@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Comparison Ant Task</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Comparison Ant Task</h2>
+</td><td valign="top" align="right"><a href="../../doc/export/cmdlineComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The comparison ant task can be used to generate comparisons from a number of saved snapshots. For more
+      information please consult the <a href="../../doc/export/comparisons.html">overview</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        You can integrate the command line comparison with your ant script (read about ant at
+        <a target="_blank" href="http://ant.apache.org">ant.apache.org</a>) by using
+        the <b><tt>compare</tt></b> task
+        that is provided in <i><tt>{JProfiler installation directory}/bin/ant.jar</tt></i>.
+      
+      <p>
+        To make the <b><tt>compare</tt></b> task available to ant, you
+        must first insert a <b><tt>taskdef</tt></b> element that tells
+        ant where to find the task definition. Here is an example of using the
+        task in an ant build file:
+      </p>
+      
+<pre>
+      &lt;taskdef name="compare"
+               classname="com.jprofiler.ant.CompareTask"
+               classpath="C:\Program Files\jprofiler7\bin\ant.jar"/&gt;
+
+      &lt;target name="compare"&gt;
+        &lt;compare sortbytime="true"&gt;
+          &lt;fileset dir="."&gt;
+            &lt;include name="*.jps" /&gt;
+          &lt;/fileset&gt;
+          &lt;comparison name="TelemetryHeap" file="heap.html"/&gt;
+          &lt;comparison name="TelemetryThreads" file="threads.html"&gt;
+            &lt;option name="measurements" value="inactive,active"/&gt;
+            &lt;option name="valuetype" value="bookmark"/&gt;
+            &lt;option name="bookmarkname" value="test"/&gt;
+          &lt;/comparison&gt;
+        &lt;/compare&gt;
+      &lt;/target&gt;
+      </pre>
+      
+<p>
+        The <b><tt>taskdef</tt></b> definition must occur only once per
+        ant-build file and can appear anywhere on the top level below the
+        <b><tt>project</tt></b> element.
+      </p>
+      
+<p>
+        
+<b>Note:</b> it is <b>not possible</b> to copy the <i><tt>ant.jar</tt></i> archive to
+        the <i><tt>lib</tt></i> folder of your ant distribution. You have to reference a full
+        installation of JProfiler in the task definition.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <tt>compare</tt> task supports the following attributes:
+      <div>&nbsp;</div>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">listfile</td>
+          <td align="">
+            An file that contains a list of snapshot files that should be compared,
+            one snapshot per line. The snapshot from a nested fileset will be prepended.
+          </td>
+          <td align="center">Only if no nested fileset is specified</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">sortbytime</td>
+          <td align="">
+            Sort all supplied snapshot files by their file modification time.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">ignoreerrors</td>
+          <td align="">
+            Ignore errors that occur when options for a comparison cannot be set and
+            continue with the next comparison. The default value is "false", i.e. the
+            export is terminated, when the first error occurs.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+      
+</table>
+      
+<p>
+        The compare task can contain nested <b>fileset</b> elements to specify
+        the snapshots that should be compared. If no fileset is specified, the
+        <b>listfile</b> attribute of the compare task must be set.
+      </p>
+      
+<p>
+        The compare task contains a list of <b>comparison</b> elements with the
+        following attributes:
+      </p>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">name</td>
+          <td align="">
+            The comparison name. For a list of available comparison names, please see
+            <a href="../../doc/export/cmdlineComparisons.html">the help page on the command line executable</a>.
+            extension.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">file</td>
+          <td align="">
+            The output file name. The process for the output format selection is described
+            in the <a href="../../doc/export/comparisons.html">overview</a>.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+      
+</table>
+      
+<p>
+        The comparison element can optionally contain a list of <b>option</b> elements with the
+        following attributes:
+      </p>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">name</td>
+          <td align="">
+            The option name. Each comparison has its own set of options. For a list of available
+            comparison names and the corresponding options, please see
+            <a href="../../doc/export/cmdlineComparisons.html">the help page on the command line executable</a>.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">value</td>
+          <td align="">
+            The value of the option.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+      
+</table>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/export/cmdlineComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

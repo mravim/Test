@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Thread History View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Thread History View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/threads/$historyFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/threads/historySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The thread history view shows the list of all threads in the JVM in the order
+      they were started. On the left hand side of the view, the names of the threads
+      appear as a fixed column, the rest of the view is filled with a scrollable
+      measuring tool which shows time on its horizontal axis. The origin of the time axis
+      coincides with the starting time of the first thread in the JVM. Each alive thread
+      is shown as a colored line which starts when the thread is started and
+      ends when the thread dies. The color indicates a certain thread status and is
+      one of
+      <ul>
+<li>
+<span class="sectiontitle">green</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/help_threads_runnable.png">
+          Green color means that the thread is <b>runnable</b> and eligible for
+          receiving CPU time by the scheduler. This does not mean that the thread has 
+          in fact consumed CPU time, only that the thread was ready to run and was not
+          blocking or sleeping. How much CPU time a thread is allotted, depends on various
+          other factors such as general system load, the thread's priority and the scheduling
+          algorithm.
+        </li>
+<li>
+<span class="sectiontitle">orange</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/help_threads_condition.png">
+          Orange color means that the thread is <b>waiting</b>.
+          The thread is sleeping and will be woken up either by a timer or by another thread.
+        </li>
+<li>
+<span class="sectiontitle">red</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/help_threads_monitor.png">
+          Red color means that the thread is <b>blocking</b>.
+          The thread has is trying to enter a <tt>synchronized</tt> code section
+          or a <tt>synchronized</tt> method whose monitor is currently held
+          by another thread.
+        </li>
+<li>
+<span class="sectiontitle">blue</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/help_threads_netio.png">
+          Light blue color means that the thread is in <b>Net I/O</b>.
+          The thread is waiting for a <tt>network operation</tt> of the java library 
+          to complete. This thread state occurs if a thread is listening for socket connections 
+          or if it is waiting to read or write data to a socket.
+        </li>
+</ul>
+      
+<p>
+        
+<b>Note:</b> If you are color-blind, you can edit <i><tt>bin/jprofiler.vmoptions</tt></i>
+        and set <tt>-Djprofiler.highContrastMode=true</tt>. The above colors will then
+        have an optimal contrast.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      At the top of the view, there is a thread filter selector. You can use it to
+      filter the displayed threads by
+      <ul>
+<li>
+<span class="sectiontitle">liveness status</span>
+<br>
+          From the combo box you can choose if you wish to display
+          <ul>
+<li>Both alive and dead threads</li>
+<li>Alive threads only</li>
+<li>Dead threads only</li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">name</span>
+<br>
+          In the text box you can enter the full name of a thread or only a part of it.
+          Only threads whose names begin with this fragment are displayed. You
+          can also use wildcards ("*" and "?") to select groups of threads.
+          Please note that if you use wildcards, you have to manually append a
+          trailing "*" if desired. You can display the union of multiple filters
+          at the same time by separating multiple filter expressions with commas, e.g.
+          <tt>AWT-, MyThreadGroup-*-Daemon</tt>.
+          <p>
+            The selection is performed once you press
+            the enter key. The combo box contains all entries performed during
+            the current session. The <b>[Reset filters]</b> button
+            can be used to remove all filters.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you move the mouse across the thread history view, the time at the position of
+      the mouse cursor will be shown in JProfiler's status bar.
+      If you have <a href="../../../doc/views/monitors/monitors.html">recorded monitor events</a>, a tool tip
+      with the stack trace and links into the
+      <a href="../../../doc/views/monitors/graphHistory.html">locking history graph</a> and the
+      <a href="../../../doc/views/monitors/monitorContentionHistory.html">monitor history view</a>
+      will be displayed. The link to the locking history graph points to the time that the event
+      has started, the linked entry in the monitor history view shows the entire event. If the
+      event has not yet completed, the link into the monitor history view is not available.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you right-click a thread name on the left side of the view, a context menu will be displayed
+      that allows you to jump to the <a href="../../../doc/views/cpu/invocation.html">Call tree view</a> or the
+      <a href="../../../doc/views/cpu/hotspots.html">Hot spots view</a> and display the single selected thread there.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Grid lines and background of the thread history view can be configured in the
+      <a href="../../../doc/views/threads/historySettings.html">thread history
+      view settings dialog</a>.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/threads/$historyFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/threads/historySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

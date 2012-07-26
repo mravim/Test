@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Saving Live Sessions to Disk</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Saving Live Sessions to Disk</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/remoteTable.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/configSync.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Snapshots of live profiling sessions can be saved to disk by selecting
+      <i>Session-&gt;Save snapshot</i> from JProfiler's
+      main menu or by clicking on the corresponding 
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/save_16.png">&nbsp;tool bar entry in
+      JProfiler's main tool bar.
+      <p>A file chooser will be brought up where you can select the name and directory 
+      of the snapshot file to be written. The standard extension of JProfiler's snapshot 
+      files is <i><tt>*.jps</tt></i>. Once JProfiler has finished writing the snapshot to disk,
+      a message box informs you that the snapshot was saved.
+      </p>
+      
+<p>
+        A <a href="../../doc/views/common/bookmarks.html">bookmarks</a> will be added when a snapshot
+        is saved manually.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Besides JProfiler snapshots, JProfiler can also save and open <b>HPROF heap dump files</b> with the
+        <i>Profiler-&gt;Save HPROF snapshot</i>. You will be asked to provide a file name for
+        the HPROF snapshot. The snapshot file will be given an .hprof extension and will be saved on the computer where the profiled JVM is running.
+        The path will be interpreted as relative to the current directory of the profiled JVM.
+      
+      <p>
+        In situations where physical memory is sparse, saving an HPROF snapshot can be preferable compared to saving a full JProfiler snapshot.
+        Also, there are alternative ways to save HPROF snapshots:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">with -XX:+HeapDumpOnOutOfMemoryError</span>
+<br>
+          The <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html">-XX:+HeapDumpOnOutOfMemoryError VM parameter</a>
+          is supported by Sun 1.4.2_12+, 1.5.0_07+ and 1.6+ JVMs and is the basis of the
+          <a href="../../doc/sessions/triggers/events.html">"Out of memory exception" trigger type</a>.
+        </li>
+<li>
+<span class="sectiontitle">with jmap</span>
+<br>
+          The <a target="_blank" href="http://download.oracle.com/javase/6/docs/technotes/tools/share/jmap.html">jmap executable in the JDK</a>
+          can be used to extract an HPROF heap dump from a running JVM. It is partially supported by Sun 1.5 JVMs and supported by all Sun 1.6 JVMs.
+        </li>
+<li>
+<span class="sectiontitle">with jconsole</span>
+<br>
+          The <a target="_blank" href="http://download.oracle.com/javase/6/docs/technotes/tools/share/jconsole.html">jconsole executable in the JDK</a>
+          can be used to extract an HPROF heap dump from a running JVM. It is available for Java 1.5+. Starting with
+          Java 1.6 you can attach to any local Java process without any modifications,
+          <a target="_blank" href="http://download.oracle.com/javase/1.5.0/docs/guide/management/agent.html">for Java 1.5</a>, some modifications
+          of the VM parameters are required.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can also save snapshots with the
+      <a href="../../doc/offline/offline.html">offline profiling</a> API or use a
+      <a href="../../doc/sessions/triggers/triggerSettings.html">trigger</a> and the
+      <a href="../../doc/sessions/triggers/actions.html">"Save snapshot"  and "Create a HPROF heapdump" actions</a>
+      to save snapshot in an exact way. This is also useful for <a href="../../doc/offline/offline.html">offline profiling</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Saved snapshots can be loaded
+      <ul>
+<li>
+          by selecting <i>Session-&gt;Open snapshot</i>
+          from JProfiler's main menu.
+        </li>
+<li>
+          by selecting a file from the "Open snapshot" tab in JProfiler's
+          <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+</ul>
+      
+<p>
+        The following restrictions apply when viewing snapshots:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">JProfiler snapshots</span>
+<br>
+          
+<p>
+            After a JProfiler snapshot has been loaded, the functionality of all views is identical to
+            a live profiling session with the exception of the
+            <a href="../../doc/views/heapwalker/heapwalker.html">heap walker view</a>: The heap
+            walker overview will be shown if a heap snapshot was taken at the time of saving,
+            otherwise the heap walker will be unavailable.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">HPROF snapshots</span>
+<br>
+          
+<p>
+            When an HPROF snapshot is loaded, only the heap walker is available. Also, the "Allocations"
+            and "Time" views of the heap walker are not available.
+          </p>
+        
+</li>
+</ul>
+      
+<p>
+        The status bar indicates that a snapshot is being viewed by displaying the
+        message <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/save_16.png">&nbsp;<b>Snapshot</b>
+        in its rightmost compartment.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/remoteTable.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/configSync.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

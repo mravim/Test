@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Call Tracer</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Call Tracer</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/tracerShowHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The call tracer shows a multi-threaded chronological sequence of method calls.
+      
+      <p>
+        To record call traces, click
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_tracer_start_16.png">&nbsp;<b>Record
+        call traces</b> in the tool bar or select <i>View-&gt;Record call traces</i>
+        from JProfiler's main menu. If you have previously recorded call traces, the old recorded data will
+        be lost. <a href="../../../doc/views/common/bookmarks.html">Bookmarks</a> will be added when recording is started
+        or stopped manually.
+      </p>
+      
+<p>
+        Please note that recording call traces can generate <b>massive amounts of data in a very short time</b>.
+        To avoid problems with excessive memory consumption, a <b>cap</b> is set on the maximum number of collected
+        call traces. That cap is configurable in the <a href="../../../doc/views/cpu/tracerSettings.html">view settings</a>.
+        The amount of collected traces heavily depends on your <a href="../../../doc/sessions/filters/filterSettings.html">filter settings</a>.
+        Also see the <a href="../../../doc/helptopics/config/filters.html">help topic on method call filters</a> for
+        background information.
+      </p>
+      
+<p>
+        By default, calls into filtered classes are recorded, similarly to the default behavior of the
+        <a href="../../../doc/views/cpu/hotspots.html">hot spot view</a>. Calls into filtered
+        classes can be excluded in the <a href="../../../doc/views/cpu/tracerSettings.html">view settings</a>.
+      </p>
+      
+<p>
+        Call tracing only works when the <a href="../../../doc/sessions/profiling/callTreeCollection.html">method call recording type</a>
+        is set to "dynamic instrumentation". Sampling does not keep track of single method calls, so it is technically
+        not possible to collect call traces with sampling.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To facilitate navigation, all method calls are grouped in a tree on three levels:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Threads</span>
+<br>
+          Every time the executing thread changes in the call sequence, a new
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/threads_16.png">&nbsp;<b>thread node</b> is created.
+        </li>
+<li>
+<span class="sectiontitle">Packages</span>
+<br>
+          Every time the Java package changes in the call sequence, a new
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_package_16.png">&nbsp;<b>package node</b> is created.
+        </li>
+<li>
+<span class="sectiontitle">Classes</span>
+<br>
+          Every time the class changes in the call sequence, a new
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_class_16.png">&nbsp;<b>class node</b> is created.
+        </li>
+</ul>
+      
+<p>
+        At the lowest level there are <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_start_16.png">&nbsp;<b>method entry</b> and
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_stop_16.png">&nbsp;<b>method exit</b> nodes. If call traces into other methods
+        have been recorded from the current method or if another thread interrupts the current method, the entry and exit nodes for the that method will not
+        be adjacent. Initially, all nodes are collapsed, so you see a sequence of thread nodes after the traces have been recorded.
+      </p>
+      
+<p>
+        You can navigate on the method level only by using the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_down_16.png">&nbsp;<b>skip to next method trace</b> (<code>Alt-Down</code>) and
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_up_16.png">&nbsp;<b>skip to previous method trace</b> (<code>Alt-Up</code>) actions.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Each node displays the following information:
+      <ul>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          For thread nodes, this is the thread name, for package nodes this is the package name and for class nodes
+          this is the fully qualified class name. By default, method nodes show the method name and the method signature.
+          In the <a href="../../../doc/views/cpu/tracerSettings.html">view settings</a>, you can decide to
+          drop the signature or add the fully qualified class name. The latter can be useful when using the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/find_16.png">&nbsp;quick search feature.
+        </li>
+<li>
+<span class="sectiontitle">Trace count</span>
+<br>
+          Thread, package and class nodes display the number of method call traces that are contained in them.
+        </li>
+<li>
+<span class="sectiontitle">Trace time</span>
+<br>
+          
+<p>
+            The trace time on the right side is one of
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Relative to first trace</span>
+<br>
+              The displayed time is the difference between the current call trace and the first displayed call trace.
+              This is the default setting.
+            </li>
+<li>
+<span class="sectiontitle">Relative to previous node</span>
+<br>
+              The displayed time is the difference between the current call trace and the previous node.
+              If the previous node is the parent node, that difference will be zero.
+            </li>
+<li>
+<span class="sectiontitle">Relative to previous node of the same type</span>
+<br>
+              The displayed time is the difference between the current call trace and the previous node of the same type.
+              For example, if the current node is a class node, the previous node of the same type is the previous
+              class node in the tree.
+            </li>
+</ul>
+          
+<p>
+            The time display type can be configured in the <a href="../../../doc/views/cpu/tracerSettings.html">view settings</a>.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Below the table with the call traces, a <b>stack trace list</b> shows you the stack trace of the currently selected
+      method trace. You can double-click on the stack trace element to show the source code. The context menu
+      gives you access to source and bytecode navigation.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        A huge number of traces can be collected in a very short time. To eliminate traces that are of no interest,
+        the call tracer allows you to quickly trim the displayed data. For example, traces in certain threads
+        might not be interesting or traces in certain packages or classes might not be relevant. Also, recursive method invocations
+        can occupy a lot of space and you might want to eliminate those single methods only.
+      
+      <p>
+        You can <b>hide nodes</b> by selecting them and pressing the delete key. All other instances
+        of the selected nodes and all associated child nodes will be hidden as well. You can select multiple nodes and delete them together.
+        Alternatively, you can select the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/element_delete_16.png">&nbsp;<b>hide selected nodes</b>
+        action from the toolbar or the context menu.
+      </p>
+      
+<p>
+        To show hidden nodes again, you can click on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/element_add_16.png">&nbsp;<b>show hidden</b>
+        button or select <i>View-&gt;Show Hidden</i> from the main menu to show the
+        <a href="../../../doc/views/cpu/tracerShowHiddenDialog.html">show hidden elements dialog</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/tracerShowHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

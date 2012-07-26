@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Snapshot Comparisons Overview</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Snapshot Comparisons Overview</h2>
+</td><td valign="top" align="right"><a href="../../doc/comparisons/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/comparisons/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In JProfiler, you can save profiling data to disk,
+        <ul>
+<li>
+            either with the <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/save_16.png">&nbsp;<a href="../../doc/sessions/saving.html">save
+            action</a> in JProfiler's <a href="../../doc/views/views.html">main window</a>
+          
+</li>
+<li>
+            or with the <a href="../../doc/offline/offline.html">offline profiling API</a>
+          
+</li>
+</ul>
+      
+      
+<p>
+        To compare one or several of these snapshots, JProfiler offers a separate comparison window that you can
+        access by
+        <ul>
+<li>
+            Choosing <tt>Compare multiple snapshots</tt> from the <b>Snapshots</b> tab of
+            the <a href="../../doc/quickstart/startcenter.html">start center</a> and clicking <b>[OK]</b>.
+            If the current window is already used for a profiling session, you will be prompted whether a new
+            frame should be opened, otherwise the current window will be exchanged with the snapshot comparison window.
+          </li>
+<li>
+            Choosing <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/compare_16.png">&nbsp;<i>Session-&gt;Compare
+            snapshots in new window</i> from JProfiler's main menu.
+          </li>
+</ul>
+      
+</p>
+      
+<p>
+        Menu and toolbar of the snapshot window are focused on snapshot comparisons, you can access all other parts of
+        JProfiler from a snapshot window by choosing <i>File-&gt;Show start center</i> from the
+        main menu or clicking on the corresponding toolbar button. This can be necessary if you close all other windows.
+        <i>File-&gt;New window</i> opens a new JProfiler window with the start center displayed.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      <b>Note:</b> It is possible to create and export comparisons from the
+      <a href="../../doc/export/cmdlineComparisons.html">command line</a> or an
+      <a href="../../doc/export/antComparisons.html">ant build file</a>.
+      This is especially useful for an automated quality assurance process.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The snapshot window contains a <b>snapshot selector at the left side</b> that lets you configure the
+        snapshots which are available for creating a comparison. Before you create a comparison, you have to add
+        the involved snapshots to the snapshot selector. If you open the snapshot comparison window without
+        having saved any snapshots during the current JProfiler session, you will be prompted to select snapshot files.
+      
+      <p>
+        The <b>order</b> of the snapshot files in the list is significant since all comparisons will assume that
+        snapshots further down in the list have been recorded later.
+      </p>
+      
+<p>
+        
+<b>Note:</b> Snapshots are always compared to other snapshots, if you wish to compare a snapshot to
+        a currently running profiling session, please save a snapshot first. The saved snapshot will automatically
+        be shown in the snapshot selector.
+      </p>
+      
+<p>
+        The snapshot selector offers the following operations as toolbar buttons and context menu items:
+        <ul>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/add_16.png"> <b>add a new snapshot file</b> (<code>INS</code>). In the
+            following file chooser select one or more <i><tt>*.jps</tt></i> files to add to the snapshot
+            selector. New snapshots are always appended to the end of the list.
+          </li>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/sort_az_desc_16.png"> <b>sort snapshot files</b>. In the
+            following popup dialog, you can select whether to sort the snapshot files by creation time (i.e. the file
+            modification time) or by name. Note that this is a one-time operation, new snapshots are always appended to
+            the end of the list.
+          </li>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/open_window_16.png"> <b>open snapshot files</b>. The selected
+            snapshot files are opened in new windows, just like when you open them from the
+            <a href="../../doc/quickstart/startcenter.html">start center</a> or with
+            <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/open_16.png">&nbsp;<i>Session-&gt;Open snapshot</i>
+            from JProfiler's main menu.
+          </li>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/remove_16.png"> <b>remove snapshot files</b> (<code>DEL</code>). The currently
+            selected snapshot files are removed from the snapshot selector. If any of the snapshot files to be removed
+            are used in an existing comparison, those comparison will be closed as well after a confirmation dialog.
+          </li>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/up_16.png"> <b>move snapshot files up in the list</b> (<code>ALT-UP</code>).
+            If your selection is a single interval, the whole block of snapshot files will be moved.
+          </li>
+<li>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/down_16.png"> <b>move snapshot files down in the list</b> (<code>ALT-DOWN</code>).
+            If your selection is a single interval, the whole block of snapshot files will be moved.
+          </li>
+</ul>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      After you've added the involved snapshots, you can <b>create comparisons</b> with the <b>comparison wizards</b>.
+      There are several comparison wizards that group comparisons in analogy to the <a href="../../doc/views/views.html">view sections</a>
+      in the profiling window:
+      <ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_memory_comparison_16.png">&nbsp;the
+          <a href="../../doc/comparisons/memory/memory.html">memory comparison wizard</a>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_cpu_comparison_16.png">&nbsp;the
+          <a href="../../doc/comparisons/cpu/cpu.html">CPU comparison wizard</a>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_telemetry_comparison_16.png">&nbsp;the
+          <a href="../../doc/comparisons/telemetry/telemetry.html">telemetry comparison wizard</a>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_probe_comparison_16.png">&nbsp;the
+          <a href="../../doc/comparisons/probes/probes.html">probe comparison wizard</a>
+        
+</li>
+</ul>
+      
+<p>
+        The comparison wizards can be invoked from the <i>File</i> menu, from the toolbar as well as
+        from the context menu of the snapshot selector.
+      </p>
+      
+<p>
+        If you wish to perform the comparison on a subset of the displayed snapshot files, it is easiest to first select
+        the involved snapshots before invoking a comparison wizard. However, all snapshot wizards allow you to change
+        this selection.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Comparisons are displayed as new tabs in the snapshot comparison window. They can be
+      <ul>
+<li>
+          
+<b>renamed</b> by choosing <i>View-&gt;Rename</i> from the main menu while the view
+           is active.
+        </li>
+<li>
+          
+<b>closed</b> by choosing <i>View-&gt;Close</i> from the main menu while the view
+           is active. You can also click the tab with the middle mouse button to close it.
+        </li>
+</ul>
+      
+<p>
+        The above actions are also available in the context menu on the bottom of the tab.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The comparison wizards are optimized to quickly let you create new comparisons that are similar to previous
+        comparisons. The wizards <b>remember all previous parameters</b>, so to create another comparison with the same parameters
+        but different snapshots, just select new new snapshots in the snapshot selector on the left, invoke the
+        wizard and click on "Finish".
+      
+      <p>
+        To create another comparison with the same snapshots but different parameters,
+        just invoke the wizard, click on "Next" to confirm the comparison type, then click on the step in the index
+        where you wish to make a change and finally click on "Finish".
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Most of the parameters that can be adjusted on the fly in the <a href="../../doc/views/views.html">normal profiling views</a>
+      are selected in the comparison wizards and are fixed once the snapshot comparison has been created. These parameters
+      are displayed in the <b>comparison header</b> which has the same layout for every comparison: In the first line
+      you see the name of the comparison, the following lines are name value pairs of the selected parameters.
+      <p>
+        All comparisons have specific <b>view settings</b> that can be edited by choosing
+        <i>View-&gt;View settings</i> from the main menu or the corresponding
+        <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/view_settings_16.png"> toolbar button
+        when the comparison is active.
+      </p>
+      
+<p>
+        Common properties of comparisons include
+        <ul>
+<li>
+<a href="../../doc/views/common/export.html">Exporting comparisons to HTML, CSV and XML</a>
+</li>
+<li>
+<a href="../../doc/views/common/windows.html">Undocking comparisons from the main window</a>
+</li>
+<li>
+<a href="../../doc/views/common/sorting.html">Sorting tables</a>
+</li>
+<li> 
+<a href="../../doc/views/common/classViewer.html">Source and bytecode viewer</a>
+</li>
+<li>
+<a href="../../doc/views/common/find.html">Quick search capability</a>
+</li>
+</ul>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/comparisons/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/comparisons/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

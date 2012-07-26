@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker - Inspections View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker - Inspections View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$inspectionsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/inspectionsList.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker reference view conforms to the <a href="../../../doc/views/heapwalker/viewLayout.html">basic layout</a>
+      of all heap walker views. Also see the <a href="../../../doc/views/heapwalker/heapwalker.html">help on key concepts</a>
+      for the entire heap walker.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The inspections view of the heap walker does not show any information on the current object set. Rather, it displays
+      a number of operations that will <b>analyze the current object set in some way</b>. As a result of any
+      inspection, a new object set will be created.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        <a href="../../../doc/views/heapwalker/inspectionsList.html">All available inspections</a> are shown in a tree
+        on the left side, for better usability they are ordered into several categories. On the right side,
+        the property panel explains the inspection, offers configuration options for the selected inspection and shows
+        a button to calculate it.
+      
+      <p>
+        Since inspections can be expensive
+        to calculate for large heaps, the <b>results are cached</b>. In this way, you can go back in the history and
+        look at the results of previously calculated inspections without waiting.
+        Inspections with cached results have a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/inspection_calculated_16.png">&nbsp;special
+        symbol in the tree and a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/check_16.png">&nbsp;"Calculated" status in the
+        property panel.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        After an inspection has been calculated, the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view change dialog</a>
+        will be shown. By default, the <a href="../../../doc/views/heapwalker/references.html">reference view</a> is recommended.
+      
+      <p>
+        An inspection can <b>partition the calculated object set into groups</b>. Groups are shown in a table
+        at the top of the heap walker. Initially, the first row in the group table is selected. By changing the selection,
+        you change the current object set. For example, the "Duplicate strings" inspection shows the duplicate string values
+        as groups. If you are in the reference view, you can then see the <code>java.lang.String</code> instances with the
+        selected string value below.
+      </p>
+      
+<p>
+        Beside the group name column in the group table there are the following sortable columns:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Priority</span>
+<br>
+          Each inspection that creates groups decides which groups are most important in the context of the inspection.
+          Since this does not always correspond to a sort order of one of the other columns, the priority column
+          contains a numeric value that enforces that sort order. By default, the group table is sorted by this column.
+        </li>
+<li>
+<span class="sectiontitle">Instance Count</span>
+<br>
+          The number of objects that are contained in the group. If you select the group, the current object set below will
+          have this number of objects.
+        </li>
+<li>
+<span class="sectiontitle">Shallow Size</span>
+<br>
+          The combined shallow size of the objects that are contained in the group. If you select the group, the current
+          object set below will have this shallow size. For an explanation of sizes of object sets, please see the
+          <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker overview</a>.
+        </li>
+</ul>
+      
+<p>
+        You can <b>search</b> in the group table by typing into it or right-clicking it and
+        selecting the <i>Find</i> action from the context menu. The group table can be <b>exported</b> to
+        HTML or CSV, by choosing <i>Export View</i> from its context menu. Note that the group table
+        will not be exported when you export the current heap walker view with the export action in the tool bar.
+      </p>
+      
+<p>
+        The group selection is not a separate selection step in the heap walker, but it becomes part of the selection
+        step made by the inspection. You can see the group selection in the selection step pane at the bottom.
+        When you change the group selection, the selection step pane is updated immediately.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$inspectionsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/inspectionsList.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

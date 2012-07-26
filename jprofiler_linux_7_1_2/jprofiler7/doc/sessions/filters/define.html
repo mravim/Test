@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Define Filters for Method Recording</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Define Filters for Method Recording</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/filters/filterSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/view.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/filters/filterSettings.html">filter settings</a>, you define filter
+      rules for packages and classes that will be applied to
+      <a href="../../../doc/sessions/profiling/callTreeCollection.html">method call recording</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are two types of filter rules:
+      <ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/package_inclusive_16.png">&nbsp;
+          <b>Included</b> packages or classes are profiled and <b>will</b> be shown in the call tree.
+          If the first filter is inclusive, no classes are profiled by default.
+        </li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/package_exclusive_16.png">&nbsp;
+          <b>Excluded</b> packages or classes are not profiled and <b>will not</b> be shown in the
+          call tree. If the first filter is exclusive, all other classes are profiled by default.
+        </li>
+</ul>
+      
+<p>
+        All calls <b>from</b> profiled classes are shown in the call tree regardless
+        of whether the called class is profiled or not. For example, if you only have one inclusive filter for the
+        <code>com.mycorp.</code> packages, and if your class <code>com.mycorp.MyClass</code> calls a method in
+        java core classes, all those calls will be measured, but their internal call structure will not be resolved.
+        In the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>, such method calls are opaque
+        and will be labeled with a red corner.
+      </p>
+      
+<p>
+        Package filters include all sub-packages. For example, if you have one inclusive filter with the name
+        <code>com.mycorp.</code>, it includes all classes directly in the <code>com.mycorp.</code> package
+        as well as the <code>com.mycorp.test</code> and the <code>com.mycorp.test.detail</code> packages.
+      </p>
+      
+<p>
+        Filter rules are evaluated from top to bottom, the last matching rule is applied.
+        For example, if you add an exclusive filter for the <code>com.mycorp.</code> packages, but further down
+        add an inclusive filter for the <code>com.mycorp.test</code> package, the  <code>com.mycorp.test</code> package
+        is profiled while other classes in the <code>com.mycorp.</code> packages are not.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When clicking on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/find_16.png">&nbsp;<b>[Add]</b> button, you
+      also get the option to select filters in a package browser. The package browser shows packages for
+      <ul>
+<li>
+<span class="sectiontitle">Classes from the configured class path</span>
+<br>
+          if the application is not running yet. Since the class path may not be configured for some session types,
+          the package tree may be empty.
+        </li>
+<li>
+<span class="sectiontitle">Loaded classes that can be instrumented</span>
+<br>
+          if the application is already running. This includes attach sessions where the profiling agent is not
+          waiting for a connection on startup.
+        </li>
+</ul>
+      
+<p>
+        Next to each package node, the cumulated number of contained classes is displayed. The total number
+        of classes that will be included or excluded through your selection is indicated at the bottom of the dialog.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Adjacent filter rules of the same type can be <b>grouped</b> together. Just select all filters that you wish to group
+      and select the appropriate action from the context menu. You are then prompted to name the group. The name of a filter group
+      is only informational. The context menu also offers an action to ungroup selected groups. Filter rules in filter groups
+      are sorted alphabetically, have a gray background and cannot be moved. However,they can be deleted from the filter group.
+      To add a new filter rule to an existing filter group, you first have to ungroup the group and group it again.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        <b>By default</b>, the filter rules are configured to exclude a list of common framework classes. All other classes are
+        included. Whenever you find that the default list is not suitable, or if you would like to profile classes that
+        are in that list, you should delete the entire exclude group and add your own inclusive filters. Alternatively, you
+        can delete parts of the default exclude group.
+      
+      <p>
+        If, at any later point, you wish to restore these default exludes, you can use the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reset_filters_16.png">&nbsp;reset filters to default button on the right side.
+        All current filter settings will be lost in that case.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To analyze the overall filter configuration, you can click on <b>[Show filter tree]</b> and bring up
+      <a href="../../../doc/sessions/filters/view.html">a dialog</a> that shows you all filter rules in a read-only
+      package hierarchy.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Filter configurations can be saved to <a href="../../../doc/sessions/filters/templates.html">filter templates</a> with the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/save_16.png">&nbsp;save button, the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/open_16.png">&nbsp;open button lets you replace the current filter configuration with
+      a filter template.
+      <p>
+        On the <a href="../../../doc/generalSettings/sessionDefaults.html">session defaults</a> tab of the
+        <a href="../../../doc/generalSettings/generalSettings.html">general settings dialog</a> you can change the 
+        default filter template used for new sessions.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can quickly bring up this tab by clicking on the <b>[Global filters]</b> button that is shown
+      in the bottom right corner of views that show call trees or time measurements of method calls.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/filters/filterSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/view.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

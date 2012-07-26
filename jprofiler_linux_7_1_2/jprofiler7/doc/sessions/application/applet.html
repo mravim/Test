@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Launched applet session</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Launched applet session</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/application/local.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/webstart.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    If the session type in the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>
+    is set to "Applet", the following settings are displayed in the middle part of the dialog:
+    <ul>
+<li>
+<span class="sectiontitle">Java VM</span>
+<br>
+        Choose the Java VM to run your applet. The main class 
+        <code>sun.applet.AppletViewer</code> from the <i><tt>tools.jar</tt></i> of
+        the selected JVM will be used to show the applet.
+        Java VMs are configured
+        on the <a href="../../../doc/generalSettings/vm.html">"Java VMs" tab</a>
+        of JProfiler's <a href="../../../doc/generalSettings/generalSettings.html">general settings</a>
+        which are accessible by clicking the
+        <b>[General settings]</b> button on the bottom of the dialog.
+      </li>
+<li>
+<span class="sectiontitle">URL</span>
+<br>
+        Enter a URL pointing to an HTML page which contains the applet.
+        By clicking on the <b>[...]</b> button you can bring up a file chooser
+        to select an HTML file on your file system.
+      </li>
+</ul>
+    
+<p>
+      
+<b>Note:</b> If the applet view is too restrictive for
+      your applet, please use the <b>Java plugin integration wizard</b> available on
+      the <tt>New session</tt> tab of the
+      <a href="../../../doc/quickstart/startcenter.html">start center</a> to profile the applet
+      directly in the browser.
+    </p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/application/local.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/webstart.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

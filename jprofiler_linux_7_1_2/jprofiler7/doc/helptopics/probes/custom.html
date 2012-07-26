@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Custom Probes</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Custom Probes</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/probes/probesOverview.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      If you want to collect information on a subsystem that is not covered by the built-in probes, JProfiler
+      offers an API to write your own custom probes. There are two ways to develop and deploy a custom probe into
+      the profiled application. On the one hand, you can write your custom probe in your IDE, add the compiled classes
+      to the classpath, and add a special VM parameter to the invocation of the profiled application. On the other
+      hand, you can create the probe directly in the JProfiler GUI by configuring the scripts in the custom probe wizard.
+      In the latter case, no modification of the profiled application is necessary.
+    <br>
+    
+<p>
+      For an overview of the basic probe concepts, please see the
+      <a href="../../../doc/helptopics/probes/probesOverview.html">corresponding help topic</a>. An example for a custom probe
+      is given in the <i><tt>api/samples/probe</tt></i> directory.
+    </p>
+
+    
+<h3>2. Probe Configuration</h3>
+    
+<p>
+      A probe is a Java class that implements one or both of the interfaces <code>com.jprofiler.api.agent.probe.InterceptorProbe</code>
+      and <code>com.jprofiler.api.agent.probe.TelemetryProbe</code>. Both interfaces extends the base <code>com.jprofiler.api.agent.probe.Probe</code>
+      interface which in itself is not sufficient to develop a useful probe.
+    </p>
+    
+<p>
+      Each probe is configured at startup when its <code>getMetaData()</code> method is called by the profiling agent.
+      To get a meta data instance, call <code>com.jprofiler.api.agent.probe.ProbeMetaData#create(String name)</code>
+      and continue calling configuration methods on the returned object. ProbeMetaData is a fluent interface, so you
+      can append calls to its methods on the same line. The information you provide at <b>configuration time </b>via the <code>ProbeMetaData</code> is
+      relevant when using the <code>com.jprofiler.api.agent.probe.ProbeContext</code> that is passed to you during <b>data-collection time</b>.
+    </p>
+    
+<p>
+      Several configuration methods determine the capabilities of the probe. For example,
+      <code>metaData.payload(true).telemetry(true).events(true).controlObjectsView(true)</code>
+      configures a probe that publishes data for all available views.
+    </p>
+    
+<p>
+      An easy way to configure an automatic telemetry is to call <code>ProbeMetaData#addOpenControlObjectTelemetry(String name)</code>.
+      Custom telemetries can be configured with <code>ProbeMetaData#addCustomTelemetry(String name, Unit unit, float factor)</code>.
+    </p>
+    
+<p>
+      Importantly for the time line and events views, you can configure custom event types with <code>ProbeMetaData#customTypeNames(String[] names)</code>
+      and assign them custom colors with <code>ProbeMetaData#customColors(String[] names)</code>.
+    </p>
+    
+<p>
+      Events and control objects can receive additional data, which is configured with
+      <code>ProbeMetaData#addAdditionalData(String name, DataType dataType)</code> for events and
+      <code>ProbeMetaData#addAdditionalControlObjectData(String name, DataType dataType, boolean nested)</code>
+      for control objects.
+    </p>
+
+    
+<h3>3. Interceptor Probes</h3>
+    
+<p>
+      An interceptor probe gets the opportunity to intercept selected methods. It is queried at startup
+      for the methods that should be instrumented and notified each time when one of those methods are called.
+      The interception methods are passed an instance of <code>com.jprofiler.api.agent.probe.InterceptorContext</code>
+      which contains methods to publish payload information and create events.
+    </p>
+    
+<p>
+      Because methods can be intercepted recursively,
+      you should use <code>InterceptorContext#push(PayloadInfo)</code> to save a payload in the method entry and
+      <code>InterceptorContext#pop()</code> to
+      retrieve it in the method exit. The payload stack is thread-local, so it also works in multi-threaded situations.
+      Finally you can call <code>calculateTime()</code> on the payload info object and publish it with
+      <code>InterceptorContext#addPayloadInfo(PayloadInfo)</code>.
+    </p>
+    
+<p>
+      Control objects are registered by creating an open event with
+      <code>ProbeContext#createOpenEvent(String description, Object controlObject)</code>
+      and are closed by creating a close event with
+      <code>ProbeContext#createCloseEvent(String description, Object controlObject)</code>
+      If you have configured additional data for control objects, you create the open event with
+      <code>ProbeContext#createOpenEvent(String description, Object controlObject, Object[] controlObjectData)</code>
+      instead.
+    </p>
+    
+<p>
+      Custom events for particular control objects are created with
+      <code>ProbeContext#createCustomEvent(String description, int type, Object controlObject)</code>.
+      If you do not use control objects, just pass <code>null</code> as the last parameter of this method.
+      The type ID is the index in the array argument that was passed to
+      <code>ProbeMetaData#customTypeNames(String[] names)</code> at configuration time.
+      If you have configured additional data for events, you supply it by calling
+      <code>ProbeEvent#additionalData(Object[] additionalData)</code> on the event.
+    </p>
+    
+<p>
+      Note that all created events have to be published by calling <code>ProbeContext#addEvent(ProbeEvent)</code>.
+    </p>
+
+    
+<h3>4. Telemetry Probes</h3>
+    
+<p>
+      A telemetry probe is called once a second via its <code>fillTelemetryData(ProbeContext probeContext, int[] data)</code>
+      method and thus periodically gets a chance to publish its telemetry data.
+      The indices in the data array correspond to the invocations of
+      <code>ProbeMetaData#addCustomTelemetry(String name, Unit unit, float factor)</code> in the meta-data
+      configuration.
+    </p>
+    
+<p>
+      Since telemetry information is not related to payloads, telemetry probes are passed an instance of
+      <code>com.jprofiler.api.agent.probe.ProbeContext</code> rather than the derived <code>com.jprofiler.api.agent.probe.InterceptorContext</code>
+      that is passed to the interception methods of telemetry probes. A probe can take both roles and implement both the
+      interfaces for an interceptor probe and a telemetry probe.
+    </p>
+
+    
+<h3>5. Manual Probe Registration</h3>
+    
+<p>
+      To manually register a probe in the profiled application, you have to create a class that implements
+      <code>com.jprofiler.api.agent.probe.ProbeProvider</code>. Its <code>getProbes()</code> method can
+      return one or several probes. Then, you have to pass the VM parameter
+      <tt>-Djprofiler.probeProvider=fully-qualified-class</tt> to the profiled JVM.
+      The probe provider is instantiated at startup.
+    </p>
+
+    
+<h3>6. Custom Probe Wizard</h3>
+    
+<p>
+      Developing probes in an IDE, compiling them against the JProfiler API and deploying them to the profiled application
+      together with the modification of the java command can be quite inconvenient. JProfiler offers an easier way to
+      quickly develop and deploy custom probes without the need to use an IDE or modify the profiled application.
+      The <a href="../../../doc/sessions/probes/custom.html">custom probe wizard</a> leads you step-by step through the
+      creation of a custom probe.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/custom_probes_selector.png">
+    </p>
+    
+<p>
+      First, you define the meta data script, which is already passed an instance of <code>com.jprofiler.api.agent.probe.ProbeMetaData</code>.
+      The script editor in JProfiler offers code analysis, code completion and context-sensitive Javadoc.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/custom_probe_meta_data_script.png">
+    </p>
+    
+<p>
+      Custom probes defined in the JProfiler GUI are both interceptor and telemetry probes. You can optionally define a telemetry script
+      in the custom probe wizard.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/custom_probe_wizard_telemetry_script.png">
+    </p>
+    
+<p>
+      Selecting methods for interception is also much easier in the JProfiler GUI than when writing probes manually. You
+      just select the methods from a list of all found methods in the profiled JVM.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/custom_probe_wizard_method_selector.png">
+    </p>
+    
+<p>
+      There are three interception scripts for method entry, exit and exception exit. You configure them
+      for different groups of methods with the same signature. The method arguments of the
+      intercepted method are passed to the method entry script together with the interceptor context and the current
+      object.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/custom_probe_wizard_interceptor_script.png">
+    </p>
+
+    
+<h3>7. Custom Probe Vs. Triggers</h3>
+    
+<p>
+      If you just want to intercept a method and invoke your own code there without collecting any data,
+      it is recommended to use a <a href="../../../doc/sessions/triggers/events.html">method trigger</a>
+      with a "Run interceptor script" action. In this way you do not have to provide the probe meta data.
+      Also, method triggers can be added conveniently via the context menu in the call tree view.
+    </p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/probes/probesOverview.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

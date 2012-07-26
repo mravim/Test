@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker - Time View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker - Time View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$chronoFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/restrictedChrono.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker time view conforms to the
+      <a href="../../../doc/views/heapwalker/viewLayout.html">basic layout</a>
+      of all heap walker views. Also see the
+      <a href="../../../doc/views/heapwalker/heapwalker.html">help on key concepts</a>
+      for the entire heap walker.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The time view shows a time-resolved histogram of object allocations. The bin size depends on the
+        zoom level.
+      
+      <p>
+        This view can only be used if the "Record object allocation times" feature
+        is activated on the <a href="../../../doc/sessions/profiling/memory.html">"Memory Profiling" tab</a> of the
+        <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>. Allocation times are
+        <b>only available for recorded objects</b>.
+        The number of unrecorded objects is displayed above the graph.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you move the mouse across the time view, the time at the position of
+      the mouse cursor will be shown in JProfiler's status bar.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can select multiple time intervals by
+      <ul>
+<li>
+          clicking and dragging with the mouse on the graph in the horizontal direction.
+        </li>
+<li>
+          choosing the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/selection_uptohere_16.png"> select up to here
+          action from the context menu.
+        </li>
+<li>
+          choosing the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/selection_fromhere_16.png"> select from here
+          action from the context menu.
+        </li>
+<li>
+          choosing the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/bookmarks_16.png"> select between
+          bookmarks action from the tool bar right above the view or the context menu.
+          A dialog will be shown that allows you to select a range of bookmarks. All objects
+          allocated between the first selected and the last selected bookmark are selected in the
+          view.
+        </li>
+</ul>
+      
+<p>
+        You can clear your selections by clicking on the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/clear_selection_16.png"> clear selections button
+        at the top of the view or by selecting the corresponding action from the context menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To add a selection step from this view you can select one or more time intervals and
+      click the <b>[Use selected]</b> button above the graph.
+      <p>
+        A new object set will be created that contains only the instances of the selected objects.
+        After your selection,
+        the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a> will
+        assist you in choosing the appropriate view for the new object set.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$chronoFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/restrictedChrono.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

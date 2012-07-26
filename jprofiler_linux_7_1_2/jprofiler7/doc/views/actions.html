@@ -1,0 +1,591 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler's Menu</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler's Menu</h2>
+</td><td valign="top" align="right"><a href="../../doc/views/views.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/views/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    JProfiler's toolbar and menu contain actions applicable to all views
+    as well as actions which are view-sensitive or appear for certain views only.
+    The common menu and toolbar entries fall into six categories:
+    <table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>session menu</b> contains actions to create, open and close sessions
+      and snapshots.
+      
+      <ul>
+<li>
+<span class="sectiontitle">Start center</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          (<code>CTRL-O</code>)
+          Brings up JProfiler's <a href="../../doc/quickstart/startcenter.html">start center</a>.
+          If there already is an open session in the current window, it will be discarded
+          once a new session is opened. This action is also available from JProfiler's toolbar.
+        </li>
+<li>
+<span class="sectiontitle">New window</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_window_16.png">
+          (<code>CTRL-ALT-O</code>)
+          Open in a new instance of JProfiler's main window and brings up JProfiler's
+          <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+<li>
+<span class="sectiontitle">New session</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/new_session_16.png">
+          (<code>CTRL-N</code>)
+          Creates a new session and brings up the
+          <a href="../../doc/sessions/application/applicationSettings.html">application settings dialog</a>.
+          The new session will be started after leaving the dialog with <b>[OK]</b>.
+          If there is already an open session in the current window, it will be discarded.
+        </li>
+<li>
+<span class="sectiontitle">Integration wizards</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          This submenu contains the starting points for the
+          <a href="../../doc/quickstart/appservers.html">application server integration wizards</a>,
+          just like the "New session" tab on the <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+<li>
+<span class="sectiontitle">Conversion wizards</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          This submenu contains the starting points for the
+          conversion wizards,
+          just like the "Convert" tab on the <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+<li>
+<span class="sectiontitle">Open session</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Brings up the <a href="../../doc/sessions/open.html">open session dialog</a>.
+          If there already is an open session in the current window, it will be discarded
+          once a new session is opened.
+        </li>
+<li>
+<span class="sectiontitle">Export session settings</span>
+<br>
+          Brings up a dialog where you can
+          <a href="../../doc/sessions/importExport.html">export settings for selected sessions</a> to an
+          external config file.
+        </li>
+<li>
+<span class="sectiontitle">Import session settings</span>
+<br>
+          Brings up a dialog where you can
+          <a href="../../doc/sessions/importExport.html">import settings for selected sessions</a> from an
+          external config file.
+        </li>
+<li>
+<span class="sectiontitle">Save snapshot</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/save_16.png">
+          (<code>CTRL-S</code>)
+          Brings up a file chooser to select a 
+          <a href="../../doc/sessions/saving.html">snapshot file</a> to be written.
+          A dialog box informs about the successful completion of the operation.
+          This action is also available from JProfiler's toolbar. 
+        </li>
+<li>
+<span class="sectiontitle">Open snapshot</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Brings up a file chooser to select a 
+          <a href="../../doc/sessions/saving.html">snapshot file</a> to be opened.
+          If there already is an open session in the current window, it will be discarded.
+        </li>
+<li>
+<span class="sectiontitle">Session settings</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/profiling_settings_16.png">
+          Brings up the <a href="../../doc/sessions/sessions.html">session settings dialog</a>.
+        </li>
+<li>
+<span class="sectiontitle">General settings</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Brings up the <a href="../../doc/generalSettings/generalSettings.html">general settings dialog</a>.
+        </li>
+<li>
+<span class="sectiontitle">IDE integrations</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Short cut to the IDE integrations tab of the
+          <a href="../../doc/generalSettings/ide.html">general settings dialog</a> where you can
+          integrate all supported IDEs.
+        </li>
+<li>
+<span class="sectiontitle">Close session</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Closes the current session. If there is an open session in the current window, you
+          will be asked for confirmation. The window will be kept open and reverted to its
+          original state.
+        </li>
+<li>
+<span class="sectiontitle">Close window</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/close_window_16.png">
+          (<code>CTRL-W</code>)
+          Closes the current window. If there is an open session in the current window, you
+          will be asked for confirmation.
+        </li>
+<li>
+<span class="sectiontitle">Exit JProfiler</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          (<code>CTRL-ALT-X</code>)
+          After confirmation, closes all open main windows and exits JProfiler.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>view menu</b> contains view-specific actions and gives access to
+      the view settings dialog. View specific actions are described in the help page
+      of the <a href="../../doc/views/views.html">corresponding view</a>.
+      <ul>
+<li>
+<span class="sectiontitle">View settings</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/view_settings_16.png">
+          (<code>CTRL-T</code>)
+          Brings up the view settings dialog for the corresponding view. If disabled,
+          the currently active view has no particular settings. This action
+          is also available from JProfiler's toolbar.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>profiling menu</b> contains actions which change the window or session
+      as a whole.
+      <ul>
+<li>
+<span class="sectiontitle">Stop/Detach/Start/Attach session</span>
+<br>
+          (<code>F11</code>)
+          This action is also available from JProfiler's toolbar.
+          <ul>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/stop_16.png">&nbsp;Stops
+              the session (all
+              <a href="../../doc/sessions/sessions.html">session types</a> except remote 
+              session), i.e. the process is destroyed.
+              In a stopped session, the profiling views are
+              <a href="../../doc/views/views.html">not fully functional</a>
+              (visible if currently started and not remote session).
+            </li>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/detached_16.png">&nbsp;Detaches
+              the current <a href="../../doc/sessions/sessions.html">remote session</a>.
+              The profiled JVM will be detached from JProfiler's front end and continues
+              to run undisturbed. In a detached session, the profiling views are
+              <a href="../../doc/views/views.html">not fully functional</a>
+              (visible if currently attached and remote session).              
+            </li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/start_16.png">
+              Starts the application configured in the current session if it is an
+              <a href="../../doc/sessions/sessions.html">application session, applet session or Web Start
+              session</a> (visible if currently detached and not remote session).
+            </li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/attached_16.png">
+              Attaches the current <a href="../../doc/sessions/sessions.html">remote session</a>
+              to a remote application or reconnects to it.
+              (visible if currently detached and remote session).
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Record allocation data</span>
+<br>
+          This action is also available from JProfiler's toolbar and status bar. The
+          <a href="../../doc/views/memory/memory.html">memory views</a> and some
+          <a href="../../doc/views/telemetry/telemetry.html">telemetry views</a> rely
+          on allocation data.
+          <ul>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/record_memory_16.png">
+              Start recording allocation data.
+              (visible if allocations are currently not recorded).
+              Adds a bookmark with a solid line to all graph views with a time axis.
+            </li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/stop_memory_16.png">
+              Stop recording allocation data.
+              (visible if allocations are currently recorded).
+              Adds a bookmark with a dashed line to all graph views with a time axis.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Record CPU data</span>
+<br>
+          This action is also available from JProfiler's toolbar and status bar. The
+          <a href="../../doc/views/cpu/cpu.html">CPU views</a> rely
+          on CPU data.
+          <ul>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/record_cpu_16.png">
+              Start recording CPU data.
+              (visible if CPU data is currently not recorded).
+              Adds a bookmark with a solid line to all graph views with a time axis.
+            </li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/stop_cpu_16.png">
+              Stop recording CPU data.
+              (visible if CPU data is currently recorded).
+              Adds a bookmark with a dashed line to all graph views with a time axis.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Start / Change Request tracking</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/request_tracking_16.png">
+          (<code>CTRL-F8</code>)
+          Brings up the <a href="../../doc/views/cpu/requestTracking.html">request tracking dialog</a>.
+          This action is also available from JProfiler's toolbar.
+        </li>
+<li>
+<span class="sectiontitle">Enable triggers</span>
+<br>
+          This action is also available from JProfiler's status bar and
+          toggles the <a href="../../doc/sessions/triggers/enableDisable.html">trigger execution state</a>
+          
+<ul>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/triggers_enable_16.png">
+              Enable triggers.
+              (visible if triggers are currently not enabled).
+              Adds a bookmark with a solid line to all graph views with a time axis.
+            </li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/triggers_disable_16.png">
+              Disable triggers.
+              (visible if triggers are currently disabled).
+              Adds a bookmark with a dashed line to all graph views with a time axis.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Enable trigger groups</span>
+<br>
+          Brings up a dialog to
+          <a href="../../doc/sessions/triggers/enableDisable.html">enable or disable groups of triggers</a>.
+        </li>
+<li>
+<span class="sectiontitle">Save HPROF snapshot</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/javacup_16.png">
+          Brings up a dialog to select a path for an
+          <a href="../../doc/sessions/saving.html">HPROF snapshot file </a> to be saved.
+          A dialog box informs about the successful completion of the operation.
+        </li>
+<li>
+<span class="sectiontitle">Run garbage collector</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/recycle_16.png">
+          Run the garbage collector in the profiled JVM.
+          This action is also available from JProfiler's toolbar.
+        </li>
+<li>
+<span class="sectiontitle">Add bookmark</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/bookmark_add_16.png">
+          Add a bookmark in all graph views with a time axis. Bookmarks can
+          be renamed or deleted by right-clicking them and choosing the appropriate action from
+          the context menu. Bookmarks can also be set programmatically from the
+          <a href="../../doc/offline/javadoc/com/jprofiler/api/agent/Controller.html">profiling API</a>.
+        </li>
+<li>
+<span class="sectiontitle">Edit bookmarks</span>
+<br>
+          Brings up a dialog where you can
+          <a href="../../doc/views/common/editBookmarks.html">edit all existring bookmarks</a>.
+        </li>
+<li>
+<span class="sectiontitle">Show global filters for method call recording</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Show a dialog with a tree view of all
+          <a href="../../doc/sessions/filters/view.html">exclusive or inclusive filters</a>
+          that JProfiler uses when recording the method call tree.
+          This action is also available at the bottom of several views that show call trees.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>go to menu</b> provides one-click access to all of
+      JProfiler's profiling views, grouped into the seven
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/cpu_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/memory_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/heapwalker_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/threads_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/monitors_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/telemetry_16.png">&nbsp;
+      <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/probes_16.png">&nbsp;
+      <a href="../../doc/views/views.html">view sections</a>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>window menu</b> allows you to keep track of all
+      <a href="../../doc/views/common/windows.html">tops level windows created by JProfiler</a>.
+      <ul>
+<li>
+<span class="sectiontitle">Undock/Dock view</span>
+<br>
+          (<code>CTRL-E</code>)
+          This action is also available from the context menu when right clicking the view
+          in the tab selector at the bottom of the window.
+          <ul>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/view_undock_16.png">&nbsp;Undocks the view
+              and shows it in a separate top level window.
+              (visible if the currently active view is docked into the main window)
+            </li>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/view_dock_16.png">&nbsp;Docks the view
+              and returns it to the main window.
+              (visible if the currently active view is undocked)
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Dock all floating views</span>
+<br>
+          Docks all currently undocked views into their main windows.
+        </li>
+<li>
+<span class="sectiontitle">Cycle to previous window</span>
+<br>
+          (<code>CTRL-F2</code>)
+          Activate the previous window in the window list and bring it to the front.
+        </li>
+<li>
+<span class="sectiontitle">Cycle to next window</span>
+<br>
+          (<code>CTRL-F3</code>)
+          Activate the next window in the window list and bring it to the front.
+        </li>
+<li>
+<span class="sectiontitle">Tile all undocked views</span>
+<br>
+          Tile the desktop with all undocked views.
+        </li>
+<li>
+<span class="sectiontitle">Stack all undocked views</span>
+<br>
+          Resize all undocked views to a standard size and stack them regularly on the desktop.
+        </li>
+<li>
+<span class="sectiontitle">Close unused console windows</span>
+<br>
+          Close all console windows that do not have an active process associated with them.
+        </li>
+</ul>
+      
+<p>
+        At the bottom of the window menu you can directly navigate to a window by selecting it from the list.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>help menu</b> gives access to help, web sites, and useful e-mail addresses
+      for JProfiler.
+      <ul>
+<li>
+<span class="sectiontitle">Help contents</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/help_16.png">
+          (<code>F1</code>)
+          Brings up context sensitive help. This action is also available from
+          JProfiler's toolbar.
+        </li>
+<li>
+<span class="sectiontitle">Show quickstart dialog</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/help_16.png">
+          (<code>SHIFT-F1</code>)
+          Brings up the <a href="../../doc/quickstart/quickstart.html">quickstart dialog</a>.
+        </li>
+<li>
+<span class="sectiontitle">Screencasts for JProfiler</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/screencasts_16.png">
+          Opens the web page with screen casts for JProfiler in your browser.
+        </li>
+<li>
+<span class="sectiontitle">Check for update</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/updater_16.png">
+          Opens the updater which checks for a new JProfiler version in the same major series.
+        </li>
+<li>
+<span class="sectiontitle">Purchase JProfiler online</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/purchase_16.png">
+          Opens the online shop for JProfiler in your browser.
+        </li>
+<li>
+<span class="sectiontitle">Contact sales</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/mail_16.png">
+          Brings up a sales contact form in your browser.
+        </li>
+<li>
+<span class="sectiontitle">Contact support</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/mail_16.png">
+          Brings up a support contact form in your browser.
+        </li>
+<li>
+<span class="sectiontitle">JProfiler on the web</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/web_16.png">
+          Opens the main web site for JProfiler in your browser.
+        </li>
+<li>
+<span class="sectiontitle">Enter license key</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/license_16.png">
+          Allows you to <a href="../../doc/quickstart/licenseKey.html">enter your license key</a>.
+        </li>
+<li>
+<span class="sectiontitle">About JProfiler</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/empty_16.png">
+          Shows general information about your copy of JProfiler and its license status.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/views/views.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/views/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

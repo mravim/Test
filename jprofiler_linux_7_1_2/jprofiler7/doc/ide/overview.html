@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler IDE Integrations</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler IDE Integrations</h2>
+</td><td valign="top" align="right"><a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/idea.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        JProfiler can be integrated into the IDEs listed
+        <a href="../../doc/ide/$folder$.html">here</a>.
+        Installation is done either
+      
+      <ul>
+<li>
+<span class="sectiontitle">Automatically (recommended)</span>
+<br>
+          Select <i>Session-&gt;IDE integrations</i>
+          from JProfiler's main menu or go to the
+          <a href="../../doc/generalSettings/ide.html">IDE integrations tab</a> in the
+          <a href="../../doc/generalSettings/generalSettings.html">general settings dialog</a>.
+          Now select the desired IDE from the drop down list, click on <b>[Integrate]</b>
+          and <a href="../../doc/generalSettings/ide.html">follow the instructions</a>.
+        </li>
+<li>
+<span class="sectiontitle">Manually</span>
+<br>
+          The directory <i><tt>integrations</tt></i> in the JProfiler install directory
+          holds a number of archives which can be used for manually integrating JProfiler
+          with any of the supported IDEs. See the file 
+          <i><tt>README.txt</tt></i> in the above directory for detailed instructions.
+        </li>
+</ul>
+      
+<p>
+        After completing the instructions, you can invoke JProfiler from the integrated IDE without
+        having to specify class path, main class, working directory, used JVM and other options again.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        All integrations insert toolbar buttons and menu entries into the respective IDE that run
+        the application in the IDE with profiling enabled.
+        On Windows and Mac OS X, the IDE reuses an already running instance of JProfiler to present
+        profiling data. If JProfiler is not running, it will be started automatically.
+      
+      <p>
+        Navigation to source code from JProfiler will be performed in the IDE, i.e. if you choose
+        the "Show source" action for a class or a method, it will be displayed in the IDE and not
+        in JProfiler's integrated source code viewer. 
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/idea.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

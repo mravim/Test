@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Offline Profiling</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Offline Profiling</h2>
+</td><td valign="top" align="right"><a href="../../doc/offline/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/offline/commandLineController.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler's offline profiling capability allows you to run profiling sessions from
+      the command line without the need for starting JProfiler's GUI front end. Offline profiling
+      makes sense if you want to
+      <ul>
+<li>
+          perform profiling runs from a scripted environment (e.g. an
+          <a target="_blank" href="http://ant.apache.org">ant</a> build file)
+        </li>
+<li>
+          save snapshots on a regular basis for QA work
+        </li>
+<li>
+          profile server components on remote machines via slow network connections
+        </li>
+</ul>
+      
+<p>
+        Performing an offline profiling run for your application is analogous to
+        <a href="../../doc/sessions/remote.html">remote profiling</a> with special library parameters
+        passed to the profiling agent VM parameter <code>-Xrunjprofiler</code> for Java &lt;=1.4.2 (JVMPI) or
+        <code>-agentpath:[path to jprofilerti library]</code> for Java &gt;=1.5.0 (JVMTI):
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">offline switch</span>
+<br>
+          Passing <code>offline</code> as a library parameter enables offline profiling.
+          In this case, a connection with JProfiler's GUI is not possible.
+        </li>
+<li>
+<span class="sectiontitle">session ID</span>
+<br>
+          In order for JProfiler to set the correct profiling settings, a corresponding session 
+          has to be configured in JProfiler's GUI front end. The ID of that session has to
+          passed as a library parameter: <code>id=nnnn</code>. Your settings in the
+          <a href="../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>
+          are used for offline profiling. The session ID can be seen in the top right corner
+          of the <a href="../../doc/sessions/application/applicationSettings.html">application settings dialog</a>.
+        </li>
+<li>
+<span class="sectiontitle">config file location (optional)</span>
+<br>
+          The config file that is read for extracting the session with the specified ID has to 
+          be passed via <code>config={path to config.xml}</code>. The config file is located in
+          the <i><tt>.jprofiler7</tt></i> directory in your user home directory (on Windows, the user home
+          directory is typically <i><tt>c:\Documents and Settings\$USER</tt></i>). If you leave out this
+          parameter, JProfiler will try to detect the config file location automatically.
+        </li>
+</ul>
+      
+<p>
+        A summary of all library parameters is available in the
+        <a href="../../doc/sessions/remoteTable.html">remote session invocation table</a>.
+      </p>
+      
+<p>
+        If you profile on a machine where JProfiler is not installed, you will need to transfer the contents 
+        of the <i><tt>bin/{your platform}</tt></i> directory as well as the JAR file 
+        <i><tt>bin/agent.jar</tt></i> and the config file <i><tt>{User home directory}/.jprofiler7/config.xml</tt></i>.
+      </p>
+      
+<p>
+        
+<b>Example:</b>
+      
+</p>
+      
+<p>
+        A typical invocation for offline profiling with Java &gt;=1.5 (JVMTI) will look like this:
+      </p>
+      
+<pre>
+        java "-agentpath:C:\Program Files\jprofiler7\bin\windows\jprofilerti.dll=offline,id=109,config=C:\Users\bob\.jprofiler7\config.xml"
+        "-Xbootclasspath/a:C:\Program Files\jprofiler7\bin\agent.jar"
+        -classpath myapp.jar com.mycorp.MyApp
+      </pre>
+      
+<p>
+        Please study the <a href="../../doc/sessions/remoteTable.html">remote session invocation table</a>
+        to generate the correct invocation for your JVM. Also, please don't forget that the platform-specific
+        native library path has to be modified, just like for
+        <a href="../../doc/sessions/remote.html">remote profiling</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If the generated snapshots have heap dumps in them, you can use the <b><tt>jpanalyze</tt></b>
+      executable to <a href="../../doc/generalSettings/snapshots.html">prepare the heap dump analysis in advance</a>.
+      Opening the snapshot in the JProfiler GUI will then be very fast.
+      The executable is named <i><tt>jpanalyze.exe</tt></i> on Windows and <i><tt>jpanalyze</tt></i>
+      on Unix-based operating systems and is located in the <i><tt>bin</tt></i> directory of
+      a JProfiler installation. If you execute it with the <b>-help</b> option, you will
+      get help on its usage:
+<pre>
+  Usage: jpanalyze [options] "snapshot file" ["snapshot file" ...]
+
+  where "snapshot file" is a snapshot file with a .jps, .hprof, or .dat extension
+        [options] is a list of options in the format -option=value
+
+  Options:
+      -format=dir|tar|tgz
+          The format in which the analysis data should be stored. Defaults to
+          dir.
+      -removeUnreferenced=true|false
+          If unreferenced or weakly referenced objects should be removed.
+      -retained=true|false
+          Calculate retained sizes (biggest objects). removeUnreferenced will be
+          set to true.
+</pre>
+      
+<p>
+        The <tt>removeUnreferenced</tt> and the <tt>retained</tt> command line options correspond to the
+        options in the <a href="../../doc/views/heapwalker/options.html">heap walker options dialog</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you start your application from an ant build file, you can use the
+      <a href="../../doc/offline/ant.html">ant task</a> to easily profile your
+      application in offline mode.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you already have a launched "Application" session defined, you can generate a start script for offline profiling with
+      the <b>local to offline conversion wizard</b> on the "Convert" tab of the
+      <a href="../../doc/quickstart/startcenter.html">start center</a> or by selecting
+      <i>Session-&gt;Conversion wizards-&gt;Convert application session to offline</i>
+      from the main menu.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To control CPU profiling, triggering of heap dumps and saving of snapshots during
+      an offline profiling session, you can use the
+      <ul>
+<li>
+<span class="sectiontitle">Profiling API</span>
+<br>
+          JProfiler's <a href="../../doc/offline/api.html">profiling API</a> allows you to control the profiling
+          agent from your own code. An example on how to
+          use the offline profiling API is available in the <i><tt>$JPROFILER_HOME/api/samples/offline</tt></i>
+          directory.
+        </li>
+<li>
+<span class="sectiontitle">Triggers</span>
+<br>
+          
+<p>
+            With <a href="../../doc/sessions/triggers/triggerSettings.html">triggers</a>, you can define all profiling actions
+            in the JProfiler GUI.
+          </p>
+          
+<p>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/trigger_settings.png">
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">JProfiler MBean</span>
+<br>
+          
+<p>
+            On Java 1.5+, the profiling agent registers an MBean that gives access to all profiling actions.
+            MBeans are configurable in
+            <a target="_blank" href="http://download.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html">jconsole</a>:
+          </p>
+          
+<p>
+            
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/mbean.png">
+          </p>
+          
+<p>
+            Most methods of the <code>com.jprofiler.api.agent.Controller</code> are reflected in the MBean. For
+            documentation of the MBean operations, please see the javadoc of <code>com.jprofiler.api.agent.mbean.RemoteControllerMBean</code>.
+          </p>
+          
+<p>
+            The MBean may also be accessible via configuration facilities of an application server or other tools.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Command line controller</span>
+<br>
+          
+<p>
+            With Java 1.5+, you can use the <a href="../../doc/offline/commandLineController.html">command line controller tool</a>
+            to interactively record profiling data and save snapshots in a convenient way without having to use a separate MBean viewer.
+          </p>
+        
+</li>
+</ul>
+      
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If wish to analyze profiling information at run-time, you can use the <b>profiling platform</b> that is
+      part of JProfiler. Please see the javadoc in <i><tt>$JPROFILER_HOME/api/javadoc</tt></i> and the sample
+      in <i><tt>$JPROFILER_HOME/api/samples/platform</tt></i> for more information.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/offline/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/offline/commandLineController.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

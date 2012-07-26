@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Common Properties Of Monitor Views</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Common Properties Of Monitor Views</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/$usageTables$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/monitorContentionCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Monitor views show a table where every row corresponds to a waiting or blocking event on a monitor.
+      There are two monitor views:
+      <ul>
+<li>
+<a href="../../../doc/views/monitors/monitorContentionCurrent.html">current monitors view</a>
+<br>
+          The current monitors view shows monitors that are currently involved in
+          a waiting or blocking operation.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/monitorContentionHistory.html">monitor history view</a>
+<br>
+          The monitor history view shows the sequence of waiting and blocking operations on monitors.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The monitor views show the following 6 columns:
+      <a href="../../../doc/views/common/sorting.html">sortable</a>.
+      <ul>
+<li>
+<span class="sectiontitle">Time</span>
+<br>
+          The start time of the event.
+        </li>
+<li>
+<span class="sectiontitle">Duration</span>
+<br>
+          The duration of the event. The event may still be in progress.
+        </li>
+<li>
+<span class="sectiontitle">Type</span>
+<br>
+          The type of the event, one of "waiting" or "blocked".
+        </li>
+<li>
+<span class="sectiontitle">Monitor ID</span>
+<br>
+          The ID of the monitor for identifying multiple events on a particular 
+          monitor instance.
+        </li>
+<li>
+<span class="sectiontitle">Monitor class</span>
+<br>
+          The class of the monitor. If no Java object is associated with this monitor
+          <tt>[raw monitor]</tt> is displayed.
+        </li>
+<li>
+<span class="sectiontitle">Waiting thread</span>
+<br>
+          The thread that is or was waiting during the event.
+        </li>
+<li>
+<span class="sectiontitle">Owning thread</span>
+<br>
+          The thread holding the monitor which is blocking the waiting thread is displayed. The owning thread is only
+          relevant for the "blocked" event type. This column is not available
+          if you profile with Java &lt;=1.4 (JVMPI).
+        </li>
+</ul>      
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        In the lower part of the split pane, the stack traces of the waiting thread and
+        - if applicable - of the owning thread are displayed. Stack traces can only be displayed
+        if <a href="../../../doc/views/cpu/cpu.html">CPU data is being recorded</a>.
+      
+    </td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        You can show any monitor in the <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker</a> by
+        selecting the table row and choosing <i>Show Selection In Heap Walker</i>
+        from the context menu. If a heap dump was already taken, you can choose to select the object in the
+        current heap dump, otherwise a new heap dump will be taken.
+      
+      <p>
+        Note that the selected monitor might not exist in the heap dump because the heap dump might have been
+        taken before the monitor was allocated or after the monitor was garbage collected.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you profile with Java &lt;=1.4 (JVMPI), the monitor class names can only be displayed if they
+      are recorded objects. You can enable "Record allocations on startup" in the
+      <a href="../../../doc/sessions/startupDialog.html">session startup dialog</a>
+      to record all objects.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/$usageTables$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/monitorContentionCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

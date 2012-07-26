@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Top-level Windows in JProfiler</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Top-level Windows in JProfiler</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/find.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/sorting.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      All views in JProfiler can be undocked and promoted to a separate top level window by
+      <ul>
+<li>
+          choosing <i>Window-&gt;Undock view</i> from JProfiler's main menu
+        </li>
+<li>
+          right clicking the view in the tab selector at the bottom of the window and choosing
+          <i>Undock view</i> from the context menu.
+        </li>
+</ul>
+      
+<p>
+        An undocked view has a reduced main menu that contains only the <i>View</i> and
+        <i>Window</i> menus from the <a href="../../../doc/views/actions.html">main menu</a>
+        as well as a reduced toolbar. With <i>Window-&gt;Show main window for this session</i>
+        (<code>CTRL-H</code>) the corresponding main window can be activated.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If a view has been undocked, a placeholder is shown in the corresponding tab in the main window.
+      An undocked view can be re-docked into its main window by
+      <ul>
+<li>
+          choosing <i>Window-&gt;Dock view</i> from the main menu of the
+          undocked view.
+        </li>
+<li>
+          closing the window.
+        </li>
+<li>
+          clicking the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_dock_16.png">&nbsp;dock button
+          in the placeholder for the view.
+        </li>
+<li>
+          choosing <i>Window-&gt;Dock view</i> from JProfiler's main menu
+        </li>
+<li>
+          right clicking the view in the tab selector at the bottom of the window and choosing
+          <i>Undock view</i> from the context menu.
+        </li>
+</ul>
+      
+<p>
+        Undocked views can be tiled or stacked with the
+        <i>Window-&gt;Tile all undocked view</i> and
+        <i>Window-&gt;Stack all undocked view</i> menu entries. Note that undocked
+        views of all main windows are treated uniformly.
+      </p>
+      
+<p>
+        To dock all undocked views with a single action, please choose
+        <i>Window-&gt;Dock all floating view</i>. Note that undocked
+        views of all main windows are docked.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler keeps track of all created top level windows in the window list available at the
+      bottom of the <i>Window</i> menu. These windows include
+      <ul>
+<li>
+           
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jprofiler_16.png">&nbsp;main windows
+        </li>
+<li>
+           
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/empty_16.png">&nbsp;undocked views
+        </li>
+<li>
+           
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/terminal_16.png">&nbsp;console windows
+        </li>
+<li>
+           
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/source_16.png">&nbsp;source and bytecode viewers
+        </li>
+</ul>
+      
+<p>
+        This list does not include
+      </p>
+      
+<ul>
+<li>native console windows</li>
+</ul>
+      
+<ul>
+<li>windows opened by the profiled application</li>
+</ul>
+      
+<p>
+        To navigate to a window in the window list, click on it or use the
+        <i>Window-&gt;Cycle to previous window</i> (<code>CTRL-F2</code>) and
+        <i>Window-&gt;Cycle to next window</i> (<code>CTRL-F3</code>) menu entries.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/find.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/sorting.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

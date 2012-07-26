@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using JProfiler With Ant</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Using JProfiler With Ant</h2>
+</td><td valign="top" align="right"><a href="../../doc/offline/commandLineController.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/offline/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/offline/api.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Integrating JProfiler with your ant script (read about ant at
+        <a target="_blank" href="http://ant.apache.org">ant.apache.org</a>)
+        is easy. Just use the <b><tt>profile</tt></b> task
+        that is provided in <i><tt>{JProfiler installation directory}/bin/ant.jar</tt></i>
+        instead of the <b><tt>java</tt></b> task. The profile task
+        drop in replacement for the the <b><tt>java</tt></b> as it supports
+        all its attributes and nested tasks. In addition, it has a number of
+        additional attributes that govern how the application is profiled.
+      
+      <p>
+        
+<b>Note:</b> At least ant 1.6.3 is required for the profile task
+        to work.
+      </p>
+      
+<p>
+        To make the <b><tt>profile</tt></b> task available to ant, you
+        must first insert a <b><tt>taskdef</tt></b> element that tells
+        ant where to find the task definition. Here is an example of using the
+        task in an ant build file:
+      </p>
+      
+<pre>
+      &lt;taskdef name="profile"
+               classname="com.jprofiler.ant.ProfileTask"
+               classpath="C:\Program Files\jprofiler7\bin\ant.jar"/&gt;
+
+      &lt;target name="profile"&gt;
+        &lt;profile classname="MyMainClass" offline="true" sessionid="80"&gt;
+          &lt;classpath&gt;
+            &lt;fileset dir="lib" includes="*.jar" /&gt;
+          &lt;/classpath&gt;
+        &lt;/profile&gt;
+      &lt;/target&gt;
+      </pre>
+      
+<p>
+        The <b><tt>taskdef</tt></b> definition must occur only once per
+        ant-build file and can appear anywhere on the top level below the
+        <b><tt>project</tt></b> element.
+      </p>
+      
+<p>
+        
+<b>Note:</b> it is <b>not possible</b> to copy the <i><tt>ant.jar</tt></i> archive to
+        the <i><tt>lib</tt></i> folder of your ant distribution. You have to reference a full
+        installation of JProfiler in the task definition.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Besides the attributes of the <tt>java</tt> task,
+        the <tt>profile</tt> task supports the following additional attributes:
+      <div>&nbsp;</div>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">offline</td>
+          <td align="">
+            Whether the profiling run should be in
+            <a href="../../doc/offline/offline.html">offline mode</a>.
+            Corresponds to the <b>offline</b>
+            <a href="../../doc/sessions/remoteTable.html">library parameter</a>.
+            Either <tt>true</tt> or <tt>false</tt>.
+          </td>
+          <td rowspan="2" align="center">
+            No, offline and nowait cannot <b>both</b> be <tt>true</tt>
+          </td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">nowait</td>
+          <td align="">
+            Whether profiling should start immediately or whether
+            the profiled JVM should wait for a connection from the JProfiler GUI.
+            Corresponds to the <b>nowait</b>
+            <a href="../../doc/sessions/remoteTable.html">library parameter</a>.
+            Either <tt>true</tt> or <tt>false</tt>.
+          </td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">sessionid</td>
+          <td align="">
+            Defines the session id from which profiling settings should be taken.
+            Has no effect if neither nowait nor offline are
+            set because in that case the profiling session is selected in the GUI.
+            Corresponds to the <b>id</b>
+            <a href="../../doc/sessions/remoteTable.html">library parameter</a>.
+          </td>
+          <td align="center">
+            Required if
+            <ul>
+<li>offline is set</li>
+<li>nowait is set and the profiled JVM has a version of 1.5 or earlier</li>
+</ul>
+          
+</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">configfile</td>
+          <td align="">
+            Defines the config file from which the profiling settings should be
+            read. If not set or empty, the default config file location will be taken
+            ($HOME/.jprofiler7/config.xml). Has no effect if neither nowait
+            nor offline are set because in that case the profiling session is
+            selected in the GUI.
+            Corresponds to the <b>config</b>
+            <a href="../../doc/sessions/remoteTable.html">library parameter</a>.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">port</td>
+          <td align="">
+            Defines the port number on which the profiling agent should listen for
+            a connection from the JProfiler GUI. This must be the same as
+            the port configured in the remote session configuration.
+            If not set or zero, the default port (8849) will be used.
+            Has no effect if offline is set because in that case there's no
+            connection from the GUI. Corresponds to the <b>port</b>
+            <a href="../../doc/sessions/remoteTable.html">library parameter</a>.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">usejvmpifor15</td>
+          <td align="">
+            Use the deprecated JVMPI interface for 1.5 JREs.
+            Either <tt>true</tt> or <tt>false</tt>.
+            Default is <tt>false</tt> which means that the
+            new JVMTI interface will be used.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">useinterpreted</td>
+          <td align="">
+            Profile in interpreted mode.
+            Either <tt>true</tt> or <tt>false</tt>.
+            Default is <tt>false</tt>.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+      
+</table>
+
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If the generated snapshots have heap dumps in them,
+      you can then use the <tt>analyze</tt> ant task to
+      <a href="../../doc/generalSettings/snapshots.html">prepare the heap dump analysis in advance</a>.
+      This is an alternative to calling the <b><tt>jpanalyze</tt></b> executable directly as described for
+      <a href="../../doc/offline/offline.html">offline profiling</a>.
+      <p>
+        Here is an example of using the task in an ant build file:
+      </p>
+      
+<pre>
+      &lt;taskdef name="analyze"
+               classname="com.jprofiler.ant.AnalyzeTask"
+               classpath="C:\Program Files\jprofiler7\bin\ant.jar"/&gt;
+
+      &lt;target name="analyze"&gt;
+        &lt;analyze&gt;
+          &lt;fileset dir="output" includes="*.jps" /&gt;
+        &lt;/analyze&gt;
+      &lt;/target&gt;
+      </pre>
+      
+<p>
+        This will prepare heap dump analyses for all snapshot files in the "output" directory.
+      </p>
+      
+<p>
+        Besides the file set for the snapshot files to by analyzed, the
+        <tt>analyze</tt> task supports the following additional attributes:
+      </p>
+<div>&nbsp;</div>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">format</td>
+          <td align="">
+            One of "dir", "tar" or "tgz". By default, the directory format is
+            used. These options correspond to the
+            <a href="../../doc/generalSettings/snapshots.html">heap dump analysis saving options</a>
+            in the general settings.
+          </td>
+          <td align="center">
+            No
+          </td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">removeunreferenced</td>
+          <td align="">
+            Corresponds to the "Remove unreferenced and weakly referenced objects" option in the
+            <a href="../../doc/views/heapwalker/options.html">heap walker options dialog</a>.
+            Either <tt>true</tt> or <tt>false</tt>.
+          </td>
+          <td align="center">
+            No
+          </td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">retained</td>
+          <td align="">
+            Corresponds to the "Calculate retained sizes" option in the
+            <a href="../../doc/views/heapwalker/options.html">heap walker options dialog</a>.
+            Either <tt>true</tt> or <tt>false</tt>.
+            If set to <tt>true</tt>, <tt>removeunreferenced</tt> will be set to to
+            <tt>true</tt> as well.
+          </td>
+          <td align="center">
+            No
+          </td>
+        
+</tr>
+      
+</table>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/offline/commandLineController.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/offline/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/offline/api.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

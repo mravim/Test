@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>JProfiler IDE integrations</title>
+</head>
+<body>
+<h1>Installation notes for the IDE integrations of JProfiler</h1>
+
+<b>version 7.1.2</b><br />
+<b>released on 2012-06-30</b>
+<hr size="1" />
+
+
+<h2>I. Automatic Installation</h2>
+
+<p>
+In order to minimize the post-install configuration, we recommend
+to install the IDE integrations from within JProfiler:
+</p>
+<p>
+Choose Session->IDE integrations from JProfiler's main menu,
+select the desired IDE and click on "Integrate".
+</p>
+<p>
+For more information on how to work with the IDE integrations, please see
+<a href="../doc/ide/overview.html">the JProfiler help</a>.
+</p>
+
+
+<h2>II. Manual Installation</h2>
+
+<p>
+Manual installations are not recommended. They're outlined below in
+case the automatic installation cannot be used, for example if admin
+rights are required.
+</p>
+
+<h3>1. eclipse</h3>
+
+<p>
+These instructions apply to all versions of eclipse.
+</p>
+<ol>
+<li>Create a directory called <tt>com.jprofiler.integrations.eclipse</tt> in the
+   plugins directory of your eclipse installation.</li>
+<li>Locate the suitable <tt>eclipseNN-jprofiler.zip</tt> file (where <tt>NN</tt> is the
+  eclipse version) in the directory of this readme file and unpack it into the directory created in step a).</li>
+<li>Start eclipse, open the preferences dialog from the main menu
+   (Window->Preferences), select "JProfiler" and fill in the path to the
+   jprofiler executable (<tt>jprofiler.exe</tt> on Windows and<tt>jprofiler</tt> on
+   UNIX based platforms).</li>
+<li>For eclipse 2.x, activate the "JProfiler" plugin for the Java perspective
+under <i>Window->Customize perspective->Other</i>. For eclipse 3.x, activate the "Profile"
+actions for the Java perspective under <i>Window->Customize perspective->Command</i>.</li>
+</ol>
+
+<h3>2. IntelliJ IDEA</h3>
+
+<p>
+These instructions apply to all versions of IntelliJ IDEA
+</p>
+<ol>
+<li>Locate the suitable <tt>ideaNN-jprofiler.jar</tt> (where NN is the IDEA version) in the directory of
+   this readme file and copy it into the directory "plugins" in your IDEA
+   installation.</li>
+<li>Create a file <tt>jprofiler.properties</tt> in the same directory with
+   the contents:
+<pre>
+jprofilerExecutable=path_to_jprofiler_executable
+</pre>
+   On Windows, take care to substitute backslashes with forward slashes.
+   For example: <tt>C:/Program Files/jprofiler/bin/windows/jprofiler.exe</tt></li>
+</ol>
+
+<h3>3. JBuilder</h3>
+
+<p>
+These instructions apply to all versions of JBuilder.
+</p>
+<ol>
+<li>Locate <tt>jbuilder-jprofiler.jar</tt> in the directory of this readme file
+   and copy it into the directory <tt>lib/ext</tt> in your JBuilder installation.</li>
+<li>Start JBuilder.</li>
+<li>When invoking the "optimize" action for the first time, fill in the
+   path to the jprofiler executable (<tt>jprofiler.exe</tt> on Windows and
+   <tt>jprofiler.sh</tt> on UNIX based platforms).</li>
+</ol>
+
+<h3>4. JDeveloper 10.1.3</h3>
+
+<p>
+These instructions apply to all versions of JDeveloper.
+</p>
+
+<ol>
+<li>Locate <tt>jdeveloperNN-jprofiler.zip</tt> (where NN is the JDeveloper version) in the
+   directory of this readme file
+   and extract it into the directory <tt>jdev/extensions</tt> in your JDeveloper installation.</li>
+<li>Start JDeveloper, choose Tools->Preferences->JProfiler and fill in the
+   path to the jprofiler executable (<tt>jprofiler.exe</tt> on Windows and
+   <tt>jprofiler.sh</tt> on UNIX based platforms).</li>
+</ol>
+
+<h3>5. Netbeans</h3>
+
+<p>
+These instructions apply to Netbeans
+</p>
+
+<ol>
+<li>Go to "Update Center" or "Plugins" available from the "Tools" menu,
+   and install
+   <tt>netbeansNN-jprofiler.nbm</tt> (where NN is the Netbeans version) in the directory of this readme file
+   and install it into the IDE.</li>
+<li>Create a file <tt>jprofiler.properties</tt> in the Netbeans user directory
+   or in the directory <tt>[IDE installation directory]/ideX</tt> (where X is a number) with the
+   contents:
+<pre>
+jprofilerExecutable=path_to_jprofiler_executable
+</pre>
+   On Windows, take care to substitute backslashes with forward slashes.
+   For example: <tt>C:/Program Files/jprofiler/bin/windows/jprofiler.exe</tt></li>
+<li>
+  In the same directory as the above file, create a subdirectory modules/ext and
+  copy the contents of $JPROFILER_HOME/lib to that directory.
+</li>
+</ol>
+</body>
+</html>

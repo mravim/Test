@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Command Line Comparisons</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Command Line Comparisons</h2>
+</td><td valign="top" align="right"><a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/export/cmdlineComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler's command line comparison facility allows you to export a number of
+      snapshot comparisons as HTML, CSV or XML. This is especially convenient if you use
+      <a href="../../doc/offline/offline.html">offline profiling</a> and
+      wish to generate comparisons in an automated fashion.
+      <p>
+        There are two ways to programmatically generate comparisons:
+      </p>
+      
+<ul>
+<li>
+<a href="../../doc/export/cmdlineComparisons.html">with the special command line executable</a>
+<br>
+</li>
+<li>
+<a href="../../doc/export/antComparisons.html">with the ant task</a>
+<br>
+</li>
+</ul>
+      
+<p>
+        In both cases you specify a number of snapshots and a number of comparison names together
+        with a set of options for each comparison.  Each comparison has its own set of options.
+        The options can be used to adjust the presentation and the displayed data.
+        For each selection step in the comparison wizards, an option is provided
+        that allows you to perform the same selection for the command line comparison.
+      </p>
+      
+    
+      Most comparisons in JProfiler support multiple output formats. By default, the output format
+      is deduced from the extension of the output file:
+      <ul>
+<li>
+<span class="sectiontitle">.html</span>
+<br>
+          export as HTML file. Note that a directory named <i><tt>jprofiler_images</tt></i>
+          will be created that contains images used in the HTML page.
+        </li>
+<li>
+<span class="sectiontitle">.csv</span>
+<br>
+          export as CSV data, the first line contains the column names.
+          <p>
+            
+<b>Note:</b> When using Microsoft Excel, CSV is not a stable format. Microsoft Excel on
+            Windows takes the separator character from the regional settings. JProfiler uses a semicolon as
+            the separator in locales that use a comma as a decimal separator and a comma in locales that use
+            a dot as a decimal separator. If you need to override the CSV separator character you can
+            do so by setting -Djprofiler.csvSeparator in <i><tt>bin/export.vmoptions</tt></i>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">.xml</span>
+<br>
+          export as XML data. The data format is self-descriptive.
+        </li>
+</ul>
+    
+<br>
+    
+<p>
+      If you would like to use different extensions, you can use the <b>format</b>
+      option to override the choice of the output format.
+    </p>
+  
+    
+</td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The export will fail if
+      
+      <ul>
+<li>one of the specified snapshot files does not exist</li>
+<li>you specify an unrecognized option</li>
+<li>you specify an unrecognized comparison name</li>
+<li>the output file cannot be written</li>
+<li>an option has an invalid value</li>
+<li>an option leads to an invalid selection in JProfiler, e.g. if a class cannot be found</li>
+</ul>
+      
+<p>
+        You can choose to ignore errors by using the global <b>ignoreerrors</b> option.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/export/cmdlineComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

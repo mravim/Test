@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config version="2.0">
+  <interfaces>
+    <interface id="JVMTI11" options="-agentpath:${LIBRARY}=${PARAM}" updatableConfiguration="true" nativeLibraryPathRequired="false" bootClassPathRequired="false" library="jprofilerti"/>
+    <interface id="JVMTI10" options="-agentpath:${LIBRARY}=${PARAM}" updatableConfiguration="false" nativeLibraryPathRequired="false" bootClassPathRequired="false" library="jprofilerti"/>
+    <interface id="JVMPI" options="-Xrunjprofiler:${PARAM}" updatableConfiguration="false" nativeLibraryPathRequired="true" bootClassPathRequired="true" library="jprofiler"/>
+  </interfaces>
+  <vendors>
+    <!-- use oldIds attribute for Oracle migration -->
+    <vendor id="Oracle" fullName="Oracle (formerly Sun)" displayName="Oracle" oldIds="Sun">
+      <modes>
+        <mode id="hotspot" jvmOptions=""  profilerOptions=""/>
+        <mode id="interpreted" jvmOptions="-Xint" profilerOptions=""/>
+        <mode id="default" jvmOptions="" profilerOptions=""/>
+        <mode id="hotspot (JVMPI)" interface="JVMPI" jvmOptions="-Xshare:off"  profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+        <mode id="interpreted (JVMPI)" interface="JVMPI" jvmOptions="-Xint -Xshare:off" profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+      </modes>
+      <versions>
+        <version id="1.2.2" interface="JVMPI" specificJVMOptions="[solaris: -native] -Djava.compiler=none" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="default" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.3.0" interface="JVMPI" specificJVMOptions="[solaris: -Xboundthreads]" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="default" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.3.1" interface="JVMPI" specificJVMOptions="[solaris: -Xboundthreads]" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <unsupported>
+            <release id="1.3.1" />
+            <release id="1.3.1_01" />
+          </unsupported>
+          <modeRefs>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.0" interface="JVMPI" srcFileName="src.zip" srcFileDirPrefix="">
+          <unsupported>
+            <release id="1.4.0-beta" />
+            <release id="1.4.0-beta2" />
+            <release id="1.4.0-beta3" />
+            <release id="1.4.0-rc" />
+            <release id="1.4.0" />
+          </unsupported>
+          <modeRefs>
+            <modeRef idRef="hotspot"/>
+            <modeRef idRef="interpreted" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.1" interface="JVMPI" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.2" idRef="1.4.1"/>
+        <version id="1.5.0" interface="JVMTI10" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot (JVMPI)"/>
+            <modeRef idRef="interpreted (JVMPI)"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+        <version id="1.7.0" idRef="1.6.0"/>
+      </versions>
+    </vendor>
+    <vendor id="IBM" fullName="IBM Corporation" displayName="IBM">
+      <modes>
+        <mode id="jit compiler" jvmOptions=""  profilerOptions="" comment="does not work with sampling"/>
+        <mode id="interpreted" jvmOptions="-Djava.compiler=none" profilerOptions=""/>
+        <mode id="interpreted (>= 1.5)" jvmOptions="-Xint" profilerOptions=""/>
+        <mode id="jit compiler (>= 1.5)" jvmOptions=""  profilerOptions="" comment=""/>
+      </modes>
+      <versions>
+        <version id="1.3.0" interface="JVMPI" specificJVMOptions="" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="interpreted" preferred="true"/>
+            <modeRef idRef="jit compiler"/>
+          </modeRefs>
+        </version>
+        <version id="1.3.1" idRef="1.3.0"/>
+        <version id="1.4.0" idRef="1.3.0"/>
+        <version id="1.4.1" idRef="1.3.0"/>
+        <version id="1.4.2" idRef="1.3.0"/>
+        <version id="1.5.0" interface="JVMTI10" specificJVMOptions="-Xshareclasses:none" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="jit compiler" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="-Xshareclasses:none" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="jit compiler" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+        <version id="1.7.0" idRef="1.6.0"/>
+      </versions>
+    </vendor>
+    <vendor id="Apple" fullName="Apple Computer, Inc." displayName="Apple">
+      <modes>
+        <mode id="hotspot" jvmOptions="" profilerOptions=""/>
+        <mode id="interpreted" jvmOptions="-Xint" profilerOptions=""/>
+        <mode id="hotspot (JVMPI)" interface="JVMPI" jvmOptions="-XX:-UseSharedSpaces"  profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+        <mode id="interpreted (JVMPI)" interface="JVMPI" jvmOptions="-Xint -XX:-UseSharedSpaces" profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+      </modes>
+      <versions>
+        <version id="1.3.1" interface="JVMPI" specificJVMOptions="" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="interpreted" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.1" interface="JVMPI" specificJVMOptions="-XX:-UseSharedSpaces" srcFileName="src.zip" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.2" idRef="1.4.1"/>
+        <version id="1.5.0" interface="JVMTI10" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot (JVMPI)"/>
+            <modeRef idRef="interpreted (JVMPI)"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+      </versions>
+    </vendor>
+    <vendor id="JRockit" fullName="Oracle JRockit" displayName="JRockit">
+      <modes>
+        <mode id="default" jvmOptions="" profilerOptions="" comment=""/>
+        <mode id="default (JVMPI)" jvmOptions="-Xjvmpi:entryexit=off" profilerOptions="" comment=""/>
+        <mode id="noopt" jvmOptions="-Xnoopt" profilerOptions=""/>
+      </modes>
+      <versions>
+        <version id="1.4.1" interface="JVMPI" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="default (JVMPI)" preferred="true"/>
+            <modeRef idRef="noopt"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.2" idRef="1.4.1"/>
+        <version id="1.5.0" interface="JVMPI" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="default" preferred="true"/>
+            <modeRef idRef="default (JVMPI)"/>
+            <modeRef idRef="noopt"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="default" preferred="true"/>
+          </modeRefs>
+        </version>
+       </versions>
+    </vendor>
+    <vendor id="Hewlett-Packard" fullName="Hewlett-Packard Co." displayName="HP">
+      <modes>
+        <mode id="hotspot" jvmOptions=""  profilerOptions="" />
+        <mode id="interpreted" jvmOptions="-Xint" profilerOptions=""/>
+        <mode id="hotspot (JVMPI)" interface="JVMPI" jvmOptions="-Xshare:off"  profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+        <mode id="interpreted (JVMPI)" interface="JVMPI" jvmOptions="-Xint -Xshare:off" profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+      </modes>
+
+      <versions>
+        <version id="1.3.1" interface="JVMPI" specificJVMOptions="" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.1" interface="JVMPI" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot"/>
+            <modeRef idRef="interpreted" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.2" idRef="1.4.1"/>
+        <version id="1.5.0" interface="JVMTI10" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot (JVMPI)"/>
+            <modeRef idRef="interpreted (JVMPI)"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+      </versions>
+    </vendor>
+    <vendor id="The FreeBSD Foundation" fullName="The FreeBSD Foundation" displayName="FreeBSD">
+      <modes>
+        <mode id="hotspot" jvmOptions=""  profilerOptions="" comment="does not work with full instrumentation"/>
+        <mode id="interpreted" jvmOptions="-Xint" profilerOptions=""/>
+        <mode id="classic" jvmOptions="-classic" profilerOptions=""/>
+        <mode id="hotspot (JVMPI)" interface="JVMPI" jvmOptions="-Xshare:off"  profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+        <mode id="interpreted (JVMPI)" interface="JVMPI" jvmOptions="-Xint -Xshare:off" profilerOptions="" comment="deprecated, default interface JVMTI is preferred"/>
+      </modes>
+
+      <versions>
+        <version id="1.3.1" interface="JVMPI" specificJVMOptions="" srcFileName="src.jar" srcFileDirPrefix="src/">
+          <modeRefs>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot"/>
+            <modeRef idRef="classic" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.1" interface="JVMPI" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot"/>
+            <modeRef idRef="interpreted" preferred="true"/>
+          </modeRefs>
+        </version>
+        <version id="1.4.2" idRef="1.4.1"/>
+        <version id="1.5.0" interface="JVMTI10" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+            <modeRef idRef="hotspot (JVMPI)"/>
+            <modeRef idRef="interpreted (JVMPI)"/>
+          </modeRefs>
+        </version>
+        <version id="1.6.0" interface="JVMTI11" specificJVMOptions="" srcFileName="src.zip" srcFileDirPrefix="">
+          <modeRefs>
+            <modeRef idRef="hotspot" preferred="true"/>
+            <modeRef idRef="interpreted"/>
+          </modeRefs>
+        </version>
+      </versions>
+    </vendor>
+    
+  </vendors>
+</config>

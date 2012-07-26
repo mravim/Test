@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>The Influence of Method Call Recording Filters on Hot Spots</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>The Influence of Method Call Recording Filters on Hot Spots</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/times.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/requestTracking.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      The notion of a performance hot spot is not absolute but relative to your point of view.
+      The total execution time of a method is not the right measure, since in that case
+      your main method or the <code>run()</code> methods of your threads
+      would be the biggest hot spots in most cases. Such a definition of a hot spot would
+      not be very useful. Clearly, we somehow must use the <b>inherent time of methods</b> to determine
+      what a hot spot is.
+    <br>
+    
+<p>
+      As an extreme case, one could use the inherent time of all executed methods in the JVM
+      for the ranking of hot spots. This would not be very useful either, since the biggest hot spots
+      will most likely always be core methods in the JRE, like string manipulation, I/O classes or core drawing routines in
+      obscure implementation classes of the AWT.
+    </p>
+    
+<p>
+      As the above considerations make clear, the definition of a hot spot is not trivial and
+      must be carefully considered.
+    </p>
+    
+<h3>2. Definition of a hot spot</h3>
+    
+<p>
+      Only with <a href="../../../doc/helptopics/config/filters.html">method call recording filters</a> is it possible to
+      come up with a useful definition of a hot spot. Usually, your filters settings
+      will exclude all library classes and framework classes by restricting the profiled classes to your top-level
+      packages.
+    </p>
+    
+<p>
+      In order to be useful to you, a hot spot must be
+    </p>
+    
+<ul>
+<li>
+<span class="sectiontitle">a method in your own classes</span>
+<br>
+        These are the classes that you can actually modify to solve a performance problem.
+      </li>
+<li>
+<span class="sectiontitle">a method in a library class that you call directly</span>
+<br>
+        This gives your a more fine-grained resolution of the activities of your own methods.
+        While not directly under your control, you can sometime choose to call libraries less frequently or in a
+        different way.
+      </li>
+</ul>
+    
+<p>
+      Sometimes, you will want to eliminate hot spots in unprofiled classes by adding their time to the
+      inherent time of the calling method, which is definitely in a profiled class. In that way,
+      only profiled methods can appear as hot spots. JProfiler's hot spot view offers both modes with the
+      "Filtered classes" drop-down list in the top-right corner. The allocation hot spots views also offer this
+      mechanism of adjusting the definition of a hot spot.
+    </p>
+    
+<h3>3. Example</h3>
+    
+<p>
+      In the following example, a simple program with the main class <code>misc.JdomTest</code> is shown that
+      reads an XML file with the help of the JDOM library.
+      First, we set the filter settings to include <code>misc.</code> and <code>org.jdom.</code>.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/hotspots_with_jdom.png">
+    </p>
+    
+<p>
+      Since  we profile the JDOM classes, all the hot spots are in the JDOM subsystem, and not in our own class.
+      This may be useful if you a JDOM developer, but otherwise you just see confusing and useless information.
+      None of the listed <code>org.jdom.*</code> classes are ever called by our code. While we could
+      open the back traces and check how they have been invoked, this is cumbersome and produces
+      no insight into any performance problems that we might be able to solve.
+    </p>
+    
+<p>
+      In the next step, we change our filter settings so that only the <code>misc.</code> package
+      is profiled.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/hotspots_allfilters_separate.png">
+    </p>
+    
+<p>
+      We see the <code>SAXBuilder</code> class in JDOM that is actually constructed and called by our code
+      to read the XML file. No other internal JDOM classes are shown. The <code>readDocument</code> method
+      that calls the JDOM library is not a significant hot spot.
+    </p>
+    
+<p>
+      If you want to fully concentrate on your own classes, the remaining JDOM hot spots might be unwanted.
+      You can quickly change the hot spot definition by setting the "filtered classes handing" to "add to calling class".
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/hotspots_allfilters_addtocalling.png">
+    </p>
+    
+<p>
+      Now, the list of hot spots just includes the method that reads the XML file, as expected for our trivial
+      example.
+    </p>
+    
+<p>
+      From the above example, you can see how important the filter settings and the filtered classes handling
+      are for the actual results in the hot spot view. The same considerations apply to the allocation
+      hot spot view.
+    </p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/times.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/requestTracking.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

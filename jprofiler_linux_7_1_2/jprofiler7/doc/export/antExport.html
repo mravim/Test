@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Export Ant Task</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Export Ant Task</h2>
+</td><td valign="top" align="right"><a href="../../doc/export/cmdlineExport.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$snapshotFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The export ant task can be used to export views from a saved snapshot. For more
+      information please consult the <a href="../../doc/export/export.html">overview</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        You can integrate the command line export with your ant script (read about ant at
+        <a target="_blank" href="http://ant.apache.org">ant.apache.org</a>) by using
+        the <b><tt>export</tt></b> task
+        that is provided in <i><tt>{JProfiler installation directory}/bin/ant.jar</tt></i>.
+      
+      <p>
+        To make the <b><tt>export</tt></b> task available to ant, you
+        must first insert a <b><tt>taskdef</tt></b> element that tells
+        ant where to find the task definition. Here is an example of using the
+        task in an ant build file:
+      </p>
+      
+<pre>
+      &lt;taskdef name="export"
+               classname="com.jprofiler.ant.ExportTask"
+               classpath="C:\Program Files\jprofiler4\bin\ant.jar"/&gt;
+
+      &lt;target name="export"&gt;
+        &lt;export snapshotfile="c:\home\ingo\test.jps"&gt;
+          &lt;view name="CallTree" file="calltree.html"/&gt;
+          &lt;view name="HotSpots" file="hotspots.html"&gt;
+            &lt;option name="expandbacktraces" value="true"/&gt;
+            &lt;option name="aggregation" value="class"/&gt;
+          &lt;/view&gt;
+        &lt;/export&gt;
+      &lt;/target&gt;
+      </pre>
+      
+<p>
+        The <b><tt>taskdef</tt></b> definition must occur only once per
+        ant-build file and can appear anywhere on the top level below the
+        <b><tt>project</tt></b> element.
+      </p>
+      
+<p>
+        
+<b>Note:</b> it is <b>not possible</b> to copy the <i><tt>ant.jar</tt></i> archive to
+        the <i><tt>lib</tt></i> folder of your ant distribution. You have to reference a full
+        installation of JProfiler in the task definition.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <tt>export</tt> task supports the following attributes:
+      <div>&nbsp;</div>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">snapshotfile</td>
+          <td align="">
+            The path to the snapshot file. This must be a file with a <i><tt>.jps</tt></i>
+            extension.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">session</td>
+          <td align="">
+            An alternate session from which the view settings should be taken. The
+            session id can be found in the application settings next to the
+            session name. By default, the view settings are taken from the session
+            that is embedded inside the snapshot file.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">ignoreerrors</td>
+          <td align="">
+            Ignore errors that occur when options for a view cannot be set and
+            continue with the next view. The default value is "false", i.e. the
+            export is terminated, when the first error occurs.
+          </td>
+          <td align="center">No</td>
+        
+</tr>
+      
+</table>
+      
+<p>
+        The export task contains a list of <b>view</b> elements with the
+        following attributes:
+      </p>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">name</td>
+          <td align="">
+            The view name. For a list of available view names, please see
+            <a href="../../doc/export/cmdlineExport.html">the help page on the command line executable</a>.
+            extension.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">file</td>
+          <td align="">
+            The output file name. The process for the output format selection is described
+            in the <a href="../../doc/export/export.html">overview</a>.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+      
+</table>
+      
+<p>
+        The view element can optionally contain a list of <b>option</b> elements with the
+        following attributes:
+      </p>
+      
+<table cellpadding="4" border="1">
+        
+<tr>
+          
+<th align="">Attribute</th>
+          <th align="">Description</th>
+          <th align="">Required</th>
+        
+</tr>
+        
+<tr>
+          
+<td align="">name</td>
+          <td align="">
+            The option name. Each view has its own set of options. For a list of available
+            view names and the corresponding options, please see
+            <a href="../../doc/export/cmdlineExport.html">the help page on the command line executable</a>.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+        
+<tr>
+          
+<td align="">value</td>
+          <td align="">
+            The value of the option.
+          </td>
+          <td align="center">Yes</td>
+        
+</tr>
+      
+</table>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/export/cmdlineExport.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$snapshotFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

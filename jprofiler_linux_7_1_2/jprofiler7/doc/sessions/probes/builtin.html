@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Built-in Probes</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Built-in Probes</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/probes/probeSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/custom.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        All built-in probes are described on the help page of the <a href="../../../doc/views/probes/probes.html">probes view</a>.
+        Here, only configuration aspects of built-in probes are discussed. For general information on the concepts behind
+        probes, see the <a href="../../../doc/helptopics/probes/probesOverview.html">corresponding help topic</a>.
+      
+      <p>
+        Click on a probe to display the configuration panel. The following common configuration options are available for each probe:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Enabled or disabled</span>
+<br>
+          If a probe is disabled, the bytecode instrumentation required by that particular probe will not be performed. Disabling
+          a probe may be useful for trouble-shooting or minimization of overhead. Note that the overhead of a probe that is
+          enabled but not recording is very small.
+        </li>
+<li>
+<span class="sectiontitle">Record on startup</span>
+<br>
+          If you would like to record probe data right after connecting to the profiled JVM, you can select this option.
+          Otherwise you can start recording data for selected probes manually in the
+          <a href="../../../doc/views/probes/probes.html">probes view</a>.
+        </li>
+<li>
+<span class="sectiontitle">Record single events</span>
+<br>
+          Data in the <a href="../../../doc/views/probes/events.html">probe events view</a> is only available if this option
+          is selected. Recording single events may add noticeable overhead depending on the activities of the
+          profiled application. Other probe views are not affected by this setting.
+        </li>
+<li>
+<span class="sectiontitle">Annotate into call tree</span>
+<br>
+          Select this option, if you would like to see payload data from the <a href="../../../doc/views/probes/hotSpots.html">probe hot spots view</a>
+          in the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+          In this way, you get additional information in-place when analyzing performance problems in the call tree view.
+          You can deselect this option in order to minimize overhead.
+          <p>
+            This option is not available for the "Servlets" probe.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The following built-in probes have particular configuration options:
+      
+      <ul>
+<li>
+<span class="sectiontitle">JDBC</span>
+<br>
+          If required, you can choose to resolve parameters of prepared statements. By default,
+          those parameters are shown as question marks in the <a href="../../../doc/views/probes/hotSpots.html">hot spot view</a>
+          and the <a href="../../../doc/views/probes/events.html">event view</a>. Resolving these parameters
+          makes the hot spots view more cluttered, but can be useful for debugging purposes.
+        </li>
+<li>
+<span class="sectiontitle">JPA/Hibernate</span>
+<br>
+          The JPA/Hibernate probe supports a number of providers, like Hibernate 3.x, Hibernate 4.x and eclipselink 2.3.
+          You can deselect providers in the probe configuration.
+        </li>
+<li>
+<span class="sectiontitle">JMS</span>
+<br>
+          Since messages are custom objects, JProfiler does not know how to optimally display messages in the hot spots
+          and event views. By default, a message is only identified via the <code>toString()</code> value of the destination
+          returned by <code>javax.jms.Message#getJMSDestination()</code>.
+          <p>
+            With the "message resolver script" you can display customized information on your messages. The
+            <a href="../../../doc/scripts/scripts.html">script</a> receives a parameter "message" which is of type
+            <code>java.lang.Object</code>. This is because the JMS classes may not be available in the profiled JVM,
+            so the JMS probe cannot depend on them. You can cast the message to a subtype of <tt>javax.jms.Message</tt>,
+            extract the relevant information and return a string that will be displayed in the JProfiler GUI. That string
+            is the basis for the hot spots calculation in the <a href="../../../doc/views/probes/hotSpots.html">hot spot view</a>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Servlets</span>
+<br>
+          The servlet probe splits the call tree for different URL invocations, so you can analyze different requests
+          separately. What constitutes a "different" request is governed by the "URL splitting" setting of the servlet
+          probe. By default, only the request path is retained, and all parameters are discarded.
+          <p>
+            In reality, there may be certain request parameters that should be retained for URL splitting, such as parameters
+            that do not identify user input, but determine the type of the request. For example, you may have a
+            dispatcher servlet and a parameter "controller" that determines the type of the request. In that case,
+            you would probably like to retain the parameter "controller". In the text field after the
+            "Retain request parameters" radio button, a comma-separated list of such parameters can be specified.
+          </p>
+          
+<p>
+            However, the structure of the URLs may be more complex than that. Maybe you want to discard parts of the
+            request path or conditionally retain request parameters. In that case, you can use the "Resolve with script"
+            option and define a <a href="../../../doc/scripts/scripts.html">script</a> that returns the string defining the
+            URL displayed by JProfiler. The script is passed two parameters: <code>uri</code> for the request path and
+            <code>queryString</code> for the query parameters. Just returning <code>uri</code> would correspond to
+            the default "Request path only" setting.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/probes/probeSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/custom.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

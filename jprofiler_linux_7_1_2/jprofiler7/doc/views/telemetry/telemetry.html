@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Telemetry View Section</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Telemetry View Section</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/telemetry/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/telemetry/settings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The telemetry view section shows a number of historic graphs which display cumulated
+    information about the profiled JVM.
+    <table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are several views in this section:
+      <ul>
+<li>
+<span class="sectiontitle">Memory</span>
+<br>
+          
+<p>
+            Shows the maximum heap size and the amount of used and free space in it. This
+            view can be displayed as a line graph or area graph.
+          </p>
+          
+<p>
+            When you profile a Java 1.5+ JVM, the drop down list at the top offers
+            all available memory pools. Please see the
+            <a target="_blank" href="http://www.oracle.com/technetwork/java/gc-tuning-5-138395.html">article on tuning garbage collection</a>
+            for more information on heap memory pools. In addition, there are several memory pools for
+            non-heap data structures. The drop down list shows all available memory pools in a tree-like structure,
+            so you can display the sum of all heap pools (the default selection) or the sum of all
+            non-heap pools in the graph.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Recorded objects</span>
+<br>
+          Shows the total number of objects on the heap, divided into arrays and non-arrays.
+          This view can be displayed as a line graph or area graph. Note that this view
+          only displays <a href="../../../doc/views/memory/memory.html">recorded objects</a> and is unavailable
+          if no objects have been recorded so far. Objects that have been recorded are tracked even
+          after recording has been stopped.
+        </li>
+<li>
+<span class="sectiontitle">Recorded throughput</span>
+<br>
+          Shows how many objects are garbage collected and created. The plotted values
+          are time rates, so the total numbers in a time interval are given by the area
+          under the respective lines. Note that this view
+          only displays <a href="../../../doc/views/memory/memory.html">recorded objects</a> and is unavailable
+          if no objects have been recorded so far. Objects that have been recorded are tracked even
+          after recording has been stopped.
+        </li>
+<li>
+<span class="sectiontitle">GC activity</span>
+<br>
+          Shows the garbage collector activity in percent of the elapsed time. This
+          view is only available when profiling with a Java 1.5+ JVM. The combo
+          box at the top allows you to show the activity for specific GC types. Sun JVMs
+          implement a "Copy" and a "MarkSweepCompact" that apply to different object generations.
+        </li>
+<li>
+<span class="sectiontitle">Classes</span>
+<br>
+          Shows the total number of classes loaded by the JVM, divided into
+          <a href="../../../doc/sessions/filters/filterSettings.html">CPU-profiled and non-CPU-profiled</a> classes.
+          This view can be displayed as a line graph or area graph.
+        </li>
+<li>
+<span class="sectiontitle">Threads</span>
+<br>
+          Shows the total number of alive threads in the JVM, divided into
+          the different <a href="../../../doc/views/threads/history.html">thread states</a>.
+          This view can be displayed as a line graph or area graph.
+        </li>
+<li>
+<span class="sectiontitle">CPU load</span>
+<br>
+          Shows the CPU load of the profiled process in percent of the elapsed time. This
+          view is only available when profiling with a Java 1.5+ JVM.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Telemetries whose measurements are summable can be shown as a line graph and as an area graph.
+        To change the graph type, choose <i>Line graph</i> or <i>Area graph</i>
+        from the context or view menu. The graph type is a persistent view setting separate for each view and is also
+        accessible through the view settings dialog.
+      
+      <p>
+        When a view is shown as an area graph, the line which shows the total value is 
+        given by the upper bound of the filled area while the single contributions are
+        shown as stacked area segments.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you move the mouse across a telemetry view, the time at the position of
+      the mouse cursor and the corresponding value on the vertical axis will be shown
+      in JProfiler's status bar. The <b>current value</b> of each data line is
+      always shown next to the corresponding legend entry.
+      <p>
+        Horizontal and vertical grid lines of the VM telemetry views can be configured in the
+        view settings dialog.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Note that you can use a
+      <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger</a> and the
+      <a href="../../../doc/sessions/triggers/actions.html">"Start recording"  and "Stop recording" actions</a>
+      to control VM telemetry recording for <a href="../../../doc/offline/offline.html">offline profiling</a>.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/telemetry/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/telemetry/settings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

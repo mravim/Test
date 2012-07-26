@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Locking History Graph View Settings Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Locking History Graph View Settings Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/graphHistory.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The locking history graph view settings dialog is accessed by bringing
+      
+      the
+      <a href="../../../doc/views/monitors/graphHistory.html">locking history graph</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On the <b>Recording</b> tab, the following options are available:
+      
+    <ul>
+<li>
+<span class="sectiontitle">Monitor blocking threshold</span>
+<br>
+        Select the minimum time threshold in microseconds (&micro;s) for
+        which a monitor contention (i.e. when a thread is blocking) is displayed in the
+        <a href="../../../doc/views/monitors/graphHistory.html">locking history graph</a>.
+      </li>
+<li>
+<span class="sectiontitle">Monitor waiting threshold</span>
+<br>
+        Select the minimum time threshold in microseconds (&micro;s) for
+        which a monitor wait state (i.e. when a thread is waiting) is displayed in the
+        <a href="../../../doc/views/monitors/graphHistory.html">locking history graph</a>.
+      </li>
+</ul>
+  
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On the <b>Time Line</b> tab, rhe following options are available:
+      <ul>
+<li>
+<span class="sectiontitle">Scale to fit window</span>
+<br>
+          Determines whether the view operates in the "fixed time scale" or
+          "scale to fit window" mode. These modes are described in the
+          VM telemetry view <a href="../../../doc/views/telemetry/telemetry.html">help page</a>.
+        </li>
+<li>
+<span class="sectiontitle">Show bookmarks</span>
+<br>
+          Controls where bookmarks will be shown, one of
+          <ul>
+<li>
+<span class="sectiontitle">None</span>
+<br>
+              No bookmarks will be shown in the VM telemetry view.
+            </li>
+<li>
+<span class="sectiontitle">In time scale</span>
+<br>
+              The vertical bookmark line will only be drawn in the time scale at the top of the view.
+            </li>
+<li>
+<span class="sectiontitle">In entire view</span>
+<br>
+              The vertical bookmark line will be drawn in the time scale and in the view itself.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Grid lines for time axis</span>
+<br>
+          Controls on what ticks grid lines will be shown along the time axis.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/graphHistory.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

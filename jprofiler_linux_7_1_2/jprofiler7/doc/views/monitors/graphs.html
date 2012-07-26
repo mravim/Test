@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Common Properties Of Locking Graphs</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Common Properties Of Locking Graphs</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/graphCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Locking graphs show single locking situations in the JVM. In contrast to the
+        <a href="../../../doc/views/monitors/monitorContention.html">monitor views</a>, the locking graphs focus
+        on the entire set of <b>relationships</b> of all involved monitors and threads rather than the duration
+        of isolated monitor events.
+      
+      <p>
+        There are two locking graphs:
+      </p>
+      
+<ul>
+<li>
+<a href="../../../doc/views/monitors/graphCurrent.html">Current locking graph</a>
+<br>
+          The current locking graph visualizes the current locking situation in the JVM.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/graphHistory.html">Locking history graph</a>
+<br>
+          The locking history graph visualizes the recorded locking situations in the JVM.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The following elements are shown in locking graphs:
+      
+      <ul>
+<li>
+          Threads which participate in a locking situation are painted as blue rectangles.
+          The rectangle includes information about
+          <ul>
+<li>
+              The thread name
+            </li>
+<li>
+              The thread group (in brackets)
+            </li>
+</ul>
+        
+</li>
+<li>
+          Monitors which participate in the locking situation are painted as gray rectangles.
+          The rectangle includes information about
+          <ul>
+<li>
+              The class of the monitor
+            </li>
+<li>
+              The monitor id which can be used to get further information about the monitor
+              in the <a href="../../../doc/views/monitors/monitorContention.html">monitor views</a>
+            
+</li>
+</ul>
+        
+</li>
+<li>
+          The <b>ownership of monitors</b> which participate in a locking situation is painted as a
+          <b>solid black arrow</b>. The arrowhead points from the thread to the monitor. To see details about where
+          the monitor was entered, move the mouse over the arrow and see the information in the
+          <b>tool tip window</b>.
+        </li>
+<li>
+          The <b>blocking</b> of threads which participate in a locking situation is painted as a
+          <b>dashed red arrow</b>. The arrowhead points from the blocked thread to the monitor that the thread wants
+          to enter. To see details about where the thread is blocking, move the mouse over the arrow
+          and see the information in the <b>tool tip window</b>.
+        </li>
+<li>
+          The <b>waiting</b> of threads which participate in a locking situation is painted as a
+          <b>solid yellow arrow</b> with a hollow arrowhead. The arrowhead points from the waiting thread to the monitor
+          that the thread is waiting on.  To see details about where the thread is waiting, move the mouse
+          over the arrow and see the information in the <b>tool tip window</b>.
+        </li>
+<li>
+          Threads or monitors that are part of a <b>deadlock</b> are painted in <b>red</b>.
+        </li>
+</ul>
+      
+<p>
+        The tool tip window shows a stack trace in a scrollable list whose context menu allows you to navigate
+        to the source code or show the selected method in the byte code viewer. You can pin the tool tip window
+        by toggling the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/lock_10.png">&nbsp;pin button in the top right corner of
+        the tool tip window.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Locks are analyzed for
+      
+      <ul>
+<li>
+          the primitive synchronization mechanism that's built into the Java platform,
+          i.e. when using the <b>synchronized</b> keyword.
+        </li>
+<li>
+          the locking facility in the <b>java.util.concurrent</b> package which
+          does not use monitors of objects but a different natively implemented mechanism.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        You can show any monitor in the <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker</a> by
+        selecting the monitor node and choosing <i>Show Selection In Heap Walker</i>
+        from the context menu. If a heap dump was already taken, you can choose to select the object in the
+        current heap dump, otherwise a new heap dump will be taken.
+      
+      <p>
+        Note that the selected monitor might not exist in the heap dump because the heap dump might have been
+        taken before the monitor was allocated or after the monitor was garbage collected.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you profile with Java &lt;=1.4 (JVMPI), the monitor class names can only be displayed if they
+      are recorded objects. You can enable "Record allocations on startup" in the
+      <a href="../../../doc/sessions/startupDialog.html">session startup dialog</a>
+      to record all objects.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/graphCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

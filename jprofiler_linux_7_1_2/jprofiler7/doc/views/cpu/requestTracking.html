@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Request Tracking</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Request Tracking</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Request tracking connects call sites with execution sites in asynchronous execution flows by
+        adding hyperlinks into the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+        For an explanation of the underlying concepts, please see the
+        <a href="../../../doc/helptopics/cpu/requestTracking.html">corresponding help topic</a>.
+      
+      <p>
+        Request tracking can be changed with the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_16.png">&nbsp;tool bar button
+        or via the <b>[Request Tracking]</b> button in the <a href="../../../doc/sessions/startupDialog.html">startup dialog</a>.
+        In the latter case, the selected request tracking settings are active immediately after JProfiler connects to the profiled JVM.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In the request tracking dialog you can switch request tracking on and off separately for the following supported
+      request tracking types:
+      <ul>
+<li>
+<span class="sectiontitle">Executors</span>
+<br>
+          
+<p>
+            The <b>call site</b> is the last profiled method before a task is handed off to an
+            executor service from the <code>java.util.concurrent</code> package. The <b>execution site</b> is in the thread
+            that executes the task.
+          </p>
+          
+<p>
+            For example, if you call
+          </p>
+
+<pre>
+  Executors.newSingleThreadExecutor().submit(new Runnable() {
+      public void run() {
+          // your code
+      }
+  });
+</pre>
+          
+<p>
+            the enclosing method that calls <code>submit</code> is the call site, and the code below <code>// your code</code> is the execution site.
+          </p>
+          
+<p>
+            Executors are used by many higher-level libraries for managing asynchronous executions, those libraries
+            are implicitly supported by this request tracking type.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">AWT</span>
+<br>
+          
+<p>
+            The <b>call site</b> is last profiled method before a deferred action is posted to the AWT event queue with
+            <code>EventQueue.invokeLater(...)</code> or similar. The <b>execution site</b> is always in the event dispatch thread.
+          </p>
+          
+<p>
+            For example, if you call
+          </p>
+
+<pre>
+  EventQueue.invokeLater(new Runnable() {
+      public void run() {
+          // your code
+      }
+  });
+</pre>
+          
+<p>
+            the enclosing method that calls <code>invokeLater</code> is the call site, and the code below <code>// your code</code> is the execution site.
+          </p>
+          
+<p>
+            Together with the default entry in the <a href="../../../doc/sessions/filters/exceptional.html">exceptional method configuration</a>,
+            this feature provides a way to comprehensively analyze long-running AWT events.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">SWT</span>
+<br>
+          
+<p>
+            The <b>call site</b> is the last profiled method before a deferred action is posted on the UI thread with
+            <code>Display.getDefault().asyncExec(...)</code> or similar. The <b>execution site</b> is always in the UI thread.
+          </p>
+          
+<p>For example, if you call</p>
+          
+<pre>
+  Display.getDefault().asyncExec(new Runnable() {
+      public void run() {
+          // your code
+      }
+  });
+          </pre>
+          
+<p>
+            the enclosing method that calls <code>asyncExec</code> is the call site, and the code below <code>// your code</code> is the execution site.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Thread start</span>
+<br>
+          
+<p>
+            The <b>call site</b> is the last profiled method before <code>Thread.start()</code> is called.
+            The <b>execution site</b> is a a top-level node in the started thread. If multiple threads
+            are merged, each recorded execution site is still displayed separately.
+          </p>
+          
+<p>
+            For example, if you call
+          </p>
+
+<pre>
+  new Thread() {
+      public void run() {
+          // your code
+      }
+  }.start();
+</pre>
+          
+<p>
+            the enclosing method that calls <code>start</code> is the call site, and the code below <code>// your code</code> is the execution site.
+          </p>
+          
+<p>
+            Request tracking for threads can add a lot of nodes into your call trees that may be hard to interpret, because threads
+            are started by the JRE in ways that are not immediately obvious. It is recommended to use thread start request tracking
+            only in the case of a related problem.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Since the call tree can merge several invocation of a method, one call site can be related to several execution sites,
+        for example an executor invocation can use different threads in a thread pool for different invocations.
+        In this case, the <b>execution site dialog</b> is shown which allows you select the desired execution site.
+        by looking at the displayed thread names and back traces. Call sites are assigned numeric IDs by JProfiler
+        starting with #1, so you can recognize the same call site when browsing call trees for different threads.
+      
+      <p>
+        On the other hand, a execution site can only by called by a single call site. A hyperlink that leads to the call site
+        is shown in the tree. If more than one call site start a task in the same call stack, multiple execution sites are
+        created side by side.
+      </p>
+      
+<p>
+        When jumping between call sites and execution sites, the <b>call tree history</b> is useful to move back and
+        forth in your selection history. This is a general feature of the
+        <a href="../../../doc/views/cpu/invocation.html">call tree view</a> which also works for changes in thread, thread status and
+        aggregation level selection.
+      </p>
+      
+<p>
+        Note that following a hyperlink will select the explicit thread of the call site or execution site. If you're starting in the
+        "All threads" thread selection, the call tree will always change to that of a single thread. You can subsequently choose
+        the parent thread group or "All threads" again and the current selection will be preserved.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Monitor View Section</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Monitor View Section</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The monitor view section contains the
+      <ul>
+<li>
+<a href="../../../doc/views/monitors/graphCurrent.html">Current locking graph</a>
+<br>
+          The current locking graph visualizes the current locking situation in the JVM.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/monitorContentionCurrent.html">Current monitors view</a>
+<br>
+          The current monitors view shows monitors that are currently involved in
+          a waiting or blocking operation.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/graphHistory.html">Locking history graph</a>
+<br>
+          The locking history graph visualizes the recorded locking situations in the JVM.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/monitorContentionHistory.html">Monitor history view</a>
+<br>
+          The monitor history view shows waiting and blocking operations on monitors.
+        </li>
+<li>
+<a href="../../../doc/views/monitors/statistics.html">Monitor usage statistics</a>
+<br>
+          The statistics view shows statically calculated statistics for monitor usage.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        For all views that are not only showing current events, you have to <b>record monitor events</b>
+        in order to see data. Recording is started by clicking
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/monitors_start_16.png">&nbsp;<b>Record
+        monitor events</b> in the tool bar.
+        <a href="../../../doc/views/common/bookmarks.html">Bookmarks</a> will be added when recording is started
+        or stopped manually.
+      
+      <p>
+        Monitor event recording can be stopped by clicking on
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/monitors_stop_16.png">&nbsp;<b>Stop
+        recording monitor events</b> in the tool bar.
+      </p>
+      
+<p>
+        
+<b>Restarting</b> data acquisition <b>resets</b> the monitor data in all
+        historical views of the monitor view section.
+      </p>
+      
+<p>
+        In most applications, a large number of short events is generated continuously and would be unmanageable
+        to navigate. Because of this, JProfiler applies minimum thresholds for recording and waiting events below
+        which events are discarded. The thresholds are displayed on the
+        <a href="../../../doc/views/monitors/graphHistory.html">locking history graph</a> and the
+        <a href="../../../doc/views/monitors/monitorContentionHistory.html">monitor history view</a> together with a hyperlink
+        to open the view settings dialog where the thresholds can be changed. Changes are effective immediately.
+      </p>
+      
+<p>
+        Note that you can also use a
+        <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger</a> and the
+        <a href="../../../doc/sessions/triggers/actions.html">"Start recording"  and "Stop recording" actions</a>
+        to control monitor event recording in a fine-grained and exact way.
+        This is also useful for <a href="../../../doc/offline/offline.html">offline profiling</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The update frequency can be set on the
+      <a href="../../../doc/sessions/profiling/misc.html">miscellaneous tab</a>
+      in the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>
+      for all dynamic views of the monitor view section.
+    </td>
+</tr>
+</table>
+
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

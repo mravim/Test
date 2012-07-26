@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker - Reference View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker - Reference View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/treeOutgoing.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker reference view conforms to the
+      <a href="../../../doc/views/heapwalker/viewLayout.html">basic layout</a>
+      of all heap walker views. Also see the
+      <a href="../../../doc/views/heapwalker/heapwalker.html">help on key concepts</a>
+      for the entire heap walker.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The reference view of the heap walker offers three <b>view modes</b> that can
+      be changed in the combo box at the top of the view:
+      <ul>
+<li>
+<a href="../../../doc/views/heapwalker/treeOutgoing.html">Outgoing references</a>
+<br>
+          Shows a tree of the outgoing references separately from all objects in the current object set.
+        </li>
+<li>
+<a href="../../../doc/views/heapwalker/treeIncoming.html">Incoming references</a>
+<br>
+          Shows a tree of the incoming references separately to all objects in the current object set.
+        </li>
+<li>
+<a href="../../../doc/views/heapwalker/cumulatedReferencesIn.html">Cumulated incoming references</a>
+<br>
+          Shows a tree-table of the cumulated references that hold the objects in the current object set.
+        </li>
+<li>
+<a href="../../../doc/views/heapwalker/cumulatedReferencesOut.html">Cumulated outgoing references</a>
+<br>
+          Shows a tree-table of the cumulated references that originate from objects in the current object set.
+        </li>
+</ul>
+      
+<p>
+        The reference view helps you to <b>find memory leaks</b>. Please note the <b>"Show path to GC root"</b>
+        functionality in the <a href="../../../doc/views/heapwalker/treeIncoming.html">incoming references</a>
+        for this purpose.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/treeOutgoing.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

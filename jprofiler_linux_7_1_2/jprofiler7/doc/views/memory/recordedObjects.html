@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Recorded Objects View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Recorded Objects View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/memory/$recordedObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/recordedObjectsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The recorded objects view shows the list of classes of all recorded objects and arrays together
+      with the number of instances which are allocated on the heap.
+      Only <b>recorded objects</b> will be displayed in this view. See the
+      <a href="../../../doc/views/memory/memory.html">memory section overview</a> for further details on
+      allocation recording. The <a href="../../../doc/views/memory/allObjects.html">all objects view</a>
+      displays all objects, regardless of whether they have been recorded.
+    </td>
+</tr>
+</table>
+
+    
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The recorded objects view has an <b>aggregation level selector</b>. It allows you
+      to switch between
+      <ul>
+<li>
+<span class="sectiontitle">Classes</span>
+<br>
+          Every row in the table is a single class. This is the default aggregation level.
+        </li>
+<li>
+<span class="sectiontitle">Packages</span>
+<br>
+          Every row in the table is a single package. Sub-packages are not included. In this
+          aggregation level, the table becomes a <b>tree table</b>. You can open each package
+          by clicking on the tree node on its left and see the contained classes directly beneath it.
+        </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+          Every row in the table is a <a href="../../../doc/sessions/profiling/probes.html">Java EE component</a>.
+          This aggregation level is like a filter for the classes mode and enables you to quickly check the
+          loaded Java EE components in your profiled application.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are three sortable columns shown in the table:
+      <ul>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          Depending on the aggregation level, this column shows different values:
+          <ul>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+              shows the name of the class or the array type. When using Java 1.4 or Java 1.5 with the old profiling interface JVMPI,
+              the notation <tt>&lt;class&gt;[]</tt> stands for non-primitive arrays of any class type.
+              (e.g. the array might be of type <tt>String[]</tt> or <tt>Object[]</tt>).
+              A further distinction is not possible due to restrictions in the profiling interface.
+            </li>
+<li>
+<span class="sectiontitle">package</span>
+<br>
+              shows the name of the package.
+            </li>
+<li>
+<span class="sectiontitle">Java EE</span>
+<br>
+              shows the display name of the Java EE component. If the display name is different from the
+              actual class name, the class name is displayed in square brackets.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Instance count</span>
+<br>
+          Shows how many instances are currently allocated on the heap. This instance count
+          is displayed graphically as well.
+        </li>
+<li>
+<span class="sectiontitle">Size</span>
+<br>
+          Shows the total size of all allocated instances. Note that this is the
+          <b>shallow size</b> which does not include the size of referenced arrays and
+          instances but only the size of the corresponding pointers. The size is in bytes and includes
+          only the object data, it does not include internal JVM structures for the class, nor does it
+          include class data or local variables.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For a selected class or package, you can jump from the recorded objects view to the
+      <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree</a> as well as the
+      <a href="../../../doc/views/memory/allocationHotspots.html">allocation hot spots</a> by
+      bringing up the context menu with a right click and choosing
+      <tt>Show allocation tree for selection</tt>
+      or <tt>Show allocation hot spots for selection</tt>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can add a selected class or package to the
+      <a href="../../../doc/views/memory/classTracker.html">class tracker</a> by
+      bringing up the context menu with a right click and choosing
+      <tt>Add Selection To Class Tracker</tt>. If the class tracker is not recording, recording will
+      be started for all classes configured in the class tracker. If the class tracker is recording with
+      a different object type or liveness type, all recorded data will be cleared after a confirmation dialog.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The recorded objects view can filter objects according to their liveness status:
+      <ul>
+<li>
+<span class="sectiontitle">Live objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_live_16.png">
+          Only objects which are currently in memory are shown.
+        </li>
+<li>
+<span class="sectiontitle">Garbage collected objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_gced_16.png">
+          Only objects which have been garbage collected are shown.
+        </li>
+<li>
+<span class="sectiontitle">Live and garbage collected objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_all_16.png">
+          All created objects are shown.
+        </li>
+</ul>
+      To switch between the three modes, you can click on the toolbar entry
+      displaying the current mode and chose the new desired mode. Also, JProfiler's
+      main menu and the context menu allow the adjustment of the view mode via
+      <i>View-&gt;Change view mode</i>.
+      
+      <p>If the garbage collected objects are shown, you can reset the accumulated data
+      by clicking on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reset_gc_16.png">
+      reset action in the toolbar or choosing the the 
+      <i>Reset garbage collector for this view</i> menu item
+      in the <i>View</i> or context menu. All garbage collector data will be
+      cleared and the view will be empty for the "Garbage collected objects" mode until 
+      further objects are garbage collected. Note that
+      you can force garbage collection by clicking on the garbage collector
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/recycle_16.png">&nbsp;tool bar button or by
+      selecting <i>Profiler-&gt;Run garbage collector</i> from
+      JProfiler's main menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The update frequency for the recorded objects view can be set on the
+      <a href="../../../doc/sessions/profiling/misc.html">miscellaneous tab</a>
+      in the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can <a href="../../../doc/views/memory/memory.html">stop and restart allocation recording</a>
+      to clear the recorded objects view.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/memory/$recordedObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/recordedObjectsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

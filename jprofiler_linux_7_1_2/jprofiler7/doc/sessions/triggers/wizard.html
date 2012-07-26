@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Wizard</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Trigger Wizard</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/triggerSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The trigger wizard is shown when you add a new trigger or when you edit an existing trigger in the
+      <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger section</a> of the
+      <a href="../../../doc/sessions/sessions.html">session settings</a>.
+      <p>
+        The trigger wizard is also shown, when adding or editing triggers in the
+        <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger settings</a> or when
+        <a href="../../../doc/sessions/triggers/addToTriggerDialog.html">adding a trigger from a view that displays single methods</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The first step of the trigger wizard lets you choose the event type from the list of available
+        <a href="../../../doc/sessions/triggers/events.html">trigger event types</a>.
+      
+      <p>
+        The following steps in the wizard depend on this selection. Note that you can click with the mouse on the index
+        to quickly jump to a different step. This is especially useful when editing triggers.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      After the event-specific steps in the wizard, you can configure the actions that should take place when the trigger
+      event occurs. JProfiler offers a fixed set of <a href="../../../doc/sessions/triggers/actions.html">available actions</a>.
+      The actions are configured directly in the list, the options associated with an action are shown when the action is
+      selected.
+      <p>
+        Actions are executed when the event occurs. For events that have a <b>duration</b>, such as the method
+        invocation event or the threshold events, you can use the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_waitForFinish_16.png">&nbsp;"Wait for the event to finish"
+        action to separate actions that should be executed when the events starts from actions that should be executed
+        when the event finishes.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In the <a href="../../../doc/sessions/triggers/triggerSettings.html">list of configured triggers</a>, each trigger is
+      represented by the trigger type and a short summary of its most important parameters. If you have multiple triggers
+      of the same type, this might not be distinctive enough.
+      On the "Description" step, you can configure a name that is displayed in the list of triggers instead of the 
+      parameter summary.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can <a href="../../../doc/sessions/triggers/enableDisable.html">enable and disable groups of triggers</a>
+      in a live session. To group triggers for this feature, the "Group ID" step allows you to optionally assign
+      a group ID to each trigger.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/triggerSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

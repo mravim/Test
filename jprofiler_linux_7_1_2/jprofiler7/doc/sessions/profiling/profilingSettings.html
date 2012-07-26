@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Profiling Settings</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Profiling Settings</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        In the profiling settings section of the <a href="../../../doc/sessions/sessions.html">session settings dialog</a>
+        you can adjust a number of settings that impact profiling detail and overhead.
+        Please see the detailed discussion in the
+        <a href="../../../doc/helptopics/config/sessionSettings.html">help topic on profiling settings</a>
+        to get a background understanding of the various available settings.
+      
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The profiling settings section displays a list of pre-configured
+        <b>profiling settings templates</b> that are targeted at a variety of situations. As different templates in
+        the drop down list are selected, the description box and the performance indicators
+        below it are updated accordingly. Both description and performance indicators should help
+        you choose the best template for your task at hand. If you click on the
+        <b>[Customize profiling settings]</b> button below the drop down list, the
+        <b>profiling settings dialog</b> is opened.
+      
+      <p>
+        If you customize the profiling settings, the text in the drop down list changes to "[Customized]". You
+        can save new profiling settings templates with the <b>[Save as template]</b> button. The
+        <a href="../../../doc/sessions/profiling/templates.html">profiling settings template dialog</a> is then displayed.
+      </p>
+      
+<p>
+        On the <a href="../../../doc/generalSettings/sessionDefaults.html">session defaults</a> tab of the
+        <a href="../../../doc/generalSettings/generalSettings.html">general settings dialog</a> you can change the
+        default profiling settings template used for new sessions.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The profiling settings dialog is grouped into several tabs:
+      <ul>
+<li>
+<a href="../../../doc/sessions/profiling/callTreeCollection.html">Method call recording</a>
+<br>
+          Configure method call recording options for the session. These settings affect CPU views
+          and memory views with allocation information.
+        </li>
+<li>
+<a href="../../../doc/sessions/profiling/cpu.html">CPU profiling</a>
+<br>
+          Configure options regarding CPU profiling. These settings affect CPU views only.
+        </li>
+<li>
+<a href="../../../doc/sessions/profiling/probes.html">Probes</a>
+<br>
+          Configure recording options for probes.
+        </li>
+<li>
+<a href="../../../doc/sessions/profiling/memory.html">Memory profiling</a>
+<br>
+          Configure options regarding memory profiling. These settings affect all memory views.
+        </li>
+<li>
+<a href="../../../doc/sessions/profiling/thread.html">Thread profiling</a>
+<br>
+          Configure options regarding thread profiling. These settings affect all views
+          in the thread section.
+        </li>
+<li>
+<a href="../../../doc/sessions/profiling/misc.html">Miscellaneous</a>
+<br>
+          Configure miscellaneous options for profiling.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Other settings, which concern the presentation of profiling data
+      are called <b>view settings</b> and are accessible from
+      the main toolbar <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">
+      as well as from context sensitive menus in each view. View settings
+      are persistent as well and are saved automatically for each session.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

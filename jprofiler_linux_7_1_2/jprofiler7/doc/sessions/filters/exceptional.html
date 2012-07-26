@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Exceptional Methods</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Exceptional Methods</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/filters/templates.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/ignored.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/filters/filterSettings.html">filter settings</a>, you define methods
+      whose exceptionally slow invocations will be shown separately in the
+      <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+      <p>
+        By default, JProfiler splits invocation events on the AWT thread in that way. If you click on on the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reset_filters_16.png">&nbsp;Reset button, the default entries
+        will be restored.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Exceptional methods can be used to <b>investigate outliers in the performance of selected methods</b>.
+        Often, certain methods are supposed to complete quickly, but occasionally an invocation will take much
+        longer than the median time. In the call tree view, you cannot analyze those outliers, since all calls
+        are cumulated.
+      
+      <p>
+        When you register a method for exceptional method recording, a few of the slowest invocations will be retained
+        separately in the call tree. The other invocations will be merged into a single method node as usual.
+        The number of separately retained invocations can be configured in the
+        <a href="../../../doc/sessions/profiling/cpu.html">profiling settings</a>, by default it is set to 5.
+      </p>
+      
+<p>
+        When discriminating slow method invocations, a certain thread state can be used for the time measurement.
+        By default, the wall clock time (all thread states) is used, but a different thread status can be configured
+        in the <a href="../../../doc/sessions/profiling/cpu.html">profiling settings</a>. Note that the thread status selection
+        in the <a href="../../../doc/views/cpu/cpu.html">CPU views</a> is not used in this case, but the separate setting in the
+        profiling settings is used.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Exceptional method runs are displayed differently in the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+      For the concerned method nodes, icons are changed and text is appended:
+      <ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_16.png">&nbsp;<b>[exceptional run]</b>
+<br>
+          Such a node contains an exceptionally slow method run. By definition, it will have an invocation count of one.
+          If many other method runs are slower later on, this node may vanish and be added to the "merged exceptional runs"
+          node depending on the configured
+          <a href="../../../doc/sessions/profiling/cpu.html">maximum number of separately recorded method runs</a>.
+        </li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_merged_16.png">&nbsp;<b>[merged exceptional runs]</b>
+<br>
+          Method invocations which do not qualify as exceptionally slow are merged into this node. For any call stack, there
+          can only be one such node per exceptional method.
+        </li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_current_16.png">&nbsp;<b>[current exceptional run]</b>
+<br>
+          If an invocation was in progress while the call tree view was transmitted to the JProfiler GUI,
+          it was not yet known whether the invocation was exceptionally slow or not. The "current exceptional run" shows
+          the separately maintained tree for the current invocation. After the invocation completes, it will either be
+          maintained as a separate "exceptional run" node or be merged into the "merged exceptional runs" node.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To check the <b>statistical properties</b> of the distribution of call times of certain methods of interest, please
+      start with the <a href="../../../doc/views/cpu/statistics.html">method statistics view</a>. It can show you
+      the outlier coefficient and a graph of call times versus frequency. This analysis allows you to assess whether an
+      outlier is significant or not. From the method statistics view you can use the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_16.png">&nbsp;<i>Add as exceptional method</i> action
+      in the context menu to add the method to the list of exceptional methods. The same context action is
+      available in the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Apart from removing previously configured exceptional methods, you can also add exceptional methods directly
+      on this tab of the filter settings. The following ways for selecting methods are available:
+      
+    <ul>
+<li>
+<span class="sectiontitle">Search in configured classpath</span>
+<br>
+        A class chooser will be shown that shows all classes in the classpath configured in
+        the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>.
+        Finally you have to select a method from the selected class.
+      </li>
+<li>
+<span class="sectiontitle">Search in other JAR or class files</span>
+<br>
+        First, you can select a JAR or class file. If the selection is a JRE file, you then have to
+        select a class in a class chooser. After the selection you will be asked whether to
+        expand the classpath with the current selection. For remote sessions, the classpath
+        is often not configured, so this is a shortcut to make your selection permanent.
+        Finally, you can select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Search in profiled classes</span>
+<br>
+        If the session is being profiled, a class chooser is displayed that shows all classes
+        in the profiled JVM. There may be classes in the classpath that have not been loaded. Those classes
+        will not be shown in the class chooser. Finally, you can to select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Enter manually (advanced)</span>
+<br>
+        This option displays a dialog that allows you to enter class name, method name and method signature in
+        JNI format. The JNI format of the method signature is explained in the javadoc of
+        <tt>com.jprofiler.api.agent.probe.InterceptionMethod</tt>.
+        <p>
+          The context menu for the list of methods offers the option to edit existing entries.
+        </p>
+        
+      
+</li>
+</ul>
+  
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/filters/templates.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/ignored.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

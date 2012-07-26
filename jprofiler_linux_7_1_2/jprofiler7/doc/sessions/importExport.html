@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Importing And Exporting Sessions Settings</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Importing And Exporting Sessions Settings</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/configSync.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can export session settings to an XML file and import them in a different JProfiler installation.
+      Also, the <a href="../../doc/quickstart/appservers.html">command line integration wizard</a> produces
+      config files with a remote session that you can import in the JProfiler GUI.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For exporting sessions to an XML file, choose <i>Session-&gt;Export Session Settings</i>
+      from JProfiler's main menu. You will be asked for the following information:
+      <ul>
+<li>
+<span class="sectiontitle">Sessions to export</span>
+<br>
+          Select one or more sessions to be exported. To select all sessions, press <code>CTRL-A</code> in the list and hit <code>SPACE</code>
+          for toggling the selection. The file format of the exported file is the same as
+          JProfiler's <a href="../../doc/sessions/sessions.html">config file</a>. Licensing information and general settings are
+          omitted.
+        </li>
+<li>
+<span class="sectiontitle">Location of the exported file</span>
+<br>
+          The location can be a file path or a directory path. For a directory path the exported file will be named
+          <i><tt>config.xml</tt></i>. The text field that displays the location supports auto-completion.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For importing sessions from an XML file, choose <i>Session-&gt;Import Session Settings</i>
+      from JProfiler's main menu. In the file chooser, select the config file that should be imported. A dialog will be shown
+      that lists all sessions contained in the config file and allows you to select which sessions to import.
+      To select all sessions, press <code>CTRL-A</code> in the list and hit <code>SPACE</code> for toggling the selection.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/configSync.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

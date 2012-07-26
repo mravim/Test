@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Allocation Call Tree</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Allocation Call Tree</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/memory/$allocationsMonitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/allocationsMonitorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation call tree shows a top-down call tree cumulated for all
+      threads and filtered according to the 
+      <a href="../../../doc/sessions/filters/define.html">filter settings</a> which
+      is similar to the one shown in the 
+      <a href="../../../doc/views/cpu/invocation.html">call tree view</a> in JProfiler's
+      <a href="../../../doc/views/cpu/cpu.html">CPU section</a> except that it shows allocations
+      of class instances and arrays instead of time measurements.
+      <p>
+        In order to prepare an allocation call tree, you have to click on the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/calculate_16.png">&nbsp;calculate toolbar button
+        or choose <i>View-&gt;Calculate allocation call tree</i> from JProfiler's
+        main menu. If an allocation tree has already been calculated, the context sensitive menu
+        also gives access to this action.
+      </p>
+      
+<p>
+        Before the allocation call tree is calculated, the
+        <a href="../../../doc/views/memory/allocationOptions.html">allocation options dialog</a> is shown.
+        The class or package selection as well as the selected liveness mode are displayed at the top of the
+        allocation call tree view.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler automatically <a href="../../../doc/sessions/profiling/probes.html">detects Java EE components</a>
+      and displays the relevant nodes in the allocation call tree with special icons that depend
+      on the Java EE component type:
+
+      <br>
+<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_servlet_16.png">&nbsp;servlets<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_jsp_16.png">&nbsp;JSPs<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_ejb_16.png">&nbsp;EJBs<br>
+<br>
+
+      For JSPs and EJBs, JProfiler shows a display name:
+      <ul>
+<li>
+<span class="sectiontitle">JSPs</span>
+<br>the path of the JSP source file</li>
+<li>
+<span class="sectiontitle">EJBs</span>
+<br>the name of the EJB interface</li>
+</ul>
+
+      
+<p>
+        If URL splitting is enabled in the <a href="../../../doc/sessions/probes/builtin.html">servlet probe</a>
+        each request URL creates a new node with a
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_annotation_class_16.png">&nbsp;special icon and the prefix
+        <b>URL:</b>, followed by the part of the request URL on which the allocation call tree
+        was split. Note that URL nodes <b>group request by the displayed URL</b>.
+      </p>
+
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation call tree view has an <b>aggregation level selector</b>. It allows you
+      to switch between
+      <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_method_16.png">
+          Every node in the tree is a method call. This is the default aggregation level. Special Java EE component
+          methods have their own icon (see above) and display name, the real class name is appended
+          in square brackets.
+          
+        </li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_class_16.png">
+          Every node in the tree is a single class. Java EE component
+          classes have their own icon (see above) and display name, the real class name is appended
+          in square brackets.
+        </li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_package_16.png">
+          Every node in the tree is a single package. Sub-packages are not included.
+        </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_servlet_16.png">
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_jsp_16.png">
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_ejb_16.png">
+          Every node in the tree is a <a href="../../../doc/sessions/profiling/probes.html">Java EE component</a>.
+          If the component has a separate display name, the real class names are omitted.
+        </li>
+</ul>
+      
+<p>
+        When you switch between two aggregation levels, JProfiler will make the best effort to <b>preserve your
+        current selection</b>. When switching to a a more detailed aggregation level, there may not be
+        a unique mapping and the first hit in the allocation call tree is chosen.
+      </p>
+      
+<p>
+        The allocation call tree doesn't display all method calls in the JVM, it only displays
+        <ul>
+<li>
+<span class="sectiontitle">unfiltered classes</span>
+<br>
+            Classes which are unfiltered according to your
+            <a href="../../../doc/sessions/filters/define.html">configured filter sets</a> are
+            used for the construction of the allocation call tree.
+          </li>
+<li>
+<span class="sectiontitle">first level calls into unfiltered classes</span>
+<br>
+            Every call into a filtered class that originates from an unfiltered class is used for the construction of
+            the allocation call tree. Further calls into filtered classes are not resolved. This means
+            that a filtered node can include information from other filtered calls. Filtered nodes are painted with
+            a <b>red marker in the top left corner</b>.
+          </li>
+<li>
+<span class="sectiontitle">thread entry methods</span>
+<br>
+            The methods <code>Runnable.run()</code> and the main method are always displayed, regardless of
+            the filter settings.
+          </li>
+</ul>
+      
+</p>
+      
+        
+<p>
+          A particular node is a <b>bridge node</b> if it would normally not be displayed in the view,
+          but has descendant nodes that have to be displayed. The icons of bridge nodes are <b>grayed out</b>.
+          For the allocation call tree view this is the case if
+          
+            the current node has no allocations, but there are descendant nodes that have allocations.
+          
+          
+        </p>
+      
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When <b>navigating</b> through the allocation call tree by opening
+      method calls, JProfiler automatically expands methods which are only called
+      by one other method themselves.
+      <p>
+        To quickly <b>expand larger portions</b>
+        of the allocation call tree, select a method and choose
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/expand_16.png">
+        <i>View-&gt;Expand Multiple Levels</i> from the main window's menu or
+        choose the corresponding menu item from the context menu. A dialog is shown
+        where you can adjust the number of levels (20 by default) and the threshold in per mille
+        of the parent node's value that determines which child nodes are expanded.
+      </p>
+      
+<p>
+        If you want to
+        <b>collapse an opened part</b> of the allocation call tree, select the
+        topmost method that should remain visible and choose
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/collapse_16.png">
+        <i>View-&gt;Collapse all</i> from the main window's menu or
+        the context menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If a method node is selected, the context menu allows you to quickly add a
+      <a href="../../../doc/sessions/triggers/triggerSettings.html">method trigger</a> for the selected method with the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_16.png">&nbsp;add method trigger action.
+      A <a href="../../../doc/sessions/triggers/addToTriggerDialog.html">dialog</a> will be displayed where you
+      can choose whether to add the method interception to an existing method trigger or whether to create a
+      new method trigger.
+      
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Nodes in the allocation call tree <b>can be hidden</b> by selecting them and hitting the <code>DEL</code> key
+      or by choosing <i>Hide Selected</i> from the context menu. Percentages will be corrected accordingly as if the
+      hidden node did not exist.
+      
+        All similar nodes in other call stacks will be hidden as well.
+      
+      <p>
+        When you hide a node, the toolbar and the context menu will get a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/element_add_16.png"> Show Hidden 
+        action. Invoking this action will bring up a dialog where you can select hidden elements to be shown again.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For method, class or package nodes, the context menu and the <i>View</i> menu have an
+      <b>Add Filter From Selection</b> entry. The sub-menu contains actions to add 
+      <a href="../../../doc/sessions/filters/define.html">appropriate filters</a> as well
+      as an action to add an <a href="../../../doc/sessions/filters/ignored.html">ignored method entry</a>.
+      <p>
+        If a node is excluded, you will get options to add an inclusive filter, otherwise you will get options to add an
+        exclusive filter. These actions are not available for classes in the "java." packages.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+      
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+        The <b>tree map selector</b> above the  allocation call tree view allows you to switch to
+        an alternate visualization: A tree map that shows all call stacks as a set of nested rectangles.
+        Please see the <a href="../../../doc/views/common/treeMaps.html">help on tree maps</a> for more information.
+      </td>
+</tr>
+</table>
+    
+
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If enabled in the <a href="../../../doc/views/memory/allocationsMonitorSettings.html">view settings</a>,
+      every node in the allocation call tree has
+      a <b>percentage bar</b> whose length is proportional to the total number of allocations including
+      all descendant nodes and whose light-red part indicates the percentage of allocations in the
+      current node.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Every node in the allocation call tree has textual information attached that depends on the
+      <a href="../../../doc/views/memory/allocationsMonitorSettings.html">allocation call tree settings</a> and shows
+      <ul>
+<li>
+          a <b>percentage number</b> which is calculated with respect to the root of the tree or calling node.
+        </li>
+<li>
+          a <b>size measurement</b> in bytes or kB which displays the shallow size of those objects which
+          were allocated here (depends on cumulation view setting, see below).
+        </li>
+<li>
+          an <b>allocation count</b> which shows how many instances of classes and arrays have been
+          allocated here (depends on cumulation view setting, see below).
+        </li>
+<li>
+          
+    a <b>name</b> which depends on the aggregation level:
+    <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+        a method name that is either fully qualified or relative with respect to to the calling method.
+      </li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+        a class name.
+      </li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+        a package name.
+      </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+        the display name of the Java EE component.
+      </li>
+</ul>
+  
+        
+</li>
+<li>
+          
+    a <b>line number</b> which is only displayed if
+    <ul>
+<li>the aggregation level is set to "methods"</li>
+<li>
+        line number resolution has been enabled in the
+        <a href="../../../doc/sessions/profiling/callTreeCollection.html">profiling settings</a>
+      
+</li>
+<li>the calling class is unfiltered</li>
+</ul>
+    
+<p>
+      Note that the line number shows the line number of the invocation
+      and not of the method itself.
+    </p>
+  
+        
+</li>
+</ul>
+      
+<p>
+        The size and the allocation count are either cumulated for all calls below
+        the associated node or not, depending on the corresponding cumulation
+        <a href="../../../doc/views/memory/allocationsMonitorSettings.html">view setting</a>. Note
+        that allocations performed in calls to filtered classes are consolidated in the
+        first call into a filtered class.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If garbage collected objects are shown, you can reset the accumulated data
+        by clicking on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reset_gc_16.png">
+        reset action in the toolbar or choosing the the
+        <i>Reset garbage collector for this view</i> menu item
+        in the <i>View</i> or context menu. All garbage collector data will be
+        cleared and the view will be empty for the "Garbage collected objects" mode until
+        further objects are garbage collected and a new allocation call tree or allocation hot spots are
+        calculated. Note that you can force garbage collection by clicking on the garbage collector
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/recycle_16.png">&nbsp;tool bar button or by
+        selecting <i>Profiler-&gt;Run garbage collector</i> from
+        JProfiler's main menu.
+      
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Only recorded objects will be displayed in the allocation call tree view. See the
+      <a href="../../../doc/views/memory/memory.html">memory section overview</a> for further details on
+      allocation recording.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <i>View-&gt;Take heap snapshot for selection</i> menu item and the
+      corresponding
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/snapshot_selection_16.png">
+      toolbar entry take a new snapshot, switch to the
+      <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker view</a> and create an object set with
+      the currently selected class and allocation spot.
+    </td>
+</tr>
+</table>
+  
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/memory/$allocationsMonitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/allocationsMonitorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

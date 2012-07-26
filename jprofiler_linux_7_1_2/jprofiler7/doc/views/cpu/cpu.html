@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>CPU View Section</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>CPU View Section</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$invocationFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The CPU view section contains several views which are <b>thread resolved</b>.
+      Directly above those views you can see the current selection of thread and thread state.
+      <p>
+        The thread selection can be one of
+      </p>
+      
+<ul>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/selector_group_16.png"> thread groups</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/selector_thread_16.png"> active threads</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/selector_thread_dead_16.png"> dead threads</li>
+</ul>
+
+      
+<p>
+        Next to the thread selector you find information about the <b>thread state</b>
+        which is one of
+        <ul>
+<li>
+<span class="sectiontitle">All states</span>
+<br>
+            No filtering is performed.
+          </li>
+<li>
+<span class="sectiontitle">Runnable</span>
+<br>
+            Only runnable thread states will be shown. This is the standard setting.
+          </li>
+<li>
+<span class="sectiontitle">Waiting</span>
+<br>
+            Only waiting thread states will be shown.
+          </li>
+<li>
+<span class="sectiontitle">Blocked</span>
+<br>
+            Only blocked thread states will be shown.
+          </li>
+<li>
+<span class="sectiontitle">Net I/O</span>
+<br>
+            Only blocking network operations of the java library will be shown.
+          </li>
+</ul>
+      
+</p>
+      
+<p>
+        When you switch between two thread states, JProfiler will make the best effort to <b>preserve your
+        current selection</b>.
+      </p>
+
+      
+<p>
+        Below the thread selector you find information about the aggregation level which is one of
+        <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+</li>
+</ul>
+      
+</p>
+      
+<p>
+        The call tree is always recorded on the method level. If you switch to a higher
+        aggregation level, the information contained in the method call tree is aggregated
+        accordingly into a new tree from which the current view is calculated. Java EE components
+        can only be shown if component recording has been enabled in on the
+        <a href="../../../doc/sessions/profiling/probes.html">Probes tab</a> of the
+        <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>.
+      </p>
+
+      
+<p>
+        In the dynamic views thread selection, thread state and aggregation level are displayed
+        in combo boxes.
+        After changing the selection in the thread selector or the thread state selector,
+        the dynamic views are updated immediately with the new settings.
+        The thread selector applies to all dynamic views simultaneously.
+        Initially it is set to <tt>All thread groups</tt> and may be switched
+        to specific threads or thread groups as soon as they come into existence.
+      </p>
+
+      
+<p>
+        Please turn to the <a href="../../../doc/views/threads/threads.html">thread view section</a>
+        for more detailed information on threads.
+      </p>
+    
+</td>
+</tr>
+</table>
+      
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The update frequency can be set on the
+      <a href="../../../doc/sessions/profiling/misc.html">miscellaneous tab</a>
+      in the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>
+      for all dynamic views of the CPU view section.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Unless "Record CPU data on startup" has been selected in the <tt>Startup</tt> section of
+        the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>, data
+        acquisition has to be started manually by clicking on
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/record_cpu_16.png">&nbsp;<b>Record
+        CPU data</b> in the tool bar or by selecting 
+        <i>Profiler-&gt;Record CPU data</i> from JProfiler's main menu.
+        <a href="../../../doc/views/common/bookmarks.html">Bookmarks</a> will be added when recording is started
+        or stopped manually.
+      
+      <p>
+        CPU data acquisition can be stopped by clicking on
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/stop_cpu_16.png">&nbsp;<b>Stop
+        recording CPU data</b> in the tool bar or by selecting 
+        <i>Profiler-&gt;Stop recording CPU data</i> from JProfiler's
+        main menu.
+      </p>
+      
+<p>
+        The CPU recording state is shown in the status bar with a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/cpu_16.png"> CPU icon
+        which is shown in gray when CPU is not recorded. Clicking on the CPU icon will toggle CPU recording. 
+      </p>
+      
+<p>
+        
+<b>Restarting</b> data acquisition <b>resets</b> the CPU data in all 
+        dynamic views of the CPU view section.
+      </p>
+      
+<p>
+        Note that you can also use a
+        <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger</a> and the
+        <a href="../../../doc/sessions/triggers/actions.html">"Start recording"  and "Stop recording" actions</a>
+        to control CPU recording in a fine-grained and exact way.
+        This is also useful for <a href="../../../doc/offline/offline.html">offline profiling</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The CPU view section contains the
+      <ul>
+<li>
+<a href="../../../doc/views/cpu/invocation.html">Call tree view</a>
+<br>
+          The call tree view shows top down call trees for the selected thread
+          or thread group.
+        </li>
+<li>
+<a href="../../../doc/views/cpu/hotspots.html">Hot spots view</a>
+<br>
+          The hot spots view shows the methods where most of the time is spent in the
+          profiled application.
+        </li>
+<li>
+<a href="../../../doc/views/cpu/graph.html">Call graph</a>
+<br>
+          The call graph shows call graphs for selected threads or thread groups.
+        </li>
+<li>
+<a href="../../../doc/views/cpu/statistics.html">Method statistics</a>
+<br>
+          The method statistics view shows information on the distribution of calls to the same method.
+        </li>
+<li>
+<a href="../../../doc/views/cpu/tracer.html">Call tracer</a>
+<br>
+          The call tracer shows a multi-threaded chronological sequence of method calls.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$invocationFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

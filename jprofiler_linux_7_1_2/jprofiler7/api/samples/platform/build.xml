@@ -1,0 +1,67 @@
+<!--
+  Compile and run the sample custom profiler. See src-profiler/TestProfiler.java for more information.
+
+  Note: A 1.5 JRE is required for compiling and running this sample
+  1.2-1.4 JREs can be used by replacing "-agentlib:jprofilerti=" with "-Xrunjprofiler:", porting the Java code
+  to the Java 1.4 syntax and using the retroweaved platform_java_14.jar instead of platform.jar.
+-->
+<project name="platform" default="run">
+
+  <import file="../common/ant_common.xml"/>
+
+  <target name="compile" depends="prepare" description="Compile the test profiler">
+
+    <!-- The test program does not depend on anything else -->
+    <javac srcdir="src-test" />
+
+    <!-- Interceptors depend only on agent.jar, they can be used for any kind of profiling -->
+    <javac srcdir="src-interceptor">
+      <classpath>
+        <fileset dir="${bin.dir}">
+          <include name="agent.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+
+    <!-- The test profiler references the test program as well as the interceptor.
+         platform.jar contains the infrastructure for writing a custom profiler.
+     -->
+    <javac srcdir="src-profiler">
+      <classpath>
+        <pathelement path="src-test"/>
+        <pathelement path="src-interceptor"/>
+        <fileset dir="${bin.dir}">
+          <include name="platform.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+
+  </target>
+
+  <target name="clean" description="Delete all compiled classes">
+    <delete>
+      <fileset dir="." includes="src-*/**/*.class"/>
+    </delete>
+  </target>
+
+  <target name="run" depends="compile" description="Compile and run the test profiler">
+
+    <java classname="TestProfiler" fork="true">
+      <!-- VM parameter that loads native profiling agent for Java 1.5+ and activate offline profiling mode -->
+      <jvmarg value="-agentpath:${libraryPath}=offline,id=80,config=../common/config.xml"></jvmarg>
+      <!-- The custom interceptors are registered with an interceptor provider -->
+      <jvmarg value="-Djprofiler.probeProvider=probe.LoadFactorProbeProvider"></jvmarg>
+      <!-- The interceptor classes have to be added to the boot classpath so that the interceptors are available to the agent -->
+      <jvmarg value="-Xbootclasspath/a:src-interceptor"/>
+
+      <!-- The platform JAR file is added to the boot classpath, agent.jar is added automatically to the boot classpath -->
+      <jvmarg value="-Xbootclasspath/a:${bin.dir}/platform.jar"/>
+
+      <!-- the interceptor is already in the boot classpath, so it does not have to be added to the classpath -->
+      <classpath>
+        <pathelement path="src-profiler"/>
+        <pathelement path="src-test"/>
+      </classpath>
+    </java>
+  </target>
+</project>

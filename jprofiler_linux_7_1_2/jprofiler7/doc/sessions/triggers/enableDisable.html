@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Enabling And Disabling Triggers</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Enabling And Disabling Triggers</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/addToTriggerDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      By default, triggers are active when the JVM is started for profiling. There are two ways to disable triggers at startup:
+      <ul>
+<li>
+<span class="sectiontitle">disable individually on startup</span>
+<br>
+          In the <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger configuration</a> you can select
+          single triggers and disable them. Those triggers will be shown in gray.
+        </li>
+<li>
+<span class="sectiontitle">disable all on startup</span>
+<br>
+          In the <a href="../../../doc/sessions/startupDialog.html">session startup dialog</a> there is a check box <tt>Enable triggers on startup</tt>.
+          If you deselect this check box, all triggers will be disabled when the JVM is started for profiling.
+        </li>
+</ul>
+      
+<p>
+        During a live session, you can enable or disable all triggers by choosing
+        <i>Profiling-&gt;(Enable|Disable) triggers</i> from JProfiler's main menu.
+        <a href="../../../doc/views/common/bookmarks.html">Bookmarks</a> will be added when triggers are enabled or disabled manually.
+      </p>
+      
+<p>
+        The trigger recording state is shown in the status bar with a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_16.png"> flag icon
+        which is shown in gray when triggers are not enabled. Clicking on the flag icon will toggle trigger recording.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Sometimes, you need to toggle trigger recording for <b>groups of triggers</b> at the same time. This is possible
+      by <a href="../../../doc/sessions/triggers/wizard.html">assigning the same group ID</a> to the triggers of interest and
+      invoking <i>Profiling-&gt;Enable triggers groups</i> from JProfiler's main menu.
+      <p>
+        A dialog will be shown where you can select one or more group IDs. Furthermore, there are
+        radio buttons to control whether the selected trigger groups should be enabled or disabled.
+      </p>
+      
+<p>
+        Enabling or disabling trigger groups overrides the global trigger recording status as well as the initial disabling of
+        individual triggers.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/addToTriggerDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

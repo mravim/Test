@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Allocation Options Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Allocation Options Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/memory/$classTracker$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/packageSelection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation options dialog is displayed if you execute the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/calculate_16.png">&nbsp;calculate action for the
+      <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree view</a> or the
+      <a href="../../../doc/views/memory/allocationHotspots.html">allocation hot spots view</a>.
+      It allows you to specify parameters that determine the information contained in the call tree.
+      Your selection will then be displayed at the top of both views. The allocation call tree
+      and the allocation hot spots are always calculated together, so the settings in this dialog apply
+      to both views.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation call tree and allocation hot spots can display:
+      <ul>
+<li>
+<span class="sectiontitle">Cumulated allocations for all classes</span>
+<br>
+          The allocation call tree and the allocation hot spots will show all allocations, regardless
+          of the class or array type.
+        </li>
+<li>
+<span class="sectiontitle">Allocations for a selected class or package</span>
+<br>
+          Use the <b>[...]</b> chooser button to select a class or package that should be
+          displayed by the allocation call tree and the allocation hot spots views. This brings up the
+          <a href="../../../doc/views/memory/packageSelection.html">class selection dialog</a>.
+        </li>
+</ul>
+
+      
+<p>
+        If the <a href="../../../doc/sessions/profiling/memory.html">allocation recording mode</a> is set
+        to "Live and GCed objects without class resolution", it is not possible to switch to select
+        class for the "Allocations for a selected class or package" mode and a corresponding warning message
+        will be displayed.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation call tree can show objects according to their liveness status:
+      <ul>
+<li>
+<span class="sectiontitle">Live objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_live_16.png">
+          Only objects which are currently in memory are shown.
+        </li>
+<li>
+<span class="sectiontitle">Garbage collected objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_gced_16.png">
+          Only objects which have been garbage collected are shown.
+        </li>
+<li>
+<span class="sectiontitle">Live and garbage collected objects</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/gcmode_all_16.png">
+          All created objects are shown.
+        </li>
+</ul>
+      
+<p>
+        If the <a href="../../../doc/sessions/profiling/memory.html">allocation recording mode</a> is set
+        to "Live objects only", it is not possible to switch to view modes with garbage collected objects
+        and a corresponding warning message will be displayed.
+      </p>
+
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      By default, the data in the allocation call tree and allocation hot spots views will not be updated automatically.
+      If you would like to periodically update the views with the current data, select the
+      <tt>Auto-update the allocation views</tt> check box. Please note that for large heaps this can incur a 
+      significant performance overhead.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you click on <b>[OK]</b>, the allocation tree and the allocation hot spots are calculated.
+      If you have a large heap, this can take a few seconds. If you click cancel, no new allocation tree and allocation
+      hot spots will be calculated.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/memory/$classTracker$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/packageSelection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

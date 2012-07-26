@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Using the Difference Column in the Memory Views</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Using the Difference Column in the Memory Views</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/memory/recording.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/memory/memoryLeak.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      In contrast to <a href="../../../doc/helptopics/memory/recording.html">allocation recording</a>,
+      where you can restrict the displayed objects to a certain period of time, a common situation
+      is that you want to retain all recorded objects but still see the difference of object
+      allocations with respect to a certain point in time. In particular, you might be interested
+      in which classes have a decreasing allocation count, something that would not be possible
+      with allocation recording.
+    <br>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/difference_column.png">
+    </p>
+
+    
+<h3>2. Memory views with differencing</h3>
+    
+<p>
+      By default the difference column is not displayed. Only when you choose
+      <i>View-&gt;Mark current values</i> or the corresponding toolbar button,
+      the difference column is shown as the last column.
+      The following views in JProfiler have an optional difference column:
+      <ul>
+<li>
+<span class="sectiontitle">all objects view and recorded objects view</span>
+<br>
+          In the all objects view and the recorded objects view,
+          the difference column displays the number of currently allocated objects
+          of a class minus the number at the point when the values were marked.
+        </li>
+<li>
+<span class="sectiontitle">allocations hotspot view</span>
+<br>
+          In the allocations hotspot view,
+          the difference column is similar to the recorded objects view,
+          just that the number of allocations in a method are measured. If you select a class
+          for the hotspots view with the "Change selection" button, the number of allocations
+          is additionally for a single package or class only.
+        </li>
+</ul>
+    
+</p>
+    
+<p>
+      In most cases you'll be interested in sorting the view by the values in the difference column.
+      There are two sort modes that can be adjusted in the view settings dialog:
+      <ul>
+<li>
+<span class="sectiontitle">absolute ordering</span>
+<br>
+          With absolute ordering, the absolute value of the difference will be used for sorting.
+          This is appropriate if you're interested in the biggest changes.
+        </li>
+<li>
+<span class="sectiontitle">normal ordering</span>
+<br>
+          With normal ordering, you'll have positive differences at the top, then a usually long
+          list of zero differences and finally the negative differences. This is the right setting
+          if you're looking for a memory leak and are only interested in positive differences.
+        </li>
+</ul>
+    
+</p>
+
+    
+<h3>3. Differencing and the heap walker</h3>
+    
+<p>
+      The difference column only shows a calculation, there's no fixed set of objects behind this
+      number. Because of that, it is not possible to select the "difference objects" and
+      work with them in the heap walker. To select objects based on their time of creation,
+      please see the
+      <a href="../../../doc/helptopics/memory/recording.html">article on allocation recording</a>.
+    </p>
+
+    
+<h3>4. The class tracker</h3>
+    
+<p>
+      The class tracker view provides a way to capture the history
+      of instance counts over time for selected classes or packages in the form or a graph. However,
+      you have to select the tracked classes or packaged in advance, so the class tracker is best used on classes or packages
+      that appear suspicious from the differencing in the all objects or recorded objects views.
+    </p>
+
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/memory/recording.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/memory/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/memory/memoryLeak.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

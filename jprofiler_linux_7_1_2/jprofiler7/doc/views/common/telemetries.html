@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Graphs With a Time Axis</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Graphs With a Time Axis</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/treeMaps.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are many graphs with a time axis in JProfiler, such as the
+      <a href="../../../doc/views/telemetry/telemetry.html">VM telemetry views</a>, the
+      <a href="../../../doc/views/threads/history.html">thread history view</a>
+      or the <a href="../../../doc/views/heapwalker/chrono.html">time view in the heapwalker</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Graphs with a time axis have two different display modes. The display mode is a
+      persistent view setting and is thus also accessible through the
+      view settings dialog of each such view.
+      <ul>
+<li>
+<span class="sectiontitle">fixed scale</span>
+<br>
+          If you are currently in the "scale to fit window" mode, you can switch to this mode by
+          <ul>
+<li>choosing the
+              <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_continue_16.png">
+              scale mode selector button at the top of the graph.
+            </li>
+<li>choosing
+              <i>Scale to fit window</i>
+              from the context menu.
+            </li>
+<li>checking
+              <tt>Scale to fit window</tt>
+              in the view settings dialog.
+            </li>
+</ul>
+          
+<p>
+            In this mode, the time axis can be scrolled with the scroll bar on the bottom which appears if
+            the total extent of the axis does not fit into the current view size.
+          </p>
+          
+<p>
+            For dynamic views, if the current time is visible, the view is in <b>auto-follow mode</b> where the
+            time axis is scrolled automatically when new data arrives to always show the current time.
+            If you are not in auto-follow mode, because you scrolled back in time, just move the scroll bar
+            to the right end of the time scale to re-enable auto-following.
+          </p>
+          
+<p>
+            You can adjust the scale of the time axis by <b>zooming in or out</b>.
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_in_16.png">&nbsp;Zooming in increases
+            the level of detail while
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_out_16.png">&nbsp;zooming out decreases
+            it. You change the zoom level by
+            <ul>
+<li>
+                using the zoom controls at the top of the view.
+              </li>
+<li>
+                choosing
+                <i>Zoom in</i>
+                and
+                <i>Zoom out</i>
+                from the context menu.
+              </li>
+</ul>
+          
+</p>
+        
+</li>
+<li>
+<span class="sectiontitle">scale to fit window</span>
+<br>
+          If you are currently in the "fixed scale" mode, you can switch to this mode by
+          <ul>
+<li>
+              choosing the
+              <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_fit_horizontal_16.png">
+              scale mode selector button in the lower right corner of the view.
+            </li>
+<li>
+              choosing
+              <i>Continue at fixed scale</i>
+              from the context menu.
+            </li>
+<li>
+              deselecting
+              <tt>Scale to fit window</tt>
+              in the view settings dialog.
+            </li>
+</ul>
+          
+<p>
+            The time scale on the time axis is adjusted in order to show the
+            total extent of the axis in the current size of the view. Zooming is not possible in
+            this mode.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Grid lines and background of the graph can be configured in the view settings dialog.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/treeMaps.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

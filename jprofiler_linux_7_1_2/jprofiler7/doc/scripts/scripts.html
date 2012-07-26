@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Scripts in JProfiler</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Scripts in JProfiler</h2>
+</td><td valign="top" align="right"><a href="../../doc/scripts/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/scripts/editorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler's built-in script editor allows you to enter custom logic in various places in the JProfiler GUI, including
+      <a href="../../doc/sessions/probes/custom.html">custom probe configuration</a>,
+      heap walker <a href="../../doc/views/heapwalker/treeOutgoing.html">filters</a> and
+      <a href="../../doc/views/heapwalker/inspections.html">inspections</a> and the
+      <a href="../../doc/sessions/triggers/actions.html">"Run interceptor script" trigger action</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The box above the edit area show the available parameters of the script as well
+      as its return type. If parameters or return type are classes (and not primitive types), they
+      will be shown as hyperlinks. Clicking on such a hyperlink opens the Javadoc in the external browser.
+      <p>
+        To get more information on classes from the <tt>com.jprofiler.api.*</tt> packages,
+        please choose <i>Help-&gt;Show Javadoc Overview</i> from the menu and read the the
+        <a href="../../doc/helptopics/probes/custom.html">help topic on custom probes</a>.
+      </p>
+      
+<p>
+        A number of packages can be used without using fully-qualified class names. Those packages are:
+        <ul>
+<li>java.util.*</li>
+<li>java.io.*</li>
+<li>com.jprofiler.api.*</li>
+<li>com.jprofiler.api.probes.*</li>
+</ul>
+      
+</p>
+      
+<p>
+        You can put a number of import statements as the first lines in the text area in order to avoid using fully
+        qualified class names.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Scripts can be
+      <ul>
+<li>
+<span class="sectiontitle">expressions</span>
+<br>
+          An expression doesn't have a trailing semicolon and evaluates to the required return type.
+          <p>
+            Example: <code>object.toString().contains("test")</code>
+          
+</p>
+          
+<p>
+            The above example would work as a filter script in the outgoing reference view of the heap walker.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">scripts</span>
+<br>
+          A script consists of a series of Java statements with a return statement of the
+          required return type as the last statement.
+          <p>
+            Example: <code>data[0] = ((Integer)probeContext.getMap().remove("myCount")).intValue();</code>
+          
+</p>
+          
+<p>
+            The above example would work as the telemetry script in a custom probe configuration.
+          </p>
+        
+</li>
+</ul>
+      
+<p>
+        JProfiler detects automatically whether you have entered an expression or a script.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The Java editor offers the following code assistance powered by the eclipse platform:
+      <ul>
+<li>
+<span class="sectiontitle">Code completion</span>
+<br>
+          Pressing <code>CTRL-Space</code> brings up a popup with code completion proposals. Also, typing
+          a dot (".") shows this popup after a delay if no other character is typed.
+          While the popup is displayed, you can continue to type or delete characters with <code>Backspace</code> and
+          the popup will be updated accordingly. "Camel-hump completion" is supported, i.e. typing <tt>NPE</tt> and
+          hitting <code>CTRL-Space</code> will propose <tt>NullPointerException</tt> among other classes.
+          If you accept a class that is not automatically imported, the fully qualified name will be inserted.
+          <p>
+            The completion popup can suggest:
+          </p>
+          
+<ul>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/completion_variable_16.png"> variables and default parameters. Default parameters are displayed in bold font.</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/completion_package_16.png"> packages (when typing an import statement)</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/completion_class_16.png"> classes</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/completion_field_16.png"> fields (when the context is a class)</li>
+<li>
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/completion_method_16.png"> methods (when the context is a class or the parameter list of a method)</li>
+</ul>
+          
+<p>
+            You can configure code completion behavior in the <a href="../../doc/scripts/editorSettings.html">Editor Settings</a>.
+          </p>
+          
+<p>
+            Parameter classes that are neither contained in the configured <a href="../../doc/sessions/application/applicationSettings.html">session class path</a>
+            nor in the <a href="../../doc/sessions/application/codeEditor.html">configured JDK</a> are marked as <b>[unresolved]</b>
+            and are changed to the generic <code>java.lang.Object</code> type. To get code completion for these parameters,
+            add the missing JAR files to the session class path.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Problem analysis</span>
+<br>
+          The code that you enter is analyzed on the fly and checked for errors and warning conditions. Errors are
+          shown as red underlines in the editor and red stripes in the right gutter. Warnings (such as an unused variable declaration)
+          are shown as a yellow backgrounds in the editor and yellow stripes in the right gutter. Hovering the mouse over an error or
+          warning in the editor as well as hovering the mouse over a stripe in the gutter area displays the error
+          or warning message.
+          <p>
+            The status indicator at the top of the right gutter is
+            <ul>
+<li>
+<span class="sectiontitle">green</span>
+<br>
+                if there are no warnings or errors in the code.
+              </li>
+<li>
+<span class="sectiontitle">yellow</span>
+<br>
+                if there are warnings but no errors in the code.
+              </li>
+<li>
+<span class="sectiontitle">red</span>
+<br>
+                if there are errors in the code. In this case the code will not compile and the session cannot be started.
+              </li>
+</ul>
+          
+</p>
+          
+<p>
+            You can configure the threshold for problem analysis in the <a href="../../doc/scripts/editorSettings.html">Editor Settings</a>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Context-sensitive Javadoc</span>
+<br>
+          Pressing <code>SHIFT-F1</code> opens the browser at the Javadoc page that describes the element at the cursor
+          position. If no corresponding Javadoc can be found, a warning message is displayed. Javadoc for the
+          Java runtime library can only be displayed if a <a href="../../doc/sessions/application/codeEditor.html">JDK is configured for the session</a>
+          and a valid Javadoc location is specified in the <a href="../../doc/generalSettings/vm.html">JDK settings</a>.
+        </li>
+</ul>
+      
+<p>
+        All key bindings in the Java code editor are configurable. Choose <i>Settings-&gt;Key Map</i>
+        to display the <a href="../../doc/scripts/keyMap.html">Key map editor</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If the gutter icon in the top right corner of the dialog is green, your script is going to compile unless you
+      have disabled error analysis in the <a href="../../doc/scripts/editorSettings.html">Editor Settings</a>.
+      In some situations, you might want to try the actual compilation. Choosing
+      <i>Code-&gt;Test Compile</i> from the menu will compile the
+      script and display any errors in a separate dialog. Saving your script with the <b>[OK]</b>
+      button will not test the syntactic correctness of the script unless the script is used right away.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Often you will want to <b>reuse a script that you have entered previously</b>. The <b>script history</b>
+      saves recently used scripts. If you click on the <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/java_code_16.png">&nbsp;script history
+      tool bar button, a dialog will be shown where you can see all scripts that have been used recently.
+      Scripts are organized by script signature and the current script signature is selected by default.
+      When you confirm the script history dialog, the current script in the editor is replaced.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/scripts/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/scripts/editorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

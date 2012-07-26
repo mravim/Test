@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Adjusting Method Call Recording Options</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Adjusting Method Call Recording Options</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/profilingSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/cpu.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>,
+      you can adjust all options related to method call recording. These settings influence the detail level of
+      CPU profiling data and the profiling overhead.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The following options are available:
+      <ul>
+<li>
+<span class="sectiontitle">Enable method call recording</span>
+<br>
+          When you record CPU data or allocations, JProfiler collects information about the call tree.
+          You might want to record allocations without the overhead of recording the allocation call stacks:
+          If you don't need the <a href="../../../doc/views/heapwalker/allocations.html">allocation view</a>
+          in the heap walker,
+          the <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree</a>
+          and the stack trace information in the
+          <a href="../../../doc/views/monitors/monitorContention.html">monitor usage views</a>,
+          you can switch off method call recording. This will speed up profiling considerably
+          and reduce memory usage.
+        </li>
+<li>
+<span class="sectiontitle">Method call recording type</span>
+<br>
+          
+<p>
+            Select the method call recording type for CPU profiling as one of
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Dynamic instrumentation</span>
+<br>
+              
+<p>
+                When dynamic instrumentation is enabled, JProfiler modifies filtered classes
+                on the fly as they are loaded by the JVM to include profiling hooks. <b>Accuracy of non-timing
+                related stack information</b> (like allocation information) is high, <b>invocation counts</b> are available and
+                <b>Java EE payloads</b> can be annotated in the call tree, but calls from Java core classes are not resolved.
+                The overhead and timing accuracy varies depending on what classes are instrumented.
+              </p>
+              
+<p>
+                Java core classes
+                (<code>java.*</code>) cannot be profiled this way
+                and are filtered automatically.
+              </p>
+            
+</li>
+<li>
+<span class="sectiontitle">Sampling</span>
+<br>
+              
+<p>
+                When sampling is enabled, JProfiler inspects the call stacks of all
+                threads periodically. Sampling has <b>extremely low overhead</b>
+                even without any filters. Accuracy of non-timing related stack information (like allocation
+                information) is low and invocation counts are not available. Only methods that take longer
+                than the sampling period or methods called frequently are captured by sampling.
+              </p>
+              
+<p>
+                Sampling is ideally suited for use without any method call filters. To temporarily switch off
+                all filters, you can use the <tt>Disable all filters for sampling</tt> setting
+                instead of deleting all filters in your configuration. In that way you can create a profiling
+                settings template that ignores your filter configuration and alternate between using filters and
+                using no filters at all.
+              </p>
+              
+<p>
+                If sampling is enabled, the <b>sampling frequency</b> can be adjusted. The default value is 5 ms.
+                A lower sampling frequency incurs a slightly higher CPU overhead when profiling.
+              </p>
+              
+<p>
+                
+<b>Note: </b> allocations will be reported according to the call traces
+                recorded by the sampling procedure. This may lead to incorrect allocation spots.
+              </p>
+            
+</li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Line numbers</span>
+<br>
+          
+<p>
+            By default, JProfiler does not resolve line numbers in call trees. If you enable
+            <tt>show line numbers for sampling and dynamic instrumentation</tt>,
+            line numbers will be recorded and shown.
+          </p>
+          
+<p>
+            If the aggregation level is set to "methods" and a method calls another method multiple
+            times in different lines of code,
+            line number resolution will show these invocations as separate method nodes
+            in the <a href="../../../doc/views/cpu/invocation.html">call tree</a> and the
+            <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree</a>.
+            Backtraces in the hotspot views will also show line numbers.
+          </p>
+          
+<p>
+            Note that a line number can only be shown if the call to a method originates in an unfiltered class.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/profilingSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/cpu.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

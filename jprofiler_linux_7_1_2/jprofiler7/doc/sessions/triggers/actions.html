@@ -1,0 +1,496 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Action Types</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Trigger Action Types</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/sets.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The following trigger action types are available in the <a href="../../../doc/sessions/triggers/wizard.html">trigger wizard</a>
+    for configuring <a href="../../../doc/sessions/triggers/triggerSettings.html">triggers</a>:
+    <ul>
+<li>
+<span class="sectiontitle">Start recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_startRecording_16.png">
+        </p>
+        
+<p>
+          Starts recording any of
+        </p>
+        
+<ul>
+<li>
+<a href="../../../doc/views/cpu/cpu.html">CPU data</a>
+<br>
+            
+<p>
+              With the "Reset" check box, you can choose whether the previously recorded CPU data should be cleared or not.
+            </p>
+          
+</li>
+<li>
+<a href="../../../doc/views/memory/memory.html">Allocation data</a>
+<br>
+            
+<p>
+              With the "Reset" check box, you can choose whether the previously recorded allocation data should be cleared or not.
+            </p>
+          
+</li>
+<li>
+<a href="../../../doc/views/threads/threads.html">Thread data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/telemetry/telemetry.html">VM telemetry data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/cpu/statistics.html">Method statistics</a>
+<br>
+</li>
+</ul>
+        
+<p>
+          With the "Reset" check boxes for CPU data and allocation data, you can choose whether the previously recorded
+          data should be cleared or not.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Stop recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_stopRecording_16.png">
+        </p>
+        
+<p>
+          Stops recording any of
+        </p>
+        
+<ul>
+<li>
+<a href="../../../doc/views/cpu/cpu.html">CPU data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/memory/memory.html">Allocation data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/threads/threads.html">Thread data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/telemetry/telemetry.html">VM telemetry data</a>
+<br>
+</li>
+<li>
+<a href="../../../doc/views/cpu/statistics.html">Method statistics</a>
+<br>
+</li>
+</ul>
+      
+</li>
+<li>
+<span class="sectiontitle">Start monitor recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_startMonitorRecording_16.png">
+        </p>
+        
+<p>
+          Starts recording monitor data. The <a href="../../../doc/views/monitors/monitors.html">monitor views</a> that
+          show historical data receive new data when this action is executed. Please note that
+          monitor recording adds a memory overhead that grows linearly in time.
+          You should execute the "stop monitor recording" action at some point.
+        </p>
+        
+<p>
+          In the configuration, you can define blocking and waiting thresholds for monitor recording.
+          These settings are the same as those in the
+          <a href="../../../doc/views/monitors/monitorContentionHistorySettings.html">monitor history view settings dialog</a>.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Stop monitor recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_stopMonitorRecording_16.png">
+        </p>
+        
+<p>
+          Stops recording monitor data.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Start call tracer</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_startCallTracer_16.png">
+        </p>
+        
+<p>
+          Starts recording call traces. The <a href="../../../doc/views/cpu/tracer.html">call tracer view</a> will
+          receive new data once the "stop call tracer" action is executed. Please note that
+          call traces use a lot of memory. You should execute the "stop call tracer" action
+          after a short time.
+        </p>
+        
+<p>
+          In the configuration, you can define a cap on the number of recorded call traces and determine if calls
+          into filtered classes should be traced as well. These settings are the same as those in the
+          <a href="../../../doc/views/cpu/tracerSettings.html">call tracer view settings dialog</a>.
+        </p>
+        
+<p>
+          In addition, you can specify if previously recorded call traces should be reset or not. If you do not clear
+          previously recorded call traces, you can build up call traces over several trigger events.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Stop call tracer</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_stopCallTracer_16.png">
+        </p>
+        
+<p>
+          Stops recording call traces. The <a href="../../../doc/views/cpu/tracer.html">call tracer view</a>
+          will be updated with the recorded data as soon as this action is executed.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Trigger heap dump</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_triggerHeapdump_16.png">
+        </p>
+        
+<p>
+          With this action you can trigger a heap dump as in the <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker</a>.
+          Accordingly, you can select whether to
+        </p>
+        
+<ul>
+<li>
+<span class="sectiontitle">Select recorded objects only</span>
+<br>
+            Note that if you select this option and have not recorded any allocations, the heap walker will show the empty object set.
+          </li>
+<li>
+<span class="sectiontitle">Remove unreferenced and weakly referenced objects</span>
+<br>
+            This is effectively like a full GC before taking the snapshots, just that the GC is performed in the
+            internal data structures of the profiling agent.
+          </li>
+<li>
+<span class="sectiontitle">Calculate retained sizes</span>
+<br>
+            To reduce the memory overhead and the time for heap snapshot processing you can deselect this option.
+            Retained sizes can only be calculated if the "Remove unreferenced and weakly referenced objects" option is
+            selected.
+          </li>
+<li>
+<span class="sectiontitle">Record primitive data</span>
+<br>
+            This has no effect with Java 1.5 and JVMTI where primitive data cannot be recorded. Java 1.2-1.4 and Java 1.6+
+            fully support this option.
+          </li>
+</ul>
+      
+</li>
+<li>
+<span class="sectiontitle">Trigger thread dump</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_triggerThreadDump_16.png">
+        </p>
+        
+<p>
+          With this action you can trigger a thread dump as in the <a href="../../../doc/views/threads/dumps.html">thread dumps view</a>.
+          Please note that frequently taking thread dumps will cause a linear growth in memory overhead.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Start probe recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_startProbeRecording_16.png">
+        </p>
+        
+<p>
+          With this action you can start <a href="../../../doc/views/probes/probes.html">probe recording</a> for a single selected built-in probe.
+          Probes that do not have the "record at startup" option selected in the session settings can be started this way
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Stop probe recording</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_stopProbeRecording_16.png">
+        </p>
+        
+<p>
+          With this action you can stop <a href="../../../doc/views/probes/probes.html">probe recording</a> for a single selected built-in probe.
+          If probe recording should only be done for a specific use case, you can use this action to switch off recording.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Start probe tracking</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_startProbeTracking_16.png">
+        </p>
+        
+<p>
+          With this action you can start <a href="../../../doc/views/probes/tracker.html">probe tracking</a> for a single
+          selected built-in probe and one or more control objects or hot spots.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Stop probe tracking</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_stopProbeTracking_16.png">
+        </p>
+        
+<p>
+          With this action you can stop <a href="../../../doc/views/probes/tracker.html">probe tracking</a> for a single
+          selected built-in probe and one or more control objects or hot spots. This only has an effect if you have
+          executed the Start probe tracking" action first.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Save snapshot</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_saveSnapshot_16.png">
+        </p>
+        
+<p>
+          With this action you can <a href="../../../doc/sessions/saving.html">save a JProfiler snapshot</a> of all profiling data to disk.
+        </p>
+        
+<p>
+          In addition to the name of the snapshot file you can specify whether a number should be appended to the file name to prevent
+          old snapshot files from being overwritten. Note that the path is relative to the working directory of the
+          profiled JVM and that the snapshot is saved on the remote machine if you profile remotely.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Create an HPROF heap dump</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_hprofHeapdump_16.png">
+        </p>
+        
+<p>
+          Requirements: Java 1.6+
+        </p>
+        
+<p>
+          With this action you can <a href="../../../doc/sessions/saving.html">save an HPROF heap snapshot</a> of all profiling data to disk.
+          For the <a href="../../../doc/sessions/triggers/events.html">"Out of memory exception"</a> event type, this is the
+          only supported action.
+        </p>
+        
+<p>
+          In addition to the name of the snapshot file you can specify whether a number should be appended to the file name to prevent
+          old snapshot files from being overwritten. Note that the path is relative to the working directory of the
+          profiled JVM and that the snapshot is saved on the remote machine if you profile remotely.
+        </p>
+        
+<p>
+          HPROF heap dumps also offer the option to only save referenced objects.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Wait for the event to finish</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_waitForFinish_16.png">
+        </p>
+        
+<p>
+          For <a href="../../../doc/sessions/triggers/events.html">event types</a> that have a duration, such as the
+          method invocation event or the threshold events, you can use this action to execute some actions not at the start
+          of the event but rather after the event is finished.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Override thread status for current method</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_overrideThreadStatus_16.png">
+        </p>
+        
+<p>
+          This action is only available for the <a href="../../../doc/sessions/triggers/events.html">method invocation</a> event type
+          and allows you to change the <a href="../../../doc/views/threads/history.html">thread status</a> for the duration of the methods
+          that are associated the the trigger. The thread status is configurable.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Print method invocation</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_printMethodInvocation_16.png">
+        </p>
+        
+<p>
+          This action is only available for the <a href="../../../doc/sessions/triggers/events.html">method invocation</a> event type
+          and allows you print details about the current method invocation including parameters and return value to the output stream
+          configured in the <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger output options</a>.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Invoke interceptor</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_invokeInterceptor_16.png">
+        </p>
+        
+<p>
+          This action is only available for the <a href="../../../doc/sessions/triggers/events.html">method invocation</a> event type
+          and allows you to invoke an interceptor when the methods associated the the trigger are invoked. Interceptors
+          can be developed with the JProfiler API and can also be added with VM parameters. Please see the <i><tt>api</tt></i>
+          directory for documentation and samples. The advantage of adding the interceptor with a trigger is that you do
+          not have to specify the methods and signatures in the interceptor class.
+        </p>
+        
+<p>
+          You can enter the interceptor class manually or use the <b>[...]</b> button to scan the class path
+          configured in the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>
+          for all classes extending <code>com.jprofiler.api.agent.interceptor.Interceptor</code>.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Add bookmark</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_addBookmark_16.png">
+        </p>
+        
+<p>
+          With this action you can <a href="../../../doc/views/common/bookmarks.html">add a boookmark</a> to the time-resolved views.
+          You have to enter a description for the bookmark.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Sleep</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_sleep_16.png">
+        </p>
+        
+<p>
+          With this action, you can sleep a specified amount of time until the next action in the list is executed. Please note that
+          this does not block the current thread in the JVM. For example, you can use this action to start CPU recording, record
+          10 minutes, stop CPU recording and save a snapshot.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Print message</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/action_printMessage_16.png">
+        </p>
+        
+<p>
+          With his action you can print an arbitrary message to the output stream configured in the
+          <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger output options</a>.
+        </p>
+      
+</li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/sets.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

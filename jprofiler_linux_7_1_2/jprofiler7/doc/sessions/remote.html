@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Starting Remote Sessions</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Starting Remote Sessions</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/attach.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/remoteTable.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In most cases, the integration of JProfiler with an application server is handled by the
+      <a href="../../doc/quickstart/appservers.html">application server integration wizards</a>.
+      If no GUI is available on the remote machine you can use the
+      <b><tt>jpintegrate</tt></b> executable in the <i><tt>bin</tt></i> directory
+      for a console integration wizard.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you want to quickly profile a JVM of version 1.6 or hight on a remote machine,
+      extract a JProfiler archive from the
+      <a target="_blank" href="http://www.ej-technologies.com/download/jprofiler/files.html">download page</a>
+      on the remote machine. You do not have to enter a license key there. Run the
+      <b><tt>bin/jpenable</tt></b> command line application on the remote machine. You will be able to
+      select a JVM and load the profiling agent into it so that is listens on a specific profiling port.
+      <p>
+        In your local JProfiler GUI, create an
+        <a href="../../doc/sessions/application/remote.html">"Attach to profiled JVM (local or remote)" session</a>
+        and enter the host name and the same profiling port that you specified in <b><tt>jpenable</tt></b>
+        on the remote machine.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To permanently start your application or application server in such a way that you can connect to
+      it with a remote session from JProfiler's GUI front end, the following steps are required. They are different
+      for the old profiling interface JVMPI and the new profiling interface JVMTI. For that latter, the required modifications
+      are considerably simpler.
+      <ul>
+<li>
+<span class="sectiontitle">Java &gt;= 1.5.0 (JVMTI)</span>
+<br>
+          Add a VM parameter to your startup command that tells the VM to load the profiling agent:
+          <pre>
+    -agentpath:{Path to jprofilerti library}
+          </pre>
+          where <tt>{Path to jprofilerti library}</tt> depends on the operating system and the architecture of the JVM
+          (<b>not</b> the architecture of the operating system):
+          <br>
+          
+<br>
+          
+<table cellpadding="4" border="1">
+            
+<tr>
+              
+<td align="">Windows, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}\bin\windows\jprofilerti.dll</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Windows, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}\bin\windows-x64\jprofilerti.dll</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Linux x86, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/linux-x86/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Linux x86, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/linux-x64/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Linux PPC, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/linux-ppc/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Linux PPC64, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/linux-ppc64/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Solaris SPARC, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/solaris-sparc/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Solaris SPARC, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/solaris-sparcv9/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Solaris x86, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/solaris-x86/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Solaris x86, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/solaris-x64/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">Mac OS, 32 and 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/macos/libjprofilerti.jnilib</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">HP-UX PA_RISC, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/hpux-parisc/libjprofilerti.sl</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">HP-UX PA_RISC, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/hpux-parisc64/libjprofilerti.sl</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">HP-UX IA64, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/hpux-ia64n/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">HP-UX IA64, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/hpux-ia64w/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">AIX, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/aix-ppc/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">AIX, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/aix-ppc64/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">FreeBSD x86, 32-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/freebsd-x86/libjprofilerti.so</tt></i></td>
+            
+</tr>
+            
+<tr>
+              
+<td align="">FreeBSD x86, 64-bit</td>
+              <td align=""><i><tt>{JProfiler install directory}/bin/freebsd-x64/libjprofilerti.so</tt></i></td>
+            
+</tr>
+          
+</table>
+          
+<p>
+            Also, you might need to add other JVM-specific options found in the
+            <a href="../../doc/sessions/remoteTable.html">remote session invocation table</a>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Java &lt;= 1.4.2 (JVMPI)</span>
+<br>
+          
+<ol style="list-style-image: none">
+<li>
+<span class="sectiontitle">Adjust your startup command</span>
+<br>
+              Add the following command line parameters to your startup command:
+              <ul>
+<li>
+                  A VM parameter that tells the VM to load the profiling agent:
+                  <pre>
+      -Xrunjprofiler
+                  </pre>
+                
+</li>
+<li>
+                  A VM parameter that adds JProfiler-specific classes to the boot classpath:
+                  <ul>
+<li>
+<span class="sectiontitle">Windows</span>
+<br>
+<tt>-Xbootclasspath/a:{JProfiler install directory}\bin\agent.jar</tt>
+</li>
+<li>
+<span class="sectiontitle">all other supported platforms</span>
+<br>
+<tt>-Xbootclasspath/a:{JProfiler install directory}/bin/agent.jar</tt>
+</li>
+</ul>
+                
+</li>
+<li>
+                  other JVM-specific options found in the <a href="../../doc/sessions/remoteTable.html"> remote session invocation table</a>
+                
+</li>
+</ul>
+            
+</li>
+<li>
+<span class="sectiontitle">Adjust the native library path</span>
+<br>
+              The native library path is an environment variable whose name depends on on the operating system and the architecture of the JVM
+              (<b>not</b> the architecture of the operating system).
+              <br>
+              
+<br>
+              
+<table cellpadding="4" border="1">
+                
+<tr>
+                  
+<td align="">Windows, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}\bin\windows</tt></i> to the environment variable <tt>PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Windows, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}\bin\windows-x64</tt></i> to the environment variable <tt>PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Linux x86, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/linux-x86</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Linux x86, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/linux-x64</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Linux PPC, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/linux-ppc</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Linux PPC64, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/linux-ppc64</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Solaris SPARC, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/solaris-sparc</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Solaris SPARC, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/solaris-sparcv9</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Solaris x86, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/solaris-x86</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Solaris x86, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/solaris-x64</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">Mac OS, 32 and 64-bit</td>
+                  <td align=""><i><tt>{JProfiler install directory}/bin/macos</tt></i> to the environment variable <tt>DYLD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">HP-UX PA_RISC, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/hpux-parisc</tt></i> to the environment variable <tt>SHLIB_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">HP-UX PA_RISC, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/hpux-parisc64</tt></i> to the environment variable <tt>SHLIB_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">HP-UX IA64, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/hpux-ia64n</tt></i> to the environment variable <tt>SHLIB_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">HP-UX IA64, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/hpux-ia64w</tt></i> to the environment variable <tt>SHLIB_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">AIX, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/aix-ppc</tt></i> to the environment variable <tt>LIBPATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">AIX, 64-bit</td>
+                  <td align=""><i><tt>{JProfiler install directory}/bin/aix-ppc64</tt></i> to the environment variable <tt>LIBPATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">FreeBSD x86, 32-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/freebsd-x86</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+                
+<tr>
+                  
+<td align="">FreeBSD x86, 64-bit</td>
+                  <td align="">Add <i><tt>{JProfiler install directory}/bin/freebsd-x64</tt></i> to the environment variable <tt>LD_LIBRARY_PATH</tt>.</td>
+                
+</tr>
+              
+</table>
+            
+</li>
+</ol>
+        
+</li>
+</ul>
+      
+<p>
+        The <a href="../../doc/sessions/remoteTable.html">remote session invocation table</a>
+        shows the complete commands for all supported JVMs.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please note that the profiling interfaces JVMPI and JVMTI only run with the standard garbage collection.
+      If you have VM parameters on your command line that change the garbage collector type such as
+      <ul>
+<li>
+<tt>-Xincgc</tt>
+</li>
+<li>
+<tt>-XX:+UseParallelGC</tt>
+</li>
+<li>
+<tt>-XX:+UseConcMarkSweepGC</tt>
+</li>
+<li>
+<tt>-XX:+UseParNewGC</tt>
+</li>
+</ul>
+      please make sure to remove them. It might be a good idea to remove all <tt>-XX</tt>
+      options if you have problems with profiling.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you start your application from an ant build file, you can use the
+      <a href="../../doc/offline/ant.html">ant task</a> to easily profile your
+      application.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/attach.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/remoteTable.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

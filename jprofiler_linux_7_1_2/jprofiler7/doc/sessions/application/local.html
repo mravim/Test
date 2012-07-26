@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Launched application session</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Launched application session</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/application/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/applet.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    If the session type in the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>
+    is set to "Application", the following settings are displayed in the middle part of the dialog:
+    <ul>
+<li>
+<span class="sectiontitle">Java VM</span>
+<br>
+        Choose the Java VM to run your application. Java VMs are configured
+        on the <a href="../../../doc/generalSettings/vm.html">"Java VMs" tab</a>
+        of JProfiler's <a href="../../../doc/generalSettings/generalSettings.html">general settings</a>
+        which are accessible by clicking the
+        <b>[General settings]</b> button on the bottom of the dialog.
+      </li>
+<li>
+<span class="sectiontitle">Working directory</span>
+<br>
+        Choose the directory in which your <b>java</b> process will be started either
+        manually or by clicking on the <b>[...]</b> button to bring up a file chooser.
+        As long as you have not selected a particular directory, this option is set to
+        <tt>[startup directory]</tt> which means that JProfiler's startup
+        directory will also be your application's working directory.
+      </li>
+<li>
+<span class="sectiontitle">VM arguments</span>
+<br>
+        If your application needs virtual machine arguments of the form
+        <tt>-Dproperty=value</tt>, you can enter them here. Parameters that contain spaces 
+        must be surrounded with double quotes (like <tt>"-Dparam=a parameter with spaces"</tt>).
+      </li>
+<li>
+<span class="sectiontitle">Main class or executable JAR</span>
+<br>
+        Enter the fully qualified name of your main class or the path to an executable JAR 
+        file here. If you enter a main class, it has to be contained in class path (see above).
+        <p>
+          Clicking on the <b>[...]</b> button brings up menu that lets you
+          <ul>
+<li>
+<span class="sectiontitle">Search the classpath</span>
+<br>
+              If you have already configured your classpath, this option will search for
+              classes with a main method and present them in the
+              main class selection dialog.
+            </li>
+<li>
+<span class="sectiontitle">Browse for an executable JAR file</span>
+<br>
+              This brings up a file chooser where you can select an executable JAR file. If the JAR file
+              has a Class-Path manifest entry, you will be asked whether the class path should be replaced
+              with the contents of that attribute. Also, the working directory will be set to the
+              parent directory of the executable JAR file after a confirmation.
+            </li>
+<li>
+<span class="sectiontitle">Browser for a .class file</span>
+<br>
+              This brings up a file chooser where you can select the <i><tt>*.class</tt></i> file
+              of the desired main class. A dialog box will ask you whether to add the associated class
+              path root directory to the class path.
+            </li>
+</ul>
+        
+</p>
+      
+</li>
+<li>
+<span class="sectiontitle">Arguments</span>
+<br>
+        This is the place to enter any arguments you want to supply to the main class 
+        of your application. Arguments that contain spaces 
+        must be surrounded with double quotes (like <tt>"a parameter with spaces"</tt>).
+      </li>
+<li>
+<span class="sectiontitle">Open browser with URL</span>
+<br>
+        If you would like to open a browser window along with the session, please select this checkbox
+        and enter the URL in the adjacent text field. JProfiler polls this URL until it becomes available,
+        only then is the browser opened. Please set the
+        <a href="../../../doc/generalSettings/misc.html">browser start command</a> if you're
+        working on a UNIX platform.
+      </li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/application/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/applet.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

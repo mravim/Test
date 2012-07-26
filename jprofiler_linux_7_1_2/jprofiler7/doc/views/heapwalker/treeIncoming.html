@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker Reference View - Incoming References</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker Reference View - Incoming References</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/treeOutgoing.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/cumulatedReferencesIn.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The incoming references view shows instances in the current object set. Each instance can be opened to show
+        incoming references.
+      
+      
+    
+      The table only concerns the top-level instances and shows the following sortable columns:
+    <br>
+    
+<ul>
+<li>
+<span class="sectiontitle">Retained size</span>
+<br>
+        The amount of memory that would be freed if the object were removed from the heap.
+      </li>
+<li>
+<span class="sectiontitle">Shallow size</span>
+<br>
+        The amount of memory directly used by the object.
+      </li>
+<li>
+<span class="sectiontitle">Allocation time</span>
+<br>
+        The time when the object was allocated. This information is only available if
+        allocation time recording is enabled in the <a href="../../../doc/sessions/profiling/memory.html">profiling settings</a>.
+      </li>
+</ul>
+    
+<p>
+      The number of top-level objects that are shown is limited to 100 by default. You can add more objects with the hyperlink
+      after the last row in the table. The default number of objects can be adjusted in the
+      <a href="../../../doc/views/heapwalker/viewSettings.html">view settings</a>.
+    </p>
+  
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Each reference node has one or two icons. The first icon is one of
+      
+      <ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/incoming_default_16.png"> a regular reference.
+        </li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/incoming_single_path_16.png"> a reference expanded by the search to garbage collector root (see below).
+        </li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/incoming_equivalent_ancestor_16.png"> a reference from an object that is
+          already present as an ancestor node. This indicates a reference cycle. Cycles are more conveniently analyzed
+          in the <a href="../../../doc/views/heapwalker/graph.html">graph view</a>
+        
+</li>
+</ul>
+      
+<p>
+        The second icon is either not present or one of
+      </p>
+      
+<ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_class_16.png"> a reference from a class.
+          
+    
+      In most circumstances, classes are the last step on the path to the GC root that you are interested in.
+      Classes are not garbage collector roots, but in all situations where no custom classloaders
+      are used it is appropriate and easier to treat them as such. This is JProfiler's default
+      mode when searching for garbage collector roots, you can change this in the
+      <a href="../../../doc/views/heapwalker/pathToRootOptions.html">path to root options dialog</a>.
+    <br>
+    
+<p>
+      Class objects have references to
+      <ul>
+<li>
+          all implemented interfaces
+        </li>
+<li>
+          their classloader unless they were loaded by the bootstrap classloader
+        </li>
+<li>
+          all references in their constant pool
+        </li>
+</ul>
+    
+</p>
+    
+<p>
+      Note that class objects have no reference to their super class.
+    </p>
+    
+<p>
+      Classes are garbage collected <b>together with their classloader</b> when
+      <ul>
+<li>
+          there is no class loaded by that classloader that has any live instances
+        </li>
+<li>
+          the classloader is unreferenced except by its classes (this is a JVM level reference and not visible
+          in the source of <tt>java.lang.Class</tt>).
+        </li>
+<li>
+          None of the <tt>java.lang.Class</tt> objects is referenced except by the classloader
+          and other classes of that classloader.
+        </li>
+</ul>
+    
+</p>
+  
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/path_to_root_16.png"> a garbage collector root. 
+          
+    
+      A garbage collector root is an entity in the JVM that itself is not garbage collected and pins other objects or classes.
+      There are the following types of garbage collector roots:
+    <br>
+    
+<ul>
+<li>
+<span class="sectiontitle">JNI references</span>
+<br>Native code can request references from the JNI (local or global)</li>
+<li>
+<span class="sectiontitle">stack</span>
+<br>Local variables all current stack frames</li>
+<li>
+<span class="sectiontitle">sticky class</span>
+<br>The JVM itself can flag certain classes as non-garbage collectable</li>
+<li>
+<span class="sectiontitle">thread block</span>
+<br>Live threads are not garbage collected</li>
+<li>
+<span class="sectiontitle">monitor used</span>
+<br>A monitor that is held by someone cannot be garbage collected</li>
+<li>
+<span class="sectiontitle">other GC root</span>
+<br>The JVM can pin objects by attaching this unspecified GC root to them</li>
+</ul>
+    
+<p>
+      For classes there is a special condition that prevents garbage collection:
+      Since each instance has an implicit reference to its class, any live instance prevents a class
+      from being garbage collected. This construct groups all such instances for reasons of conciseness.
+      In this way you can also select all instances of a specific class (rather than a specific class name).
+    </p>
+  
+        
+</li>
+</ul>
+      
+<p>
+        
+    
+      Each object is optionally annotated with an <b>object ID</b>. With this ID, you can check whether two objects are
+      the same or not. The display of IDs can be switched off the the context menu and the
+      <a href="../../../doc/views/heapwalker/viewSettings.html">view settings</a>.
+    <br>
+  
+      
+</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+    
+      To check why an instance is not garbage collected, you can select it and click the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/path_to_root_16.png">&nbsp;<b>[Show paths to GC root]</b>
+      button at the top of the view. The <a href="../../../doc/views/heapwalker/pathToRootOptions.html">options dialog</a>
+      allows you to configure the way JProfiler performs the search.
+    <br>
+    
+<p>
+      After the search has completed, the tree is expanded up to the garbage collector roots
+      that were found. If the object is <b>not</b> referenced by a garbage collector root, a message
+      box will be displayed. Note that this case is only possible if the
+       "Remove unreferenced and weakly referenced objects" option in the
+      <a href="../../../doc/views/heapwalker/options.html">heap walker option dialog</a>
+      is unchecked.
+    </p>
+  
+      
+        Newly expanded nodes on the path to the GC root have a red
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/incoming_single_path_16.png"> reference icon. To highlight the found path
+        without any distractions, no sibling references are shown on that level. To show all sibling references, you can
+        either choose the <i>Show all incoming references</i> action from the context menu or
+        <i>View</i> menu or collapse and expand the parent node.
+      
+    </td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To analyze both incoming and outgoing references and to explore the relationship between objects of interest,
+      use the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/create_graph_selected_16.png">&nbsp;<b>[Show in graph]</b>
+      button at the top of the view. The selected instances will be then be added to the
+      <a href="../../../doc/views/heapwalker/graph.html">graph</a>. The graph is not cleared when you choose a new object set
+      or go back in the history, so you can add objects from different object sets to the graph.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If you're profiling in live mode with a 1.5 JVM or higher, the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/tostring_16.png">&nbsp;<b>[Show toString() values]</b> button
+        at the top of the view is active. When you click it, JProfiler invokes <code>toString()</code> on all expanded
+        references in the view and shows the results. If you open more references or add more references with the
+        hyperlink at the bottom of the table, those objects will not have their <code>toString()</code> values
+        displayed. You will have to click the button again in order to show the missing values.
+      
+      <p>
+        The reason why this operation is not performed automatically is that calculating toString() values is an
+        expensive operation that invokes Java code in the profiled JVM and may even have unwanted side effects
+        in buggy implementations.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To add a selection step from this view you can select one or multiple objects and click the
+        <b>[Use ...]</b> button above the graph and choose in the popup menu. Multiple objects are selected by
+        keeping the SHIFT or CTRL keys pressed during selection. The following selection modes are available:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Selected Objects</span>
+<br>
+          A new object set will be created that contains only the selected instances.
+        </li>
+<li>
+<span class="sectiontitle">Exclusively Referenced Objects</span>
+<br>
+          A new object set will be created that contains all objects that would be garbage collected if the selected
+          objects did not exist.
+        </li>
+<li>
+<span class="sectiontitle">Items in Selected Collection</span>
+<br>
+          This option is only enabled if you select an array of objects or a standard collection from the
+          <tt>java.util</tt> package. A new object set will be created that contains the objects
+          in the array or collection. If you select a map collection, you are prompted whether you want to include
+          the key objects as well.
+        </li>
+</ul>
+      
+<p>
+        After your selection,
+        the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a> will
+        assist you in choosing the appropriate view for the new object set.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/treeOutgoing.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/cumulatedReferencesIn.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

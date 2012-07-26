@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Path Search Options Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Path Search Options Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/graph.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$graphFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The path search options dialog is displayed after clicking the
+    <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/highlight_16.png">&nbsp;<b>[Find path between two selected nodes]</b>
+    button in the <a href="../../../doc/views/heapwalker/graph.html">heap walker graph view</a>.
+    <table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        There are three optional consecutive passes when searching for a path:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Directed path from first to second object</span>
+<br>
+          Find a path of outgoing references from the first object that you have selected to the second object that you have selected.
+        </li>
+<li>
+<span class="sectiontitle">Directed path from second to first object</span>
+<br>
+          Find a path of outgoing references from the second object that you have selected to the first object that you have selected.
+        </li>
+<li>
+<span class="sectiontitle">Undirected path</span>
+<br>
+          Find any kind of connection between the two selected objects <b>even if the direction of the path changes in
+          between</b>. This works well for objects that are closely related, for example objects that have a common holder
+          that references them both through a low number of outgoing references.
+          <p>
+            If the two objects are not closely related, a found path will likely involve class objects and stack frames and may be
+            of little practical use. That is why this option is not selected by default.
+          </p>
+        
+</li>
+</ul>
+      
+<p>
+        JProfiler starts the search for the first selected path type and stops as soon as it finds a path.
+        For large heaps the search can take a long time, so if you know that there is no direct path between the objects
+        or that you are only interest in one direction, you can disable the other options in order to save time.
+        If no path could be found, an error message is displayed.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Similar to the <a href="../../../doc/views/heapwalker/pathToRootOptions.html">path to GC root search</a>,
+        the search stops at class objects by default. Deselect the <tt>Stop search at classes</tt> check box
+        only if you have class loader problems, otherwise the found paths
+        can cross classes arbitrarily for undirected paths. Also, weak references are not searched be default. If you
+        are interested in paths along weak references, you can enable them in this option dialog.
+      
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/graph.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$graphFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

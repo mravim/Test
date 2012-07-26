@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Settings</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Trigger Settings</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/wizard.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        In the trigger settings section of the <a href="../../../doc/sessions/sessions.html">session settings dialog</a>
+        you can configure triggers that allow you to respond to certain events in the JVM with a list
+        of actions. For further background information, please see the
+        <a href="../../../doc/helptopics/config/triggers.html">help topic on triggers and offline profiling</a>.
+      
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The trigger settings section is grouped into several tabs:
+      <ul>
+<li>
+<span class="sectiontitle">Triggers</span>
+<br>
+          
+<p>
+            Here, you define the list of triggers for your session. By default, no triggers are defined.
+            To add new triggers, click on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_16.png">&nbsp;add button to
+            display the <a href="../../../doc/sessions/triggers/wizard.html">trigger wizard</a>. The trigger
+            wizard is also used to <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/edit_16.png">&nbsp;edit existing triggers.
+          </p>
+          
+<p>
+            Some triggers are only required occasionally, especially when the set of actions incurs a
+            considerable overhead, such as saving snapshots. JProfiler allows you to
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/checkbox_16.png">&nbsp; <b>disable and enable triggers</b>
+            so you do not lose their configuration for the next time you need them. The corresponding actions are
+            also available from the context menu.
+          </p>
+          
+<p>
+            Note that you can select multiple triggers to quickly disable, enable or delete many triggers.
+          </p>
+          
+<p>
+            Trigger configurations can be saved to <a href="../../../doc/sessions/triggers/sets.html">trigger sets</a> with the
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/save_16.png">&nbsp;save button, with the
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/open_16.png">&nbsp;open button you can add a trigger
+            set to the current list of triggers.
+            <p>
+              On the <a href="../../../doc/generalSettings/sessionDefaults.html">session defaults</a> tab of the
+              <a href="../../../doc/generalSettings/generalSettings.html">general settings dialog</a> you can change the
+              default trigger set used for new sessions. By default, no triggers are added to a new session.
+            </p>
+          
+</p>
+        
+</li>
+<li>
+<span class="sectiontitle">Output options</span>
+<br>
+          
+<p>
+            The following actions print information when they are executed:
+          </p>
+          
+<ul>
+<li>Print message</li>
+<li>Print method invocation</li>
+</ul>
+          
+<p>
+            On this tab you define where this output should be printed. The available options are:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Print to stdout</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Print to stderr</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Print to file</span>
+<br>
+              For this option you have to enter a file name. The file will be saved relative to the working directory
+              of the profiled JVM on the machine where the profiled JVM is running.
+            </li>
+</ul>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/wizard.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

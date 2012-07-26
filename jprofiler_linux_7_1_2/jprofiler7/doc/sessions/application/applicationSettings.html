@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Application Settings</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Application Settings</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/attach.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The application settings section of the <a href="../../../doc/sessions/sessions.html">session settings dialog</a> collects
+        all information that is required to start your application with profiling enabled.
+        If you use an <a href="../../../doc/ide/overview.html">IDE integration</a>, this information
+        will be provided by the IDE.
+      
+      <ul>
+<li>
+<span class="sectiontitle">Session name</span>
+<br>
+          Every session has a unique name that is presented in the
+          "Open session" pane of the <a href="../../../doc/quickstart/startcenter.html">start center</a>
+          and in the <a href="../../../doc/sessions/open.html">open session dialog</a>. It is also
+          used for the title of the main window and the terminal window.
+          Next to the name text field you see an ID which is used for choosing the session in
+          <a href="../../../doc/offline/offline.html">offline profiling</a> or for remote profiling with the
+          <a href="../../../doc/sessions/remoteTable.html">"nowait" option</a> (in the latter case only relevant
+          if the profiled JVM has a version of 1.5 or earlier).
+        </li>
+<li>
+<span class="sectiontitle">Session type</span>
+<br>
+          There are five different session types. Depending on this choice, the middle part
+          of the tab will display different options.
+          The available sessions are grouped into two categories:
+          <b>attach sessions</b> that attach to a JVM that is already running and
+          <b>launch sessions</b> that launch a new JVM for profiling.
+          <ul>
+<li>
+<a href="../../../doc/sessions/application/attach.html">Attach to local JVM session</a>
+<br>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_local_attach_16.png">
+              An attach to local JVM session can connect to any locally started JVM with
+              a minimum version of Java 1.6. The profiling agent is loaded on the fly. This is the
+              easiest and most convenient way to profile.
+            </li>
+<li>
+<a href="../../../doc/sessions/application/remote.html">Attach to profiled JVM session</a>
+<br>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_remote_attach_16.png">
+              An attach to profiled JVM session connects to a running application which has been
+              <a href="../../../doc/sessions/remote.html">started with JProfiler's profiling agent</a>.
+              The profiling agent listens on the default port of 8849
+              which can be changed in the agent's initialization parameters. Remote sessions
+              are most convenient for profiling server applications on remote machines and
+              application servers.
+            </li>
+<li>
+<a href="../../../doc/sessions/application/local.html">Launched application session</a>
+<br>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_application_16.png">
+              A launched application session starts your application when the session is opened. You have to
+              specify the virtual machine, as well as your application's class path, main class,
+              parameters and working directory. Your application will be started in a separate 
+              terminal window.
+              Application sessions are most convenient for profiling GUI and console applications where
+              you have written the main class yourself.
+            </li>
+<li>
+<a href="../../../doc/sessions/application/applet.html">Launched applet session</a>
+<br>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_applet_16.png">
+              Applet sessions are used for profiling applets with Sun's
+              applet viewer which is shipped with every JDK. You only have to supply the
+              URL to a HTML page containing the applet.
+              <p>
+                
+<b>Note:</b> If the applet viewer is too restrictive for
+                your applet, please use the <b>Java plugin integration wizard</b> available on
+                the <tt>New session</tt> tab of the
+                <a href="../../../doc/quickstart/startcenter.html">start center</a> to profile the applet
+                directly in the browser.
+              </p>
+            
+</li>
+<li>
+<a href="../../../doc/sessions/application/webstart.html">Launched Java Web Start session</a>
+<br>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_webstart_16.png">
+              JProfiler can profile <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136112.html">Java Web Start</a>
+              applications. You only have to supply the URL for the JNLP file or select a cached application.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Java file path</span>
+<br>
+          With the radio buttons on the left you can switch between the
+          <ul>
+<li>
+<span class="sectiontitle">Class path</span>
+<br>
+              The class path consists of directories and jar files that are used for the -classpath VM argument.
+              The class path is also used by the <a href="../../../doc/views/common/classViewer.html">bytecode viewer</a> to
+              find class files for display.
+            </li>
+<li>
+<span class="sectiontitle">Source path</span>
+<br>
+              The source path optionally lists archives and directories that contain source code for some or all of
+              the entries in the class path. Note that the
+              sources of the selected JDK contained in <i><tt>src.jar</tt></i> or
+              <i><tt>src.zip</tt></i> will be automatically appended if they are installed.
+              The source path is is used by the
+              <a href="../../../doc/views/common/classViewer.html">source code viewer</a>
+              to display Java sources.
+            </li>
+<li>
+<span class="sectiontitle">Native library path</span>
+<br>
+              The native library path consists of directories that are added to the native library envrironment variable.
+              The name of the native library envrironment variable depends on the operating system.
+              You only have to specify the native library path when you load native libraries by calling
+              <code>java.lang.System.loadLibrary()</code> or for resolving dependent libraries that
+              have to be dynamically loaded by your native libraries.
+            </li>
+</ul>
+          
+<p>
+            When clicking the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_16.png"> add button you can select multiple
+            path entries to the path list in one go from the file chooser. Alternatively, to quickly add a list of path
+            entries defined elsewhere, you can <b>copy a path from the system clipboard</b> by clicking
+            <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/copy_16.png"> copy button. The path must consist of either
+          </p>
+          
+<ul>
+<li>a single path entry</li>
+<li>
+              or multiple path entries separated by the standard path separator (";" on Windows, ":" on UNIX)
+              or by line breaks.
+            </li>
+</ul>
+          
+<p>
+            Each path entry can be
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">absolute</span>
+<br>
+              The path entry is added as it is.
+            </li>
+<li>
+<span class="sectiontitle">relative</span>
+<br>
+              On the first occurrence of a relative path, JProfiler brings up a directory chooser and asks for
+              the root directory against which relative paths should be interpreted. All subsequent relative
+              paths will be interpreted against this root directory.
+            </li>
+</ul>
+          
+<p>
+            JProfiler will only add unique path entries into the list. If no new path entry could be found,
+            a corresponding error message is displayed.
+          </p>
+          
+<p>
+            Note: Adjusting the class and source path during an active session is effective for the
+            <a href="../../../doc/views/common/classViewer.html">source code and bytecode viewer</a> only.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/application/attach.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

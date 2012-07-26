@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler's Start Center</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler's Start Center</h2>
+</td><td valign="top" align="right"><a href="../../doc/quickstart/features.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/appservers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When JProfiler is started, the <b>start center</b> window appears.
+      The start center is composed of three tabs:
+      <ul>
+<li>
+<span class="sectiontitle">Open session</span>
+<br>
+          All sessions configured by you or the preconfigured demo sessions can
+          be started by double clicking on a session or by selecting a session
+          and clicking <b>[OK]</b> at the bottom of the start center. In addition,
+          sessions can be <a href="../../doc/sessions/sessions.html">edited</a>,
+          copied or deleted by using the buttons on the right
+          hand side of the dialog or by invoking the context menu.
+        </li>
+<li>
+<span class="sectiontitle">New session</span>
+<br>
+          Sessions can be created in one of two ways:
+          <ul>
+<li>
+<span class="sectiontitle">By manual configuration</span>
+<br>
+              Use the <b>[New session]</b> button to
+              <a href="../../doc/sessions/application/applicationSettings.html">manually configure</a> a 
+              new session. After you finish configuring your session, it will
+              be started.
+            </li>
+<li>
+<span class="sectiontitle">Through an integration wizard</span>
+<br>
+              Use the <b>[New server integration]</b> button to invoke the
+              <a href="../../doc/quickstart/appservers.html">integration wizard</a>
+              selector. The <b>[New remote integration]</b> and
+              <b>[New applet integration]</b> buttons are convenience shortcuts.
+              After you finish configuring your session, you can either start the session
+              immediately or the "open session" tab will be displayed with the new session
+              selected.
+            </li>
+</ul>        
+        
+</li>
+<li>
+<span class="sectiontitle">Convert session</span>
+<br>
+          Here, you can convert existing launched application sessions to remote sessions or
+          <a href="../../doc/offline/offline.html">offline profiling sessions</a> or
+          prepare a launched application session for redistribution to other computers. The latter will
+          also collect all files for the agent that are necessary to get the agent running
+          on remote machines. The existing launched application session that is chosen for conversion will
+          not be modified.
+        </li>
+<li>
+<span class="sectiontitle">Open snapshot</span>
+<br>
+          Previously <a href="../../doc/sessions/saving.html">saved sessions</a> can be
+          opened from this tab by selecting <tt>Open a single saved snapshot</tt> and selecting the desired
+          <i><tt>*.jps</tt></i> file. Also, you can select "Compare multiple snapshots" to create
+          <a href="../../doc/comparisons/comparisons.html">snapshot comparisons</a>.
+        </li>
+</ul>
+      
+<p>When you choose not to open a profiling session for an empty window and exit
+      the start center by clicking the <b>[Cancel]</b> button, all of
+      JProfiler's views are disabled and only the general settings
+      (<i>Session-&gt;General settings</i>) and the
+      <i>Session</i> and <i>Help</i> menus are enabled.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The start center can be invoked at any later time
+      <ul>
+<li>
+          by choosing <i>Session-&gt;Start center</i> or clicking on the
+          corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/startcenter_16.png">&nbsp;toolbar
+          button.
+          <p>
+            If a session is currently active upon opening a session, it will be stopped
+            after a confirmation dialog and the new session will replace all profiling
+            data of the old session.
+          </p>
+        
+</li>
+<li>
+          by choosing <i>Session-&gt;Start center in new window</i>.
+          A new main window of JProfiler will be opened, other active sessions will
+          not be affected.
+        </li>
+</ul>      
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/quickstart/features.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/appservers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

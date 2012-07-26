@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Configuring Session Settings</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Configuring Session Settings</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      Apart from the application settings which control how a JVM is launched or how a connection is made to
+      a profiled JVM, session settings mostly deal with <b>the way profiling data is recorded</b>.
+    <br>
+    
+<p>
+      Session settings can be shown by editing a session in the start center or by invoking
+      <i>Session-&gt;Session settings</i> from the main menu for the currently running session.
+      Every time a session is started, a startup dialog is displayed that allows you to
+      change the session settings.
+    </p>
+    
+<p>
+      On older JVMs (1.5 and earlier), these settings must be adjusted according to your personal needs before
+      the session is started. For modern JVMs (1.6 and later), JProfiler is able to
+      change session settings at runtime. Any change in the session settings clears
+      all recorded data. <b>View settings</b> can be changed during a running session without
+      loss of recorded data. The primary distinction between session settings and view settings is that session
+      settings determine <b>how much data is recorded</b>.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/session_settings.png">
+    </p>
+
+    
+<h3>2. Limiting the recorded profiling data</h3>
+    
+<p>
+      Why doesn't JProfiler just record everything it can and show it to the user?
+      The answer is twofold:
+      <ul>
+<li>
+<span class="sectiontitle">There's a trade-off between information depth and runtime overhead</span>
+<br>
+          Profiling adds overhead to the profiled application. It runs more slowly and consumes
+          more memory. As an example, consider the call tree. JProfiler record separate call trees
+          for each thread. If all method calls in all classes are recorded, the profiling agent has
+          to do a lot of bookkeeping operations and its internal data structures use a lot of memory.
+        </li>
+<li>
+<span class="sectiontitle">You want to reduce clutter in the recorded data</span>
+<br>
+          Maximum detail doesn't lead to maximum insight. On the contrary, excessive detail will
+          often be in the way. If there's too much information available, you're likely to get lost in it.
+          Let's continue the above example: most of the time, you're not interested in the internal
+          call tree of framework classes. Say, if you call <code>HashMap#get()</code>, the sufficiently
+          detailed information will be the duration of this call. When you're not familiar with an
+          implementation or if you're not in control of it, the internal calls structure is not
+          helpful information, but rather just clutter, that you can ignore.
+        </li>
+</ul>
+    
+</p>
+    
+<p>
+      In principle, reducing the information depth can be done after recording. The view filters in the
+      CPU views are such an example: the internal call structure of all classes that do no match
+      the selected view filter is removed from the call tree. However, especially the increased memory
+      consumption of profiling is critical: if you do not have enough physical memory available,
+      the profiled JVM might become unstable or even crash. So in practice, you should record as little
+      data as possible. With appropriate profiling settings you choose the required detail while retaining
+      an acceptable runtime performance.
+    </p>
+
+    
+<h3>3. Profiling settings templates</h3>
+    
+<p>
+      Except for filter, trigger and probe settings, all other session settings are grouped into the "profiling settings"
+      tab of the session settings dialog. Most of those settings are advanced settings, and do not need to be adjusted
+      under normal circumstances.
+    </p>
+    
+<p>
+      JProfiler offers <b>templates for profiling settings</b>. When you start a new session, JProfiler asks you
+      whether you want to start with the "Sampling" or "Instrumentation" template. On the startup dialog,
+      overhead meters for CPU and memory overhead help you in judging whether the
+      current profiling settings are acceptable for you. Please note that the overhead meters do not
+      give any absolute values, because JProfiler has no way of knowing the runtime characteristics of your application.
+      Rather, they are hints that allow you to compare different profiling settings.
+    </p>
+    
+<p>
+      Each profiling settings template defines certain values for the profiling settings that
+      can be viewed and modified by clicking the <b>[Customize profiling settings]</b> button on the
+      profiling settings tab of the session settings dialog. When you modify and save those settings, the template combo box
+      displays that the profiling settings are "Customized".
+    </p>
+
+    
+<h3>4. Overview of the various profiling settings</h3>
+    
+<p>
+      The most important profiling settings are:
+      <ul>
+<li>
+<span class="sectiontitle">the method call recording type</span>
+<br>
+          This profiling settings determines performance overhead and informational detail
+          in the CPU and memory views that show call trees. A detailed presentation
+          of the various method call recording types is available in a
+          <a href="../../../doc/helptopics/config/callTreeCollection.html">separate article</a>.
+        </li>
+<li>
+<span class="sectiontitle">the filter settings</span>
+<br>
+          The filter settings determine the detail that is shown in any call tree
+          or call stack in JProfiler. In brief, they define the set of classes whose internal
+          call structure is shown while method calls into all other classes are
+          treated as opaque. Please see the
+          <a href="../../../doc/helptopics/config/filters.html">article on filters for method call recording</a>
+          for a thorough discussion.
+        </li>
+</ul>
+    
+</p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

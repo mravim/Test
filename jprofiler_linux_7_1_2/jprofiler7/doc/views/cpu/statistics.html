@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Method Statistics</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Method Statistics</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/statisticsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/statisticsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The method statistics view shows information on the distribution of calls to the same method.
+      
+      <p>
+        Recording method statistics is a memory intensive operation, so it is split from regular CPU recording.
+        To record method statistics, click
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_statistics_start_16.png">&nbsp;<b>Record
+        method statistics</b> in the tool bar or select <i>View-&gt;Record method statistics</i>
+        from JProfiler's main menu. If you have previously recorded method statistics, the old recorded data will
+        be lost. <a href="../../../doc/views/common/bookmarks.html">Bookmarks</a> will be added when recording is started
+        or stopped manually.
+      </p>
+      
+<p>
+        If <a href="../../../doc/views/cpu/cpu.html">CPU recording</a> is not enabled, it will be enabled when you start
+        recording method statistics. Note that CPU recording will not be stopped when you stop recording 
+        method statistics.
+      </p>
+      
+</td>
+</tr>
+</table>
+      
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The method statistics view shows a table with all methods from
+        <a href="../../../doc/sessions/filters/filterSettings.html">profiled classes</a> that were invoked during method
+        statistics recording. The following columns are shown in the table:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Method</span>
+<br>
+          The name of the method and its parameters.
+        </li>
+<li>
+<span class="sectiontitle">Total Time</span>
+<br>
+          The total time spent in the method.
+        </li>
+<li>
+<span class="sectiontitle">Invocations</span>
+<br>
+          The number of times a method was called.
+        </li>
+<li>
+<span class="sectiontitle">Average Time</span>
+<br>
+          The average time spent in a method. This is equal to the total time divided by the invocation count.
+        </li>
+<li>
+<span class="sectiontitle">Median Time</span>
+<br>
+          The <a target="_blank" href="http://en.wikipedia.org/wiki/Median">median</a> time is the
+          time for which half of the method calls were shorter and half were longer.
+        </li>
+<li>
+<span class="sectiontitle">Minimum Time</span>
+<br>
+          The minimum time of a single method invocation.
+        </li>
+<li>
+<span class="sectiontitle">Maximum Time</span>
+<br>
+          The maximum time of a single method invocation.
+        </li>
+<li>
+<span class="sectiontitle">Standard Deviation</span>
+<br>
+          The <a target="_blank" href="http://en.wikipedia.org/wiki/Standard_deviation">standard deviation</a> measures
+          the breadth of the distribution of method call times. If all method call times are nearly equal, the value will
+          be close to zero, the more spread-out the call times are, the higher the standard deviation will be.
+        </li>
+<li>
+<span class="sectiontitle">Outlier Coefficient</span>
+<br>
+          The outlier Coefficient is calculated as (maximum time - median time) / median time. It measures how
+          significant the maximum time deviates from the median time. Outliers with small times are not considered.
+          Methods with high outlier coefficients are suitable candidates for exceptional method run measurements in
+          the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+        </li>
+</ul>
+        
+<p>
+          You can <a href="../../../doc/views/common/sorting.html">sort</a> the table on all columns. Double-clicking on a table row
+          will show the source code of the selected method.
+        </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can use this view as a starting point for determining which methods are candidates for
+      <a href="../../../doc/sessions/filters/exceptional.html">exceptional method run recording</a>.
+      Once you have identified methods with a high outlier coefficient, you can right-click them in the table and
+      choose <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_16.png">&nbsp;<i>Add as exceptional method</i>
+      from the context menu.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Below the method table, a graph with the distribution of invocation counts versus call times is shown.
+        The graph is always shown for the currently selected method in the method table.
+      
+      <p>
+        By default, the graph shows invocation counts on a linear scale. However, in order to identify outliers with a low
+        relative frequency, it is useful to switch to a logarithmic axis. This can be done in the
+        <a href="../../../doc/views/cpu/statisticsSettings.html">view settings</a> or in the context menu.
+      </p>
+      
+<p>
+        The graph can be exported to HTML or CSV by right-clicking into the graph area and selecting
+        <i>Export</i> from the context menu. The export action in the tool bar and in the context
+        menu of the method table export the method table without the currently shown graph.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views. The time axis in this case is the call duration axis.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/statisticsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/statisticsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

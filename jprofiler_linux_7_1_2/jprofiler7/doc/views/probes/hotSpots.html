@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probe Hot Spots</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probe Hot Spots</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/probes/controlObjects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/telemetries.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The hot spots view is conceptually similar to the <a href="../../../doc/views/cpu/hotspots.html">CPU hot spots view</a>.
+      Instead of showing method hot spots, it shows <b>payload names</b> published by the selected probe. Payload names
+      (such as the SQL string of a statement for the JDBC probe) have an associated duration, and the ones that take the
+      most time result as the top hot spots.
+      <p>
+        Payloads are also connected with particular call stacks, so the hot spot view can show a
+        merged tree of back traces. Even if sampling is enabled, JProfiler records the exact call traces for probe payloads
+        by default. If you want to avoid this overhead, you can switch it off in the
+        <a href="../../../doc/sessions/profiling/probes.html">profiling settings</a>.
+      </p>
+      
+<p>
+        For more information on the payload concept, please see the
+        <a href="../../../doc/helptopics/probes/probesOverview.html">corresponding help topic</a>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Every hot spot is described in several columns:
+      <ul>
+<li>
+          The <b>hot spot</b> column shows the payload name. For an explanation of probe-specific payloads, please see
+          the <a href="../../../doc/views/probes/probes.html">probe overview</a>.
+        </li>
+<li>
+          the <b>inherent time</b>, i.e. how much time has been spent
+          in the hot spot together with a bar whose length is proportional to this value.
+        </li>
+<li>
+          the <b>average time</b>, i.e. the inherent time (see above) divided by the
+          invocation count (see below).
+        </li>
+<li>
+          the <b>invocation count</b> of the hot spot. In contrast to CPU profiling, this is also available if "Sampling"
+          is selected as the <a href="../../../doc/sessions/profiling/callTreeCollection.html">method call recording type</a>.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If you click on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/warning_triangle_16.png">&nbsp;handle
+        on the left side of a hot spot, a tree of backtraces will be shown.
+        Every entry in the backtrace tree has textual information attached to it which depends
+        on the view settings.
+      
+      <ul>
+<li>
+          a <b>percentage number</b> which is calculated with respect either to the
+          total time or the called method.
+        </li>
+<li>
+          a <b>time measurement</b> in ms or &micro;s of how
+          much time has been contributed to the parent <b>hot spot</b> on this path.
+          If enabled in the view settings, every node in the hot spot backtraces tree has
+          a <b>percentage bar</b> whose length is proportional to this number.
+        </li>
+<li>
+          an <b>invocation count</b> which shows how often the <b>hot spot</b>
+          has been invoked on this path.
+          <p>
+            
+<b>Note:</b> This is <b>not</b> the number of invocations of this method.
+          </p>
+        
+</li>
+<li>
+          
+    a <b>name</b> which depends on the aggregation level:
+    <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+        a method name that is either fully qualified or relative with respect to to the calling method.
+      </li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+        a class name.
+      </li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+        a package name.
+      </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+        the display name of the Java EE component.
+      </li>
+</ul>
+  
+        
+</li>
+<li>
+          
+    a <b>line number</b> which is only displayed if
+    <ul>
+<li>the aggregation level is set to "methods"</li>
+<li>
+        line number resolution has been enabled in the
+        <a href="../../../doc/sessions/profiling/callTreeCollection.html">profiling settings</a>
+      
+</li>
+<li>the calling class is unfiltered</li>
+</ul>
+    
+<p>
+      Note that the line number shows the line number of the invocation
+      and not of the method itself.
+    </p>
+  
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For certain probes, such as the "JPA/Hibernate" probe, the top-level elements in the backtraces are
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/annotation_container_16.png">
+      containers for
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/annotation_16.png">
+      secondary hot spots (JDBC statements in the JPA/Hibernate case) and nodes for
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/execution_site_16.png">
+      direct and
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_site_16.png">
+      deferred operations.
+      <p>
+        The back traces below a "deferred operations" node are not directly associated with the actual execution
+        of the hot spot. They show
+        <ul>
+<li>where the entity has been <b>acquired</b>, if it already existed</li>
+<li>where the entity has been <b>persisted</b>, if it is newly created</li>
+</ul>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In the <b>view filter</b> at the bottom of the tree you can enter the full name of a payload or only a part of it.
+      Only payloads whose names begin with this fragment are displayed. You
+      can also use wildcards ("*" and "?") to select groups of payloads.
+      Please note that if you use wildcards, you have to manually append a
+      trailing "*" if desired. You can display the union of multiple filters
+      at the same time by separating multiple filter expressions with commas, e.g.
+      <tt>test-, MyTest-*-123</tt>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_to_tracker_16.png">
+        "Add Selection To Tracker" action in the context menu and the tool bar creates a tracker graph in the
+        <a href="../../../doc/views/probes/tracker.html">probe tracker view</a>. You can select multiple control objects to
+        create a single tracker graph for the sum of their operations.
+      
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/probes/controlObjects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/telemetries.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

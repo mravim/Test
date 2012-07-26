@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Snapshot Option Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Snapshot Option Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/heapwalker.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/viewLayout.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap snapshot options dialog is displayed each time before the actual
+      <a href="../../../doc/views/heapwalker/heapwalker.html">heap snapshot</a> is taken.
+      The dialog has two tabs, grouping all overhead-related options on the second tab.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If the <b>Select recorded objects</b> option is checked, the heap walker will restrict the heap snapshot to
+      recorded objects only. In this way you can focus on the objects that have been created
+      during a selected time span. If the option is unchecked, all objects on the heap will
+      be shown (excluding any objects removed by the overhead options below).
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The overhead options are:
+      <ul>
+<li>
+<span class="sectiontitle">Remove unreferenced and weakly referenced objects</span>
+<br>
+          If this option is checked, JProfiler will remove all objects from the
+          heap that are <b>not strongly referenced</b>. These include:
+          <ul>
+<li>unreferenced objects that are eligible for garbage collection</li>
+<li>objects that are referenced only through soft, weak and phantom references</li>
+<li>
+              objects that are in the finalizer queue and will be garbage collected
+              as soon as the finalizers have been run
+            </li>
+</ul>
+          
+<p>
+            For strongly referenced objects, the heap walker will not display soft,
+            weak and phantom references.
+          </p>
+          
+<p>
+            This mode is preferable for memory leak detection, and is especially helpful
+            to obtain useful information when showing the
+            <a href="../../../doc/views/heapwalker/pathToRootOptions.html">path to root</a>
+            for selected objects.
+            Deselecting this option reduces the time for processing the heap snapshot and allows you to analyze the heap "as-is".
+          </p>
+          
+<p>
+            
+<b>Note:</b> With Java &gt;= 1.5.0 (JVMTI), unreferenced objects are not shown by the
+            heap walker. The dynamic memory views like the <a href="../../../doc/views/memory/allObjects.html">all objects view</a> and the
+            <a href="../../../doc/views/memory/recordedObjects.html">recorded objects view</a> can therefore show higher instance counts.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Calculate retained sizes</span>
+<br>
+          Calculating retained sizes adds memory overhead while the heap snapshot is processed and can take some time
+          for large heap snapshots. If you experience memory problems when taking heap snapshot or if you want the heap
+          snapshot processing to take less time, you can deselect this option. In that case, no retained sizes will be available.
+          Also, the <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects view</a> will not be available.
+          <p>
+            Retained sizes can only be calculated if the "Remove unreferenced and weakly referenced objects" is selected.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Record primitive data</span>
+<br>
+          
+<b>Note:</b> This option is only visible when you profile with Java
+          1.4 (JVMPI) or with Java 1.6+ (JVMTI 1.1). With Java 1.5 (JVMTI 1.0), primitive data is not recorded.
+          <p>
+            If this option is checked, the heap walker will record primitive data and display
+            string values and values of primitive fields in the
+            <a href="../../../doc/views/heapwalker/references.html">reference views</a>.
+          </p>
+          
+<p>
+            Deselecting this option will save memory and is advisable if you experience memory problems when taking heap snapshot.
+            If primitive data is not recorded, it will be requested on demand in a live session, depending on whether the object
+            still exists. The data may not be the same as at the time of the heap snapshot in that case. These on-demand requests
+            only work for Java 1.5+. For Java 1.4, the <a href="../../../doc/views/heapwalker/treeOutgoing.html">outgoing references view</a>
+            will display <tt>N/A</tt> for primitive values.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/heapwalker.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/viewLayout.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

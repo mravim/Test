@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Method Call Recording - Influence on Performance and Accuracy</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Method Call Recording - Influence on Performance and Accuracy</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/config/sessionSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/filters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      At first glance, it might seem that the method call recording settings only influence the
+      CPU section of JProfiler. However, the memory section as well as the thread and monitor sections
+      show information that originates from the call tree that is built by the profiling agent of
+      JProfiler: the call tree view, the allocation call tree, the stack traces in
+      the monitor views and locking graphs as well as many other views all depend on the current call stack
+      which is always recorded, even if "CPU recording" is switched off in JProfiler.
+    <br>
+    
+<p>
+      Selecting the right method call recording type is crucial for a successful profiling run.
+      As explained in the
+      <a href="../../../doc/helptopics/config/sessionSettings.html">article on session settings</a>,
+      the aim is to get the best runtime performance while retaining an acceptable level of
+      informational detail. While the most important profiling setting in this regard is the
+      <a href="../../../doc/helptopics/config/filters.html">filter configuration</a>,
+      the method call recording type complements this choice. Each method call recording
+      type has various limitations that you should bear in mind when configuring
+      filters settings.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/method_call_recording_type.png">
+    </p>
+
+    
+<h3>2. Dynamic instrumentation</h3>
+    
+<p>
+      For instrumentation, JProfiler <b>injects bytecode into the methods of profiled classes</b> that report the entry
+      and exit of a method as well as the invocation of methods in unprofiled classes. Unprofiled
+      classes are not touched and run without overhead.
+    </p>
+    
+<p>
+      If most classes are unprofiled, this mode causes low overhead while providing highly detailed measurements.
+      Typically, the entire JRE and any framework classes are unprofiled so that dynamic instrumentation is most
+      often the best choice. Since there are some classes in the <code>java.*</code> and <code>sun.*</code> packages
+      that the profiling agent does not get a chance to modify, the internal calls of these packages cannot
+      be resolved with dynamic instrumentation. However, for most applications this is not a problem.
+    </p>
+
+    
+<h3>3. Sampling</h3>
+    
+<p>
+      "Sampling" means to periodically take measurements that are called "samples". In
+      the case of profiling, an additional thread periodically <b>halts the entire JVM and
+      inspects the call stack of each thread</b>. The period is typically 5&nbsp;ms, so that
+      a large number of method calls can occur between two samples.
+    </p>
+    
+<p>
+      The advantage of sampling is that its performance overhead is not very sensitive
+      to the filter settings. Even without any filters, sampling is still fast since
+      it operates with big granularity in time. You might ask why it is not possible to
+      decrease the sampling time into the microsecond range to achieve a better resolution.
+      The answer is that the process of sampling is a very expensive operation. Halting
+      the entire JVM and querying the call stacks of a threads takes a lot of time. If you
+      do this too often, sampling will actually become slower than dynamic or full
+      instrumentation.
+    </p>
+    
+<p>
+      Sampling has two other important informational deficiencies: Since
+      sampling does not monitor the entry and the exit of method calls, there's <b>no invocation
+      count</b> in the CPU views of JProfiler. Furthermore, the <b>allocation spots for objects
+      are only approximate</b>. The actual call stack might always be deeper than the reported one.
+      In addition, this informational deficiency is not systematic, but statistical: Objects
+      allocated by the same method may be recorded to be spread out among methods that are called shortly before
+      or after it.
+    </p>
+    
+<p>
+      To get around this deficiency, JProfiler has an option to record the exact
+      allocation spots for sampling. In this case, the profiling agent does not rely on the
+      call tree as recorded by the sampler. Rather, after each object allocation, it queries the
+      JVMTI for the call stack of the current thread. However, this is an expensive operation
+      and if you create a lot of objects the performance of the profiled application may suffer.
+    </p>
+    
+<p>
+      To conclude, sampling is best suited for performance bottleneck searches with all filters
+      turned off.
+    </p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/config/sessionSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/filters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

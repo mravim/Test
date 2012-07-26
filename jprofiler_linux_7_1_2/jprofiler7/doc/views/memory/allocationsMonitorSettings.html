@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Allocation Call Tree Settings</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Allocation Call Tree Settings</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/memory/allocationsMonitor.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/$allocationsMonitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The allocation call tree view settings dialog is accessed by bringing
+      
+      the
+      <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The view mode can be toggled with the <b>cumulate allocations</b> checkbox.
+      This sets whether allocations should be cumulated to show all allocations below any
+      method or not.
+    </td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can select a size scale mode for all displayed sizes:
+      <ul>
+<li>
+<span class="sectiontitle">Automatic</span>
+<br>
+          Depending on the size value, it's displayed in MB, kB or
+          bytes, in such a way that 3 significant digits are retained.
+        </li>
+<li>
+<span class="sectiontitle">Megabytes (MB)</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Kilobytes (kB</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Bytes</span>
+<br>
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>node description</b> options control the amount of information
+      that is presented in the description of each node.
+
+      <ul>
+<li>
+<span class="sectiontitle">Show percentage bar</span>
+<br>
+          If this option is checked, a percentage bar will be displayed whose length is
+          proportional to the number of allocations including all descendant nodes
+          and whose light-red part indicates the percentage of allocations in the current node.
+        </li>
+<li>
+<span class="sectiontitle">Always show fully qualified names</span>
+<br>
+          If this option is not checked, class names are omitted in intra-class method calls
+          which enhances the conciseness of the display. This option is only relevant for
+          the "methods" aggregation level.
+        </li>
+<li>
+<span class="sectiontitle">Always show signature</span>
+<br>
+          If this option is not checked, method signatures are shown only if two methods
+          with the same name appear on the same level. This option is only relevant for
+          the "methods" aggregation level.
+        </li>
+</ul>      
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>percentage calculation</b> determines against what allocation numbers
+      percentages are calculated.
+      <ul>
+<li>
+<span class="sectiontitle">Absolute</span>
+<br>
+          Percentage values show the contribution to the total number of allocations.
+        </li>
+<li>
+<span class="sectiontitle">Relative</span>
+<br>
+          Percentage values show the contribution to the parent method.
+        </li>
+</ul>
+      
+<p>
+        Whether the contribution is cumulated or not depends on the <tt>Cumulate allocations</tt>
+        setting (see above).
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/memory/allocationsMonitor.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/$allocationsMonitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

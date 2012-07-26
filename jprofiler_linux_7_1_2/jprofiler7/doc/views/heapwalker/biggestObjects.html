@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker - Biggest Objects View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker - Biggest Objects View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$biggestObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/biggestObjectsRetainedSize.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker biggest objects view conforms to the
+      <a href="../../../doc/views/heapwalker/viewLayout.html">basic layout</a>
+      of all heap walker views. Also see the
+      <a href="../../../doc/views/heapwalker/heapwalker.html">help on key concepts</a>
+      for the entire heap walker.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The biggest objects view shows a list of the biggest objects in in the current object set.
+      The table shows the following information:
+
+      <ul>
+<li>The first column shows the name of the object's class and the ID of the object</li>
+<li>
+          The second column shows the object's retained size together with a bar visualizing the relative
+          importance of that number with the respect to all the objects that are shown.
+          Also, a percentage number is shown that indicates how much of the total used heap size is
+          retained by this object.
+          <p>
+            Please see the <a href="../../../doc/views/heapwalker/heapwalker.html">key concepts of the heap walker</a>
+            for an explanation of retained size.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Each object can be expanded to show outgoing references to other objects that are retained by this object.
+      In this way, you can recursively expand the tree of retained objects (also called a "dominator tree") that would be
+      garbage collected if the one of the parents were to be removed. The information displayed for each object in this tree
+      is similar to the <a href="../../../doc/views/heapwalker/treeOutgoing.html">outgoing reference view</a>,
+      except that only dominating references are displayed.
+      <p>
+        Not all dominated objects are directly referenced by their dominators. For example, consider the references in the following figure:
+      </p>
+      
+<p>
+        
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/transitive_reference.png">
+      </p>
+      
+<p>
+        Object A dominates objects B1 and B2, it does not have a direct reference to object C. Both B1 and B2 reference C.
+        Neither B1 nor B2 dominates C, but A does. In this case, B1, B2 and C are listed as direct children of A in
+        the dominator tree, and C will not be listed a child of B1 and B2. For B1 and B2, the field names in A
+        by which they are held are displayed. For C,  <b>[transitive reference]</b> is displayed on the reference node.
+      </p>
+      
+<p>
+        At the left side of each reference node in this tree, a percentage bar shows how many percent of the retained size of the
+        top-level object heap are still retained by the
+        target object. The numbers will decrease as you drill down further into the tree. In the
+        <a href="../../../doc/views/heapwalker/viewSettings.html">view settings</a>, you can change the percentage base to
+        the total heap size.
+       </p>
+        
+<p>
+          The dominator tree has a built-in <b>cutoff</b> that eliminates all objects that have a retained size that
+          is lower than 0.5% of the retained size of the parent object. This is to avoid excessively long lists of small dominated objects
+          that distract from the important objects. If such a cutoff has been performed, a 
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/cutoff_16.png">&nbsp;cutoff child node will be shown that notifies you about
+          the number of objects that are not shown on this level, their total retained size and the maximum retained size
+          of the single objects.
+        </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>view mode selector</b> above the biggest objects view allows you to switch to
+      an alternate visualization: A tree map that shows all dominated objects as a set of nested rectangles.
+      Please see the <a href="../../../doc/views/common/treeMaps.html">help on tree maps</a> for more information.
+      <p>
+        Each rectangle represents a dominated object. The area of the rectangle is proportional to its retained size.
+        In contrast to the tree, the tree map gives you a <b>flattened perspective of all leafs in the dominator tree</b>.
+        If you're mostly interested in big arrays, you can use the tree map in order to find them quickly without
+        having to dig into the branches of the tree. Also, the tree map gives you an overall impression of the relative
+        importance of dominated objects and the object size distribution in the heap.
+      </p>
+      
+<p>
+        At the bottom right of the tree map you can see the total percentage of the entire heap that is
+        represented by the tree map. If you have not zoomed in, the remaining part of the heap is dominated by objects that have not made
+        it into the list of biggest objects due to the internal threshold for retained sizes.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To analyze both incoming and outgoing references and to explore the relationship between objects of interest,
+      use the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/create_graph_selected_16.png">&nbsp;<b>[Show in graph]</b>
+      button at the top of the view. The selected instances will be then be added to the
+      <a href="../../../doc/views/heapwalker/graph.html">graph</a>. The graph is not cleared when you choose a new object set
+      or go back in the history, so you can add objects from different object sets to the graph.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If you're profiling in live mode with a 1.5 JVM or higher, the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/tostring_16.png">&nbsp;<b>[Show toString() values]</b> button
+        at the top of the view is active. When you click it, JProfiler invokes <code>toString()</code> on all expanded
+        references in the view and shows the results. If you open more references or add more references with the
+        hyperlink at the bottom of the table, those objects will not have their <code>toString()</code> values
+        displayed. You will have to click the button again in order to show the missing values.
+      
+      <p>
+        The reason why this operation is not performed automatically is that calculating toString() values is an
+        expensive operation that invokes Java code in the profiled JVM and may even have unwanted side effects
+        in buggy implementations.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To add a selection step from this view you can select one or more objects and
+      click the <b>[Use selected]</b> button above the table.
+      <p>
+        A new object set will be created that contains only the instances of the selected objects.
+        After your selection,
+        the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a> will
+        assist you in choosing the appropriate view for the new object set.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$biggestObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/biggestObjectsRetainedSize.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

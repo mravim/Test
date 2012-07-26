@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Thread Monitor View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Thread Monitor View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/threads/$monitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/threads/monitorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The thread monitor view shows the filtered list of all threads in the JVM
+      together with associated information on times and status. There are a maximum of
+      six columns shown in the table, which can be
+      <a href="../../../doc/views/common/sorting.html">sorted</a>.
+      <ul>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          Shows the name of the thread. If the thread has not been 
+          named explicitly, the name is provided by the JVM. To make most use of this view,
+          name your threads according to their function by invoking the
+          <tt>setName()</tt> method on all threads created by you.
+        </li>
+<li>
+<span class="sectiontitle">Group</span>
+<br>
+          Shows the name of the thread group associated with this thread. 
+        </li>
+<li>
+<span class="sectiontitle">Start time</span>
+<br>
+          Shows the time when the thread has been started. This time is calculated
+          relative to the start time of the first thread in the JVM.
+        </li>
+<li>
+<span class="sectiontitle">End time</span>
+<br>
+          This column is only visible when <tt>show dead threads</tt> is enabled
+          in the <a href="../../../doc/views/threads/monitorSettings.html">view settings
+          dialog</a>. It shows the time when the thread has died and is empty if the
+          thread is still alive. This time is calculated relative to the start time of
+          the first thread in the JVM.
+        </li>
+<li>
+<span class="sectiontitle">CPU time</span>
+<br>
+          Shows the CPU time which has been consumed by the thread.
+          <p>
+            
+<b>Note:</b> The CPU time column is only visible if the
+            <tt>CPU time type</tt> is set to <tt>Estimated CPU times</tt>
+            on the <a href="../../../doc/sessions/profiling/misc.html">Miscellaneous</a> tab of
+            the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings</a>.
+            In addition, the CPU time is only measured when you <a href="../../../doc/views/cpu/cpu.html">record CPU data</a>.
+            Otherwise the CPU time column is always empty.
+          </p>
+          
+<p>
+            This column may also be empty if your system and JVM do not support thread specific CPU time reporting.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Creating thread</span>
+<br>
+          Shows the name of the thread and its thread group that created this thread.
+          <p>
+            
+<b>Note:</b> The creating thread column is only visible if you profile
+            with Java 1.5 and higher (JVMTI). For Java 1.4 and lower (JVMPI), this column
+            is not shown.
+          </p>
+          
+<p>
+            This column may also be empty if your system and JVM do not support thread specific CPU time reporting.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Status</span>
+<br>
+          Shows the status of the thread which corresponds to the status reported in the
+          <a href="../../../doc/views/threads/history.html">thread history view</a>.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you profile with Java 1.5 and higher (JVMTI), the above table will be the top component of a split pane.
+      In the lower part of the split pane, the filtered <b>stack trace of the thread creation</b> of the currently
+      selected thread is displayed. Stack traces can only be displayed if
+      <a href="../../../doc/views/cpu/cpu.html">CPU data was being recorded</a> when the thread was created.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can decide which threads are shown in the thread monitor view by checking the
+      desired filters in the <a href="../../../doc/views/threads/monitorSettings.html">thread
+      monitor view settings dialog</a>. If <tt>Show dead threads</tt> is not
+      enabled, the <tt>End time</tt> column will not be visible.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/threads/$monitorFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/threads/monitorSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

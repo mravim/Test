@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Editing Bookmarks</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Editing Bookmarks</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/bookmarks.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/classViewer.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The bookmark dialog is invoked by choosing <i>Profiling-&gt;Edit Bookmarks</i> from JProfiler's main menu.
+      It shows a list of all <a href="../../../doc/views/common/bookmarks.html">bookmarks</a>. For each bookmark, the following properties
+      are displayed:
+      <ul>
+<li>
+<span class="sectiontitle">Time</span>
+<br>
+          The time when the bookmark was set, relative to the start of the JVM. 
+        </li>
+<li>
+<span class="sectiontitle">Line style and color</span>
+<br>
+          The line style (solid or dashed) and the color of the bookmark line as shown in the graph views with a time axis
+          is shown as a sample. For automatic bookmarks, solid lines indicate a start event, while dashed lines indicate
+          a stop event.
+        </li>
+<li>
+<span class="sectiontitle">Description</span>
+<br>
+          For automatic bookmarks, the description indicates the origin of the bookmark.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Bookmarks can be
+      <ul>
+<li>
+          
+<b>edited</b> by selecting a single bookmark and clicking on the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/edit_16.png">&nbsp;<b>[Edit]</b> button or by double-clicking
+          on a bookmark. A dialog will be shown where you can edit the description, the color and the line style of the bookmark.
+        </li>
+<li>
+          
+<b>deleted</b> by selecting one or multiple bookmarks and clicking on the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/remove_16.png">&nbsp;<b>[Remove]</b> button or hitting the
+          <code>DEL</code> key.
+        </li>
+<li>
+          
+<b>sorted</b> by time or by description by clicking on the table columns.
+        </li>
+<li>
+          
+<b>searched</b> by typing into the table or choosing <i>Find</i> from the
+          context menu.
+        </li>
+<li>
+          
+<b>exported</b> to HTML or CSV by clicking on the
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/export_16.png">&nbsp;<b>[Export]</b> button
+          in the lower-right corner of the dialog.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/bookmarks.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/classViewer.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

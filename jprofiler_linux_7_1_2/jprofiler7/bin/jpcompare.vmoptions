@@ -1,0 +1,4 @@
+# For 32-bit JVMs, raise the -Xmx value carefully because otherwise snapshot
+# files cannot be memory mapped anymore and all operations slow down.
+-Xmx768m
+-Xss2m

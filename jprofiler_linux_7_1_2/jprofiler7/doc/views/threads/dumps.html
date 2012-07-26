@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Thread Dumps View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Thread Dumps View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/threads/$dumpsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In the thread dumps view you can take thread dumps that show the current stack traces of all threads that
+      can be displayed in the <a href="../../../doc/views/threads/history.html">thread history view</a>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      A new thread dump is taken by clicking on the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/thread_dump_16.png">&nbsp;<b>[Thread dump]</b> tool bar button.
+      This button is also present for the <a href="../../../doc/views/threads/history.html">thread history view</a> and
+      the  <a href="../../../doc/views/threads/monitor.html">thread monitor view</a>.
+      A <a href="../../../doc/views/common/bookmarks.html">bookmark</a> will be added to the time-resolved views.
+      <p>
+        The new thread dump will by added to the list of thread dumps and it will be selected automatically.
+        The two lists to the right show the threads that are contained in the currently selected thread dump as well as the
+        stack trace of the currently selected thread.
+      </p>
+      
+<p>
+        The list of threads is organized according to thread groups, similar to the thread selector in the
+        <a href="../../../doc/views/cpu/cpu.html">CPU views</a>.
+      </p>
+      
+<p>
+        The stack traces in thread dumps are <b>not filtered</b>, i.e. the
+        <a href="../../../doc/sessions/filters/filterSettings.html">filter settings</a> in the session settings do not apply.
+        The context menu gives access to source and byte code navigation. Double-clicking on a stack trace element shows the
+        selected method.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Thread dumps can be copied to the clipboard with the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/thread_dump_16.png">&nbsp;<b>[Copy To Clipboard]</b> button at the
+      top of the list of thread dumps. The entire selected thread dump is copied as plain text to the clipboard.
+      <p>
+        To copy a single thread only, choose the <i>Copy Selected Thread To Clipboard</i> menu
+        item from the context menu of the list of threads.
+      </p>
+      
+<p>
+        When <a href="../../../doc/views/common/export.html">exporting</a> the thread dumps view to HTML, the file chooser
+        offers a combo box for exporting the selected thread dump only, or all thread dumps to the same file.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Thread dumps can also be taken with the
+      <a href="../../../doc/sessions/triggers/actions.html">trigger thread dump</a> trigger action
+      or via the <a href="../../../doc/offline/javadoc/com/jprofiler/api/agent/Controller.html">API</a>.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/threads/$dumpsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

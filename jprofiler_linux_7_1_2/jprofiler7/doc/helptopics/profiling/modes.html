@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Profiling Modes</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Profiling Modes</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      There a 4 different profiling modes in JProfiler. Three of them involve a connection with the JProfiler
+      GUI so you can see and analyze data immediately.
+    <br>
+    
+<p>
+      The three modes result from trade-offs between convenience and efficiency. It is most convenient to
+      simply attach the JProfiler GUI to any running JVM ("Attach mode"), but it is most efficient to load the profiling
+      agent and startup and tell it about the profiling settings immediately ("Profile at startup"). A middle way
+      is to load the profiling agent at startup and tell it later on what the profiling settings should be ("Prepare for profiling").
+    </p>
+    
+<p>
+      The fourth mode is used when the use of a JProfiler GUI is not desired or technically possible ("Offline mode").
+    </p>
+
+    
+<h3>2. Attach mode</h3>
+    
+<p>
+      For profiling Java 1.6 or higher, JProfiler supports <a href="../../../doc/sessions/attach.html">attaching to a running JVM</a>
+      and loading the profiling agent on the fly.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/attach_dialog.png">
+    </p>
+    
+<p>
+      Attach mode has some drawbacks since some capabilities of the profiling interface are not available that way.
+      JProfiler notifies you in the GUI where this is the case. Also, to instrument classes, JProfiler
+      has to retransform them, which takes more time and resources compared to the "Profile at startup" mode.
+    </p>
+    
+<p>
+      To attach to a remote JVM that has not been prepared for profiling, JProfiler offers a command line tool
+      <i><tt>jpenable</tt></i> that loads the profiling agent and makes it possible to connect with a remote session
+      from another computer.
+    </p>
+
+    
+<h3>3. Profile at startup</h3>
+    
+<p>
+      To profile an application at startup, the profiling agent has to be activated before the JVM is created.
+      This is achieved by adding the special JVM parameter
+      <pre>
+        -agentpath:[path to jprofilerti library]
+      </pre>
+      for Java &gt;=1.5.0 (JVMTI). You rarely need to add this JVM parameter manually. For
+      <a href="../../../doc/sessions/sessions.html">launched sessions</a> and
+      <a href="../../../doc/quickstart/ide.html">IDE integrations</a> JProfiler does this automatically, for other cases,
+      there are <a href="../../../doc/quickstart/appservers.html">integration wizards</a>. They also take case of
+      potential other VM parameters that are required for profiling.
+    </p>
+    
+<p>
+      By default, the profiling agent listens on port 8849. You can change that port by appending
+      <tt>=port=8849</tt> to the above VM parameter. Except for
+      <a href="../../../doc/sessions/remote.html">remote sessions</a>, you do not have to choose a port explicitly.
+    </p>
+    
+<p>
+      The profiling agent pauses the JVM at startup and waits for a connection from the GUI to receive information
+      about profiled classes and other profiling settings. After the connection, the normal execution in the JVM is
+      continued. This is the most efficient way to profile an application, since no retransforming of already
+      loaded class files has to be performed.
+    </p>
+
+    
+<h3>4. Prepare for profiling</h3>
+    
+<p>
+      Alternatively, it is possible to let the application start up
+      immediately and wait for a connection from the JProfiler GUI. In that case, the instrumented classes have to
+      be retransformed after the JProfiler GUI tells the profiling agent about the profiling classes.
+    </p>
+    
+<p>
+      This mode is <a href="../../../doc/sessions/remoteTable.html">activated by appending</a> <tt>,nowait</tt>
+      to the <code>-agentpath</code> VM parameter. In most cases, this is handled by the integration wizard.
+      For maximum efficiency, it's also possible to append <tt>,config=[config file]</tt> and
+      <tt>,id=[id]</tt> parameters to instruct the profiling agent to take the profiling settings from a
+      particular session in a particular config file. If you connect with the same profiling settings, no classes
+      will have to be retransformed.
+    </p>
+    
+<p>
+      In any case, this mode is more efficient than attach mode since a lot of instrumentations are independent of
+      the profiling settings. Those instrumentations are performed as the classes are loaded and the number of
+      retransformed classes is lower. Also, all capabilities of the profiling interface of the JVM are available
+      in this mode.
+    </p>
+
+    
+<h3>5. Offline profiling</h3>
+    
+<p>
+      For automated profiling or for situations where it is not possible to attach a JProfiler GUI due to network
+      restrictions, you can profile without a profiling GUI. In that case, you need to instruct the profiling agent
+      when to record data, what data should be recorded and when snapshots should be saved. This is done
+      with <a href="../../../doc/helptopics/config/triggers.html">triggers</a> which are activated for certain events
+      and can execute a series of configurable actions.
+    </p>
+    
+<p>
+      This mode is <a href="../../../doc/sessions/remoteTable.html">activated by appending</a>
+      <tt>,offline,config=[config file],id=[id]</tt> to the <code>-agentpath</code> VM parameter.
+      Usually this is handled by the integration wizard. Similar to the "Prepare for profiling" mode, the selected
+      session in the specified config file will be used for the profiling settings. The trigger configuration from
+      that session controls recording and saving.
+    </p>
+    
+<p>
+      The profiling results are only saved to snapshot files, it is not possible to attach a JProfiler GUI in offline
+      mode. However, you can control data recording and snapshot saving manually with the
+      <a href="../../../doc/offline/commandLineController.html">jpcontroller</a> command line controller.
+    </p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

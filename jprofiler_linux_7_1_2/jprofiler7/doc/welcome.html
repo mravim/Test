@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Welcome To JProfiler</title>
+<link href="../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Welcome To JProfiler</h2>
+</td><td valign="top" align="right"><a href="../doc/order.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    Thank you for choosing JProfiler. To help you get acquainted with JProfiler's features, this manual
+    is divided into two sections:
+    <ul>
+<li>
+<a href="../doc/helptopics/$folder$.html">Help topics</a>
+<br>
+        
+<p>
+          Help topics present important concepts in JProfiler. They are not necessarily tied to a
+          single view. Help topics are recommended reading for all JProfiler users.
+        </p>
+        
+<p>
+          The help topics section does not cover all aspects of JProfiler. Please turn to the
+          reference section for an exhaustive explanation of all features that can be found in JProfiler.
+        </p>
+      
+</li>
+<li>
+<a href="../doc/$folder$.html">Reference</a>
+<br>
+        
+<p>
+          The reference section covers all views, all dialogs and all features of JProfiler. It is
+          highly hierarchical and not optimized for systematic reading.
+        </p>
+        
+<p>
+          The reference section is the basis for JProfiler's context sensitive help system.
+          Each view and each dialog have one or more corresponding items in the reference section.
+        </p>
+      
+</li>
+</ul>
+    
+<p>
+      We appreciate your feedback. If you feel that there's a lack of documentation in a certain
+      area of if you find inaccuracies in the documentation, please don't hesitate to contact us
+      at <a target="_blank" href="mailto:support@ej-technologies.com">support@ej-technologies.com</a>.
+    </p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../doc/order.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

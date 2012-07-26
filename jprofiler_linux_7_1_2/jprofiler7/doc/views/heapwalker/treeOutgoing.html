@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker Reference View - Outgoing References</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker Reference View - Outgoing References</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/references.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/treeIncoming.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The outgoing references view shows instances in the current object set. Each instance can be opened to show
+        outgoing references as well as primitive data.
+      
+      
+    
+      The table only concerns the top-level instances and shows the following sortable columns:
+    <br>
+    
+<ul>
+<li>
+<span class="sectiontitle">Retained size</span>
+<br>
+        The amount of memory that would be freed if the object were removed from the heap.
+      </li>
+<li>
+<span class="sectiontitle">Shallow size</span>
+<br>
+        The amount of memory directly used by the object.
+      </li>
+<li>
+<span class="sectiontitle">Allocation time</span>
+<br>
+        The time when the object was allocated. This information is only available if
+        allocation time recording is enabled in the <a href="../../../doc/sessions/profiling/memory.html">profiling settings</a>.
+      </li>
+</ul>
+    
+<p>
+      The number of top-level objects that are shown is limited to 100 by default. You can add more objects with the hyperlink
+      after the last row in the table. The default number of objects can be adjusted in the
+      <a href="../../../doc/views/heapwalker/viewSettings.html">view settings</a>.
+    </p>
+  
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Each reference node consists of three parts:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Field name</span>
+<br>
+          The field name of the object in the parent node that holds the referenced object
+        </li>
+<li>
+<span class="sectiontitle">Reference icon</span>
+<br>
+          The reference icon separates the holder from the referenced object. The icon is one of
+          <ul>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/outgoing_single_16.png"> A regular reference.
+            </li>
+<li>
+              
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/outgoing_single_equivalent_ancestor_16.png"> A reference from an object that is
+              already present as an ancestor node. This indicates a reference cycle. Cycles are more conveniently analyzed
+              in the <a href="../../../doc/views/heapwalker/graph.html">graph view</a>
+            
+</li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Referenced object</span>
+<br>
+          This is the object referenced by the outgoing reference. Direct child references below this node refer to this object.
+        </li>
+</ul>
+
+      
+<p>
+        
+    
+      Each object is optionally annotated with an <b>object ID</b>. With this ID, you can check whether two objects are
+      the same or not. The display of IDs can be switched off the the context menu and the
+      <a href="../../../doc/views/heapwalker/viewSettings.html">view settings</a>.
+    <br>
+  
+      
+</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>[Apply filter ...]</b> menu at the top of the view allows you to <b>filter the current object set</b>.
+        Filters are always applied to the top-level objects, i.e. the objects that are actually part of the current object set.
+      
+      <p>
+        When you open outgoing references and select a reference or a primitive value, the filter uses the selected node
+        as the criterion. Top-level objects that do not have a path of outgoing references such as the selected path, are discarded by the filter.
+      </p>
+      
+<p>
+        If a non-primitive value is selected, and you are profiling a Java 5 or higher JVM in live mode, you can
+        apply a filter <b>with a code snippet</b>. In the script, you can use the <code>object</code> parameter
+        to write your filter expression. The objects that are passed to your script are on the same level as the one that
+        you have selected. Return <code>true</code> if the associated top-level object should be retained, otherwise
+        it will be discarded. If you want to filter repeatedly with the same expression, don't forget the script history
+        feature of the <a href="../../../doc/scripts/scripts.html">script editor</a>.
+      </p>
+      
+<p>
+        If you have selected a top-level object, the parameter is only typed if all objects in the current object set
+        have the same class. Also, in that case the result is equivalent to running the
+        <a href="../../../doc/views/heapwalker/inspectionsList.html">custom filter inspection</a> on the current object set.
+      </p>
+      
+<p>
+        Alternatively, you can apply a filter <b>by restricting the selected value</b>. If you are profiling a Java 5 or higher
+        JVM in live mode, you can perform a match against the result of the <code>toString()</code> method of the selected
+        objects. If you have selected a reference which is not at the top level, you can also filter by
+        null references or non-null references. For primitive values, you can restrict the value by settings bounds or testing
+        for equality. All text fields where you can enter values have a drop down list with a history that is persistent across sessions.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To analyze both incoming and outgoing references and to explore the relationship between objects of interest,
+      use the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/create_graph_selected_16.png">&nbsp;<b>[Show in graph]</b>
+      button at the top of the view. The selected instances will be then be added to the
+      <a href="../../../doc/views/heapwalker/graph.html">graph</a>. The graph is not cleared when you choose a new object set
+      or go back in the history, so you can add objects from different object sets to the graph.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If you're profiling in live mode with a 1.5 JVM or higher, the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/tostring_16.png">&nbsp;<b>[Show toString() values]</b> button
+        at the top of the view is active. When you click it, JProfiler invokes <code>toString()</code> on all expanded
+        references in the view and shows the results. If you open more references or add more references with the
+        hyperlink at the bottom of the table, those objects will not have their <code>toString()</code> values
+        displayed. You will have to click the button again in order to show the missing values.
+      
+      <p>
+        The reason why this operation is not performed automatically is that calculating toString() values is an
+        expensive operation that invokes Java code in the profiled JVM and may even have unwanted side effects
+        in buggy implementations.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To add a selection step from this view you can select one or multiple objects and click the
+        <b>[Use ...]</b> button above the graph and choose in the popup menu. Multiple objects are selected by
+        keeping the SHIFT or CTRL keys pressed during selection. The following selection modes are available:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Selected Objects</span>
+<br>
+          A new object set will be created that contains only the selected instances.
+        </li>
+<li>
+<span class="sectiontitle">Exclusively Referenced Objects</span>
+<br>
+          A new object set will be created that contains all objects that would be garbage collected if the selected
+          objects did not exist.
+        </li>
+<li>
+<span class="sectiontitle">Items in Selected Collection</span>
+<br>
+          This option is only enabled if you select an array of objects or a standard collection from the
+          <tt>java.util</tt> package. A new object set will be created that contains the objects
+          in the array or collection. If you select a map collection, you are prompted whether you want to include
+          the key objects as well.
+        </li>
+</ul>
+      
+<p>
+        After your selection,
+        the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a> will
+        assist you in choosing the appropriate view for the new object set.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/references.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/treeIncoming.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

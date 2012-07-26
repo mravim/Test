@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JEE &amp; Probes</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JEE &amp; Probes</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/timeLine.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The JEE &amp; Probes view shows the results of both built-in probes and custom probes.
+      For background information on probes, see the
+      <a href="../../../doc/helptopics/probes/probesOverview.html">corresponding help topic</a>.
+      Probes are configured on the <a href="../../../doc/sessions/probes/probeSettings.html">probes tab</a>
+      of the <a href="../../../doc/sessions/sessions.html">session settings</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The probes view has a <b>probe selector</b> drop-down list at the top which shows all built-in probes
+      as well as all custom probes that were detected in the profiled JVM. Custom probes can be defined in the
+      <a href="../../../doc/sessions/probes/custom.html">session settings</a> or registered on the command line with a
+      reference to a <code>com.jprofiler.api.agent.probe.ProbeProvider</code>.
+      <p>
+        Unless the probe has been configured to record data at startup, you have to start recording data manually
+        with the probe recording button next to the probe selector. Recording is switched on and off separately for
+        each probe. By default, only the JEE built-in probes and custom probes are configured to start recording at startup.
+        To change this behavior, select the corresponding option for
+        <a href="../../../doc/sessions/probes/builtin.html">built-in probes</a> or call
+        <code>metaData.recordOnStartup(false)</code> in the meta-data script of
+        <a href="../../../doc/sessions/probes/custom.html">custom probes</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The tab-like view selector at the bottom provides access to the various views provided by the probe.
+      The available views depend on what data is published by the selected probe. The following views
+      are available:
+      <ul>
+<li>
+<a href="../../../doc/views/probes/timeLine.html">Time line</a>
+<br>
+          Shows the life-time of control objects on a time-axis as horizontal bars colored with sampled control object states.
+        </li>
+<li>
+<a href="../../../doc/views/probes/controlObjects.html">Control objects</a>
+<br>
+          Shows a table with information on control objects.
+        </li>
+<li>
+<a href="../../../doc/views/probes/hotSpots.html">Hot spots</a>
+<br>
+          Shows a list of payload hot spots together with expandable back traces.
+        </li>
+<li>
+<a href="../../../doc/views/probes/telemetries.html">Telemetries</a>
+<br>
+          Shows telemetries published by the probe.
+        </li>
+<li>
+<a href="../../../doc/views/probes/events.html">Events</a>
+<br>
+          Shows the single events that are recorded by the probe.
+        </li>
+<li>
+<a href="../../../doc/views/probes/tracker.html">Tracker</a>
+<br>
+          Allows you to track selected control objects or hot spots and show their average times, counts and throughputs as graphs.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler features the following built-in probes:
+      <ul>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_jdbc_16.png">&nbsp;<b>JDBC</b>
+<br>
+<br>
+          The control objects are database connections which can be in the following active states:
+          <ul>
+<li>
+<span class="sectiontitle">Statement execution</span>
+<br>
+              A statement created via one of the <code>java.sql.Connection#createStatement(...)</code>
+              methods is being executed.
+            </li>
+<li>
+<span class="sectiontitle">Prepared statement execution</span>
+<br>
+              A statement created via one of the <code>java.sql.Connection#prepareStatement(...)</code>
+              or <code>java.sql.Connection#prepareCall(...)</code> methods is being executed.
+            </li>
+<li>
+<span class="sectiontitle">Batch execution</span>
+<br>
+              
+<code>java.sql.Statement#executeBatch()</code> is being executed on a statement.
+            </li>
+</ul>
+          
+<p>
+            The probe annotates the SQL strings of statements into the call tree and shows
+            them in the hot spots view.
+          </p>
+          
+<p>
+            The following telemetries are provided:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Executed statements</span>
+<br>
+              The number of executed statements per second.
+            </li>
+<li>
+<span class="sectiontitle">Average statement execution time</span>
+<br>
+              The average execution time in seconds for statements that completed in the last second.
+            </li>
+<li>
+<span class="sectiontitle">Recorded open connections</span>
+<br>
+              The number of open database connections at any time.
+            </li>
+</ul>
+          
+<p>
+            By default, the probe records single events and starts recording at startup.
+            There are <a href="../../../doc/sessions/probes/builtin.html">special configuration options</a> for this probe.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_persistence_16.png">&nbsp;<b>JPA/Hibernate</b>
+<br>
+<br>
+          
+<p>
+            There are no control objects for this view, so the probe does not have time line and control objects views.
+          </p>
+          
+<p>
+            The probe annotates the SQL strings of persistence operations into the call tree and shows
+            them in the hot spots view.
+          </p>
+          
+<p>
+            The following telemetries are provided:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Entity Operation Count</span>
+<br>
+              The number of entity operations per second.
+            </li>
+<li>
+<span class="sectiontitle">Query Count</span>
+<br>
+              The number of executed queries per second.
+            </li>
+<li>
+<span class="sectiontitle">Query Duration</span>
+<br>
+              The average duration of queries in the last second.
+            </li>
+</ul>
+          
+<p>
+            By default, the probe records single events and starts recording at startup.
+            There are <a href="../../../doc/sessions/probes/builtin.html">special configuration options</a> for this probe.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_jndi_16.png">&nbsp;<b>JNDI</b>
+<br>
+<br>
+          
+<p>
+            There are no control objects for this view, so the probe does not have time line and control objects views.
+          </p>
+          
+<p>
+            The probe annotates JNDI query strings into the call tree and shows them in the hot spots view.
+            Query strings are prepended with "[NAME]" and optionally have a "[FILTER]" part at the end for JNDI searches.
+          </p>
+          
+<p>
+            By default, the probe records single events and starts recording at startup.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_jms_16.png">&nbsp;<b>JMS</b>
+<br>
+<br>
+          
+<p>
+            There are no control objects for this view, so the probe does not have time line and control objects views.
+            There are two event types: "Synchronous message" and "Asynchronous message".
+          </p>
+          
+<p>
+            The probe annotates JMS message descriptions into the call tree and shows them in the hot spots view.
+            The displayed JMS message description <a href="../../../doc/sessions/probes/builtin.html">can be customized</a>.
+          </p>
+          
+<p>
+            By default, the probe records single events and starts recording at startup.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_url_16.png">&nbsp;<b>Servlets</b>
+<br>
+<br>
+          
+<p>
+            There are no control objects for this view, so the probe does not have time line and control objects views.
+          </p>
+          
+<p>
+            The probe <b>splits the call the for each detected request URL</b> so you can analyze request separately in the
+            <a href="../../../doc/views/cpu/invocation.html">call tree view</a>. The URLs are also shown in the probe hot spots view.
+            The way how distinct request URLs are determined <a href="../../../doc/sessions/probes/builtin.html">can be customized</a>.
+          </p>
+          
+<p>
+            By default, the probe does not record single events and starts recording at startup.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_file_16.png">&nbsp;<b>Files</b>
+<br>
+<br>
+          The control objects are files of the following types:
+          <ul>
+<li>
+<span class="sectiontitle">RandomAccessFile</span>
+<br>
+              A random access file which can be both read from and written to.
+            </li>
+<li>
+<span class="sectiontitle">FileInputStream</span>
+<br>
+              A file input stream which can only be read from.
+            </li>
+<li>
+<span class="sectiontitle">FileOutputStream</span>
+<br>
+              A file output stream which can only be written to.
+            </li>
+</ul>
+          
+<p>
+            They can be in the following active states:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Read</span>
+<br>
+              Data is being read from the file via the <code>java.io</code> package.
+            </li>
+<li>
+<span class="sectiontitle">Write</span>
+<br>
+              Data is being written to the file via the <code>java.io</code> package.
+            </li>
+<li>
+<span class="sectiontitle">Channel read</span>
+<br>
+              Data is being read from the file via the <code>java.nio</code> package (<code>java.nio.channels.FileChannel</code>).
+            </li>
+<li>
+<span class="sectiontitle">Channel write</span>
+<br>
+              Data is being written to the file via the <code>java.nio</code> package (<code>java.nio.channels.FileChannel</code>).
+            </li>
+</ul>
+          
+<p>
+            If configured, the probe annotates the file names into the call tree and shows
+            them in the hot spots view. The parent path of a file can be inspected in the nested property table in the control objects view.
+          </p>
+          
+<p>
+            The following telemetries are provided:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Invocation count</span>
+<br>
+              How many read and write operations were performed per second.
+            </li>
+<li>
+<span class="sectiontitle">Throughput</span>
+<br>
+              How many bytes were read and written per second.
+            </li>
+<li>
+<span class="sectiontitle">Open files</span>
+<br>
+              The number of open files at any time.
+            </li>
+</ul>
+          
+<p>
+            By default, the probe does not record single events and does not start recording at startup.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_socket_16.png">&nbsp;<b>Sockets</b>
+<br>
+<br>
+          The control objects are sockets of the following types:
+          <ul>
+<li>
+<span class="sectiontitle">Socket</span>
+<br>
+              A socket from the <code>java.io</code> package.
+            </li>
+<li>
+<span class="sectiontitle">SocketChannel</span>
+<br>
+              A socket channel from the <code>java.nio</code> package.
+            </li>
+</ul>
+          
+<p>
+            They can be in the following active states:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Read</span>
+<br>
+              Data is being read from the socket.
+            </li>
+<li>
+<span class="sectiontitle">Write</span>
+<br>
+              Data is being written to the socket.
+            </li>
+</ul>
+          
+<p>
+            If configured, the probe annotates the <code>toString()</code> values of the associated
+            <code>java.net.SocketAddress</code> objects into the call tree and shows
+            them in the hot spots view.
+          </p>
+          
+<p>
+            The following telemetries are provided:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Invocation count</span>
+<br>
+              How many read and write operations were performed per second.
+            </li>
+<li>
+<span class="sectiontitle">Throughput</span>
+<br>
+              How many bytes were read and written per second.
+            </li>
+<li>
+<span class="sectiontitle">Open sockets</span>
+<br>
+              The number of open sockets at any time.
+            </li>
+</ul>
+          
+<p>
+            By default, the probe does not record single events and does not start recording at startup.
+          </p>
+        
+</li>
+<li>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/probe_process_16.png">&nbsp;<b>Processes</b>
+<br>
+<br>
+          The control objects are processes which can be in the following active states:
+          <ul>
+<li>
+<span class="sectiontitle">Read</span>
+<br>
+              Data is being read from the input stream provided by the <code>java.lang.Process</code> object.
+            </li>
+<li>
+<span class="sectiontitle">Write</span>
+<br>
+              Data is being written to the output stream provided by the <code>java.lang.Process</code> object.
+            </li>
+</ul>
+          
+<p>
+            If configured, the probe annotates the full paths to the executables into the call tree and shows
+            them in the hot spots view. Command line arguments, working directory, special environment variables
+            and the exit code can be inspected in the nested property table in the control objects view.
+          </p>
+          
+<p>
+            The following telemetries are provided:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Live Processes</span>
+<br>
+              The number of live processes at any time.
+            </li>
+<li>
+<span class="sectiontitle">Process stream operations</span>
+<br>
+              How many read and write operations were made to the process streams per second.
+            </li>
+<li>
+<span class="sectiontitle">Process stream throughput</span>
+<br>
+              How many bytes were read from and written to the process streams per second.
+            </li>
+</ul>
+          
+<p>
+            By default, the probe does not record single events and does not start recording at startup.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/timeLine.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

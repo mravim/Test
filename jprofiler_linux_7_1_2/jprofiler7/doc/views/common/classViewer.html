@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Integrated Source Code and Bytecode Viewer</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Integrated Source Code and Bytecode Viewer</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/editBookmarks.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/dynamicFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Wherever applicable, JProfiler provides access to the source code
+      as well as the bytecode of profiled classes and displays them in a 
+      source and bytecode viewer frame. The source and bytecode viewer has
+      two tabs, one for source code and the other for bytecode. Both tabs
+      display the same class. Invoking the source and bytecode viewer through
+      the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/source_16.png">&nbsp;<b>Show
+      source</b> action in the <i>View</i> menu or context menu
+      displays the frame with the source tab activated, the 
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/bytecode_16.png">&nbsp;<b>Show
+      bytecode</b> action activates the bytecode tab first.
+
+      <p>To be able to show the source code of a class, the source must be
+      available from the
+      <a href="../../../doc/sessions/application/applicationSettings.html">source path</a>
+      of the session. To be able to jump directly to the chosen method in the source code
+      viewer and to display the bytecode of a class, the class file
+      must be available from the
+      <a href="../../../doc/sessions/application/applicationSettings.html">class path</a>
+      of the session. Changes in class path and source path for an
+      active session are recognized immediately by the source and bytecode viewer.</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The source code tab has a method selector combo box displaying the file
+      structure of the source file, including inner classes and other top level classes.
+      When selecting a method, the bytecode viewer opens the class file tree
+      at the corresponding position. The tool bar actions allow you to copy text to the clipboard
+      and search for text in the source file.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The bytecode of a class is displayed in a tree showing
+      <ul>
+<li>General information</li>
+<li>Constant pool</li>
+<li>Interfaces</li>
+<li>Fields</li>
+<li>Methods</li>
+<li>Class file attributes</li>
+</ul>
+      
+<p>
+        If you look for the bytecode, select the "Code" child of the desired
+        method. The bytecode viewer is extensively hyperlinked, allowing you to
+        navigate easily to constant pool entries or branch targets and go back
+        and forth in your navigation history with the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/browser_backward_16.png">
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/browser_forward_16.png">&nbsp;
+        navigation controls at the top of the tab.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      <b>Note:</b> When JProfiler is started through an <a href="../../../doc/ide/overview.html">IDE integration</a>,
+      the integrated source code viewer is not used and the source element is displayed in the
+      IDE.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/editBookmarks.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/dynamicFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Configuring Miscellaneous Options in General Settings</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Configuring Miscellaneous Options in General Settings</h2>
+</td><td valign="top" align="right"><a href="../../doc/generalSettings/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The following miscellaneous options are configurable:
+    <ul>
+<li>
+<span class="sectiontitle">Look and feel</span>
+<br>
+        The look and feel of JProfiler can be chosen as one of
+        <ul>
+<li>
+<span class="sectiontitle">Alloy look and feel</span>
+<br>
+            Alloy look and feel is a cross-platform look and feel which is
+            developed by <a target="_blank" href="http://www.incors.com">Incors GmbH</a>.
+            This is the default setting on Linux/Unix.
+          </li>
+<li>
+<span class="sectiontitle">Java look and feel</span>
+<br>
+            Standard cross platform look and feel. Use this look and feel if you use JProfiler through a VNC
+            client or similar and want to reduce the transmitted data.
+          </li>
+<li>
+<span class="sectiontitle">Native look and feel</span>
+<br>
+            Native look and feel on your platform. This is the default setting on Windows and Mac OS X.
+          </li>
+</ul>
+        
+<p>
+          When you switch to a different look and feel, you have to restart JProfiler for the
+          new setting to take effect.
+        </p>
+        
+<p>
+          
+<b>Note:</b> This setting is not available on Mac OS X.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Tool bar icons</span>
+<br>
+        Tool bar icons in the main window and the script editor can be large with text, large without text or small.
+        This setting can also be changed by right-clicking the tool bar in a location without buttons.
+      </li>
+<li>
+<span class="sectiontitle">Hidden messages</span>
+<br>
+        Warning messages can be disabled by clicking the
+        <b>Don't show this dialog again</b> checkbox in the warning
+        dialog. To <b>enable selected warning messages again</b>, click the
+        "Configure Hidden Messages" button.
+      </li>
+<li>
+<span class="sectiontitle">Window sizes</span>
+<br>
+        By default, JProfiler remembers the sizes of important windows. You can disable this
+        feature or clear the cache of stored window sizes.
+      </li>
+<li>
+<span class="sectiontitle">External source viewer</span>
+<br>
+        
+<p>
+          The external source viewer command allows you to redirect
+          all view source requests from the JProfiler GUI to an external application.
+          You can use the variables $FILE and $LINE to reference the file and line number to
+          be shown.
+        </p>
+        
+<p>
+          If you leave the text box empty, JProfiler will use its internal source viewer to
+          show Java source code. When JProfiler is started from an IDE integration, the source code
+          is always shown in the IDE itself.
+        </p>
+      
+</li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/generalSettings/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler as an Eclipse 3.x Plugin</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler as an Eclipse 3.x Plugin</h2>
+</td><td valign="top" align="right"><a href="../../doc/ide/idea.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/jdeveloper.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        When JProfiler is integrated into the
+        <a target="_blank" href="http://www.eclipse.org">eclipse 3.x IDE</a>,
+        JProfiler can be invoked from within the IDE without any further need for
+        session configuration. Profiling <b>WTP run configurations</b> is supported by the JProfiler plugin.
+      
+      <p>
+        
+<b>Requirements: </b>. eclipse 3.3, 3.4, 3.5, 3.6, or 3.7.
+        The eclipse 3.x plugins work with <b>the full SDKs for</b>
+        eclipse 3.x. The JProfiler integration does not work with partial installations of the
+        eclipse framework.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+    
+      The installation of the eclipse plugin is started by selecting
+     "eclipse [your version]; on the
+      <ul>
+<li>
+          IDE integration tab of JProfiler's setup wizard
+        </li>
+<li>
+          
+<a href="../../doc/generalSettings/misc.html">miscellaneous options tab</a>
+          of JProfiler's <a href="../../doc/generalSettings/generalSettings.html">general settings</a>
+          (use <i>Session-&gt;IDE integrations</i> in JProfiler's main menu as a
+          shortcut).
+        </li>
+</ul>
+      and clicking on <b>[Integrate]</b>
+    
+<br>
+    
+<p>
+      
+<b>Reminder:</b> Please close eclipse while performing the plugin
+      installation. If you are performing the installation from JProfiler's
+      setup wizard, please complete the entire setup first before starting eclipse.
+    </p>
+  
+      
+        A file selector will then prompt you to locate the <b>installation directory</b> of eclipse.
+      
+      <p>
+        After acknowledging the completion message, you can start eclipse and check
+        whether the installation was successful. 
+        If the menu item <i>Run-&gt;Profile ...</i> does not exist
+        in the <b>Java perspective</b>, please enable the "Profile" actions for this
+        perspective under <i>Window-&gt;Customize perspective</i> by
+        bringing the <b>Command</b> tab to front and selecting the "Profile" checkbox.
+      </p>
+      
+<p>
+        eclipse provides shared infrastructure for profiling plugins that allows only one active
+        profiler at a time. If another profiler has registered itself in eclipse, JProfiler will
+        show a collision message dialog at startup. Please go to the  <i><tt>plugin</tt></i> directory
+        in your eclipse installation and delete the plugins that are specified in the warning message
+        in order to guarantee that JProfiler will be used when you click on one of the profiling
+        actions.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To profile your application from eclipse, choose one of the profiling commands in the
+        <i>Run</i> menu or click on the corresponding toolbar button. The profile
+        commands are equivalent to the debug and run commands in eclipse and are part of eclipse's
+        infrastructure.
+      
+      <p>
+<center>
+<img src="../../doc/images/ide_eclipse3_toolbar.png" border="0"><br>
+<small>Main eclipse toolbar with "Profile" button</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_eclipse3_menu.png" border="0"><br>
+<small>eclipse "Run" menu with "Profile" actions</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+        The profiled application is then started just as with the usual "Run" commands.
+        If no instance of JProfiler is currently running, JProfiler is also started, otherwise
+        the running instance of JProfiler will be used for presenting profiling data.
+      </p>
+      
+<p>
+        Every time a run configuration is profiled, a dialog box is brought up that asks you
+        whether a new window should be opened in JProfiler. To get rid of this dialog, you
+        can select the "Don't ask me again" checkbox. The window policy can subsequently be
+        configured in the JProfiler settings in eclipse (see below).
+      </p>
+      
+<p>
+        All profiling settings and view settings changes are persistent across session restarts.
+      </p>
+      
+<p>
+        When JProfiler is used with the eclipse integration, the "Show source" action for a class or a method
+        in one of JProfiler's view will show the source element in eclipse and not in JProfiler's integrated
+        source code viewer.
+      </p>
+      
+<p>
+        You can also open JProfiler snapshots from eclipse, either from the project window or the open file dialog
+        in order to get source code navigation into eclipse.
+      </p>
+      
+<p>
+        With the <i>Run-&gt;Attach JProfiler to JVM</i> menu item, you can
+        <b>attach JProfiler to any locally started JVM</b> and get source code navigation in the IDE. Please
+        see the help on <a href="../../doc/sessions/attach.html">attaching to JVMs</a> for more information on attach mode.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Several JProfiler-related settings can be adjusted in eclipse under
+        <i>Window-&gt;Preferences-&gt;JProfiler</i>:
+      
+      <ul>
+<li>
+          The used <b>JProfiler installation</b> can be changed by repeating the integration from JProfiler or
+          by adjusting the JProfiler executable in the corresponding text field.
+          When you upgrade to a newer version of JProfiler, make sure to repeat the integration, since the
+          plugin has to be updated, too.
+        </li>
+<li>
+          The <b>window policy</b> can be configured as
+          <ul>
+<li>
+<span class="sectiontitle">Ask each time</span>
+<br>
+              Every time you profile a run configuration, a dialog box will ask you whether a new window
+              should be opened in JProfiler. This is the default setting.
+            </li>
+<li>
+<span class="sectiontitle">Always new window</span>
+<br>
+              Every time you profile a run configuration, a new window will be opened in JProfiler.
+            </li>
+<li>
+<span class="sectiontitle">Reuse last window</span>
+<br>
+              Every time you profile a run configuration, the last window will be reused in JProfiler.
+            </li>
+</ul>
+        
+</li>
+<li>
+          You can manually repeat the <b>collision detection</b> that is
+          performed at startup. With the corresponding checkbox, you can also switch off collision
+          detection at startup.
+        </li>
+<li>
+          You can ask JProfiler to always use <b>interpreted mode</b> for profiling.
+          A separate checkbox tells JProfiler to use the <b>deprecated JVMPI interface</b> when
+          profiling with a 1.5 JRE. Both these settings are trouble-shooting options and should normally
+          not be selected.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/ide/idea.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/jdeveloper.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

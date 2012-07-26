@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Views Overview</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Views Overview</h2>
+</td><td valign="top" align="right"><a href="../../doc/views/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/views/actions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler organizes profiling data into <b>view sections</b> which
+      collect similar or connected views. The view section chooser is located on the
+      left side of JProfiler's main window, while the single views of a view section 
+      can be selected by choosing the tabs on the bottom of the window. View sections can
+      also be switched via JProfiler's <i>Views</i> menu or the 
+      keyboard shortcuts which are indicated below.
+
+      <ul>
+<li>
+<a href="../../doc/views/memory/memory.html">Memory views</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/memory_16.png">
+          (<code>CTRL-1</code>) The memory view section contains views which are concerned
+          with the details of object allocations.
+        </li>
+<li>
+<a href="../../doc/views/heapwalker/heapwalker.html">Heap walker</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/heapwalker_16.png">
+          (<code>CTRL-2</code>) The heap walker view section allows you to take a snapshot
+          of the heap and analyze it in detail.
+        </li>
+<li>
+<a href="../../doc/views/cpu/cpu.html">CPU views</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/cpu_16.png">
+          (<code>CTRL-3</code>) The CPU view section contains views which are concerned
+          with method calls and time measurements.
+        </li>
+<li>
+<a href="../../doc/views/threads/threads.html">Thread views</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/threads_16.png">
+          (<code>CTRL-4</code>) The thread view section contains views which are concerned
+          with the details of thread statuses and the life cycle of threads.
+        </li>
+<li>
+<a href="../../doc/views/monitors/monitors.html">Monitor views</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/monitors_16.png">
+          (<code>CTRL-5</code>) The monitor view section contains views which are concerned
+          with the details of monitor contentions and wait states.
+        </li>
+<li>
+<a href="../../doc/views/telemetry/telemetry.html">Telemetry views</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/telemetry_16.png">
+          (<code>CTRL-6</code>) The telemetry view section contains views which are concerned
+          with historical characteristics of cumulated virtual machine variables.
+        </li>
+<li>
+<a href="../../doc/views/probes/probes.html">JEE &amp; Probes</a>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/probes_16.png">
+          (<code>CTRL-7</code>) The probes section contains views which record data from
+          higher-level subsystems of the JRE.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      <b>Note:</b> It is possible to create and export views from a
+      <a href="../../doc/sessions/saving.html">saved snapshot</a> from the
+      <a href="../../doc/export/cmdlineExport.html">command line</a> or an
+      <a href="../../doc/export/antExport.html">ant build file</a>.
+      This is especially useful for an automated quality assurance process.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The functionality of the various views is strongly dependent on the
+      <b>state of the current session</b> which is displayed on the right end of the status bar.
+      <ul>
+<li>
+          If the session is 
+          <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/attached_16.png">&nbsp;<b>attached</b>,
+          the complete functionality of all views is available.
+        </li>
+<li>
+          If the session is 
+          <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/detached_16.png">&nbsp;<b>detached</b>,
+          the functionality of most views is incomplete. Any information which is not 
+          already stored in JProfiler's GUI front end and would have to be queried from the
+          profiled application is unavailable.
+        </li>
+<li>
+          If a <a href="../../doc/sessions/saving.html">profiling snapshot</a> is opened,
+          the status bar displays
+          <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/save_16.png">&nbsp;<b>Snapshot</b>.
+          The functionality of all views is identical to the <b>working state</b>
+          with the exception of the
+          <a href="../../doc/views/heapwalker/heapwalker.html">heap walker view</a>:
+          The heap walker overview will be shown if a heap snapshot was taken at the
+          time of saving, otherwise the heap walker will be unavailable.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Most views have specific <b>view settings</b> that can be edited by choosing
+        <i>View-&gt;View settings</i> from the main menu or the corresponding
+        <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/view_settings_16.png"> toolbar button
+        when the view is active.
+      
+      <p>
+      Common properties of profiling views include
+      </p>
+      
+<ul>
+<li>
+<a href="../../doc/views/common/export.html">Exporting views to HTML, CSV and XML</a>
+</li>
+<li>
+<a href="../../doc/views/common/windows.html">Undocking views from the main window</a>
+</li>
+<li>
+<a href="../../doc/views/common/sorting.html">Sorting tables</a>
+</li>
+<li>
+<a href="../../doc/views/common/classViewer.html">Source and bytecode viewer</a>
+</li>
+<li>
+<a href="../../doc/views/common/dynamicFilters.html">Dynamic view filters</a>
+</li>
+<li>
+<a href="../../doc/views/common/find.html">Quick search capability</a>
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/views/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/views/actions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

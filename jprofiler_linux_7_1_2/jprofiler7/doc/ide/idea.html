@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler as an IntelliJ IDEA Plugin</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler as an IntelliJ IDEA Plugin</h2>
+</td><td valign="top" align="right"><a href="../../doc/ide/overview.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/eclipse.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        With JProfiler integrated into 
+        <a target="_blank" href="http://www.intellij.com">JetBrain's IntelliJ IDEA</a>, 
+        JProfiler can be invoked from within the IDE without any further need for
+        session configuration.
+      
+      <p>
+        
+<b>Requirements: </b>IDEA 6.x, 7.x., 8.x, 9.x or 10.x
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+    
+      The installation of the IntelliJ IDEA plugin is started by selecting
+     "IntelliJ IDEA [your version]" on the
+      <ul>
+<li>
+          IDE integration tab of JProfiler's setup wizard
+        </li>
+<li>
+          
+<a href="../../doc/generalSettings/misc.html">miscellaneous options tab</a>
+          of JProfiler's <a href="../../doc/generalSettings/generalSettings.html">general settings</a>
+          (use <i>Session-&gt;IDE integrations</i> in JProfiler's main menu as a
+          shortcut).
+        </li>
+</ul>
+      and clicking on <b>[Integrate]</b>
+    
+<br>
+    
+<p>
+      
+<b>Reminder:</b> Please close IntelliJ IDEA while performing the plugin
+      installation. If you are performing the installation from JProfiler's
+      setup wizard, please complete the entire setup first before starting IntelliJ IDEA.
+    </p>
+  
+      
+        A file selector will then prompt you to locate the installation directory
+        of IntelliJ IDEA.
+      
+      <p>
+        After acknowledging the completion message, you can start IntelliJ IDEA and check
+        whether the installation was successful. You should now see a menu entry 
+        <i>Run-&gt;Profile</i> in IDEA's main menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To profile your application from IntelliJ IDEA, choose one of the profiling commands in the
+        <i>Run</i> menu, the context menu in the editor, or click on the corresponding
+        toolbar button.
+      
+      <p>
+<center>
+<img src="../../doc/images/ide_idea4_toolbar.png" border="0"><br>
+<small>Main toolbar with "Profile" button</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_idea4_menu.png" border="0"><br>
+<small>"Run" menu with "Profile" action</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_idea4_context.png" border="0"><br>
+<small>Editor context menu with "Profile" action</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+        JProfiler can profile all run configuration types from IDEA, also applications servers. To
+        configure further settings, please edit the run configuration, choose the "Startup/Connection" tab,
+        and select the "Profile" entry. The screen shot below shows the startup settings for a
+        local server configuration. Depending on the run configuration type, you can adjust JVM options
+        or retrieve profiling parameters for remote profiling.
+      </p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_idea4_server.png" border="0"><br>
+<small>Startup settings for profiling of a local server configuration</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+        For all run configuration types you can
+        decide whether you want to open a new window in JProfiler for the profiling session
+        or if you wish to reuse the last window to accommodate the profiling session.
+      </p>
+      
+<p>
+        The profiled application is then started just as with the usual "Run" commands.
+        If no instance of JProfiler is currently running, JProfiler is also started, otherwise
+        the running instance of JProfiler will be used for presenting profiling data.
+      </p>
+      
+<p>
+        When JProfiler is started from IntelliJ IDEA, the "Show source" action for a class or a method
+        in one of JProfiler's view will show the source element in IDEA and not in JProfiler's integrated
+        source code viewer.
+      </p>
+      
+<p>
+        You can also open JProfiler snapshots from IDEA, either from the project window or the open file dialog
+        in order to get source code navigation into IDEA.
+      </p>
+      
+<p>
+        With the <i>Run-&gt;Attach JProfiler to JVM</i> menu item, you can
+        <b>attach JProfiler to any locally started JVM</b> and get source code navigation in the IDE. Please
+        see the help on <a href="../../doc/sessions/attach.html">attaching to JVMs</a> for more information on attach mode.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In order to change the used JProfiler installation from IntelliJ IDEA, please do the following:
+      <ol style="list-style-image: none">
+<li>Select "Edit Configurations" from the "Run" drop down menu</li>
+<li>Select "Application" under "Defaults" in the dialog box (or any existing run configuration)</li>
+<li>Select the "Startup/Connection" tab</li>
+<li>Select "JProfiler" in the list</li>
+<li>Click on the "Select JProfiler Executable" button</li>
+<li>Choose the JProfiler executable, which is
+          <ul>
+<li>[JProfiler installation directory]\bin\jprofiler.exe on Windows</li>
+<li>[JProfiler installation directory]/bin/jprofiler on Linux/Unix</li>
+<li>[JProfiler installation directory]/bin/macos/jprofiler.sh on Mac OS X</li>
+</ul>
+        
+</li>
+</ol>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/ide/overview.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/ide/eclipse.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

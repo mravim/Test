@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker View Settings Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker View Settings Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/viewChangeDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/restrictedHprof.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker view settings dialog is accessed by bringing
+      
+      the
+      <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>General</b> tab of the view settings dialog controls aspects which
+      apply to all heap walker views.
+      <ul>
+<li>
+<span class="sectiontitle">Show selection steps</span>
+<br>
+          If checked, the selection history window at the bottom of the heap walker is
+          shown.
+        </li>
+<li>
+<span class="sectiontitle">Show view helper dialog for new object sets</span>
+<br>
+          If checked,
+          the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a>
+          will be displayed when a new object set is created.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>Classes</b> tab applies to the
+        <a href="../../../doc/views/heapwalker/classes.html">classes view</a> only.
+        It is analogous to the
+        <a href="../../../doc/views/memory/recordedObjectsSettings.html">recorded objects view settings</a>.
+      
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>Allocations</b> tab applies to the
+        <a href="../../../doc/views/heapwalker/allocations.html">allocation view</a> only.
+        It is analogous to the
+        <a href="../../../doc/views/memory/allocationsMonitorSettings.html">allocation call tree settings</a>.
+      
+      <p>
+        
+<b>Note:</b> Unlike for the allocation call tree, there is no "cumulate allocations"
+        option since the view mode combo box in the allocations view of the heap walker offers both an
+        "allocation tree" and a "cumulated allocation tree".
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>Biggest objects</b> tab applies to the
+      <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects view</a> only.
+      <ul>
+<li>
+<span class="sectiontitle">Size scale</span>
+<br>
+          You can select a size scale, just like in the
+          <a href="../../../doc/views/memory/recordedObjectsSettings.html">recorded object view settings</a>.
+        </li>
+<li>
+<span class="sectiontitle">Show object IDs</span>
+<br>
+          If checked, all objects are annotated with object IDs. This can help you to check if an object is
+          the same as one displayed in another view.
+        </li>
+<li>
+<span class="sectiontitle">Show retained size bar for dominator tree</span>
+<br>
+          If checked, a percentage bar will be shown in from of each outgoing reference node. The percentage
+          base can be configured as
+          <ul>
+<li>
+<span class="sectiontitle">Top level object</span>
+<br>
+              The percentages refer to the retained size of the top level object.  This is
+              the default setting.
+            </li>
+<li>
+<span class="sectiontitle">Total heap</span>
+<br>
+              The percentages show how much of the total heap is retained by this reference.
+              The lengths of all percentage bars are always comparable with this option.
+            </li>
+</ul>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>References</b> tab applies to the
+      <a href="../../../doc/views/heapwalker/references.html">references view</a> only.
+      <ul>
+<li>
+<span class="sectiontitle">Size scale</span>
+<br>
+          You can select a size scale, just like in the
+          <a href="../../../doc/views/memory/recordedObjectsSettings.html">recorded object view settings</a>.
+        </li>
+<li>
+<span class="sectiontitle">Show object IDs</span>
+<br>
+          If checked, all objects are annotated with object IDs. This can help you in checking if two objects
+          in two different reference graphs are the same or not.
+        </li>
+<li>
+<span class="sectiontitle">Show declaring class if different from actual class</span>
+<br>
+          In the incoming and outgoing reference tree views, the declaring class of a field will be displayed
+          as well if it is different from the actual class or the object (i.e. the field has been declared in a super-class).
+          Since this can add a lot of potentially distracting information to the reference trees, you can switch it
+          off with this setting. In the reference graph, the declaring class is always displayed in the tool tip on the
+          reference arrows.
+        </li>
+<li>
+<span class="sectiontitle">Instance block size</span>
+<br>
+          The reference view only show a capped number of instances. This cap which is configurable here,
+          has a default value of 100. Note that you can easily add more objects with the hyperlinks at the bottom of the
+          reference tables.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>Time</b> tab applies to the
+        <a href="../../../doc/views/heapwalker/chrono.html">time view</a> only.
+        It is analogous to the
+        <a href="../../../doc/views/telemetry/settings.html">VM telemetry view settings dialog</a>.
+      
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>Graph</b> tab applies to the
+        <a href="../../../doc/views/heapwalker/graph.html">graph</a> only.
+      
+      <ul>
+<li>
+<span class="sectiontitle">Show object IDs</span>
+<br>
+          If checked, all objects are annotated with object IDs. This can help you in checking if two objects
+          in two different reference graphs are the same or not.
+        </li>
+<li>
+<span class="sectiontitle">Warning threshold for opening references</span>
+<br>
+          If an object has a lot of incoming or outgoing references, the graph can be visually overwhelmed with new objects.
+          That's why JProfiler asks you if you really want to open a large number of references.
+          The default threshold which is configurable here is set to 100.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/viewChangeDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/restrictedHprof.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Adjusting CPU Profiling Options</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Adjusting CPU Profiling Options</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/probes.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>,
+      you can adjust all options related to CPU profiling. These settings influence the detail level of
+      CPU profiling data and the profiling overhead. They only apply to the views in the 
+      <a href="../../../doc/views/cpu/cpu.html">CPU view section</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The following options are available:
+      <ul>
+<li>
+<span class="sectiontitle">Auto-tuning settings</span>
+<br>
+          Here, you can disable <a href="../../../doc/sessions/filters/ignored.html">auto-tuning</a>.
+          Furthermore you can configure the criteria for determining an overhead hot spot. A method
+          is considered an overhead hot spot if both of the following conditions are met:
+          <ul>
+<li>
+              the total time of all its invocations exceeds a threshold in per mille of the entire total time
+              in the thread
+            </li>
+<li>
+              its average time is lower than an absolute threshold in microseconds
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Time settings</span>
+<br>
+          Select whether you want times shown in the <a href="../../../doc/views/cpu/cpu.html">CPU view section</a> to be
+          measured in
+          <ul>
+<li>
+<span class="sectiontitle">elapsed time</span>
+<br>
+              With elapsed time selected, the clock time difference between
+              method entry and method exit will be shown. Note that if the
+              <a href="../../../doc/views/cpu/cpu.html">thread state selector</a> is set to
+              its standard setting (Runnable). Waiting, blocking and Net IO thread states
+              are not included in the displayed times.
+            </li>
+<li>
+<span class="sectiontitle">estimated CPU time</span>
+<br>
+              With estimated CPU time selected, the CPU time used between
+              method entry and method exit will be shown. On Windows and Mac OS the
+              system supplies CPU times with a 10&nbsp;ms resolution which are used to
+              calculate the estimated CPU times. On Linux and Solaris the VM does
+              not supply a CPU time and the estimated CPU times are roughly estimated
+              by looking at the number of runnable threads.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Settings for exceptional method run recording</span>
+<br>
+          
+<a href="../../../doc/sessions/filters/exceptional.html">Exceptional method run recording</a> has the
+          following configurable parameters:
+          <ul>
+<li>
+<span class="sectiontitle">Maximum number of separately recorded method runs</span>
+<br>
+              The maximum number of the slowest invocations that are shown separately
+              in the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>.
+              Increasing this value can increase memory overhead and visual clutter in the call tree.
+            </li>
+<li>
+<span class="sectiontitle">Time type for determining exceptional method runs</span>
+<br>
+              The time measurement that is used for finding the slowest method invocations.
+              Note that this setting is not linked to the thread state selector in the
+              <a href="../../../doc/views/cpu/cpu.html">CPU views</a>.
+            </li>
+</ul>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/probes.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

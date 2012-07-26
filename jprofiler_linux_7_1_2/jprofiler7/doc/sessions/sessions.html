@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Sessions Overview</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Sessions Overview</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The information required to start a profiling run is called a <b>session</b>.
+      Sessions are saved in the file <i><tt>{User home directory}/.jprofiler7/config.xml</tt></i>
+      and can be easily migrated to a different computer by importing this file in the
+      setup wizard. When upgrading JProfiler, your settings of older installations are imported automatically.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Sessions are created
+      <ul>
+<li>
+          on the "New Session" tab of JProfiler's
+          <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+<li>
+          by selecting <i>Session-&gt;New session</i> from
+          JProfiler's main menu.
+        </li>
+<li>
+          automatically by JProfiler's
+          <a href="../../doc/quickstart/appservers.html">application server integration wizard</a>.
+        </li>
+<li>
+          by <a href="../../doc/quickstart/appservers.html">importing them</a>.
+          from an external config file.
+        </li>
+<li>
+          closing a session that was created by invoking <a href="../../doc/sessions/attach.html">quick attach</a>
+          with <i>Session-&gt;Quick attach</i>. In that case, you will be asked whether to save a new session
+          or not.
+        </li>
+</ul>
+      Sessions are edited, deleted and opened
+      <ul>
+<li>
+          in JProfiler's <a href="../../doc/quickstart/startcenter.html">start center</a>.
+        </li>
+<li>
+          through the <a href="../../doc/sessions/open.html">open session dialog</a>
+          which is accessible from JProfiler's main menu via 
+          <i>Session-&gt;Open session</i>.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The session settings dialog can be invoked from
+        <ul>
+<li>
+            the <a href="../../doc/sessions/open.html">open session dialog</a> or the
+            <a href="../../doc/quickstart/startcenter.html">start center</a>.
+          </li>
+<li>
+            the <a href="../../doc/sessions/startupDialog.html">the session startup dialog</a>
+            that is displayed just before a session is started.
+          </li>
+<li>
+            JProfiler's main menu and the toolbar.
+            The <img style="vertical-align: middle" align="middle" border="0" src="../../doc/images/settings_16.png">&nbsp;toolbar button and the
+            menu item <i>Session-&gt;Session settings</i> open the session settings
+            dialog.
+          </li>
+</ul>
+      
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The session settings dialog is divided into 5 sections:
+      <ul>
+<li>
+<span class="sectiontitle">Application settings</span>
+<br>
+          The <a href="../../doc/sessions/application/applicationSettings.html">application settings section</a>
+          collects all information that is required to start your application with profiling enabled or to
+          connect to a running JVM.
+          If you use an <a href="../../doc/ide/overview.html">IDE integration</a>, this information
+          will be provided by the IDE.
+          <p>
+            This section also includes the <a href="../../doc/sessions/application/codeEditor.html">code editor &amp; compilation settings</a> which
+            are important for <a href="../../doc/scripts/scripts.html">code completion</a> and compilation of scripts.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Filter settings</span>
+<br>
+          In the <a href="../../doc/sessions/filters/filterSettings.html">filter settings section</a>, you
+          define which classes should be considered when recording call-stack information.
+          Defining appropriate filters will help you to reduce data overload and minimizing CPU profiling
+          overhead. By default, JProfiler adds an exclusion list
+        </li>
+<li>
+<span class="sectiontitle">Profiling settings</span>
+<br>
+          In the <a href="../../doc/sessions/profiling/profilingSettings.html">profiling settings section</a> you
+          can configure the way your application is profiled and change the focus of a profiling run toward
+          performance or accuracy, CPU or memory profiling.
+        </li>
+<li>
+<span class="sectiontitle">Trigger settings</span>
+<br>
+          In the <a href="../../doc/sessions/filters/filterSettings.html">trigger settings section</a> you can optionally
+          define a list of triggers. With triggers, you can tell the profiling agent to execute specific actions
+          when certain events occur in the JVM. The actions are also executed during
+          <a href="../../doc/offline/offline.html">offline profiling</a>.
+        </li>
+<li>
+<span class="sectiontitle">JEE &amp; probes</span>
+<br>
+          In the <a href="../../doc/sessions/probes/probeSettings.html">JEE &amp; probes section</a> you can configure
+          built-in probes and optionally define a list of custom probes. Probes capture higher-level information
+          on specific subsystems such as JDBC, file I/O or launcher processes.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      <a name="change"></a>
+      
+        If you change filter, profiling or trigger settings for an active session, the new settings
+        <b>can be applied immediately if you profile a 1.6+ JRE</b>.
+        Apart from telemetry data, all recorded data including the heap dump in the heap walker will be
+        discarded in that case. When profiling settings are updated, a
+        <a href="../../doc/views/common/bookmarks.html">bookmark</a> will be added to views with a time-line, such
+        as the telemetry views. The application of the new profiling settings may take some time,
+        especially if filter settings are changed and the method call recording type is set to
+        dynamic instrumentation. In this case, changes in the instrumentation requires that
+        classes have to be retransformed to reflect the new filter settings.
+      
+      <p>
+        If you profile a <b>pre-1.6 JRE</b>, you have to restart the session.
+      </p>
+      
+<p>
+        
+<b>View settings</b> on the other hand, are always adjustable during a running session and are saved
+        separately for each session.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/application/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Application Server Integration</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Application Server Integration</h2>
+</td><td valign="top" align="right"><a href="../../doc/quickstart/startcenter.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler's application server integration wizard makes profiling
+      application servers especially easy. It can be invoked in one of
+      two ways:
+      <ul>
+<li>from the <a href="../../doc/quickstart/startcenter.html">start center</a>
+          on the "new session" tab.
+        </li>
+<li>by selecting <i>Session-&gt;New server integration</i>
+          from JProfiler's main menu.
+        </li>
+</ul>
+
+      
+<p>
+        During the first step of the wizard
+        you are asked to specify the product which is to be integrated. The second step
+        asks you whether the profiled application or application server is running on the local
+        computer or on a remote machine. In the third step you choose the desired startup mode
+        which is one of "Wait for connection", "Startup immediately" and "Offline profiling".
+        The "Wait for connection" is recommended at first. Only choose the other modes later on once you are familiar
+        with JProfiler.
+      </p>
+      
+<p>
+      The subsequent steps depend on this choice. Please follow the instructions
+      presented by the wizard.</p>
+
+      
+<p>If you miss support for a particular
+      product, please don't hesitate to contact us through the
+      <a target="_blank" href="http://www.ej-technologies.com/redir.php?target=support">support request form</a>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If no GUI is available on the remote machine you can use the
+      <b><tt>jpintegrate</tt></b> executable in the <i><tt>bin</tt></i> directory
+      for the <b>console integration wizard</b>.
+      <p>
+        The console integration wizard will create a config file that can be
+        <a href="../../doc/sessions/importExport.html">imported</a> in a JProfiler GUI installation
+        to connect zo the profiled application server without any further configuration.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/quickstart/startcenter.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Tree Maps</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Tree Maps</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/dynamicFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/telemetries.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Tree maps are shown by the <a href="../../../doc/views/memory/allocationsMonitor.html">allocation call tree view</a>,
+        the <a href="../../../doc/views/heapwalker/allocationTreeMap.html">allocation tree map in the heap walker</a>,
+        the <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects view in the heap walker</a>
+        as well as the <a href="../../../doc/views/cpu/invocation.html">call tree view</a>
+      
+      
+<p>
+        Please see <a target="_blank" href="http://en.wikipedia.org/wiki/Tree_map">the Wikipedia page on tree maps</a>
+        for more information on tree maps in general.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Tree maps in JProfiler are <b>alternate visualizations of associated trees</b>. Each rectangle
+        in the tree map represents a particular node in the tree. The area of the rectangle is proportional to the length
+        of the percentage bar in the tree view. In contrast to the tree, the tree map gives you a
+        <b>flattened perspective of all leafs in the tree</b>. If you are mostly interested in the dominant leafs
+        of the tree, you can use the tree map in order to find them quickly without having to dig into the branches
+        of the tree. Also, the tree map gives you an overall impression of the relative importance of leaf nodes.
+      
+      <p>
+        By design, tree maps <b>only display values of leaf nodes</b>. Branch nodes are only expressed in the way the leaf nodes
+        are nested. For non-leaf nodes which have significant inherent values, JProfiler constructs synthetic child nodes.
+        In the diagram below, you can see that node A has an inherent value of 20% so that its
+        child nodes have a sum of 80%. To show the 20% inherent value of A in the tree map, a synthetic child node A' with a total value
+        of 20% is created. It is a leaf node and a sibling node of B1 and B2. A' will be shown as a colored rectangle in the
+        tree map while A is only used for determining the geometric arrangement of its child nodes B1, B2 and A'.
+      </p>
+      
+<p>
+        
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/synthetic_nodes.png">
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The actual information for tree map nodes is displayed in <b>tool tips</b> that are immediately shown when
+        you hover over the tree map. It corresponds to the information that is shown in the tree view mode.
+        If a tree map rectangle exceeds a certain size, its name is printed directly in the tree map.
+      
+      <p>
+        The tree map is shown up to a maximum nesting depth of 25 levels.
+        The depth of the particular leaf in the tree map is encoded in its color. The
+        color scale blends blue into yellow, where blue indicates a smaller and yellow a larger depth.
+        The scale is always relative to all currently displayed nodes. For example, if you zoom into a particular
+        area of the tree map, the scale will be re-adjusted so that that the depth of the parent node corresponds
+        to blue. Below the tree map, a legend presents all possible colors as well as the displayed maximum and minimum
+        depths.
+      </p>
+      
+<p>
+        Double-clicking on any colored rectangle in the tree map will zoom to the parent node unless the node is
+        already a top-level node. There are tool bar actions for for
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_in_16.png">&nbsp;zooming in and
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/zoom_out_16.png">&nbsp;zooming out, as well as as context actions for
+        showing the actual root of the associated tree.
+      </p>
+      
+<p>
+        In order to explore the hierarchical environment of a particular leaf in the tree map, there is a context
+        action "Show In Tree", that switches to the tree view mode and selects the same node there.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/dynamicFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/telemetries.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

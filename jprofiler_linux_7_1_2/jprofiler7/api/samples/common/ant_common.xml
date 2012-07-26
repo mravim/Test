@@ -1,0 +1,150 @@
+<!-- Common helper targets for all samples for starting a profiling session -->
+<project>
+
+  <property name="bin.dir" value="../../../bin"/>
+
+  <target name="prepare" depends="setLibraryPath, checkJava, copyLicenseKey"/>
+
+  <target name="checkJava">
+    <condition property="java14OrLower">
+      <or>
+        <equals arg1="${ant.java.version}" arg2="1.2"/>
+        <equals arg1="${ant.java.version}" arg2="1.3"/>
+        <equals arg1="${ant.java.version}" arg2="1.4"/>
+      </or>
+    </condition>
+    <fail if="java14OrLower">All samples require a Java 1.5 JRE or higher. Note that this is _not_ a general restriction for the JProfiler API and platform, they do work with Java 1.2 and higher.</fail>
+  </target>
+
+  <target name="setLibraryPath" depends="setPlatform, setLibraryName">
+    <property name="libraryPath" location="${bin.dir}/${platform}/${libraryName}"/>
+  </target>
+
+  <target name="setPlatform" unless="platform">
+    <condition property="platform" value="windows">
+      <os family="windows" arch="x86"/>
+    </condition>
+    <condition property="platform" value="windows-x64">
+      <os family="windows" arch="amd64"/>
+    </condition>
+
+    <condition property="platform" value="macos">
+      <os family="mac"/>
+    </condition>
+
+    <condition property="platform" value="linux-x86">
+      <os name="linux" arch="x86"/>
+    </condition>
+    <condition property="platform" value="linux-x64">
+      <os name="linux" arch="amd64"/>
+    </condition>
+    <condition property="platform" value="linux-ppc64">
+      <os name="linux" arch="ppc64"/>
+    </condition>
+    <condition property="platform" value="linux-ppc">
+      <os name="linux" arch="ppc"/>
+    </condition>
+
+    <condition property="platform" value="solaris-sparc">
+      <os name="sunos" arch="sparc"/>
+    </condition>
+    <condition property="platform" value="solaris-sparcv9">
+      <os name="sunos" arch="sparcv9"/>
+    </condition>
+    <condition property="platform" value="solaris-x86">
+      <os name="sunos" arch="x86"/>
+    </condition>
+    <condition property="platform" value="solaris-x64">
+      <os name="sunos" arch="x64"/>
+    </condition>
+
+    <condition property="platform" value="freebsd-x86">
+      <os name="freebsd" arch="x86"/>
+    </condition>
+    <condition property="platform" value="freebsd-x64">
+      <os name="freebsd" arch="x64"/>
+    </condition>
+
+    <condition property="platform" value="hpux-parisc">
+      <os name="hp-ux" arch="pa_risc2.0"/>
+    </condition>
+    <condition property="platform" value="hpux-parisc64">
+      <os name="hp-ux" arch="pa_risc2.0w"/>
+    </condition>
+    <condition property="platform" value="hpux-ia64n">
+      <os name="hp-ux" arch="ia64_32"/>
+    </condition>
+    <condition property="platform" value="hpux-ia64w">
+      <os name="hp-ux" arch="ia64"/>
+    </condition>
+
+    <condition property="platform" value="aix-ppc64">
+      <os name="aix" arch="ppc64"/>
+    </condition>
+    <condition property="platform" value="aix-ppc">
+      <os name="aix" arch="ppc"/>
+    </condition>
+
+    <fail unless="platform">Could not determine native library directory. Please pass the -Dplatform=...  property manually to this ant script.</fail>
+  </target>
+
+
+  <target name="setLibraryName">
+
+    <condition property="libraryName" value="jprofilerti.dll">
+      <os family="windows"/>
+    </condition>
+
+    <condition property="libraryName" value="libjprofilerti.jnilib">
+      <os family="mac"/>
+    </condition>
+
+    <condition property="libraryName" value="libjprofilerti.sl">
+      <or>
+        <os name="hp-ux" arch="pa_risc2.0"/>
+        <os name="hp-ux" arch="pa_risc2.0w"/>
+      </or>
+    </condition>
+
+    <condition property="libraryName" value="libjprofilerti.so">
+      <not>
+        <isset property="libraryName"/>
+      </not>
+    </condition>
+
+  </target>
+
+  <target name="copyLicenseKey">
+
+    <property name="userConfigFile" location="${user.home}/.jprofiler7/config.xml"/>
+    <property name="sampleConfigFile" location="../common/config.xml" />
+
+    <available file="${userConfigFile}" type="file" property="configFileExists"/>
+    <fail unless="configFileExists">Config file ${userConfigFile} does not exist. Please run JProfiler and enter your license key.</fail>
+
+    <available file="${sampleConfigFile}" type="file" property="sampleConfigFileExists"/>
+    <fail unless="sampleConfigFileExists">Cannot find the sample config file ${sampleConfigFile}</fail>
+
+    <loadfile property="licenseKey" srcFile="${userConfigFile}" encoding="UTF-8">
+      <filterchain>
+        <linecontains>
+          <contains value="&lt;licenseKey"/>
+        </linecontains>
+        <striplinebreaks/>
+        <tokenfilter>
+          <filetokenizer/>
+          <containsregex pattern=".*key=&quot;(.*[#|:].*)&quot;.*" replace="\1"/>
+        </tokenfilter>
+      </filterchain>
+    </loadfile>
+
+    <fail unless="licenseKey">No license key was found in the config file ${userConfigFile}. Please run JProfiler and enter your license key.</fail>
+
+    <echo>Copying license key from ${userConfigFile} to ${sampleConfigFile}</echo>
+
+    <replaceregexp file="${sampleConfigFile}" encoding="UTF-8" match="&lt;licenseKey key=&quot;.*&quot;" replace="&lt;licenseKey key=&quot;${licenseKey}&quot;" />
+
+  </target>
+
+
+</project>

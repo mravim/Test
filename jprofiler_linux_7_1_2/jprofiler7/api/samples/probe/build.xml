@@ -1,0 +1,68 @@
+<!--
+  Compile and run the sample interceptor. See src/AWTEventInterceptor.java for more information.
+
+  Note: A 1.5 JRE is required for compiling and running this sample
+  1.2-1.4 JREs can be used by replacing "-agentlib:jprofilerti=" with "-Xrunjprofiler:", porting the Java code
+  to the Java 1.4 syntax and using the retroweaved platform_java_14.jar instead of platform.jar.
+-->
+<project name="interceptor" default="run">
+
+  <import file="../common/ant_common.xml"/>
+
+  <property name="bezier.dir" value="${bin.dir}/../demo/bezier"/>
+
+  <target name="compile" depends="prepare" description="Compile the sample interceptor">
+
+    <!-- Interceptors reference classes in agent.jar -->
+    <javac srcdir="src">
+      <classpath>
+        <fileset dir="${bin.dir}">
+          <include name="agent.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+
+  </target>
+
+  <target name="clean" description="Delete all compiled classes">
+    <delete>
+      <fileset dir="." includes="src/**/*.class"/>
+    </delete>
+  </target>
+
+  <!--
+
+    Starts the "Animated Bezier Curve Demo" demo program with the interceptor. You can create a remote session,
+    keep the default values and connect to the created process. To see more event types, type into the
+    demo window, click with the mouse into it, resize it and maximize it.
+
+    Alternatively, you can add
+
+    -Djprofiler.probeProvider=probe.AWTEventProbeProvider -Xbootclasspath/a:../api/samples/interceptor/src
+
+    to the "VM arguments" in the application settings of the "Animated Bezier Curve Demo" demo session in the JProfiler
+    GUI after running the "compile" target of this ant script.
+
+  -->
+  <target name="run" depends="compile" description="Compile and run the &quot;Animated Bezier Curve Demo&quot; with the interceptor">
+
+    <echo>------------------------------------------------------------</echo>
+    <echo>Please connect with a remote sesssion from the JProfiler GUI</echo>
+    <echo>------------------------------------------------------------</echo>
+
+    <java classname="BezierAnim" fork="true">
+      <!-- VM parameter that loads native profiling agent for Java 1.5+ -->
+      <jvmarg value="-agentpath:${libraryPath}"/>
+      <!-- The custom interceptors are registered with an interceptor provider -->
+      <jvmarg value="-Djprofiler.probeProvider=probe.AWTEventProbeProvider"></jvmarg>
+      <!-- The interceptor classes have to be added to the boot classpath so that the interceptors are available to the agent -->
+      <jvmarg value="-Xbootclasspath/a:src"></jvmarg>
+
+      <!-- the interceptor is already in the boot classpath, so it does not have to be added to the classpath -->
+      <classpath>
+        <pathelement path="${bezier.dir}"/>
+      </classpath>
+    </java>
+  </target>
+
+</project>

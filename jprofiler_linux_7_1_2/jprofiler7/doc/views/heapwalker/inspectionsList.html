@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker - List of Inspections</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker - List of Inspections</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/inspections.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$inspectionsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The following inspections are provided by JProfiler:
+      
+      
+<ul>
+<li>
+<span class="sectiontitle">Custom filter [Custom inspections]</span>
+<br>
+Filter all objects in the current object set with a code snippet. Return <tt>true</tt> if an object should be added to the new object set and <tt>false</tt> if it should be discarded.<p><b>Note: In the reference view, you can apply a filter to a selected outgoing chain of references.</b>
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Filter script</span>
+<br>The script that decides whether an object should be part of the new object set or not. The script is passed a <tt>currentObject</tt> parameter. If you return <tt>true</tt>, the object will be retained, otherwise it will be discarded.</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Custom grouping [Custom inspections]</span>
+<br>
+Group the current object set with a code snippet. Return the key for each object as a <tt>java.lang.String</tt> object. Objects with the same key will be in the same group.<p>After the inspection is calculated, you will see a statistics table at the top of all heap walker view where you can select each group and analyze its members separately.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Grouping script</span>
+<br>The script that returns the group name of the group that the object should be part of. The script is passed a <tt>currentObject</tt> parameter. If all objects in the current object set are of the same class, the parameter is typed, so you will get code completion for the parameter. If you return <tt>null</tt>, the object will be retained, otherwise it will be added to the group with the name of the returned string value.</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Duplicate strings [Duplicate objects]</span>
+<br>
+Find duplicate <tt>java.lang.String</tt> objects in the current object set.<p>After the inspection is calculated, you will see a statistics table at the top of all heap walker view where you can select each duplicate string value and analyze the corresponding string objects separately.<p>Note: If no <tt>java.lang.String</tt> objects are contained in the current object set, the inspection will return the empty object set.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Minimum length</span>
+<br>The minimum size as an integer value. The default size is 20.</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Duplicate primitive wrappers [Duplicate objects]</span>
+<br>
+Find duplicate primitive wrapper objects like <tt>java.lang.Integer</tt> in the current object set.<p>After the inspection is calculated, you will see a statistics table at the top of all heap walker view where you can select each duplicate primitive value and analyze the corresponding wrapper objects separately.<p>Note: If no wrapper objects of the selected type are contained in the current object set, the inspection will return the empty object set.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Primitive wrapper type</span>
+<br>The primitive type for which the inspection will be calculated. One of "Boolean,Byte,Character,Double,Float,Integer,Long,Short".</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Duplicate arrays [Duplicate objects]</span>
+<br>
+Find duplicate arrays in the current object set.<p>After the inspection is calculated, you will see a statistics table at the top of all heap walker view where you can select each duplicate array value and analyze the corresponding arrays separately.<p>Note: If no arrays of the selected type are contained in the current object set, the inspection will return the empty object set.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Minimum shallow size in bytes</span>
+<br>The minimum size as an integer value. The default size is 100.</li>
+<li>
+<span class="sectiontitle">Array type</span>
+<br>The array type for which the inspection will be calculated. One of "Object,Boolean,Byte,Character,Double,Float,Integer,Long,Short".</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Sparse arrays [Collections &amp; Arrays]</span>
+<br>
+Find object arrays that contain a high percentage of <tt>null</tt> values.<p>After the inspection is calculated, the reference view will show columns with the overhead in bytes and the percentage of null values. You can sort the arrays on both of these columns.<p>Note: If no arrays of the selected type are contained in the current object set, the inspection will return the empty object set.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Minimum shallow size in bytes</span>
+<br>The minimum size as an integer value. The default size is 100.</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Arrays with zero length [Collections &amp; Arrays]</span>
+<br>
+Find object arrays whose length is zero. This may be an opportunity to use a <tt>null</tt> value in order to reduce memory consumption.<p>Note: If no arrays of the selected type are contained in the current object set, the inspection will return the empty object set.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Array type</span>
+<br>The array type for which the inspection will be calculated. One of "Object,Boolean,Byte,Character,Double,Float,Integer,Long,Short".</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Hash maps with bad key distribution [Collections &amp; Arrays]</span>
+<br>
+Find hash maps with a bad distribution of keys. This may be an opportunity to improve the <tt>hasCode()</tt> method of objects in order to speed up lookups in the map.<p>After the inspection is calculated, the reference view will show a column with the distribution quality. The objects with the highest hash map distribution quality will be at the top.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Minimum map size</span>
+<br>The minimum size as an integer value. The default size is 20.</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Null fields [Reference &amp; field analysis]</span>
+<br>
+Find objects with fields that have a high percentage of null values. These fields could be moved to derived classes or aggregated objects.
+</li>
+<li>
+<span class="sectiontitle">Weakly referenced objects [Reference &amp; field analysis]</span>
+<br>
+Find objects that are (transitively) referenced through a weak, soft of phantom reference.<p>To analyze the reference paths, go to the "Reference" view after the inspection is calculated and show the path to the garbage collector root for selected objects.
+<br>
+<br>Configuration options:<ul>
+<li>
+<span class="sectiontitle">Reference type</span>
+<br>The type of the reference for which the inspection will be calculated, one of "Weak reference,Soft reference,Phantom reference".</li>
+</ul>
+
+</li>
+<li>
+<span class="sectiontitle">Objects retained by inner class [Reference &amp; field analysis]</span>
+<br>
+Find objects that only referenced implicitly by one of their non-static inner classes. Sometimes this can be the cause of a memory leak.
+</li>
+<li>
+<span class="sectiontitle">Objects with many incoming references [Reference &amp; field analysis]</span>
+<br>
+Find objects that have many incoming references.<p>After the inspection is calculated, the reference view will show a column with the incoming reference count. The objects with the most incoming references will be at the top.
+</li>
+<li>
+<span class="sectiontitle">Objects that reference themselves [Reference &amp; field analysis]</span>
+<br>
+Find objects that reference themselves directly. This may be an opportunity to remove a field.<p>After the inspection is calculated, the reference view will show a column with the self-reference count. The objects with the most self-references will be at the top.
+</li>
+</ul>
+
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/inspections.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$inspectionsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

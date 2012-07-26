@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probe Control Objects</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probe Control Objects</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/probes/timeLine.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/hotSpots.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The control objects view shows tabular information on the control objects published by the selected probe.
+      For built-in probes, the name of view reflects the name of the control object, for example "Connections" or "Files".
+      Please see the <a href="../../../doc/views/probes/probes.html">probes overview</a> for more
+      information on the probe-specific control objects.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The available columns depend on the probe, the following columns are available for all probes:
+      <ul>
+<li>
+<span class="sectiontitle">ID</span>
+<br>
+          The numeric ID of the control object as assigned by JProfiler. This is is also displayed in the
+          <a href="../../../doc/views/probes/timeLine.html">time line view</a> and the
+          <a href="../../../doc/views/probes/events.html">events view</a> and can be used there to filter for a
+          specific control object.
+        </li>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          The name column contains the description of the control object, which depends on the probe. For built-in probes,
+          the column is named more specifically, for example "File name" or "Command line".
+        </li>
+<li>
+<span class="sectiontitle">Start time</span>
+<br>
+          This is the time when the control object was opened and corresponds to an "open" event in the
+           <a href="../../../doc/views/probes/events.html">events view</a>. In the
+          <a href="../../../doc/views/probes/timeLine.html">time line view</a>, this is the beginning of the
+          displayed horizontal bar for the control object.
+        </li>
+<li>
+<span class="sectiontitle">End time</span>
+<br>
+          This is the time when the control object was closed and corresponds to a "close" event in the
+           <a href="../../../doc/views/probes/events.html">events view</a>. In the
+          <a href="../../../doc/views/probes/timeLine.html">time line view</a>, this is the end of the
+          displayed horizontal bar for the control object.
+        </li>
+</ul>
+      
+<p>
+        A probe can determine that certain properties are published in a <b>nested table</b>. This is done to
+        reduce the information overload in the main table and give more space to table columns. If a nested
+        table is present, such as for the file and process probes, each row has an expansion handle at the left side.
+        If you click on is a property-value table will be expanded in-place. All properties in that table are also
+        available in the filter selector described below.
+      </p>
+      
+<p>
+        If a probe publishes several types of control objects, such as the files and socket probes,
+        a "Type" column is added that shows the type of the control object.
+        Please see the <a href="../../../doc/views/probes/probes.html">probe overview</a> for the probe-specific types.
+        If a nested table is present, the type will be added to the nested table.
+      </p>
+      
+<p>
+        Most probes publish summary information on measurements that are available on a per-event basis. For example,
+        the number of bytes that are read or written for a socket event is summed for all events and published as columns in
+        the control objects view. This information is also available if single event recording is disabled.
+      </p>
+      
+<p>
+        In general, for each available state
+        <ul>
+<li>
+            a count column is added
+          </li>
+<li>
+            for each summable numeric column in the events view, a corresponding column is added
+          </li>
+</ul>
+      
+</p>
+      
+<p>
+        In addition, each probe can publish additional columns that describe the control object and its state,
+        but are not part of its name. Please see the <a href="../../../doc/views/probes/probes.html">probe overview</a> for more
+        probe-specific information.
+      </p>
+      
+<p>
+        At the bottom the of the table, there is a special <b>total row</b> that sums all summable columns in the table, such as durations,
+        counts and throughputs. Together with the filter selector described below, you can analyze the collected data for selected
+        subsets of control objects.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      At the top of the view, there is a <b>filter selector</b>. You can use it to restrict the displayed control objects by
+      <ul>
+<li>
+<span class="sectiontitle">Status</span>
+<br>
+          
+            From the combo box you can choose if you wish to display open, closed or both open and closed control objects.
+          
+          
+        </li>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          In the text box you can enter the full name of a control object or only a part of it.
+          Only control objects whose names begin with this fragment are displayed. You
+          can also use wildcards ("*" and "?") to select groups of control objects.
+          Please note that if you use wildcards, you have to manually append a
+          trailing "*" if desired. You can display the union of multiple filters
+          at the same time by separating multiple filter expressions with commas, e.g.
+          <tt>test-, MyTest-*-123</tt>.
+        </li>
+</ul>
+      
+        
+<p>
+          By default, the filter works on all available columns.
+          In order to be more specific, you can select a particular column from the "Filter by" drop-down list.
+          This is useful, for example, to show a control object with a particular ID without getting spurious
+          matches from other columns.
+        </p>
+      
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When you right-click a control-object row, the context menu contains a
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/event_data_16.png">
+      "Show events for selected control object" action
+      that allows you to jump to the <a href="../../../doc/views/probes/events.html">events view</a> and display all events for the
+      selected control object there.
+      <p>
+        The <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_to_tracker_16.png">
+        "Add Selection To Tracker" action creates a tracker graph in the
+        <a href="../../../doc/views/probes/tracker.html">probe tracker view</a>. You can select multiple control objects to
+        create a single tracker graph for the sum of their operations.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/probes/timeLine.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/hotSpots.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

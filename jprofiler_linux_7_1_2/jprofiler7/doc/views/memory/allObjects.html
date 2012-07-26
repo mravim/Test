@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>All Objects</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>All Objects</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/memory/$allObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/allObjectsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The all objects view shows the list of <b>all loaded classes</b> together
+      with the number of instances which are allocated on the heap. This view is only visible
+      if you profile with Java 1.5 (JVMTI). To see the objects allocated during a certain time period,
+      and to record allocation call stacks, please use the
+      <a href="../../../doc/views/memory/recordedObjects.html">recorded objects view</a>.
+    </td>
+</tr>
+</table>
+
+    
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The all objects view has an <b>aggregation level selector</b>. It allows you
+      to switch between
+      <ul>
+<li>
+<span class="sectiontitle">Classes</span>
+<br>
+          Every row in the table is a single class. This is the default aggregation level.
+        </li>
+<li>
+<span class="sectiontitle">Packages</span>
+<br>
+          Every row in the table is a single package. Sub-packages are not included. In this
+          aggregation level, the table becomes a <b>tree table</b>. You can open each package
+          by clicking on the tree node on its left and see the contained classes directly beneath it.
+        </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+          Every row in the table is a <a href="../../../doc/sessions/profiling/probes.html">Java EE component</a>.
+          This aggregation level is like a filter for the classes mode and enables you to quickly check the
+          loaded Java EE components in your profiled application.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are three sortable columns shown in the table:
+      <ul>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          Depending on the aggregation level, this column shows different values:
+          <ul>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+              shows the name of the class or the array type. When using Java 1.4 or Java 1.5 with the old profiling interface JVMPI,
+              the notation <tt>&lt;class&gt;[]</tt> stands for non-primitive arrays of any class type.
+              (e.g. the array might be of type <tt>String[]</tt> or <tt>Object[]</tt>).
+              A further distinction is not possible due to restrictions in the profiling interface.
+            </li>
+<li>
+<span class="sectiontitle">package</span>
+<br>
+              shows the name of the package.
+            </li>
+<li>
+<span class="sectiontitle">Java EE</span>
+<br>
+              shows the display name of the Java EE component. If the display name is different from the
+              actual class name, the class name is displayed in square brackets.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Instance count</span>
+<br>
+          Shows how many instances are currently allocated on the heap. This instance count
+          is displayed graphically as well.
+        </li>
+<li>
+<span class="sectiontitle">Size</span>
+<br>
+          Shows the total size of all allocated instances. Note that this is the
+          <b>shallow size</b> which does not include the size of referenced arrays and
+          instances but only the size of the corresponding pointers. The size is in bytes and includes
+          only the object data, it does not include internal JVM structures for the class, nor does it
+          include class data or local variables.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The update frequency for the all objects view can be set on the
+      <a href="../../../doc/sessions/profiling/misc.html">miscellaneous tab</a>
+      in the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>.
+      The update frequency of the all objects view is <b>adjusted automatically</b>
+      according to the total number of objects on the heap. If there are many objects on the heap, the
+      calculation of the all objects view becomes more expensive, so the update frequency is
+      reduced. You can always retrieve the current data by clicking on the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reload_16.png">&nbsp;refresh button in the status bar.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can add a selected class or package to the
+      <a href="../../../doc/views/memory/classTracker.html">class tracker</a> by
+      bringing up the context menu with a right click and choosing
+      <tt>Add Selection To Class Tracker</tt>. If the class tracker is not recording, recording will
+      be started for all classes configured in the class tracker. If the class tracker is recording with
+      a different object type or liveness type, all recorded data will be cleared after a confirmation dialog.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/memory/$allObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/memory/allObjectsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

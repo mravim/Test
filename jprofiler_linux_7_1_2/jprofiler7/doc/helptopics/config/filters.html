@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Filters for Method Call Recording - How They Work and How They Are Configured</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Filters for Method Call Recording - How They Work and How They Are Configured</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/config/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/triggers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+<h3>1. Introduction</h3>
+    
+      Filters settings determine the detail level that JProfiler uses when recording
+      call sequences in the profiled application. Filtering helps to eliminate clutter and decrease the
+      profiling overhead for the profiled application. Also see the article on
+      <a href="../../../doc/helptopics/config/sessionSettings.html">profiling settings</a>
+      for a discussion of profiling settings in general.
+    <br>
+    
+<p>
+      Since the internal data storage of CPU data in JProfiler is similar to the invocation
+      tree, method call recording filters are most easily explained while looking at the
+      <a href="../../../doc/views/cpu/invocation.html">call tree view</a>. As an example,
+      we profile the "Animated Bezier Curve" demo session that comes with JProfiler.
+      When talking about filters, it is important to define the distinction between your code
+      and framework or library code. Your classes should be profiled, framework or library code
+      should not be profiled. In our example, the <code>BezierAnim</code> class is code written by you
+      and the JRE is library code.
+    </p>
+
+    
+<h3>2. What are method call recording filters?</h3>
+    
+<p>
+      The call tree shows call sequences. Each node and each leaf of the call
+      tree corresponds to a certain call stack that has existed one or multiple times
+      while CPU recording was switched on. You will notice that there are different
+      icons for nodes in the tree. Among other things, these icons serve to highlight
+      if classes are filtered or not.
+    </p>
+    
+<p>
+      The methods of an unprofiled class (alternatively the class or containing package itself,
+      depending on the aggregation level) are endpoints in the call tree, i.e. their internal
+      call structure will not be displayed. Also, any methods in other unprofiled classes that are
+      called subsequently, are not resolved. If, at any later point in the call sequence, the
+      method of a profiled class is called, it will be displayed normally. In that case,
+      the call tree shows the icon of the unprofiled parent method with a red top-left corner
+      that indicates that it is from an unprofiled class and that there may be other intermediate method
+      calls in between. The inherent time of those missing method is added to the time of the
+      unprofiled parent method.
+    </p>
+
+    
+<h3>3. Example with and without filters</h3>
+    
+<p>
+      The image below illustrates the different node types for a profiling run of the BezierAnim
+      class:
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/filters_overview.png">
+    </p>
+    
+<p>
+      In the above call tree, the <code>java.*</code> and <code>javax.*</code> packages are filtered, so only the first
+      method in the the AWT event dispatch thread is shown. In addition, the <code>InvocationEvent#dispatch()</code> method
+      is shown because it is a special method that is used for analyzing long-running AWT events. However, the AWT
+      is a complex system and the <code>InvocationEvent#dispatch()</code> method does not call <code>BezierAnim$Demo#paint()</code>
+      directly. If we add <code>javax.swing</code> in the filter settings, the call tree
+      looks like this:
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/filters_no_filters.png">
+    </p>
+    
+<p>
+      Now, the entry method into your code - <code>BezierAnim$Demo#paint()</code> - is
+      substantially more difficult to find. In cases where events are propagated through
+      a complex container hierarchy, the call tree can become many hundreds of levels deep and
+      it becomes next to impossible to interpret the data. In addition, calls like
+      <code>java.awt.Graphics2D#setPaint()</code> show their internal structure
+      and implementation classes. As a Java programmer who is not working on the JRE itself,
+      you probably do not know or care that the implementation class is actually
+      <code>sun.java2d.SunGraphics2D</code>. Also, the internal call structure is
+      most likely not relevant for you, since you have no control over the implementation.
+      It just distracts from the main goal: how to improve the performance of your code.
+    </p>
+    
+<p>
+      Not only is it easier to interpret a call tree that has been recorded with proper filter settings,
+      but also the profiling overhead of the profiled application is much lower. Recording
+      the entire call tree without filters uses a lot of memory and measuring each call takes a
+      lot of time. Both these considerations especially apply to application servers, where the
+      surrounding framework is often extremely complex and the proportion of executed framework
+      code to your own code might be very big.
+    </p>
+
+    
+<h3>4. Configuring filter settings</h3>
+    
+<p>
+      Filter settings are part of the session settings.
+      Please see the article on <a href="../../../doc/helptopics/config/sessionSettings.html">session settings</a>
+      for more information. The <a href="../../../doc/sessions/sessions.html">help on sessions</a>
+      explains under what circumstances changes in the profiling settings can be applied
+      to an active session.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/filter_settings.png">
+    </p>
+    
+<p>
+      There are two  ways in JProfiler to specify the profiled classes:
+    </p>
+    
+<ul>
+<li>
+<span class="sectiontitle">by defining exclusive filters</span>
+<br>
+        
+<p>
+          An "exclusive filters" means that you specify a package or class that should not be profiled.
+          New sessions have a default list of exclusive filters that work for many
+          applications.
+        </p>
+        
+<p>
+          If the first filter is an exclusive filter, all classes except for the following excluded packages
+          will be profiled. Further inclusive filters can be used to add back some sub-packages.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">by defining inclusive filters</span>
+<br>
+        
+<p>
+          An "inclusive filters" means that you specify a package or class that should be profiled.
+        </p>
+        
+<p>
+          If the first filter is an inclusive filter, only the the following included packages
+          will be profiled. Further exclusive filters can be used to remove some sub-packages.
+        </p>
+      
+</li>
+</ul>
+    
+<p>
+      For sessions where JProfiler attaches to a running, JVM, you can select filters from a
+      package browser that tells you how many classes will be profiled based on your selection.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/filter_package_browser.png">
+    </p>
+
+    
+<h3>5. View filters</h3>
+    
+<p>
+      In addition to the method call recording filters, there is a view filters
+      control at the bottom of all views that display call trees. View filters
+      are similar to inclusive filters and can be changed during a session.
+      However, they can only <b>reduce</b> the recorded information
+      by taking out classes that do not correspond to the selected view filter.
+    </p>
+    
+<p>
+      In the call tree, they have a similar behavior like the call tree
+      collection filters. In the hot spot views, they simply hide all classes
+      that do not correspond to the filter selection. This is very different
+      from method call recording filters, where the hot spots themselves change
+      with different filter settings.
+    </p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/config/callTreeCollection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/config/triggers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

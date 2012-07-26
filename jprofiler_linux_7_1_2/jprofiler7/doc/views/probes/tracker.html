@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probe Tracker</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probe Tracker</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/probes/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      This view allows you to track selected elements from other views and show graphs with a time axis to
+      follow the chronological evolution of selected measurements.
+      <p>
+        When you click on the <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/record_chart_16.png"><b>[Record probe tracker data]</b>
+        button, a dialog is shown that offers to track the following element types:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Control objects</span>
+<br>
+          If the current probe has control objects, you can select one or more control objects to create a graph
+          in the tracker. The graph will show separate feeds for the average execution times of all different event types.
+          For example, the "file" probe will show "Read", "Write", "Channel read" and "Channel write" feeds.
+          The following measurements can be tracked:
+          <ul>
+<li>
+<span class="sectiontitle">Event Times</span>
+<br>
+              The average duration of events for the selected control objects per second.
+            </li>
+<li>
+<span class="sectiontitle">Event Counts</span>
+<br>
+              The average event counts for the selected control objects per second.
+            </li>
+<li>
+<span class="sectiontitle">Event Throughputs</span>
+<br>
+              The average throughput for the selected control objects per second in bytes. This is only available for selected probes, e.g. for the
+              "Files", "Sockets" and "Processes" probe.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Hot Spots</span>
+<br>
+          If the current probe has hot spots, you can select one or more hot spots to create a graph
+          in the tracker. The graph will show separate feeds for the different time types:
+          <ul>
+<li>Runnable</li>
+<li>Waiting</li>
+<li>Blocked</li>
+<li>Net IO</li>
+</ul>
+          The following measurements can be tracked:
+          <ul>
+<li>
+<span class="sectiontitle">Hot Spot Times</span>
+<br>
+              The average time for the execution of the selected hot spots per second.
+            </li>
+<li>
+<span class="sectiontitle">Hot Spot Counts</span>
+<br>
+              The average invocation counts for the execution of the selected hot spots per second.
+            </li>
+</ul>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Once you have at least one graph in the probe tracker view, you can use the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_16.png"><b>[Add]</b> button to
+      show the selection dialog again and add more tracker graphs. The
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/remove_16.png"><b>[Remove]</b> button stops tracking
+      for the currently displayed graph and removes the graph from the tracker view.
+      <p>
+        The drop-down list at the top allows you to switch between all tracker graphs that have been added
+        in this profiling session.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Rather than selecting tracked elements directly in the tracker view, you can use the "add to tracker" actions
+      in the <a href="../../../doc/views/probes/controlObjects.html">control objects view</a> and the
+      <a href="../../../doc/views/probes/hotSpots.html">probe hot spots view</a> to add selected elements to
+      the tracker. The actions are available in the tool bar, the <i>View</i> menu as well as
+      the context menu.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Probe tracking can also be started programatically, either with
+      <ul>
+<li>
+          the corresponding <b>probe tracker trigger actions</b> in a
+          <a href="../../../doc/sessions/triggers/actions.html">trigger</a>
+        
+</li>
+<li>
+          the corresponding methods in the <a href="../../../doc/offline/javadoc/com/jprofiler/api/agent/Controller.html">controller API</a>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/probes/events.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>General Settings</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>General Settings</h2>
+</td><td valign="top" align="right"><a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/vm.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    JProfiler's general settings are divided into several tabs:
+    <ul>
+<li>
+<a href="../../doc/generalSettings/vm.html">JDK and JREs</a>
+<br>
+        Configure JDKs for the code editor and JREs for launching profiling sessions.
+      </li>
+<li>
+<a href="../../doc/generalSettings/sessionDefaults.html">Session defaults</a>
+<br>
+        Configure some initial properties of a new session.
+      </li>
+<li>
+<a href="../../doc/generalSettings/snapshots.html">Snapshots</a>
+<br>
+        Configure additional options for snapshots.
+      </li>
+<li>
+<a href="../../doc/generalSettings/ide.html">IDE integrations</a>
+<br>
+        Install IDE integrations for JProfiler. 
+      </li>
+<li>
+<a href="../../doc/generalSettings/misc.html">Miscellaneous</a>
+<br>
+        Configure miscellaneous options for JProfiler.
+      </li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/vm.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

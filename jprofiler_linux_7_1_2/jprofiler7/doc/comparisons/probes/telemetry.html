@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probe Telemetry Comparison</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probe Telemetry Comparison</h2>
+</td><td valign="top" align="right"><a href="../../../doc/comparisons/probes/telemetryFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/probes/telemetrySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The probe telemetry comparison is one of the <a href="../../../doc/comparisons/probes/probes.html">probes comparisons</a>. It is created by
+      invoking the probes comparison wizard. For more information on
+      snapshot comparisons, please see the <a href="../../../doc/comparisons/comparisons.html">snapshot comparison overview</a>.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The wizard has the following steps:
+      <ul>
+<li>
+<span class="sectiontitle">Select snapshots</span>
+<br>
+          The telemetry comparisons compare two or more snapshot files. In this step, you select whether you want to
+          compare the snapshots that you have selected in the <a href="../../../doc/comparisons/comparisons.html">snapshot selector</a>,
+          or whether all snapshot files should be compared. The default selection depends on whether you have selected
+          more than one snapshot in the snapshot selector.
+        </li>
+<li>
+<span class="sectiontitle">Probe selection</span>
+<br>
+          In this step, you choose for which probe the comparison should be made. If you select the "custom probe" option,
+          all snapshots are analyzed to find out which custom probe are present in all snapshots.
+        </li>
+<li>
+<span class="sectiontitle">Telemetry group</span>
+<br>
+          In this step, you choose for which telemetry group the comparison should be made. Probes can publish one or more
+          telemetry groups with multiple measurements each.
+        </li>
+<li>
+<span class="sectiontitle">Comparison type</span>
+<br>
+          
+    Each snapshot file contributes one value to the comparison graph. That value can be the
+    <ul>
+<li>
+<span class="sectiontitle">current value</span>
+<br>
+        This is the value when the snapshot was saved, i.e. the rightmost point in the
+        telemetry view and the value that is displayed next to the legend entries there.
+      </li>
+<li>
+<span class="sectiontitle">maximum value</span>
+<br>
+        This is the maximum value during the entire time that the telemetry view
+        was recording data. The maximum value is evaluated separately for each snapshot file.
+      </li>
+<li>
+<span class="sectiontitle">value at a bookmark</span>
+<br>
+        In JProfiler, you can set <a href="../../../doc/views/common/bookmarks.html">bookmarks</a> for specific points in time. In addition,
+        there are automatic bookmarks for recording events. If all compared snapshots contain a bookmark with the same name,
+        you can compare values at those times. If you choose this option you have to select a bookmark from
+        the combo box below. Only bookmarks that are contained in all snapshots are displayed.
+      </li>
+</ul>
+  
+        
+</li>
+<li>
+<span class="sectiontitle">Compared measurements</span>
+<br>
+          In this step you select which of the measurements from the selected
+          telemetry group that should be compared. You can select any combination of measurements.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Any telemetry comparison behaves similarly to the <a href="../../../doc/views/probes/telemetries.html">probe telemetry views</a>
+      themselves, on the horizontal axis you see the snapshot numbers from the snapshot selector,
+      the vertical axis remains the same. Effectively, the time axis from the VM telemetry views is replaced by an ordinal
+      snapshot file axis.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are several <a href="../../../doc/comparisons/probes/telemetrySettings.html">view settings</a> that influence the display
+      of the comparison. Please see the help on the <a href="../../../doc/views/probes/telemetries.html">probe telemetry views</a>
+      for more information.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/comparisons/probes/telemetryFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/probes/telemetrySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

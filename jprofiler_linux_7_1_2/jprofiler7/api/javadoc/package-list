@@ -1,0 +1,9 @@
+com.jprofiler.api.agent
+com.jprofiler.api.agent.mbean
+com.jprofiler.api.agent.probe
+com.jprofiler.api.platform.connection
+com.jprofiler.api.platform.data
+com.jprofiler.api.platform.descriptors
+com.jprofiler.api.platform.parameters
+com.jprofiler.api.platform.structures
+com.jprofiler.api.platform.util

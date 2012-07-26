@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Call Tree View</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Call Tree View</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/$invocationFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/showHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The call tree view shows a <a href="../../../doc/views/cpu/cpu.html">thread resolved</a>
+    top-down call tree which is shows method detail according to the
+    <a href="../../../doc/sessions/filters/filterSettings.html">configured filters</a>.
+
+    
+
+    <table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler automatically <a href="../../../doc/sessions/profiling/probes.html">detects Java EE components</a>
+      and displays the relevant nodes in the call tree with special icons that depend
+      on the Java EE component type:
+
+      <br>
+<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_servlet_16.png">&nbsp;servlets<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_jsp_16.png">&nbsp;JSPs<br>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_ejb_16.png">&nbsp;EJBs<br>
+<br>
+
+      For JSPs and EJBs, JProfiler shows a display name:
+      <ul>
+<li>
+<span class="sectiontitle">JSPs</span>
+<br>the path of the JSP source file</li>
+<li>
+<span class="sectiontitle">EJBs</span>
+<br>the name of the EJB interface</li>
+</ul>
+
+      
+<p>
+        If URL splitting is enabled in the <a href="../../../doc/sessions/probes/builtin.html">servlet probe</a>
+        each request URL creates a new node with a
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_annotation_class_16.png">&nbsp;special icon and the prefix
+        <b>URL:</b>, followed by the part of the request URL on which the call tree
+        was split. Note that URL nodes <b>group request by the displayed URL</b>.
+      </p>
+
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The call tree view has an <b>aggregation level selector</b>. It allows you
+      to switch between
+      <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_method_16.png">
+          Every node in the tree is a method call. This is the default aggregation level. Special Java EE component
+          methods have their own icon (see above) and display name, the real class name is appended
+          in square brackets.
+          
+            <p>
+              For methods that have been configured for exceptional method run recording, different icons will be shown.
+              Please see the <a href="../../../doc/sessions/filters/exceptional.html">help on exceptional method run recording</a>
+              for more information.
+            </p>
+          
+        
+</li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_class_16.png">
+          Every node in the tree is a single class. Java EE component
+          classes have their own icon (see above) and display name, the real class name is appended
+          in square brackets.
+        </li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_package_16.png">
+          Every node in the tree is a single package. Sub-packages are not included.
+        </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_servlet_16.png">
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_jsp_16.png">
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_ejb_16.png">
+          Every node in the tree is a <a href="../../../doc/sessions/profiling/probes.html">Java EE component</a>.
+          If the component has a separate display name, the real class names are omitted.
+        </li>
+</ul>
+      
+<p>
+        When you switch between two aggregation levels, JProfiler will make the best effort to <b>preserve your
+        current selection</b>. When switching to a a more detailed aggregation level, there may not be
+        a unique mapping and the first hit in the call tree is chosen.
+      </p>
+      
+<p>
+        The call tree doesn't display all method calls in the JVM, it only displays
+        <ul>
+<li>
+<span class="sectiontitle">unfiltered classes</span>
+<br>
+            Classes which are unfiltered according to your
+            <a href="../../../doc/sessions/filters/define.html">configured filter sets</a> are
+            used for the construction of the call tree.
+          </li>
+<li>
+<span class="sectiontitle">first level calls into unfiltered classes</span>
+<br>
+            Every call into a filtered class that originates from an unfiltered class is used for the construction of
+            the call tree. Further calls into filtered classes are not resolved. This means
+            that a filtered node can include information from other filtered calls. Filtered nodes are painted with
+            a <b>red marker in the top left corner</b>.
+          </li>
+<li>
+<span class="sectiontitle">thread entry methods</span>
+<br>
+            The methods <code>Runnable.run()</code> and the main method are always displayed, regardless of
+            the filter settings.
+          </li>
+</ul>
+      
+</p>
+      
+        
+<p>
+          A particular node is a <b>bridge node</b> if it would normally not be displayed in the view,
+          but has descendant nodes that have to be displayed. The icons of bridge nodes are <b>grayed out</b>.
+          For the call tree view this is the case if
+          
+          
+            the inherent time of the current node is below the
+            <a href="../../../doc/views/cpu/invocationSettings.html">defined threshold</a>, but there are
+            descendant nodes that are above the threshold.
+          
+        </p>
+      
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When <b>navigating</b> through the call tree by opening
+      method calls, JProfiler automatically expands methods which are only called
+      by one other method themselves.
+      <p>
+        To quickly <b>expand larger portions</b>
+        of the call tree, select a method and choose
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/expand_16.png">
+        <i>View-&gt;Expand Multiple Levels</i> from the main window's menu or
+        choose the corresponding menu item from the context menu. A dialog is shown
+        where you can adjust the number of levels (20 by default) and the threshold in per mille
+        of the parent node's value that determines which child nodes are expanded.
+      </p>
+      
+<p>
+        If you want to
+        <b>collapse an opened part</b> of the call tree, select the
+        topmost method that should remain visible and choose
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/collapse_16.png">
+        <i>View-&gt;Collapse all</i> from the main window's menu or
+        the context menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If a method node is selected, the context menu allows you to quickly add a
+      <a href="../../../doc/sessions/triggers/triggerSettings.html">method trigger</a> for the selected method with the
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_16.png">&nbsp;add method trigger action.
+      A <a href="../../../doc/sessions/triggers/addToTriggerDialog.html">dialog</a> will be displayed where you
+      can choose whether to add the method interception to an existing method trigger or whether to create a
+      new method trigger.
+      
+        <p>
+          You can use this view as a starting point for determining which methods are candidates for
+          <a href="../../../doc/sessions/filters/exceptional.html">exceptional method run recording</a>.
+          Once you have identified methods of interest, you can right-click them in the table and
+          choose <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/exceptional_16.png">&nbsp;<i>Add as exceptional method</i>
+          from the context menu.
+        </p>
+      
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Nodes in the call tree <b>can be hidden</b> by selecting them and hitting the <code>DEL</code> key
+      or by choosing <i>Hide Selected</i> from the context menu. Percentages will be corrected accordingly as if the
+      hidden node did not exist.
+      
+        All similar nodes in other call stacks will be hidden as well.
+      
+      <p>
+        When you hide a node, the toolbar and the context menu will get a <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/element_add_16.png"> Show Hidden 
+        action. Invoking this action will bring up a dialog where you can select hidden elements to be shown again.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      For method, class or package nodes, the context menu and the <i>View</i> menu have an
+      <b>Add Filter From Selection</b> entry. The sub-menu contains actions to add 
+      <a href="../../../doc/sessions/filters/define.html">appropriate filters</a> as well
+      as an action to add an <a href="../../../doc/sessions/filters/ignored.html">ignored method entry</a>.
+      <p>
+        If a node is excluded, you will get options to add an inclusive filter, otherwise you will get options to add an
+        exclusive filter. These actions are not available for classes in the "java." packages.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+      
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+        The <b>tree map selector</b> above the  call tree view allows you to switch to
+        an alternate visualization: A tree map that shows all call stacks as a set of nested rectangles.
+        Please see the <a href="../../../doc/views/common/treeMaps.html">help on tree maps</a> for more information.
+      </td>
+</tr>
+</table>
+    
+
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If enabled in the <a href="../../../doc/views/cpu/invocationSettings.html">view settings</a>,
+      every node in the call tree has
+      a <b>percentage bar</b> whose length is proportional to the total time spent in the current node including
+      all descendant nodes and whose light-red part indicates the percentage of the inherent time of the
+      current node.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Every entry in the call tree has textual information attached which depends
+      on the <a href="../../../doc/views/cpu/invocationSettings.html">call tree view settings</a>
+      and shows
+      <ul>
+<li>
+          a <b>percentage number</b> which is calculated with respect to either the
+          root of the tree or the calling node.
+        </li>
+<li>
+          a <b>total time measurement</b> in ms or &micro;s.
+          This is the total time that includes calls into other nodes.
+        </li>
+<li>
+          an <b>inherent time measurement</b> in ms or &micro;s.
+          This is the inherent time that does not include calls into unfiltered classes.
+        </li>
+<li>
+          an <b>invocation count</b> which shows how often the node has been
+          invoked on this path.
+        </li>
+<li>
+          
+    a <b>name</b> which depends on the aggregation level:
+    <ul>
+<li>
+<span class="sectiontitle">methods</span>
+<br>
+        a method name that is either fully qualified or relative with respect to to the calling method.
+      </li>
+<li>
+<span class="sectiontitle">classes</span>
+<br>
+        a class name.
+      </li>
+<li>
+<span class="sectiontitle">packages</span>
+<br>
+        a package name.
+      </li>
+<li>
+<span class="sectiontitle">Java EE components</span>
+<br>
+        the display name of the Java EE component.
+      </li>
+</ul>
+  
+        
+</li>
+<li>
+          
+    a <b>line number</b> which is only displayed if
+    <ul>
+<li>the aggregation level is set to "methods"</li>
+<li>
+        line number resolution has been enabled in the
+        <a href="../../../doc/sessions/profiling/callTreeCollection.html">profiling settings</a>
+      
+</li>
+<li>the calling class is unfiltered</li>
+</ul>
+    
+<p>
+      Note that the line number shows the line number of the invocation
+      and not of the method itself.
+    </p>
+  
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can set <b>change the root</b> of the call tree to any node
+      by selecting that node and choosing <i>View-&gt;Set as root</i>
+      from the main window's menu or by choosing the corresponding menu item from
+      the context menu. Percentages will now be calculated with respect to the new root
+      if the percentage base has been set to "total thread time" in the
+      <a href="../../../doc/views/cpu/invocationSettings.html">view settings dialog</a>.
+      To <b>return to the full view</b> of all nodes called
+      in the current thread or thread group, select <i>View-&gt;Show all</i>
+      from the main window's menu or the context menu.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can <a href="../../../doc/views/cpu/cpu.html">stop and restart CPU data acquisition</a>
+      to clear the call tree.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/$invocationFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/showHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

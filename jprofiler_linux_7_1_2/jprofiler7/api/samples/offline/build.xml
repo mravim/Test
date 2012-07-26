@@ -1,0 +1,50 @@
+<!--
+  Compile and run the offline profiling sample code. See src/TestProgram.java for more information.
+
+  Note: A 1.5 JRE is required for compiling and running this sample
+  1.2-1.4 JREs can be used by replacing "-agentlib:jprofilerti=" with "-Xrunjprofiler:", porting the Java code
+  to the Java 1.4 syntax and using the retroweaved platform_java_14.jar instead of platform.jar.
+-->
+<project name="offline" default="run">
+
+  <import file="../common/ant_common.xml"/>
+
+  <target name="compile" depends="prepare" description="Compile the offline profiling sample">
+
+    <!-- The controller API classes are contained in agent.jar -->
+    <javac srcdir="src">
+      <classpath>
+        <fileset dir="${bin.dir}">
+          <include name="agent.jar"/>
+        </fileset>
+      </classpath>
+    </javac>
+
+  </target>
+
+  <target name="clean" description="Delete all compiled classes and saved snapshot files">
+    <delete>
+      <fileset dir=".">
+        <include name="src/**/*.class"/>
+        <include name="*.jps"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="run" depends="compile" description="Run the offline profiling sample">
+
+    <java classname="TestProgram" fork="true">
+
+      <!-- If you change this parameter to "true", the test programm will trigger heap dumps for the snapshot files -->
+      <arg value="false"/>
+
+      <!-- VM parameter that loads native profiling agent for Java 1.5+ and activate offline profiling mode -->
+      <jvmarg value="-agentpath:${libraryPath}=offline,id=80,config=../common/config.xml"/>
+
+      <classpath>
+        <pathelement path="src"/>
+      </classpath>
+    </java>
+  </target>
+
+</project>

@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probes explained</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probes explained</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/probes/custom.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      Most functionality in a Java profiler revolves around the basic operations in the JVM which mainly concern
+      memory allocations, CPU usage and threading operations. In addition, JProfiler
+      offers a higher-level analysis of common Java subsystems that are used by many applications. For JSE, they are
+      file I/O, network I/O and process execution. For JEE, JProfiler can collect data on servlets as well as JDBC, JMS and JNDI.
+      Each such subsystem is handled by a single "probe".
+    <br>
+    
+<p>
+      The probes facility in JProfiler is exposed through an API, so you can
+      <a href="../../../doc/helptopics/probes/custom.html">write your own custom probe</a> to capture information on
+      other subsystems as well. Because JProfiler allows you to enter scripts directly in the JProfiler GUI, custom
+      probes can also be configured and deployed without using your IDE and without modifying the profiled application.
+    </p>
+
+    
+<h3>2. Events</h3>
+    
+<p>
+      Probes intercept selected methods to collect data. At method entry, a probe will usually extract semantic data from
+      the method arguments and store it for later use. Some method invocations will just be intercepted for collecting information,
+      other method invocations define time-consuming operations that are measured by the probe. When such methods exit
+      (either via a return or through an exception), the probe will retrieve the stored data, determine how long the method
+      execution has taken, and publish an <b>event</b>.
+    </p>
+    
+<p>
+      An event contains the following information: a start time, an optional duration, the associated thread and a description
+      that is constructed by the probe to describe the event. Also, an event has an <b>event type</b> that distinguishes
+      various classes of events. For example, the JDBC probe publishes different events for statement, prepared statement
+      and batch execution. In addition, an event can have an associated stack trace.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jdbc_events.png">
+    </p>
+    
+<p>
+      From these basic events, JProfiler calculates more aggregated data as explained below. After an event has been processed,
+      it can either be discarded or retained for inspection in the
+      <a href="../../../doc/views/probes/events.html">probe events view</a>. You can make this decision yourself in the
+      <a href="../../../doc/sessions/probes/probeSettings.html">probe settings</a>. By default, only the JEE probes are configured to
+      record single events. In other probes, a lot of events can be generated very quickly. File I/O, for example produces a lot of events.
+      To prevent excessive memory usage, JProfiler <b>consolidates events</b>. The event cap is configured in the
+      <a href="../../../doc/sessions/profiling/probes.html">profiling settings</a> and applies to all probes.
+      Only the most recent events are retained, older events are discarded. This consolidation does not affect the
+      higher-level views.
+    </p>
+
+    
+<h3>3. Payload</h3>
+    
+<p>
+      For events that have an associated stack trace, the probe can then publish the event description as
+      <b>payload</b> into the recorded call tree. The event description then becomes the <b>payload name</b>.
+      If you record CPU data, you can open the call tree view in the CPU section and locate a call trace where a probe
+      intercepts data, for example, a database connection executing JDBC statements. You will see a
+      <b>payload container node</b> that contains the payload names that have been published, in our example
+      the SQL strings.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jdbc_call_tree.png">
+    </p>
+    
+<p>
+      In the call tree, events with the same payload names and stack traces are aggregated. This means that at each stack trace,
+      a particular payload name can occur only once. The number of invocations and the total times 
+      are displayed. Payload names are <b>consolidated on a per-call stack basis</b>, with oldest entries being aggregated
+      into an "Earlier calls" node. By default, the maximum number of recorded payload names per call-stack is 50.
+    </p>
+    
+<p>
+      If CPU data is not being recorded, payload information is still collected, just without the associated stack trace.
+      Often you will use the "Sampling" mode for CPU profiling to reduce the overhead. This works fine for performance problems,
+      but for probes you usually need exact stack trace information. This is why JProfiler by default  determines the exact
+      stack traces even if "Sampling" is chosen.
+    </p>
+
+    
+<h3>4. Hot Spots</h3>
+    
+<p>
+      From the payload information, JProfiler calculates payload hot spots, similar to the CPU hot spots. Payload names
+      are aggregated over the entire call tree and sorted by their execution times. JProfiler calculates
+      a tree of back traces that show you which call stacks have contributed how much time and how many invocations to
+      the hot spot.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jdbc_hotspots.png">
+    </p>
+    
+<p>
+      If no CPU data is recorded, the back traces will only contain a "No CPU data was recorded" node. If CPU data
+      was only partially recorded, there may be a mixture of these nodes with actual back traces.
+    </p>
+
+    
+<h3>5. Control Objects</h3>
+    
+<p>
+      An important concept in JProfiler's probes are <b>control objects</b>. Events are often bound to
+      particular long-lived Java objects. For example, JDBC statements are associated with a JDBC connection and
+      file I/O is associated with instances of <code>java.io.File</code>. These probe-specific control objects
+      can be opened and closed via special event types.
+    </p>
+    
+<p>
+      Control-objects are displayed in a separate view together with aggregated information from the associated events.
+      For each event type, control objects show the aggregated event count and event duration. For events that measure
+      throughput in bytes, the aggregated throughput is displayed as well. Furthermore, the probe can publish
+      additional data for control objects that will help you with identifying and debugging control objects. For example,
+      the process probe publishes the command line parameters, the working directory, the special environment variables
+      and the exit code of the process.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/processes_control_objects.png">
+    </p>
+    
+<p>
+      Since control objects have a start and an end time, JProfiler shows them on a <b>time line</b> as horizontal bars.
+      The events that are associated with a control object are shown in different colors on the bar in the time line.
+      For example, read and write events in the socket probe are shown as different colors. If no event has taken place
+      at a particular time, the probe is shown as idle. For example, a JDBC connection is idle, unless a JDBC statement
+      is being executed. This status data is not taken from the list of events, which may be consolidated or not even available,
+      but it is sampled every 100 ms from the last status.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/sockets_timeline.png">
+    </p>
+
+    
+<h3>6. Telemetries</h3>
+    
+<p>
+      As an even more aggregated form of data, probes can publish telemetries that show graphs of arbitrary measurements
+      on a time axis. Telemetry data is determined once per second.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jndi_telemetry.png">
+    </p>
+    
+<p>
+      Most telemetries of built-in probes in JProfiler are canonical aggregations, such as the number
+      of open control objects, event counts per second or throughputs per second. Some telemetries are probe-specific
+      such as the "Average statement execution time" telemetry of the JDBC probe.
+    </p>
+
+    
+<h3>7. Tracking</h3>
+    
+<p>
+      Telemetries concern the summed up state of everything that is measured by a probe. More fine-grained telemetries for
+      selected control objects or hot spots are available in the probe tracker.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/jdbc_tracker.png">
+    </p>
+    
+<p>
+      Depending on the capabilities of the probe, you can track different measurements for different elements.
+      For selected control objects, you can track event durations, event counts and event throughputs,
+      for selected hot spots you can track execution times split into thread states and invocation counts.
+    </p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/probes/custom.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Call Graph View Settings Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Call Graph View Settings Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/graphMethodSelection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$graphFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The call graph view settings dialog is accessed by bringing
+      
+      the
+      <a href="../../../doc/views/cpu/graph.html">call graph</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+<ul>
+<li>
+<span class="sectiontitle">Show signature tooltips</span>
+<br>
+          If checked, the signature of a method will be shown in a <b>tooltip window</b>
+          when you move the mouse over it.
+        </li>
+<li>
+<span class="sectiontitle">Color information</span>
+<br>
+          This setting determines the meaning of the gray to red scale of the
+          background color of node rectangles. It can be one of
+          <ul>
+<li>Inherent time</li>
+<li>Total time</li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Color scale base</span>
+<br>
+          This setting determines the percentage base for calculating the
+          background color of node rectangles. It can be one of
+          <ul>
+<li>
+              Displayed nodes only. If this setting is checked, the coloring
+              of nodes changes as new nodes are expanded or added.
+            </li>
+<li>
+              All nodes. If this setting is checked, the coloring stays the same
+              as new nodes are expanded or added.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">display threshold</span>
+<br>
+          The display threshold below which nodes are ignored is entered in
+          percent. Calls whose inherent time makes up less than that percentage
+          are not shown in the method graph. If you raise the threshold, none
+          of the currently displayed nodes are hidden. If you lower the threshold,
+          nodes who do not have plus signs for expanding incoming and outgoing calls
+          may get them again.
+          <p>
+            To activate the threshold, you have to select the "Hide calls with less than ..."
+            check box.
+          </p>
+          
+<p>
+            This option allows you to <b>trim down the call graph</b> to the most important
+            parts.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/graphMethodSelection.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/$graphFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

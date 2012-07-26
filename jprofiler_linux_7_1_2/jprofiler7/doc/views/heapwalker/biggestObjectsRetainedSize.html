@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dependency of the Biggest Objects View on Retained Size Calculation</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Dependency of the Biggest Objects View on Retained Size Calculation</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/biggestObjects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$biggestObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    If "Calculate retained sizes" has not been enabled for the heap dump, the
+    <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects view</a> will not be available.
+    For the "Calculate retained sizes" option to be effective, the "Remove unreferenced and weakly referenced" option
+    has to be enabled for the heap dump as well.
+    <p>
+      Both these options are "overhead options" intended to speed up the heap dump and use less memory. The cost of this
+      lower overhead includes the loss of the biggest objects view. By default, both options are are enabled.
+    </p>
+    
+<p>
+      The "Calculate retained sizes" option can be enabled in the
+      <ul>
+<li>
+          
+<a href="../../../doc/views/heapwalker/options.html">heap walker options dialog</a>, if the heap dump is taken manually.
+        </li>
+<li>
+          the configuration of the <a href="../../../doc/sessions/triggers/actions.html">"Trigger heap dump"</a> action,
+          if the heap dump is taken by a trigger.
+        </li>
+<li>
+          the parameters passed to the <code>triggerHeapDump</code> method of the <code>Controller</code> class
+          in the <a href="../../../doc/offline/javadoc/com/jprofiler/api/agent/Controller.html">profiling API</a>, if the heap dump is taken programatically.
+        </li>
+</ul>
+    
+</p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/biggestObjects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$biggestObjectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

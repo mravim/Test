@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Request Tracking</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Request Tracking</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/hotspotsAndFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/finalizers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      It is a standard practice of most applications to handle certain tasks on dedicated threads.
+      The execution may be asynchronous to avoid blocking on the calling thread or synchronous because
+      certain operations may only be performed on one particular thread. For debugging and profiling, this
+      thread change presents two problems: On the one hand, it is not clear how expensive an invoked operation is.
+      One the other hand, an expensive operation cannot be traced to the code that caused its execution.
+    <br>
+    
+<p>
+      JProfiler's solution to this problem is <b>request tracking</b>: Call sites and execution sites in
+      multi-threaded programming are hyperlinked in the <a href="../../../doc/views/cpu/invocation.html">call tree</a>,
+      so you can seamlessly navigate both ways.
+    </p>
+
+    
+<h3>2. Request Tracking Types</h3>
+    
+<p>
+      Inter-thread communication can be implemented in various ways and the semantics of starting tasks on a separate thread cannot be
+      detected in a generic way. JProfiler explicitly supports several common asynchronous systems.
+      You can enable or disable them in the <a href="../../../doc/views/cpu/requestTracking.html">request tracking settings</a>.
+      By default, request tracking is not enabled.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_settings.png">
+    </p>
+    
+<p>
+      The simplest way to offload a task on another thread is to <b>start a new thread</b>. JProfiler supports this
+      "thread start" Request tracking type. However, threads are heavy-weight objects and are usually reused
+      for repeated invocations, so this request tracking type is more useful for debugging purposes.
+    </p>
+    
+<p>
+      The most important and generic way to start tasks on other threads uses <b>executors</b> in the <code>java.util.concurrent</code> package.
+      Executors are also the basis for many higher-level third part libraries that deal with asynchronous execution.
+      By supporting executors, JProfiler supports a whole class of libraries that deal with multi-threaded and parallel programming.
+    </p>
+    
+<p>
+      Apart for the generic cases above, JProfiler also supports the two most popular <b>GUI toolkits</b> for the JVM: AWT and SWT.
+      Both toolkits are single-threaded, which means that there is one special event dispatch thread that can manipulate GUI widgets and
+      perform drawing operations. In order no to block the GUI, long-running tasks have to be performed on background threads.
+      However, background threads often need to update the GUI to indicate progress or completion. This is done with
+      special methods that schedule a <code>Runnable</code> to be executed on the event dispatch thread.
+    </p>
+    
+<p>
+      In GUI programming, you often have to follow multiple thread changes in order to connect cause and effect: The user initiates an
+      action on the event dispatch thread, which in turn starts a background operation via an executor. After completion,
+      that executor pushes an operation to the event dispatch thread. If that last operation creates a performance problem,
+      it's two thread changes away from originating event.
+    </p>
+
+    
+<h3>3. Call Sites</h3>
+    
+<p>
+      A <b>call site</b> in JProfiler is the last profiled method call before a recorded thread change is performed.
+      It starts a task at an <b>execution site</b> which is located on a different thread.
+      If request tracking is enabled for the appropriate request tracking type, JProfiler allows you to jump
+      from a call site to an execution site by using hyperlinks that are shown in the call tree view.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_call_site.png">
+    </p>
+    
+<p>
+      Call sites and execution sites are in a 1:n relationship. A call site can start tasks on several execution sites,
+      such as different threads in a thread pool. If a call site calls more than one execution site,
+      you can choose one of them in a dialog.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_execution_site_dialog.png">
+    </p>
+
+    
+<h3>4. Execution Sites</h3>
+    
+<p>
+      An execution site is a synthetic node in the call tree that contains all executions
+      that were started by one particular call site. JProfiler allows you to jump
+      back to the call site by using the hyperlink in the execution site node.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_execution_site.png">
+    </p>
+    
+<p>
+      In principle, call sites and execution sites could be implemented in an n:m relationship. However,
+      it is often important to separately analyze the execution site depending on the call site.
+      For example, the same executor thread can handle tasks submitted from different methods, but they will probably
+      be of a different nature and so merging them would not be advantageous. That's why JProfiler creates <b>a new execution
+      site for every call site</b>.
+    </p>
+    
+<p>
+      However, if the same call site invokes the same execution site repeatedly, the execution site will show the merged call tree of
+      all its invocations. If that is not desired, you can use the
+      <a href="../../../doc/sessions/filters/exceptional.html">exceptional methods</a> feature to split the call tree further,
+      as shown in the screen shot below.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/request_tracking_exceptional.png">
+    </p>
+    
+<p>
+      Because several execution sites can refer to the same call site, call sites have a numeric ID. In that way you can
+      recognize the same call site if you see it referenced from different execution sites. Execution sites are only referenced
+      from a single call site and so they do not need a separate ID.
+    </p>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/hotspotsAndFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/finalizers.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

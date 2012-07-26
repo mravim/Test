@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <nextId id="100" />
+  <generalSettings setupHasRun="false"/>
+  <templates>
+    <template id="50" name="Instrumentation, all features supported" startFrozen="false" recordCPUOnStartup="false" vmCannotExit="false" instrumentationType="1" samplingNoFilters="false" lineNumbers="false" samplingFrequency="5" timeType="1" disableCPUProfiling="false" recordAllocOnStartup="true" recordArrayAlloc="true" enableTriggersOnStartup="true" allocTreeRecordingType="1" disableMonitorContentions="false" componentDetection="true" chronoHeap="false" autoUpdatePeriodLong="5" autoUpdatePeriodShort="2" filteredPayloads="false" allUrls="false" payloadCap="50" eventCap="20000" showSystemThreads="false" utilConcurrentHandling="true" libraryDebugParameters="" exceptionalCap="5" exceptionalTimeType="4" autoTuneInstrumentation="true" autoTuneMaxAverage="100" autoTuneMinPerMille="10" samplingPayloadCallStacks="true" description="This is JProfiler's fully featured mode. In this setting, call stack information is accurate, but CPU overhead and distortion of measured call times may be high, depending on your filter settings. You should define inclusive filters for your own packages." system="true" />
+    <template id="51" name="Sampling for CPU profiling, some features not supported" startFrozen="false" recordCPUOnStartup="false" vmCannotExit="false" instrumentationType="3" samplingNoFilters="false" lineNumbers="false" samplingFrequency="5" timeType="1" disableCPUProfiling="false" recordAllocOnStartup="true" recordArrayAlloc="true" enableTriggersOnStartup="true" allocTreeRecordingType="1" disableMonitorContentions="false" componentDetection="true" chronoHeap="false" autoUpdatePeriodLong="5" autoUpdatePeriodShort="2" filteredPayloads="false" allUrls="false" payloadCap="50" eventCap="20000" showSystemThreads="false" utilConcurrentHandling="true" libraryDebugParameters="" exceptionalCap="5" exceptionalTimeType="4" autoTuneInstrumentation="true" autoTuneMaxAverage="100" autoTuneMinPerMille="10" samplingPayloadCallStacks="true" description="This template is particularly suitable for CPU profiling and for memory profiling when accurate allocation information is not important. Sampling has a very low overhead and does not distort measured call tines. Some views, like the method statistics are no available. JEE payloads cannot be annotated in the call tree, but payload hotspots without backtraces are available." system="true" />
+  </templates>
+  <sessions>
+    <session id="80" templateId="50" name="Animated Bezier Curve Demo" type="1" isStartupWorkingDirectory="true" mainClass="bezier.BezierAnim">
+      <filters>
+        <filter type="inclusive" name="bezier." />
+      </filters>
+      <exceptionalMethods>
+        <method className="java.awt.event.InvocationEvent" methodName="dispatch" signature="()V" />
+      </exceptionalMethods>
+      <classPath>
+        <classPathEntry path="../demo" />
+      </classPath>
+      <sourcePath>
+        <sourcePathEntry path="../demo" />
+      </sourcePath>
+      <probes>
+        <probe name="com.jprofiler.agent.probe.interceptor.TrackingInterceptor" enabled="true" startProbeRecording="false" events="false" annotatePayloads="false">
+          <id value="3" />
+        </probe>
+      </probes>
+    </session>
+    <session id="81" templateId="50" name="Applet Demo (Fishworld)" type="3" isStartupWorkingDirectory="true" appletURL="../demo/fishworld.html">
+      <filters>
+        <filter type="inclusive" name="fishworld." />
+      </filters>
+      <exceptionalMethods>
+        <method className="java.awt.event.InvocationEvent" methodName="dispatch" signature="()V" />
+      </exceptionalMethods>
+      <classPath>
+        <classPathEntry path="../demo" />
+      </classPath>
+      <sourcePath>
+        <sourcePathEntry path="../demo" />
+      </sourcePath>
+      <probes>
+        <probe name="com.jprofiler.agent.probe.interceptor.TrackingInterceptor" enabled="true" startProbeRecording="false" events="false" annotatePayloads="false">
+          <id value="3" />
+        </probe>
+      </probes>
+    </session>
+    <session id="82" name="JDBC demo" recordAllocOnStartup="true" recordCPUOnStartup="true" type="1" isStartupWorkingDirectory="true" mainClass="jdbc.JdbcDemo" autoTuneInstrumentation="false" startFrozen="false" vmCannotExit="false" instrumentationType="1" samplingNoFilters="false" lineNumbers="false" samplingFrequency="5" timeType="1" disableCPUProfiling="false" recordArrayAlloc="true" enableTriggersOnStartup="true" allocTreeRecordingType="1" disableMonitorContentions="false" componentDetection="true" chronoHeap="false" autoUpdatePeriodLong="5" autoUpdatePeriodShort="2" filteredPayloads="false" allUrls="false" payloadCap="50" eventCap="20000" showSystemThreads="false" utilConcurrentHandling="true" libraryDebugParameters="" exceptionalCap="5" exceptionalTimeType="4" autoTuneMaxAverage="100" autoTuneMinPerMille="10" samplingPayloadCallStacks="true">
+      <filters>
+        <filter type="inclusive" name="jdbc." />
+      </filters>
+      <exceptionalMethods>
+        <method className="java.awt.event.InvocationEvent" methodName="dispatch" signature="()V" />
+      </exceptionalMethods>
+      <probes>
+        <probe name="builtin.JdbcProbe" enabled="true" preparedStatementParameters="false" startProbeRecording="true" events="true" annotatePayloads="true" />
+        <probe name="builtin.JndiProbe" enabled="true" startProbeRecording="true" events="true" annotatePayloads="true" />
+        <probe name="com.jprofiler.agent.probe.interceptor.TrackingInterceptor" enabled="true" startProbeRecording="false" events="false" annotatePayloads="false">
+          <id value="2" />
+        </probe>
+      </probes>
+      <classPath>
+        <classPathEntry path="../demo" />
+        <classPathEntry path="../demo/jdbc/hsqldb.jar" />
+      </classPath>
+      <sourcePath>
+        <classPathEntry path="../demo" />
+      </sourcePath>
+    </session>
+  </sessions>
+</config>

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Locking History Graph</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Locking History Graph</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/graphCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/graphHistorySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The locking history graph visualizes the recorded locking situations in the JVM. Only
+        <a href="../../../doc/views/monitors/monitors.html">recorded monitor events</a> are shown.
+      
+      <p>
+        Please see the <a href="../../../doc/views/monitors/monitorContention.html">common properties of monitor views</a>
+        for an explanation of the locking graph.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        There are two sets of events that you step through with the navigation buttons at the top of the view:
+      
+      <ul>
+<li>
+<span class="sectiontitle">All events</span>
+<br>
+          All monitor events that have been recorded. Next to the navigation buttons you see the current position
+          and the total event count as well as the time of the currently shown event. If a time spam has been cumulated (see below),
+          that time span as well as the number of events before and after the currently selected time span are shown.
+        </li>
+<li>
+<span class="sectiontitle">Events of interest</span>
+<br>
+          Monitor events that involve a thread or monitor that you have marked as being of interest to you.
+          You can mark nodes as being of interest by selecting them and choosing <i>Mark Node Of Interest</i>
+          from the context menu. Multiple nodes can be selecting by holding down the <code>Shift</code> key.
+          Marked nodes are painted in a different color.
+          <p>
+            Next to the navigation buttons you see the current position and the total event count involving
+            nodes of interest or the number of events if an event of interest is currently shown. If the current event is
+            not an event of interest, you see the number of events of interest before and after the current event.
+          </p>
+          
+<p>
+            Events of interest do not necessarily have to contain a node of interest. For example, if a thread that has
+            been marked as a node of interest releases a lock, the associated event does not contain that thread node
+            anymore, but the event is still an event of interest.
+          </p>
+          
+<p>
+            To change your selection of nodes of interest, simply select new nodes of interest or choose
+            <i>Remove mark</i> from the context menu.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The tool tips that appear when you hover of the arrows in the graph contain several navigation options:
+      <ul>
+<li>
+<span class="sectiontitle">Origin time</span>
+<br>
+          For blocking and waiting relationships, the tool tip contains a hyperlink to the event where the arrow first
+          appeared.
+        </li>
+<li>
+<span class="sectiontitle">Monitor history</span>
+<br>
+          To analyze the duration of an event, it can be useful to show it in the
+          <a href="../../../doc/views/monitors/monitorContentionHistory.html">monitor history view</a>.
+          At the bottom of the tool tip, a corresponding hyperlink is available.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      At the bottom of the view, you see a time line, where all recorded events are shown as blue lines. The currently
+      shown event is surrounded with a green marker while events of interest are shown in red.
+      <p>
+        When you hover with the mouse over event lines, you can see the number of associated events in the status bar.
+        When you click on an event line, the first event associated with that event line is shown in the graph.
+        When a new event is selected with the navigation buttons or a hyperlink in the tool tip window, the timeline
+        is scrolled so that the selected event is visible.
+      </p>
+      
+<p>
+        You can <b>cumulate multiple events</b> by clicking an dragging the mouse in the time line. The selected
+        area will be shown with a green background and all events in the selected time span will be shown together
+        in the graph. If you have marked nodes of interest, <b>only the events of interest in the selection will be
+        cumulated</b>.
+      </p>
+      
+<p>
+        In a cumulated graph, each arrow can contain multiple events of the same type. In that case, the tool tip window shows
+        the number of events as well as the total time of all contained events. A drop-down list in the tool tip window
+        lets you switch between the stack traces of the different events and the navigation hyperlinks in the tool tip
+        window refer to the currently selected event.
+      </p>
+
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Please see the <a href="../../../doc/views/common/telemetries.html">help on graphs with a time axis</a> for help on
+      common properties of graph views.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/graphCurrent.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/$graphs$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/graphHistorySettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

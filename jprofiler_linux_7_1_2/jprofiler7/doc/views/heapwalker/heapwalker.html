@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker View Section</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker View Section</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/options.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      With the heap walker, you can find memory leaks, look at single instances and flexibly select
+      and analyze objects in several steps.
+      <p>
+        Important notions are
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">the current snapshot</span>
+<br>
+          The heap walker operates on a static snapshot of the heap which is taken by
+          <ul>
+<li>
+              clicking on the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/snapshot_16.png">
+              toolbar button
+            </li>
+<li>
+              using the "Take heap snapshot for selection" action in the
+              <a href="../../../doc/views/memory/memory.html">memory views</a>.
+            </li>
+</ul>
+          
+<p>
+            If a snapshot has already been taken, it will be discarded after confirmation.
+            If the <a href="../../../doc/sessions/sessions.html">current session</a> is
+            <a href="../../../doc/views/views.html">detached</a>, it is not possible to take a new snapshot,
+            Taking a snapshot may take from a few seconds to a few minutes depending on the heap size of the profiled
+            application.
+          </p>
+          
+<p>
+            A <a href="../../../doc/views/common/bookmarks.html">bookmark</a> will be added when a heap snapshot
+            is taken manually.
+          </p>
+          
+<p>
+            Note that you can also use a
+            <a href="../../../doc/sessions/triggers/triggerSettings.html">trigger</a> and the
+            <a href="../../../doc/sessions/triggers/actions.html">"Trigger heap dump" action</a>
+            to take a snapshot. This is especially useful for <a href="../../../doc/offline/offline.html">offline profiling</a>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">the initial object set</span>
+<br>
+          After a snapshot has been fully prepared, you are taken to the
+          the <a href="../../../doc/views/heapwalker/classes.html">classes view</a> and all objects
+          in the snapshot are displayed. You can return to this view at any later point by
+          <ul>
+<li>choosing <i>View-&gt;Heap walker start view</i>
+              from JProfiler's main menu</li>
+<li>clicking on the the corresponding
+              <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/home_16.png"> toolbar button
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">the current object set</span>
+<br>
+          After each selection step a new object set is created which then becomes the current object set.
+          Starting with the initial object set, you add selection steps and change the current object set
+          to drill down toward your objective. The contents of the current object set (any number
+          of instances of classes and arrays) are described in the title area of the heap walker.
+          <p>
+            You can calculate the retained size and the deep size of the entire object set by clicking
+            on the "Calculate retained and deep sizes" hyperlink in the title area. Once the calculation
+            is finished, the hyperlink is replaced with the results.
+          </p>
+          
+<p>
+          The history of your selection steps can be shown at the bottom by clicking on the the corresponding
+              <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/heap_selection_16.png"> toolbar button
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">the view on the current object set</span>
+<br>
+          All views share the same
+          <a href="../../../doc/views/heapwalker/viewLayout.html">basic layout</a>.
+          There are 5 top-level views which <b>show information on the current object set</b>:
+          <ul>
+<li>
+              the <a href="../../../doc/views/heapwalker/classes.html">classes view</a>
+            
+</li>
+<li>
+              the <a href="../../../doc/views/heapwalker/allocations.html">allocation view</a>
+            
+</li>
+<li>
+              the <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects view</a>
+            
+</li>
+<li>
+              the <a href="../../../doc/views/heapwalker/references.html">reference view</a>
+            
+</li>
+<li>
+              the <a href="../../../doc/views/heapwalker/chrono.html">time view</a>
+            
+</li>
+</ul>
+          
+<p>
+            In addition there are two more views:
+          </p>
+          
+<ul>
+<li>
+              the <a href="../../../doc/views/heapwalker/inspections.html">inspections view</a>
+                which shows inspection that <b>operate on the current object set</b>
+            
+</li>
+<li>
+              the <a href="../../../doc/views/heapwalker/graph.html">graph</a> which does not
+              show data from the current object set. You can add objects from the reference
+              and biggest objects views that are <b>not cleared when you add selection steps</b>.
+            </li>
+</ul>
+          
+<p>
+            The view is chosen either
+            <ul>
+<li>
+                using the view selector at the bottom of the heap walker.
+              </li>
+<li>
+                or from the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a>
+                that is displayed each time a new object set is created. You can suppress this dialog in the
+                <a href="../../../doc/views/heapwalker/viewSettings.html">heap walker view settings</a>.
+              </li>
+</ul>
+          
+</p>
+        
+</li>
+<li>
+<span class="sectiontitle">the three types of size measurements</span>
+<br>
+          
+<p>
+            The title area of the heap walker displays several sizes for single objects or object sets. All sizes
+            include only the object data, they do not include internal JVM structures for classes, nor do they
+            include class data or local variables.
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">shallow size</span>
+<br>
+              The shallow size does not include the size of referenced arrays and
+              instances but only the size of the corresponding pointers. Shallow sizes are
+              trivially available for all objects and object sets and are displayed in all views.
+            </li>
+<li>
+<span class="sectiontitle">retained size</span>
+<br>
+              The retained size is calculated as the shallow size plus total size of all objects
+              that would be garbage collected if the current object or object set were removed.
+              This size tells you how much memory is really behind an object or object set.
+              Retained size calculation is done for all objects when the heap dump is processed.
+              Retained sizes are shown for single instances in several views.
+            </li>
+<li>
+<span class="sectiontitle">deep size</span>
+<br>
+              The deep size is calculated as the shallow size plus total size of all referenced
+              objects. In extreme cases, this value may be a significant
+              percentage of the entire heap. Deep size calculation is only available for the current object set.
+            </li>
+</ul>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/browser_backward_16.png">
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/browser_forward_16.png">
+      history controls of the heap walker in JProfiler's toolbar allow
+      you to go backward and forward in the <b>history of your view changes</b>.
+      View changes where selection steps were performed, as well as those performed through
+      the view selector are recorded in the history.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Changing the current object set is done by clicking on the
+      <b>[Use selected]</b> buttons in the heap walker views. You first
+      select objects of interest and then use this button to create a new
+      object set that contains only these objects. In many cases you can double click on
+      an item to create a new object set with it.
+    </td>
+</tr>
+</table>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The heap walker can only display allocation call stack information for recorded objects.
+      See the <a href="../../../doc/views/memory/memory.html">memory section overview</a>
+      for further details.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/options.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

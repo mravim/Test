@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Remote Profiling - Application Servers and Standalone Applications</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Remote Profiling - Application Servers and Standalone Applications</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/profiling/modes.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/background.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Introduction</h3>
+    
+      Although it is easiest to profile applications and application servers that are running on
+      your local machine, sometimes it is not possible to replicate the execution environment
+      on your computer. If you have no physical access to the remote machine or if the remote machine has
+      no GUI where you could run JProfiler, you have to set up remote profiling.
+    <br>
+    
+<p>
+      Remote profiling means that the profiling agent is running on the remote machine and the JProfiler
+      GUI is running on your local machine. Profiling agent and JProfiler GUI communicate with each other
+      through a socket. This situation is fundamentally the same as running a session that is launcher on the
+      local machine, just that the socket communication socket connects between different machines.
+      The main difference for you is that for launched sessions you don't have to worry about the location of native libraries
+      and that the startup sequence can be managed by JProfiler.
+    </p>
+
+    
+<h3>2. The jpenable command line utility</h3>
+    
+<p>
+      To avoid running an integration wizard or modifying the VM parameters of the profiled application,
+      just extract the JProfiler archive from the
+      <a target="_blank" href="http://www.ej-technologies.com/download/jprofiler/files.html">download page</a>
+      on the remote machine. You do not have to enter a license key there. Run the
+      <b><tt>bin/jpenable</tt></b> command line application on the remote machine. You will be able to
+      select a JVM and load the profiling agent into it so that is listens on a specific profiling port.
+      In your local JProfiler GUI, you can then connect with an "Attach to profiled JVM (local or remote)" session.
+    </p>
+    
+<p>
+      This only works with a Java VM of version 1.6 or higher and has the drawback that array allocations are
+      not recorded, i.e. stack trace information for array allocations is not available. Also, if you're
+      profiling regularly, it might be more convenient to prepare a permanent setup that does not require you to
+      run the <b><tt>jpenable</tt></b> executable every time.
+    </p>
+
+    
+<h3>3. The remote integration wizard</h3>
+    
+<p>
+      All integration wizards in JProfiler can help you with setting up remote profiling.
+      After choosing the integration type or application server, the wizard asks you where
+      the profiled application is located. If you choose the remote option, there will be
+      additional questions regarding the remote machine.
+    </p>
+    
+<p>
+      
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/integration_wizard.png">
+    </p>
+    
+<p>
+      When the remote integration wizard asks you for startup scripts or other files of
+      the application server on the remote machine it brings up a standard file selector.
+      If the file system of the remote machine is accessible as a network drive or mounted
+      into your file system, you can select those files and JProfiler will directly write
+      modified files to the right location.
+    </p>
+    
+<p>
+      If you do not have direct access to the file system of the remote machine, you have two options:
+      You can use the console integration wizard by executing <i><tt>bin/jpintegrate</tt></i> on the remote machine.
+      Alternatively, you can copy the required files to the local machine and use the "remote" option in the integration wizard.
+      However, you must then transfer the modified or new files back to the remote machine after the integration wizard has completed.
+    </p>
+
+    
+<h3>4. Requirements for remote profiling</h3>
+    
+<p>
+      Although the integration wizards in JProfiler give you all required information,
+      it's always a good idea to have a little more inside knowledge about the
+      mechanics and the requirements of remote profiling. When
+      trouble-shooting a failed integration, you should check that the requirements
+      below are fulfilled correctly.
+    </p>
+    
+<p>
+      The following requirements have to be satisfied for remote profiling:
+      <ol style="list-style-image: none">
+<li>
+          
+<p>
+            JProfiler has to be installed on the local machine <b>and</b> on the remote machine.
+            If the remote machine is a Unix machine, you might not be able to run the GUI installer
+            of JProfiler. In this case, please use the <b><tt>.tar.gz</tt></b> archive to install
+            JProfiler.
+          </p>
+          
+<p>
+            Unless you specified the "nowait" parameter on the command line together with a "config" argument,
+            (only necessary for pre 1.6 JVMs), you do <b>not</b> have to enter a license key on the
+            remote machine, the license key is always provided by the JProfiler GUI. Because of that, it is
+            sufficient to unpack JProfiler to any directory where you have write permission.
+          </p>
+        
+</li>
+<li>
+          The operating system and the architecture of the remote machine must be explicitly
+          supported by JProfiler. Please see the
+          <a target="_blank" href="http://www.ej-technologies.com/products/jprofiler/featuresPlatforms.html">list of supported platforms</a>
+          for more information. JProfiler is not a pure Java application, it contains a lot of native code
+          which is not easily portable to unsupported platforms.
+        </li>
+<li>
+          
+<p>
+            On the remote machine, you have to add a number of VM parameters to the java invocation
+            of your application server or your standalone application. The fundamental VM parameters
+             are <code>-Xrunjprofiler</code> for Java &lt;=1.4.2 (JVMPI) and
+            <code>-agentpath:[path to jprofilerti library]</code>
+             for Java &gt;=1.5.0 (JVMTI), which tell the JVM to load the native profiling agent.
+            The help page on <a href="../../../doc/sessions/remote.html">remote sessions</a>
+            in the reference section tells you the corresponding path to the jprofilerti library for all platforms.
+          </p>
+          
+<p>
+            Depending on your JVM and your platform, you have to add further VM parameters to your
+            java invocation.
+            The <a href="../../../doc/sessions/remoteTable.html">remote session invocation table</a>
+            in the reference section gives you the exact parameter sequence for your configuration.
+          </p>
+          
+<p>
+            This is all that is required to profile a modern JVM (Java 1.5 and later).
+          </p>
+        
+</li>
+<li>
+          For Java &lt;=1.4.2 (JVMPI), more steps are necessary. You also have to add
+          <code>-Xbootclasspath/a:{path to agent.jar}</code> which adds required Java classes
+          to the bootclasspath. <b><tt>agent.jar</tt></b> is located in the <i><tt>bin</tt></i>
+          directory of your JProfiler installation. In addition, the native library path on the
+          remote machine must contain the platform-specific directory in
+          the <i><tt>bin</tt></i> directory of the JProfiler installation. The "native library path" is
+          defined by a different environment variable on each platform. For example, on Windows, it
+          is simply the <code>PATH</code> environment variable, on Linux it is <code>LD_LIBRARY_PATH</code>.
+          The help page on <a href="../../../doc/sessions/remote.html">remote sessions</a>
+          in the reference section tells you the corresponding environment variables for all platforms.
+         </li>
+<li>
+          On the local machine, you have to define a "Attach to profiled JVM" session whose "host" entry points
+          to the remote machine.
+        </li>
+</ol>
+    
+</p>
+    
+<h3>5. Starting remote profiling</h3>
+    
+<p>
+      If you run the integration wizard for a local application server, JProfiler will be able
+      to start it and connect to it. JProfiler has no way to start the application server if it
+      is located on a remote machine. For remote applications and application servers, you have
+      to perform <b>two</b> actions to start the profiling session:
+    </p>
+    
+<ol style="list-style-image: none">
+<li>
+        Execute the modified start script on the remote machine. Depending on what option you have chosen in the
+        remote profiling wizard, there are two startup sequences: either the application or application
+        server starts up completely, or it prints a few lines of information and tells you that it is waiting for a connection.
+        With Java 1.6.0 and later, the profiling options will be sent to the profiling agent when the GUI connects and you don't have
+        to copy your config file to the server.
+        <p>
+          With Java 1.5.0 and earlier, changing profiling settings at runtime is not possible. In the case
+          where the application does not wait for a connection from the JProfiler GUI,
+          the profiling agent loads the profiling configuration from the <tt>config.xml</tt> file you
+          have copied to the server as instructed by the integration wizard.
+        </p>
+      
+</li>
+<li>
+        Start the "Attach to profiled JVM" session in the JProfiler GUI on the local machine. The session
+        will connect to the remote computer and the remote application or application server
+        will then start up if it waited for the GUI connection.
+      </li>
+</ol>
+    
+<h3>6. Trouble-shooting</h3>
+    
+<p>
+      When things don't work out as expected, please have a look at the terminal output of the
+      profiled application or application server on the remote machine. For application servers, the
+      stderr stream might be written to a log file. Depending on the content of the stderr output,
+      the search for the problem takes different directions:
+    </p>
+    
+<ul>
+<li>
+        If stderr contains <tt>"Waiting for connection ..."</tt>, the configuration of the remote
+        machine is ok. The problem might then be related to the following questions:
+        <ul>
+<li>Did you forget to start the "Attach to profiled JVM" session in the JProfiler GUI on your local machine?</li>
+<li>Is the host name or the IP address correctly configured in the "Attach to profiled JVM" session?</li>
+<li>Is there a firewall between the local machine or the remote machine?</li>
+</ul>
+      
+</li>
+<li>
+        If stderr contains an error message about not being able to bind a socket, the port is already
+        in use. The problem might then be related to the following questions:
+        <ul>
+<li>
+            Did you start JProfiler multiple times on the remote machine? Each profiled
+            application needs a separate communication port.
+            Please see below on how to change that port.
+          </li>
+<li>
+            Are there any zombie java processes of previous profiling runs that are
+            blocking the port? In this case please kill these processes.
+          </li>
+<li>
+            Is there a different application on the remote machine that is
+            using the JProfiler port? Please see below on how to change the port
+            for JProfiler.
+          </li>
+</ul>
+        
+<p>
+          The communication port is defined as a parameter to the profiling agent VM parameter.
+          To define a communication port of 25000, please change this VM parameter
+          to <code>-Xrunjprofiler:port=25000</code> for Java &lt;=1.4.2 (JVMPI) or
+          <code>-agentpath:[path to jprofilerti library]=port=25000</code> for Java &gt;=1.5.0 (JVMTI).
+          Also, please make sure that the same port is configured in the "Attach to profiled JVM" session in the
+          JProfiler GUI on your local machine. Please note that this port has nothing to do with
+          HTTP or other standard port numbers and must not be the same as any port that's already
+          in use on the remote machine.
+        </p>
+      
+</li>
+<li>
+        
+<p>
+          For Java 1.4.2 and earlier,
+          if stderr contains an error message about not being able to load native libraries,
+          the native library path is not configured correctly. Please see the requirements
+          above on how to configure the native library directory. If the problem persist,
+          it might be a problem with dependencies. On Unix platforms, you can execute
+          <pre>
+      LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ldd libjprofiler.so
+          </pre>
+          in the native library directory to get information about missing dependencies. On
+          Microsoft Windows, you can download the dependency walker from
+          <a target="_blank" href="http://www.dependencywalker.com">http://www.dependencywalker.com</a>
+          to analyze the problem.
+        </p>
+        
+<p>
+          Please note that it is <b>not</b> a good
+          idea to define the VM parameter <code>java.library.path</code>. If you absolutely have to do that,
+          please make sure that the definition contains the appropriate native library directory
+          for JProfiler.
+        </p>
+      
+</li>
+<li>
+        
+<p>
+          For Java 1.4.2 and earlier,
+          if stderr contains a <code>NoClassDefFoundError</code> for a class in the
+          <code>com.jprofiler.agent</code> package, the bootclasspath has not been
+          configured correctly. Please see the requirements above on how to configure 
+          the bootclasspath. Putting <b><tt>agent.jar</tt></b> in the regular
+          classpath does <b>not</b> help and may actually be harmful.
+        </p>
+        
+<p>
+          
+<code>NoClassDefFoundError</code>s also occur if there is a classloader problem.
+          The most common case is if the profiled application is an
+          <a target="_blank" href="http://www.osgi.org">OSGi</a> application. In some OSGi applications, you have to
+          add the JProfiler agent package <tt>com.jprofiler.agent</tt> to the standard
+          variable <tt>org.osgi.framework.bootdelegation</tt> in the OSGi configuration file. For
+          <a target="_blank" href="http://www.eclipse.org/equinox">eclipse Equinox</a>, this is the
+          <i><tt>config.ini</tt></i> file, for  <a target="_blank" href="http://felix.apache.org">Apache Felix</a>,
+          this is the <i><tt>config.properties</tt></i> file.
+        </p>
+      
+</li>
+<li>
+        
+<p>
+          If there are no lines in stderr that are prefixed with
+          <tt>JProfiler&gt;</tt> and your application or application server starts up normally,
+          the <code>-Xrunjprofiler</code> for Java &lt;=1.4.2 (JVMPI) or <code>-agentpath:[path to jprofilerti library]</code>
+          for Java &gt;=1.5.0 (JVMTI) VM parameter have not been included in the
+          java call. Please find out which java call in your startup script is actually executed
+          and add the VM parameters there.
+        </p>
+      
+</li>
+</ul>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/profiling/modes.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/profiling/background.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

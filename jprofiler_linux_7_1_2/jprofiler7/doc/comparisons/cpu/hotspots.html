@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Hot Spot Comparison</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Hot Spot Comparison</h2>
+</td><td valign="top" align="right"><a href="../../../doc/comparisons/cpu/$hotspotsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/cpu/hotspotsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The hot spot comparison is one of the <a href="../../../doc/comparisons/cpu/cpu.html">CPU comparisons</a>. It is created by
+      invoking the CPU comparison wizard. For more information on
+      snapshot comparisons, please see the <a href="../../../doc/comparisons/comparisons.html">snapshot comparison overview</a>.
+    </td>
+</tr>
+</table>
+  
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The wizard has the following additional steps:
+      <ul>
+<li>
+<span class="sectiontitle">Select snapshots</span>
+<br>
+          The hot spot comparison compares two snapshot files. In this step, you select the first
+          and the second snapshot file for the comparison. The combo boxes contain all snapshot files that have been added
+          to the <a href="../../../doc/comparisons/comparisons.html">snapshot selector</a>. You can use the same snapshot file
+          for the first and second snapshot file, in which case the thread selections in the next step must be different.
+        </li>
+<li>
+<span class="sectiontitle">Thread selection</span>
+<br>
+          In this step, you choose for which threads the comparison should be made. By
+          default all threads are selected, you can restrict the thread selection to single thread groups or single threads.
+        </li>
+<li>
+<span class="sectiontitle">View parameters</span>
+<br>
+          In this steps you can select thread status, aggregation level and filtered classes handling, just as for the
+          <a href="../../../doc/views/cpu/hotspots.html">hot spots view</a>.
+          In addition, you can choose whether to calculate differences of total call times or of
+          average call times (total time divided by invocation count). Note that if "Sampling" was used as
+          <a href="../../../doc/sessions/profiling/callTreeCollection.html">the method call recording type</a>, the invocation
+          count is not available and this setting will not have any effect.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Each row in the hot spot comparison has the following columns:
+      <ul>
+<li>
+          the name of the hot spot
+        </li>
+<li>
+          the inherent time in the second
+          snapshot file minus the inherent time in the first snapshot file
+        </li>
+<li>
+          the invocations in the second
+          snapshot file minus the invocations in the first snapshot file
+        </li>
+</ul>
+      
+<p>
+        The second column incorporates a bidirectional bar chart. Increases are painted in red and to the right, while
+        decreases are painted in green and to the left. In the <a href="../../../doc/comparisons/cpu/hotspotsSettings.html">view
+        settings dialog</a> you can choose whether you want this bar chart to display absolute changes or
+        the percentage of the change. The other value is displayed in parentheses. This setting also
+        determines how this column is sorted.
+      </p>
+      
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      By default, only  hot spots that have changed from one snapshot file to the other
+      are displayed. You can change this behavior in the <a href="../../../doc/comparisons/cpu/hotspotsSettings.html">view
+      settings dialog</a>.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      At the bottom of the hot spot comparison is a <a href="../../../doc/views/common/dynamicFilters.html">view filter selector</a>
+      that filters data for specific package or class names.
+    </td>
+</tr>
+</table>
+  
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/comparisons/cpu/$hotspotsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/cpu/hotspotsSettings.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

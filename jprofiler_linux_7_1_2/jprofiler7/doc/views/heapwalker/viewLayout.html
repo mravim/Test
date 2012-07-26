@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker View Layout</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker View Layout</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/options.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$classesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      All <a href="../../../doc/views/heapwalker/heapwalker.html">heap walker views</a>
+      share the same basic layout:
+      <p>
+        
+<img style="vertical-align: middle" align="middle" border="1" src="../../../doc/images/screen_heapwalker_layout.png">
+      </p>
+      
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The description of the current object set shows
+      <ul>
+<li>
+          
+<b>what kind of objects</b> are in the current object set. If there
+          is more than one class or array type in the current object set, a cumulative
+          count will be given separately for class instances and arrays. As
+          it is often the case, if all objects are of a single class or array type,
+          the class name or array type will be displayed.
+        </li>
+<li>
+<b>how many selection steps</b> have occurred so far. This gives
+          an idea of the complexity of the current selection.</li>
+<li>
+<b>how much space</b> the current object set uses on the heap.
+          Note that this is the shallow size which does not include the sizes of
+          referenced arrays and class instances.</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Most screens in the heap walker have <b>more than one view mode</b>. The drop-down list
+      in the top-left corner give access to different related views. For example,
+      the reference view has 4 different view mode, for outgoing and incoming references
+      as well as for cumulated outgoing and cumulated incoming references.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      With the selection button you can add another selection step. A new object
+      set that contains only the currently selected objects will be created.
+      Some views offer more than one way to add a selection step in a drop-down menu.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The main portion of the screen displays the specific content of the current view.
+    </td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The selection history shows all selection steps that have occurred so far. The
+      selection history pane is a vertical split pane and can be resized to the most convenient
+      size. You can toggle the visibility of the selection history window by
+      <ul>
+<li>choosing <i>View-&gt;Show selection steps</i>
+          from JProfiler's main menu</li>
+<li>clicking on the corresponding
+          <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/heap_selection_16.png">
+          toolbar button
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The view selector allows you to switch between the six different views
+      <b>without changing the current object set</b>. The views show
+      <ul>
+<li>
+          the <a href="../../../doc/views/heapwalker/classes.html">classes</a>
+          in the current object set
+        </li>
+<li>
+          the <a href="../../../doc/views/heapwalker/allocations.html">allocation spots</a>
+          of the current object set
+        </li>
+<li>
+          the <a href="../../../doc/views/heapwalker/biggestObjects.html">biggest objects</a>
+          in the current object set
+        </li>
+<li>
+          the <a href="../../../doc/views/heapwalker/references.html">references</a>
+          of the current object set
+        </li>
+<li>
+          a graph of <a href="../../../doc/views/heapwalker/chrono.html">allocation times</a>
+          of the current object set
+        </li>
+<li>
+          a list of <a href="../../../doc/views/heapwalker/inspections.html">inspections</a>
+          that can be performed on the current object set
+        </li>
+<li>
+          the <a href="../../../doc/views/heapwalker/graph.html">graph</a> where objects
+          from different object sets can be added. This view is different from the others in that
+          is does not only show data from the current object set.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/options.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$heapwalkerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$classesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

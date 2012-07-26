@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Monitor Usage Statistics</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Monitor Usage Statistics</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/monitors/$statisticsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/statisticsOptions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The monitor usage statistics view shows statically calculated statistics for
+      monitor usage.
+      Monitor usage statistics can only be calculated if
+      <a href="../../../doc/views/monitors/statistics.html">monitor events have been recorded</a>.
+      <p>
+        To calculate a statistics, click 
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/calculate_16.png">&nbsp;<b>Calculate
+        statistics</b> in the tool bar or select
+        <i>View-&gt;Calculate statistics</i>
+        from JProfiler's main menu. If a statistics has been calculated, the context menu also
+        provides access to this action.
+      </p>
+      
+<p>
+        Before a statistics is calculated, the 
+        <a href="../../../doc/views/monitors/statisticsOptions.html">monitor usage statistics options
+        dialog</a> is brought up. The resulting statistics table is static and can be 
+        re-calculated be executing
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/calculate_16.png">&nbsp;<b>Calculate
+        statistics</b> again. The statistics options dialog remembers your last selection.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The package level statistics table displays five columns:
+      <ul>
+<li>
+<span class="sectiontitle">Monitors/Threads/Classes</span>
+<br>
+          Displays the grouping criterion selected in the
+          <a href="../../../doc/views/monitors/statisticsOptions.html">statistics dialog</a>,
+        </li>
+<li>
+<span class="sectiontitle">Block count</span>
+<br>
+          Shows how often a block operation has been performed on the monitors grouped
+          in this row.
+        </li>
+<li>
+<span class="sectiontitle">Block duration</span>
+<br>
+          Shows the cumulative duration of all block operations performed on the monitors
+          grouped in this row.
+        </li>
+<li>
+<span class="sectiontitle">Wait count</span>
+<br>
+          Shows how often a waiting operation has been performed on the monitors grouped
+          in this row.
+        </li>
+<li>
+<span class="sectiontitle">Wait duration</span>
+<br>
+          Shows the cumulative duration of all waiting operations performed on the monitors
+          grouped in this row.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/monitors/$statisticsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/monitors/statisticsOptions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

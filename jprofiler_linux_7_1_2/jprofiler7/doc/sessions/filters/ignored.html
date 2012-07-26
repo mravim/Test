@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Ignored Methods</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Ignored Methods</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/filters/exceptional.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/filters/filterSettings.html">filter settings</a>, you see methods
+      an classes that should be completely ignored by JProfiler. The two main use cases for this feature are 
+      call site mechanisms of dynamic languages such as Groovy, and methods
+      that have been identified as overhead hot spots and that you have accepted into the list of ignored methods.
+      <p>
+        By default, JProfiler ignores the call site mechanism of Groovy. If you click on on the
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/reset_filters_16.png">&nbsp;Reset button, the default entries
+        will be restored.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        If the <a href="../../../doc/sessions/profiling/callTreeCollection.html">method call recording type</a> is set to
+        <tt>Dynamic instrumentation</tt>, all methods of
+        <a href="../../../doc/sessions/filters/define.html">profiled classes</a> are instrumented. This creates some overhead
+        which is significant for methods that have very short execution times. If such methods are called very frequently,
+        the measured time of those method will be far to high. Also, due to the instrumentation, the hot spot compiler
+        might be prevented from optimizing them. In extreme cases, such methods become the dominant hot spots
+        although this is not true for an uninstrumented run. An example is the method of an XML parser that reads the next
+        character. This method returns very quickly, but may be invoked millions of times in a short time span.
+      
+      <p>
+        This problem is not present when the
+        <a href="../../../doc/sessions/profiling/callTreeCollection.html">method call recording type</a> is set to
+        <tt>Sampling</tt>. However, sampling does not provide invocations counts, shows only longer method calls
+        and several view such as the <a href="../../../doc/views/cpu/statistics.html">method statistics view</a> and the
+        <a href="../../../doc/views/cpu/tracer.html">call tracer</a> do not work when sampling is used.
+      </p>
+      
+<p>
+        To alleviate the problem with dynamic instrumentation, JProfiler has a mechanism called
+        <b>auto-tuning</b>. From time to time, the profiling agent checks for such methods and transmits them
+        to the JProfiler GUI. In the status bar, an entry such as
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/excessive_overhead_16.png">&nbsp;<tt>3 overhead hot spots</tt>
+        will be shown. You can click on that status bar entry to review the detected overhead hot spots and
+        choose to accept them into the list of ignored methods. These ignored methods will then not be instrumented.
+        When a session is terminated, the same dialog is shown.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      All ignored methods will be missing in the call tree. Their execution time will be added to the inherent time of
+      the calling method. If you find later on, that some ignored methods are indispensable in the profiling views,
+      you can activate this tab in the filter settings and delete those methods.
+      <p>
+        In case that you do not want to see messages about auto-tuning, you can disable it in the
+        <a href="../../../doc/sessions/profiling/cpu.html">profiling settings</a>. Also, several parameters can be
+        adjusted to broaden or narrow the scope of the methods that are considered as overhead hot spots.
+      </p>
+      
+<p>
+        You can also add ignored methods directly on this tab of the filter settings.
+        The following ways for selecting methods are available:
+      </p>
+      
+    
+<ul>
+<li>
+<span class="sectiontitle">Search in configured classpath</span>
+<br>
+        A class chooser will be shown that shows all classes in the classpath configured in
+        the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>.
+        Finally you have to select a method from the selected class.
+      </li>
+<li>
+<span class="sectiontitle">Search in other JAR or class files</span>
+<br>
+        First, you can select a JAR or class file. If the selection is a JRE file, you then have to
+        select a class in a class chooser. After the selection you will be asked whether to
+        expand the classpath with the current selection. For remote sessions, the classpath
+        is often not configured, so this is a shortcut to make your selection permanent.
+        Finally, you can select a method from the selected class.
+        
+          <p>
+            Alternatively, you can choose all methods from the selected class by selecting the "All methods"
+            radio button at the top of the dialog.
+          </p>
+        
+      
+</li>
+<li>
+<span class="sectiontitle">Search in profiled classes</span>
+<br>
+        If the session is being profiled, a class chooser is displayed that shows all classes
+        in the profiled JVM. There may be classes in the classpath that have not been loaded. Those classes
+        will not be shown in the class chooser. Finally, you can to select a method from the selected class.
+        
+          <p>
+            Alternatively, you can choose all methods from the selected class by selecting the "All methods"
+            radio button at the top of the dialog.
+          </p>
+        
+      
+</li>
+<li>
+<span class="sectiontitle">Enter manually (advanced)</span>
+<br>
+        This option displays a dialog that allows you to enter class name, method name and method signature in
+        JNI format. The JNI format of the method signature is explained in the javadoc of
+        <tt>com.jprofiler.api.agent.probe.InterceptionMethod</tt>.
+        <p>
+          The context menu for the list of methods offers the option to edit existing entries.
+        </p>
+        
+          
+<p>
+            To select all methods from a class, enter <tt>*</tt> for the method name and the empty
+            string for the signature.
+          </p>
+        
+      
+</li>
+</ul>
+  
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/filters/exceptional.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/filters/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

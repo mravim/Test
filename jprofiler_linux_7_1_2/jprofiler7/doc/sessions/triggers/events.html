@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Trigger Event Types</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Trigger Event Types</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/wizard.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/actions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    The following trigger types are available in the <a href="../../../doc/sessions/triggers/wizard.html">trigger wizard</a>
+    for configuring <a href="../../../doc/sessions/triggers/triggerSettings.html">triggers</a>:
+    <ul>
+<li>
+<span class="sectiontitle">Method invocation</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_methodinvocation_16.png">
+        </p>
+        
+<p>
+          This event occurs when a method is called. Several methods can be configured for the same action sequence.
+          Besides the standard actions, there are several special actions for this trigger type.
+        </p>
+        
+<p>
+          The second step of the trigger wizard will then be the "Specify methods" step. Here you can edit the list of methods
+          for which this trigger will be activated. There are several ways to enter new methods:
+        </p>
+        
+    
+<ul>
+<li>
+<span class="sectiontitle">Search in configured classpath</span>
+<br>
+        A class chooser will be shown that shows all classes in the classpath configured in
+        the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>.
+        Finally you have to select a method from the selected class.
+      </li>
+<li>
+<span class="sectiontitle">Search in other JAR or class files</span>
+<br>
+        First, you can select a JAR or class file. If the selection is a JRE file, you then have to
+        select a class in a class chooser. After the selection you will be asked whether to
+        expand the classpath with the current selection. For remote sessions, the classpath
+        is often not configured, so this is a shortcut to make your selection permanent.
+        Finally, you can select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Search in profiled classes</span>
+<br>
+        If the session is being profiled, a class chooser is displayed that shows all classes
+        in the profiled JVM. There may be classes in the classpath that have not been loaded. Those classes
+        will not be shown in the class chooser. Finally, you can to select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Enter manually (advanced)</span>
+<br>
+        This option displays a dialog that allows you to enter class name, method name and method signature in
+        JNI format. The JNI format of the method signature is explained in the javadoc of
+        <tt>com.jprofiler.api.agent.probe.InterceptionMethod</tt>.
+        <p>
+          The context menu for the list of methods offers the option to edit existing entries.
+        </p>
+        
+      
+</li>
+</ul>
+  
+        
+<p>
+          In addition, <a href="../../../doc/sessions/triggers/addToTriggerDialog.html">all views with call trees</a>
+          offer the possibility to select methods for a method trigger in the context menu.
+        </p>
+        
+<p>
+          By default, the method trigger event is not fired for recursive calls. This means that if a method M is being
+          called and later on in the call stack method M is called again, the event is only fired for the first invocation
+          of method M. If you deselect the check box <tt>Ignore recursive calls</tt>, the event will be fired for
+          all invocations of a method.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Heap usage threshold</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_heapthreshold_16.png">
+        </p>
+        
+<p>
+          Requirements: Java 1.4+
+        </p>
+        
+<p>
+          This event occurs when the heap usage exceeds a certain threshold in percent of the maximum heap size for a
+          minimum period of time.
+        </p>
+        
+<p>
+          The second step of the trigger wizard will then be the "Threshold" step. Here you can configure the
+        </p>
+        
+<ul>
+<li>
+<span class="sectiontitle">Threshold</span>
+<br>
+            The trigger will be activated each time when the used heap size exceed the configured percentage of the
+            maximum heap size.
+          </li>
+<li>
+<span class="sectiontitle">Activation time</span>
+<br>
+            To avoid spurious trigger events, the activation time sets a minimum amount of time during which the threshold must
+            be exceeded. Only after the activation time has passed will the trigger be activated.
+          </li>
+<li>
+<span class="sectiontitle">Deactivation time</span>
+<br>
+            Similar to the activation time, the trigger will only be deactivated after heap usage falls below the
+            threshold for a minimum amount of time. By default, the deactivation time is the same as the activation
+            time, however, you can configure a different time for it. Activation and deactivation times
+            determine the sensitivity of the trigger to the threshold value.
+          </li>
+<li>
+<span class="sectiontitle">Inhibition time</span>
+<br>
+            To avoid that too many trigger events are fired, you can set an inhibition time. After the trigger has
+            been deactivated, the trigger will not be activated again for the duration of the inhibition time.
+          </li>
+</ul>
+      
+</li>
+<li>
+<span class="sectiontitle">CPU load threshold</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_cputhreshold_16.png">
+        </p>
+        
+<p>
+          Requirements: Java 1.5+
+        </p>
+        
+<p>
+          This event occurs when the CPU load exceeds a certain threshold in percent for a minimum period of time.
+        </p>
+        
+<p>
+          The second step of the trigger wizard will then be the "Threshold" step which is explained above for the "Heap usage threshold"
+          trigger with the only difference that the threshold value is the CPU load in percent.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Out of memory exception</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_oom_16.png">
+        </p>
+        
+<p>
+          Requirements: Java 1.6+
+        </p>
+        
+<p>
+          This event occurs when an OutOfMemoryException is thrown. You can only save an HPROF snapshot in this case
+          since the trigger works by adding
+          <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html">-XX:+HeapDumpOnOutOfMemoryError</a>
+          to the VM options.
+          Also, this trigger only works with a Java 6+ JVM. For 1.5.0_07+ and 1.4.2_12+, this VM option is also
+          supported, however, it cannot be added by the profiling agent, so you have to add it manually to the VM
+          options of the profiled application.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">Timer</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_timer_16.png">
+        </p>
+        
+<p>
+          With a timer trigger, you can periodically execute a certain set of actions, such as saving a snapshot.
+        </p>
+        
+<p>
+          The second step of the trigger wizard will then be the "Timer" step where you can configure the following properties of the timer:
+        </p>
+        
+<ul>
+<li>
+<span class="sectiontitle">Timer type</span>
+<br>
+            A timer can either periodically either and unlimited number of times of a limited number of times.
+          </li>
+<li>
+<span class="sectiontitle">Interval</span>
+<br>
+            The interval defines the period of time between two subsequent timer invocations.
+          </li>
+<li>
+<span class="sectiontitle">Offset</span>
+<br>
+            With the offset, you can specify how much time should pass between the start of the JVM and the
+            first invocation of the timer.
+          </li>
+</ul>
+      
+</li>
+<li>
+<span class="sectiontitle">JVM startup</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_jvmstart_16.png">
+        </p>
+        
+<p>
+          With a JVM startup trigger, you can execute a certain set of actions right after the JVM is started for profiling.
+          The actual execution is performed right after the trigger subsystem has been initialized in the profiling agent.
+        </p>
+      
+</li>
+<li>
+<span class="sectiontitle">JVM exit</span>
+<br>
+        
+<p>
+          Symbol: <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/trigger_jvmstop_16.png">
+        </p>
+        
+<p>
+          With a JVM exit trigger, you can execute a certain set of actions right before the JVM is shut down.
+          This is implemented with a standard shutdown hook, so code in other shutdown hooks may be executed after
+          the associated actions.
+        </p>
+      
+</li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/triggers/wizard.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/triggers/actions.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

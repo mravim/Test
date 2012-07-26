@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JDK Configuration For Code Editor And Script Compilation</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JDK Configuration For Code Editor And Script Compilation</h2>
+</td><td valign="top" align="right"><a href="../../doc/generalSettings/jreConfig.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/sessionDefaults.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The JDK configuration dialog is displayed when you click the
+        <b>[Configure JDKs]</b> button in the <a href="../../doc/generalSettings/vm.html">general settings dialog</a>,
+        the <a href="../../doc/scripts/editorSettings.html">editor settings dialog</a> or the
+        <a href="../../doc/sessions/application/codeEditor.html">code editor session settings</a>.
+      
+      <p>
+        In this dialog, you can add one or more JDKs that will be available for the purposes explained on the
+        <a href="../../doc/scripts/scripts.html">script editor</a> help page.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        When you add a new JDK, you are asked for the home directory of the JDK that you want to enter. Instead of
+        a JDK, you can also select a JRE, in which case no parameter names will be available in the code completion
+        proposals of JDK methods. After you select the home directory, JProfiler will check whether the directory
+        contains a JDK or JRE and runs <b><tt>java -version</tt></b> to determine the version of the
+        selected JDK or JRE.
+      
+      <p>
+        The table that shows the configured JDKs has several columns:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Name</span>
+<br>
+          
+<p>
+            Double-click on the "Name" column to change the name of the JDK. This name is used for JDK selection in
+            drop-down lists.
+          </p>
+          
+<p>
+            When you add a JDK, the name "JDK [major version].[minor version]" will be suggested by default. If the selection
+            is a JRE, "JRE [major version].[minor version]" will be suggested instead. The name of the JDK configuration
+            must be unique.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Java Home Directory</span>
+<br>
+          This is the Java home directory that you selected when you added the configuration. You
+          can change the Java home directory by editing this column. The Java version check will be performed
+          again and the version displayed in the "Java Version" column will be updated. The name
+          of the configuration will not be changed.
+        </li>
+<li>
+<span class="sectiontitle">Javadoc Directory</span>
+<br>
+          In this column, you can enter the location of the Javadoc that should be associated with this JDK configuration.
+          The Javadoc directory can remain empty in which case no context-sensitive Javadoc help will be available
+          for classes from the runtime library.
+        </li>
+<li>
+<span class="sectiontitle">Java Version</span>
+<br>
+          This uneditable column shows the version of the selected JDK configuration.
+        </li>
+</ul>
+      
+<p>
+        When you delete the JDK configuration that is currently used by a session, the session will still
+        reference the same configured name for the JDK. It will then be shown in red color with a
+        [not configured] message attached.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>default JDK for sessions</b> that do not explicitly set a JDK in the can be configured in their
+      <a href="../../doc/sessions/application/codeEditor.html">code editor settings</a> can be configured in the
+      <a href="../../doc/generalSettings/vm.html">general settings</a>.
+    </td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/generalSettings/jreConfig.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/sessionDefaults.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

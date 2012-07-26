@@ -1,0 +1,40 @@
+
+===================
+=  FishWorld 1.2  =
+===================
+
+FishWorld is a simple and amusing point and click Java applet game.
+
+
+Fishes come from both sides of the screen. The goal of the game is to let no
+fish through to the other side. You get points for every fish you kill (left
+click). The more points you get, the faster the game will be. So it becomes
+more difficult the longer you play. You have three sticks of dynamite you can
+use to kill all fishes currently on the screen (right click). Use it wisely.
+When you achieve a highscore, the score is saved but only as long as the applet
+is loaded.
+
+You can download the latest version of FishWorld from the following website:
+http://su2.info/fishworld/
+
+FishWorld is written as a Java applet. To run it just load the file
+fishworld.html into a Java enabled browser or run it via an applet viewer.
+
+FishWorld is free software. The source code and all graphics are Copyright (c)
+2001,2002 by Stephan Uhlmann and are published under the GNU General Public
+License. See the file COPYING for the full license text.
+
+No animals were harmed during the creation of this game. I do not advocate
+killing real life fishes. Far from it: I urge you to let animals live. Please
+visit the website of the People for the Ethical Treatment of Animals
+(http://www.peta.org).
+
+
+If you experience problems running FishWorld or have any suggestions, just
+email me at su@su2.info.
+ 
+
+Have fun,
+Stephan
+
+

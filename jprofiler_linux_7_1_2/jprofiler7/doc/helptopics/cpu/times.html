@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Time Measurements in Different CPU Views</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Time Measurements in Different CPU Views</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/hotspotsAndFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<h3>1. Wall clock time and CPU time</h3>
+    
+      When the duration of a method call is measured, there are two different possibilities to measure
+      it:
+      <ul>
+<li>
+          
+<p>
+            Most likely you'll be interested in the <b>wall clock time</b>, that is the duration between
+            the entry and the exit of a method as measured with a clock. For the profiling agent this is
+            a straightforward measurement. While it might seem at first glance that measuring times should
+            not have any significant overhead, this is not so if you need a high resolution measurement.
+            Operating systems offer different timers with different performance overheads.
+          </p>
+          
+<p>
+            For example, on Microsoft Windows, the standard timer with a granularity of 10 milliseconds
+            is very fast, because the operating system "caches" the current time. However, the duration of method
+            calls can be as low as a few nanoseconds, so a high resolution timer is needed. A high resolution
+            timer works directly with a special hardware device and carries a noticeable performance overhead.
+            In JProfiler, CPU recording is disabled by default, however, method call recording is always enabled.
+            If you compare the duration of the startup sequence of an application server with and without
+            CPU recording, you will notice the difference.
+          </p>
+          
+<p>
+            Wall clock time is measured separately for each thread. In CPU views where the thread selection
+            includes multiple threads, the displayed times can be larger than the total execution time of
+            the application. If you have 10 parallel threads of the same class <code>MyThreadClass</code>
+            whose <code>run()</code> method take 1 second and "All threads" is selected in the call tree,
+            the <code>MyThreadClass.run()</code> node in the call tree will display 10 seconds, even though
+            only one second has passed.
+          </p>
+        
+</li>
+<li>
+          
+<p>
+            Since the CPU might be handling many threads with different priorities, the wall clock time is
+            not the time the CPU has actually spent in that method. The scheduler of the operating system
+            can interrupt the execution of a method multiple times and perform other tasks. The real time
+            that was spent in the method by the CPU is called the <b>CPU time</b>.
+            In extreme cases, the CPU time and the wall clock time can differ by a large factor, especially
+            if the executing thread has a low priority.
+          </p>
+          
+<p>
+            The standard time measurement in JProfiler is wall clock time. If you wish to see the CPU
+            time in the CPU views, you can change the measurement type in the profiling settings.
+            The problem with CPU time measurement is that most operating systems provide this
+            information with the granularity of the standard timer - high resolution measurements
+            would carry to much overhead. This means the CPU times are only statistically valid
+            for method that have a CPU time bigger that the typical granularity of 10 milliseconds.
+          </p>
+        
+</li>
+</ul>
+    
+<br>
+    
+<h3>2. Thread statuses</h3>
+    
+<p>
+      The notion of time measurement must be refined further, since not all times are equally interesting.
+      Imagine a server application with a pool of threads that waiting to perform a task.
+      Most of the time would then be in the method that keeps the threads waiting while the actual
+      task will only get a small part of the overall time and will be hard to spot.
+      The necessary refinement is done with the concept of <b>thread status</b>.
+      There are 4 different thread statuses in JProfiler:
+      <ul>
+<li>
+<span class="sectiontitle">Runnable</span>
+<br>
+          In this case the thread is ready to execute code. The reason that this is not called "Running" is
+          that it may actually not be running due to the scheduler of the operating system. However,
+          if given a chance, the thread will execute instructions.
+        </li>
+<li>
+<span class="sectiontitle">Waiting</span>
+<br>
+          This means that the thread has deliberately decided to enter into hibernation until a certain
+          event occurs. This happens when you call <code>Object.wait()</code> and the current thread
+          will only become runnable again when some other thread calls <code>Object.notify()</code>
+          on the same object.
+        </li>
+<li>
+<span class="sectiontitle">Blocking</span>
+<br>
+          Whenever synchronized blocks of code or synchronized methods occur, there can be monitor
+          contention. If one thread is in the synchronized area all other threads trying to enter it
+          will be blocked. Frequent blocking can reduce the liveness of your application.
+        </li>
+<li>
+<span class="sectiontitle">Net I/O</span>
+<br>
+          During network operations, many calls in the Java standard libraries can block because
+          they're waiting for more data. This kind of blocking is called "Net I/O" in JProfiler.
+          JProfiler knows the list of methods in the JRE that lead to blocked net I/O and instruments
+          them at load time.
+        </li>
+</ul>
+    
+</p>
+    
+<p>
+      When looking for performance bottlenecks, you're mostly interested in the "Runnable" thread state
+      although it's always a good idea to have a look at the "Net I/O" and "Blocking" thread states in
+      order to check if the network or synchronization issues are reducing the performance of your
+      application.
+    </p>
+    
+<h3>3. Times in the call tree</h3>
+    
+<p>
+      Nodes in the call tree (methods, classes, packages or Java EE components, depending on the selected
+      aggregation level) are sorted by <b>total time</b>. This is the sum
+      of all execution times of this node on the particular call path as given by the ancestor nodes.
+      Only threads in the current thread selection are considered and only measurements with the currently
+      selected thread status are shown.
+    </p>
+    
+<p>
+      Optionally, the call tree offers the possibility to show the <b>inherent time</b> of a
+      node. The inherent time is defined as the total time of of a method minus the time of its child
+      nodes. Since child nodes can only be in unfiltered classes, calls into filtered classes go into the
+      inherent time. If you change your
+      <a href="../../../doc/helptopics/config/callTreeCollection.html">method call recording filters</a>,
+      the inherent times in the call tree can change.
+    </p>
+    
+<h3>4. Times in the hotspots view</h3>
+    
+<p>
+      While the call tree view shows all call stacks in your application, the hotspot view shows
+      the methods that take most of the time. Each method can potentially be called through many
+      different call stacks, so the invocation counts in the call tree and the hotspots view do not
+      have to match. The hotspot view shows the inherent time rather than the total time. In addition,
+      the hotspot view offers the option to include calls to filtered classes into the inherent time.
+      Please see the article on
+      <a href="../../../doc/helptopics/cpu/hotspotsAndFilters.html">hotspots and filters</a> for a
+      thorough discussion of this topic.
+    </p>
+    
+<p>
+      When you open a hotspot node, you see a reverse call tree. However, the times that
+      are displayed in those <b>backtraces</b> do not have the same meaning as those in the
+      call tree, since they do not express a time measurement for the corresponding node.
+      Rather, the time displayed at each node indicates how much time that particular
+      call tree contributes to the hot spot. If there is only one backtrace, you will see the hotspot
+      time at each node.
+    </p>
+    
+<h3>5. Times in the call graph</h3>
+    
+<p>
+      The times that are shown for <b>nodes</b> (methods, classes, packages or Java EE components, depending on the selected
+      aggregation level) in the call graph are the same as those in the hotspots view. The times that are associated
+      with the <b>incoming arrows</b> are the same as those in the first level of the hot spot backtrace,
+      since they show all calling nodes and the cumulated duration of their calls. The time on the
+      <b>outgoing arrows</b> is a measurement that cannot be found in the call tree.
+      It shows the cumulated duration of calls from this node, while the call tree
+      shows the cumulated duration of calls from the current call stack.
+    </p>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/hotspotsAndFilters.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

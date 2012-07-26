@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Call Graph View Settings Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Call Graph View Settings Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerShowHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The call tracer view settings dialog is accessed by bringing
+      
+      the
+      <a href="../../../doc/views/cpu/tracer.html">call tracer</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>trace recording options</b> control the amount of recorded call traces:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Maximum number of recorded call traces</span>
+<br>
+          To avoid excessive memory consumption, the profiling agent stops collecting call traces after this
+          threshold has been reached.
+        </li>
+<li>
+<span class="sectiontitle">Record calls into filtered classes</span>
+<br>
+          If selected, calls into filtered classes are traced as well. Please see
+          <a href="../../../doc/helptopics/config/filters.html">help topic on method call filters</a> for
+          background information.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>time display options</b> control the displayed trace time. The time display can be one of
+      
+      <ul>
+<li>Relative to first trace</li>
+<li>Relative to previous node</li>
+<li>Relative to previous node of the same type</li>
+</ul>
+      
+<p>
+        The above settings are explained on the help page for the
+        <a href="../../../doc/views/cpu/tracer.html">call tracer view</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The <b>method display options</b> determine the presentation of method nodes.
+        The following options are available:
+      
+      <ul>
+<li>
+<span class="sectiontitle">Show signature</span>
+<br>
+          If selected, each method node shows the signature of the method.
+        </li>
+<li>
+<span class="sectiontitle">Show class names in method nodes</span>
+<br>
+          If selected, the fully qualified class name is prepended to each method node.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/cpu/tracerShowHiddenDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/cpu/tracerFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

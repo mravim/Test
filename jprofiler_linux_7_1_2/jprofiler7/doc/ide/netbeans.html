@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>JProfiler as a Netbeans Module</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>JProfiler as a Netbeans Module</h2>
+</td><td valign="top" align="right"><a href="../../doc/ide/jdeveloper.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        With JProfiler integrated into Oracle's
+        <a target="_blank" href="http://www.netbeans.org">Netbeans(TM)</a>,
+        JProfiler can be invoked from within the IDE without any further need for
+        session configuration.
+      
+      <p>
+        
+<b>Requirements: </b>Netbeans 6.x or 7.x.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+    
+      The installation of the Netbeans module is started by selecting
+     "Netbeans IDE [your version]" on the
+      <ul>
+<li>
+          IDE integration tab of JProfiler's setup wizard
+        </li>
+<li>
+          
+<a href="../../doc/generalSettings/misc.html">miscellaneous options tab</a>
+          of JProfiler's <a href="../../doc/generalSettings/generalSettings.html">general settings</a>
+          (use <i>Session-&gt;IDE integrations</i> in JProfiler's main menu as a
+          shortcut).
+        </li>
+</ul>
+      and clicking on <b>[Integrate]</b>
+    
+<br>
+    
+<p>
+      
+<b>Reminder:</b> Please close Netbeans while performing the module
+      installation. If you are performing the installation from JProfiler's
+      setup wizard, please complete the entire setup first before starting Netbeans.
+    </p>
+  
+      
+        A file selection box will then prompt you to locate the installation directory
+        of Netbeans. In the next step, you are asked whether the installation
+        should be performed globally, or for a single user only. A single user installation
+        is mostly of interest in network installations where the user cannot write to
+        the Netbeans installation directory. If you decide for a single user installation,
+        another file selection box will then prompt you to locate your Netbeans user
+        directory. This is a version-specific directory under <i><tt>.netbeans</tt></i> in your
+        user home directory.
+      
+      <p>
+        The Netbeans updater is then invoked and the module is installed.
+        After acknowledging the completion message, you can start Netbeans and check
+        whether the installation was successful. You should now see a menu entry
+        <i>Profile-&gt;Profile Main Project With JProfiler</i> in Netbeans' main menu.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can profile <b>standard and free form projects</b> in Netbeans. For free form projects,
+      you have to debug your application once before trying to profile it, since the required file
+      <i><tt>nbproject/ide-targets.xml</tt></i> is set up by the debug action. JProfiler will add a
+      target named "profile-jprofiler" to it with the same contents as the debug target and will try to modify
+      the VM parameters as needed. If you have problems profiling a free form project, please check the
+      implementation of this target.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can profile <b>web applications</b> with the integrated Tomcat or with any other
+      Tomcat server configured in Netbeans. When your main project is a web project, selecting
+      "Profile main project with JProfiler" (see below) starts the Tomcat server with profiling enabled.
+      Please make sure to stop the Tomcat server before trying to profile it.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you use Netbeans with the <b>bundled GlassFish Server</b>, you can transparently
+      profile Java EE applications with it. When your main project is set up to use GlassFish Server,
+      selecting "Profile main project with JProfiler" (see below) starts the application server with profiling enabled.
+      Please make sure to stop the application server before trying to profile it.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        To profile your application from Netbeans, choose one of the profiling commands in the
+        <i>Run</i> menu or click on the corresponding toolbar button.
+      
+      <p>
+<center>
+<img src="../../doc/images/ide_netbeans_toolbar.png" border="0"><br>
+<small>Main toolbar with "JProfiler" button</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_netbeans_menu.png" border="0"><br>
+<small>"JProfiler" menu</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+<center>
+<img src="../../doc/images/ide_netbeans_context.png" border="0"><br>
+<small>Explorer context menu with "JProfiler" action</small>
+<br>&nbsp;<br>
+</center>
+</p>
+      
+<p>
+        The profiled application is then started just as with the usual "Run" commands.
+        If no instance of JProfiler is currently running, JProfiler is also started, otherwise
+        the running instance of JProfiler will be used for presenting profiling data.
+      </p>
+      
+<p>
+        When JProfiler is used with the Netbeans integration, the "Show source" action for a class or a method
+        in one of JProfiler's view will show the source element in Netbeans and not in JProfiler's integrated
+        source code viewer.
+      </p>
+      
+<p>
+        You can also open JProfiler snapshots from Netbeans, either from the project window or the open file dialog
+        in order to get source code navigation into Netbeans.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/ide/jdeveloper.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/ide/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

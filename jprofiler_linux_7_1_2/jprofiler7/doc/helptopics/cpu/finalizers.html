@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Replacing Finalizers With Phantom References</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Replacing Finalizers With Phantom References</h2>
+</td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/requestTracking.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+
+    
+<h3>1. Why finalizers are bad</h3>
+    
+      Sometimes one must perform pre-garbage collection actions such as freeing resources. In a JDBC driver,
+      for example, a database connection may be held by a connection object. Before the connection object is garbage
+      collected, the actual database connection must be closed. In such a case, one typically cannot rely on the
+      <code>close()</code> method being called by the user application code.
+    <br>
+    
+<p>
+      Most often, <b>finalizers</b> are used to solve this problem. A finalizer is created by overriding
+      the <code>finalize()</code> method of <code>java.lang.Object</code>. In that case, before
+      the object is garbage collected, this finalize method will be called. Unfortunately, there are severe problems
+      with the design of this finalizer mechanism. Using finalizers has a negative impact on the performance
+      of the garbage collector and can break data integrity of your application if you're not very careful
+      since the "finalizer" is invoked in a random thread, at a random time. If you use a lot of finalizers,
+      the finalizer system may be completely overwhelmed which can lead to <code>OutOfMemoryError</code>s.
+      In addition, you have no control about when a finalizer will be run, so it can create problems with locking,
+      the shutdown of the JVM and other exceptional circumstances.
+    </p>
+    
+<p>
+      Because the random execution of the finalizers break the call tree, JProfiler eliminates them from the
+      profiling results.
+    </p>
+    
+<p>
+      The solution for all these problems is to <b>eliminate finalizers</b> where they are not strictly required and
+      <b>replace the necessary ones with phantom references</b>.
+    </p>
+
+    
+<h3>2. What are phantom references?</h3>
+    
+<p>
+      Phantom references can be used to perform actions before an object is garbage collected in a safe way.
+      In the constructor of a <code>java.lang.ref.PhantomReference</code>, you specify a
+      <code>java.lang.ref.ReferenceQueue</code> where the phantom reference
+      will be enqueued once the referenced object becomes "phantom reachable".
+      Phantom reachable means unreachable other than through the phantom reference.
+      The initially confusing thing is that although the phantom reference
+      continues to hold the referenced object in a private field (unlike soft or weak references),
+      its <code>getReference()</code> method always returns <code>null</code>. This is so that you cannot make
+      the object strongly reachable again.
+    </p>
+    
+<p>
+      From time to time, you can poll the reference queue and check if there are any new phantom references
+      whose referenced objects have become phantom reachable.
+      In order to be able to to anything useful, one can for example derive a class from
+      <code>java.lang.ref.PhantomReference</code> that references resources that should be freed before
+      garbage collection. The referenced object is only garbage collected once the phantom reference
+      becomes unreachable itself.
+    </p>
+
+    
+<h3>3. How to replace finalizers with phantom references</h3>
+    
+<p>
+      Let's continue with the example of the JDBC driver above: Before a connection object is garbage
+      collected, the actual database connection must be closed. The following steps
+      are necessary to achieve this with phantom references:
+    </p>
+    
+<ul>
+<li>
+<span class="sectiontitle">Add data structure that holds phantom references</span>
+<br>
+        The JDBC driver class gets a data structure that holds phantom references to
+        the connection objects. A private field
+    <pre>
+      private LinkedList phantomReferences = new LinkedList();
+    </pre>
+        would be appropriate. This is necessary to ensure that phantom references are not garbage
+        collected as long as they have not been handled by the reference queue.
+      </li>
+<li>
+<span class="sectiontitle">Create reference queue</span>
+<br>
+        Before a connection object will be garbage collected, its phantom reference will be
+        enqueued into the associated reference queue. The JDBC driver thus gets an additional private
+        field
+    <pre>
+      private ReferenceQueue queue = new ReferenceQueue();
+    </pre>
+      
+</li>
+<li>
+<span class="sectiontitle">Derive a class from PhantomReference that references resources</span>
+<br>
+        You will not be able to access the original object from a phantom reference.
+        Therefore, you have to add the resources that must be freed to the phantom reference itself. In our
+        example JDBC driver this could be a class named <code>DatabaseConnection</code>. The
+        phantom reference class will thus look like:
+    <pre>
+      public class ConnectionPhantomReference extends PhantomReference {
+          private DatabaseConnection databaseConnection;
+
+          public MyPhantomReference(ConnectionImpl connection, ReferenceQueue queue) {
+              super(connection, queue);
+              databaseConnection = connection.getDatabaseConnection();
+          }
+
+          public void cleanup() {
+              databaseConnection.close();
+          }
+      }
+    </pre>
+        The custom phantom reference extracts the resource object from the implementation class
+        of the connection and saves it in a private field. It additionally provides a
+        <code>cleanup()</code> method that can be invoked once after the phantom reference is taken out of
+        the reference queue.
+      </li>
+<li>
+<span class="sectiontitle">Create and remember phantom references when objects are created</span>
+<br>
+        When a connection object is created, a corresponding <code>ConnectionPhantomReference</code>
+        must be created as well and added to the <code>phantomReferences</code> list:
+    <pre>
+      phantomReferences.add(new ConnectionPhantomReference(connection, queue));
+    </pre>
+      
+</li>
+<li>
+<span class="sectiontitle">Create reference queue handler thread</span>
+<br>
+        When a phantom reference is added to the queue by the garbage collector, no further action is taken.
+        You have to handle and empty the reference queue yourself. It's best to create a separate daemon thread that removes
+        phantom references from the queue and invokes the cleanup method:
+    <pre>
+      Thread referenceThread = new Thread() {
+          public void run() {
+              while (true) {
+                  try {
+                      ConnectionPhantomReference ref = (ConnectionPhantomReference)queue.remove();
+                      ref.close();
+                      phantomReferences.remove(ref);
+                  } catch (Exception ex) {
+                    // log exception, continue
+                  }
+              }
+          }
+      };
+      referenceThread.setDaemon(true);
+      referenceThread.start();
+    </pre>
+        The phantom reference is removed from the <code>phantomReferences</code> list. Now the
+        phantom reference is unreferenced itself and the referenced object can be garbage collected.
+      </li>
+</ul>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/helptopics/cpu/requestTracking.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/helptopics/cpu/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Custom Probes</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Custom Probes</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/probes/builtin.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        For more information on custom probes, please see
+        the <a href="../../../doc/helptopics/probes/custom.html">corresponding help topic</a>. Here, only the configuration
+        of custom probes in the JProfiler GUI is discussed.
+      
+      <p>
+        If you <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/add_16.png">&nbsp;add or
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/edit_16.png">&nbsp;edit a custom probe, the <b>custom probe wizard</b>
+        is displayed. In several steps, it leads you through the creation of a custom probe. You can directly jump to
+        another step of the wizard by clicking on the step in the index. The wizard is partitioned into the following steps:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Name and description</span>
+<br>
+          Here, you provide a name and a description for the probe. The name is used in the call to
+          <code>ProbeMetaData#create(String)</code> and the description is set with
+          <code>ProbeMetaData#description(String)</code>. This could be set in the meta data script in the next step,
+          but since JProfiler needs to display this information in the custom probe configuration, it is entered separately
+          outside the script and applied to the <code>ProbeMetaData</code> object before it is passed to the meta data script.
+        </li>
+<li>
+<span class="sectiontitle">Meta data</span>
+<br>
+          The meta data of the probe is configured with a single script. The <a href="../../../doc/scripts/scripts.html">script</a>
+          is passed a single parameter <code>metaData</code> of type <code>ProbeMetaData</code> and does not return anything.
+          New probes contain a non-functional example script that gives you a starting point for your own configuration.
+        </li>
+<li>
+<span class="sectiontitle">Telemetry script</span>
+<br>
+          If the probe publishes telemetries, a telemetry script is called once a second and gives you the chance to publish
+          telemetry data. The script is passed a <code>ProbeContext</code> and an int-array with the data to be filled.
+          To retrieve data that was collected during interceptions, you have to use the map returned by <code>probeContext.getMap()</code>.
+          The n-th index in the int-array corresponds to the n-th telemetry that was defined in the meta-data script.
+        </li>
+<li>
+<span class="sectiontitle">Method groups</span>
+<br>
+          The interception scripts later on operate on several methods of the same signature. If you have to deal with methods of
+          different signatures (which is common for more complex probes), you have to define different method groups.
+          Each method group can only contain methods with the same signature. In subsequent steps, the method group
+          can be selected from a drop-down list in order to configure different method groups.
+        </li>
+<li>
+<span class="sectiontitle">Specify methods</span>
+<br>
+          If you want to intercept method to collect data (which most probes do), you can add those methods in this step.
+          Remember that all methods in a single method group must have the same signature. There are several ways to enter
+          new methods:
+          
+    <ul>
+<li>
+<span class="sectiontitle">Search in configured classpath</span>
+<br>
+        A class chooser will be shown that shows all classes in the classpath configured in
+        the <a href="../../../doc/sessions/application/applicationSettings.html">application settings</a>.
+        Finally you have to select a method from the selected class.
+      </li>
+<li>
+<span class="sectiontitle">Search in other JAR or class files</span>
+<br>
+        First, you can select a JAR or class file. If the selection is a JRE file, you then have to
+        select a class in a class chooser. After the selection you will be asked whether to
+        expand the classpath with the current selection. For remote sessions, the classpath
+        is often not configured, so this is a shortcut to make your selection permanent.
+        Finally, you can select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Search in profiled classes</span>
+<br>
+        If the session is being profiled, a class chooser is displayed that shows all classes
+        in the profiled JVM. There may be classes in the classpath that have not been loaded. Those classes
+        will not be shown in the class chooser. Finally, you can to select a method from the selected class.
+        
+      </li>
+<li>
+<span class="sectiontitle">Enter manually (advanced)</span>
+<br>
+        This option displays a dialog that allows you to enter class name, method name and method signature in
+        JNI format. The JNI format of the method signature is explained in the javadoc of
+        <tt>com.jprofiler.api.agent.probe.InterceptionMethod</tt>.
+        <p>
+          The context menu for the list of methods offers the option to edit existing entries.
+        </p>
+        
+      
+</li>
+</ul>
+  
+        
+</li>
+<li>
+<span class="sectiontitle">Interception scripts</span>
+<br>
+          The first two parameters passed to an interception script are the <code>InterceptorContext</code> (which is
+          an extension of <code>ProbeContext</code>) and the current object <code>currentObject</code> (which is <code>null</code>
+          for static method interceptions).
+          <p>
+            There are interception scripts for three points in the execution flow:
+          </p>
+          
+<ul>
+<li>
+<span class="sectiontitle">Method entry</span>
+<br>
+              Called immediately after the intercepted method is entered. In addition to the common parameters, all
+              arguments of the intercepted method are passed to the script. As long as the types of the arguments
+              are in the configured class path of the session, method completion is available in the script dialog.
+            </li>
+<li>
+<span class="sectiontitle">Method exit</span>
+<br>
+              Called just before the intercepted method is exited via a return call. No method arguments are passed.
+              If creating payload information, use the payload stack methods in the interceptor context to retrieve
+              information from the entry script.
+            </li>
+<li>
+<span class="sectiontitle">Exception exit</span>
+<br>
+              Called just before the intercepted method is exited after an exception has been thrown. In addition to
+              the common parameters, the Throwable <code>t</code> is passed as a parameter. The method exit script
+              will not be called in this case.
+            </li>
+</ul>
+          
+<p>
+            Interception scripts must be defined separately for each method group.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Custom probes can be organized into <b>custom probe sets</b>. You can
+      <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/open_16.png">&nbsp;add a saved custom probe set to the current list of
+      custom probes or <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/open_16.png">&nbsp;save the current list of custom probes
+      to a set. This makes it easy to share custom probes between different sessions.
+      <p>
+        To automatically add a set of custom probe to new sessions, configure a saved custom probe set on the
+        <a href="../../../doc/generalSettings/sessionDefaults.html">session defaults tab</a> of the
+        <a href="../../../doc/generalSettings/generalSettings.html">general settings</a> dialog.
+      </p>
+      
+<p>
+        To share a set of custom probes with a colleague, or to copy it to another JProfiler installation, use the
+        <a href="../../../doc/sessions/importExport.html">import/export feature</a>.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/probes/builtin.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/probes/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

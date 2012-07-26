@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Objects Comparison View Settings Dialog</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Objects Comparison View Settings Dialog</h2>
+</td><td valign="top" align="right"><a href="../../../doc/comparisons/memory/objects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/memory/objectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The objects comparison view settings dialog is accessed by bringing
+      any
+      
+      <a href="../../../doc/comparisons/memory/objects.html">objects comparison</a> to front
+      and choosing
+      <i>View-&gt;View settings</i> from JProfiler's main menu or clicking on
+      the corresponding <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/view_settings_16.png">&nbsp;toolbar button.
+    </td>
+</tr>
+</table>
+  
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      You can select a size scale mode for all displayed sizes:
+      <ul>
+<li>
+<span class="sectiontitle">Automatic</span>
+<br>
+          Depending on the size value, it's displayed in MB, kB or
+          bytes, in such a way that 3 significant digits are retained.
+        </li>
+<li>
+<span class="sectiontitle">Megabytes (MB)</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Kilobytes (kB</span>
+<br>
+</li>
+<li>
+<span class="sectiontitle">Bytes</span>
+<br>
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>primary measure</b> defines which measurement will be shown in the
+      second column of the objects view. That column shows its values graphically
+      with a histogram, has percentages attached and is the default sort column.
+      By default, the primary measure is the instance count. Alternatively, you can work with the
+      shallow size, which is especially useful if you're looking at arrays.
+    </td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The <b>differences of primary measure</b> options determine how differences in
+      the primary measure column are displayed and how that column is sorted.
+      <ul>
+<li>
+<span class="sectiontitle">Sort and display type</span>
+<br>
+          The sort and display type can be one of
+          <ul>
+<li>
+<span class="sectiontitle">Sort by values</span>
+<br>
+              The bar chart in the primary measure column displays absolute differences. When this column is sorted,
+              it is sorted by absolute differences. Percentages are displayed in parentheses.
+            </li>
+<li>
+<span class="sectiontitle">Sort by percentages</span>
+<br>
+              The bar chart in the primary measure column displays percentages. When this column is sorted,
+              it is sorted by absolute percentages. Absolute differences are displayed in parentheses.
+            </li>
+</ul>
+        
+</li>
+<li>
+<span class="sectiontitle">Show zero difference values</span>
+<br>
+          If this option is not checked, the objects comparison does not display hot spots that have not changed
+          between the first and the second snapshot.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/comparisons/memory/objects.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/comparisons/memory/objectsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

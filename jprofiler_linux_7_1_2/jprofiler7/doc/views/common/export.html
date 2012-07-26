@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Exporting Views</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Exporting Views</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/find.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        All views can be exported to external formats by selecting
+        <b>Export</b> from the <i>View</i> menu or
+        context menu or clicking on the corresponding
+        <img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/export_16.png">&nbsp;toolbar
+        button. A file chooser will be brought up allowing you to
+        specify the output file and the export format.
+      
+      <p>
+        The export format is chosen with the "file type" combo box in the file chooser.
+        The following export formats are available:
+        <ul>
+<li>
+<span class="sectiontitle">HTML</span>
+<br>
+            Available for all views. The view will be exported to an HTML file.
+            Besides the HTML file, several image files might be written to a
+            subdirectory <i><tt>jprofiler_images</tt></i>. If the
+            <a href="../../../doc/generalSettings/misc.html">option to open files after export</a> is enabled,
+            the web browser configured in the
+            <a href="../../../doc/generalSettings/misc.html">general settings</a> is opened
+            and the exported HTML file is displayed.
+          </li>
+<li>
+<span class="sectiontitle">CSV data</span>
+<br>
+            Available for tabular views, hot spot views and graphs with a time axis. CSV data suitable
+            for Microsoft Excel is written to a file. If the
+            <a href="../../../doc/generalSettings/misc.html">option to open files after export</a> is enabled,
+            the registered application for CSV is opened and the exported CSV file is displayed.
+            <p>
+              
+<b>Note:</b> When using Microsoft Excel, CSV is not a stable format. Microsoft Excel on
+              Windows takes the separator character from the regional settings. JProfiler uses a semicolon as
+              the separator in locales that use a comma as a decimal separator and a comma in locales that use
+              a dot as a decimal separator. If you need to override the CSV separator character you can
+              do so by setting -Djprofiler.csvSeparator in <i><tt>bin/jprofiler.vmoptions</tt></i>.
+            </p>
+          
+</li>
+<li>
+<span class="sectiontitle">XML data</span>
+<br>
+            Available for tree views and hot spot views. XML data with a self-explanatory format is written to a file. If the
+            <a href="../../../doc/generalSettings/misc.html">option to open files after export</a> is enabled,
+            the registered application for XML is opened and the exported XML file is displayed.
+          </li>
+</ul>
+      
+</p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      If you export the same view multiple times to the same directory under the same name,
+      a running number will be appended to the filename. The export directory location is persistent
+      and remembered across restarts.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      With the HTML export functionality you can <b>print</b> all views
+      from JProfiler via your web browser.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/common/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/common/find.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

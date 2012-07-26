@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Probes &amp; JEE</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Probes &amp; JEE</h2>
+</td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/cpu.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/memory.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      On this tab of the <a href="../../../doc/sessions/profiling/profilingSettings.html">profiling settings dialog</a>,
+      you can edit advanced options regarding Java EE and probes.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The following options are available:
+      <ul>
+<li>
+<span class="sectiontitle">Maximum recorded number of payloads per call stack</span>
+<br>
+          
+<a href="../../../doc/sessions/probes/probeSettings.html">Probes</a> can publish information into the
+          <a href="../../../doc/views/cpu/invocation.html">call tree</a>.
+          For each call stack and payload type, JProfiler keeps track of
+          the invocation count and total execution times for each thread status. To avoid excessive memory consumption,
+          there is a cap on the number of different retained payload names. If the maximum
+          number is exceeded, the oldest payload is merged into an "[earlier calls]" node. By default,
+          this maximum value is set to 50. If you require more detail, you can increase the value in the text field
+          as needed.
+        </li>
+<li>
+<span class="sectiontitle">Show payloads without a recorded call stack</span>
+<br>
+          Payloads that do not have an associated call stack are not shown by default.
+          If you would like to display these payloads at the top-level of the call tree you can select this option.
+        </li>
+<li>
+<span class="sectiontitle">Record exact payload call stacks in sampling mode</span>
+<br>
+          If sampling is enabled, JProfiler still records the exact call stack of payloads in order
+          to generate useful back traces in the <a href="../../../doc/views/probes/hotSpots.html">probe hot spots views</a>.
+          If you are not interested in these back traces, you can deselect this option in order
+          to reduce overhead.
+        </li>
+<li>
+<span class="sectiontitle">Maximum number of recorded events</span>
+<br>
+          
+<a href="../../../doc/sessions/probes/probeSettings.html">Probes</a> can record single events and show them in the
+          <a href="../../../doc/views/probes/events.html">probe events view</a>.
+          To avoid excessive memory consumption, there is a cap on the maximum number of retained events. If the maximum
+          number is exceeded, the oldest events are discarded. By default,
+          this maximum value is set to 20000. if you require more history, you can increase the value in the text field
+          as needed.
+        </li>
+<li>
+<span class="sectiontitle">Detect Java EE components</span>
+<br>
+          JProfiler can detect the following Java EE component types:<br>
+<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_servlet_16.png">&nbsp;servlets<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_jsp_16.png">&nbsp;JSPs<br>
+          
+<img style="vertical-align: middle" align="middle" border="0" src="../../../doc/images/call_ejb_16.png">&nbsp;EJBs<br>
+<br>
+
+          The corresponding methods have a separate icon in the call tree. For JSPs, the name of the
+          JSP source file is displayed instead of the generated class and for EJBs the name of the interface
+          is displayed instead of the generated stub or proxy classes. In the "method" and the "class" aggregation levels,
+          the real class names are displayed in square brackets, too.
+          <p>
+            Based on this component information, JProfiler offers the <b>Java EE components aggregation level</b>
+            in all views with an aggregation level selector. If you would like to disable Java EE component
+            detection, you can deselect the checkbox labeled <b>Detect Java EE components</b>.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Show request URLs without a recorded call stack</span>
+<br>
+          The servlet probe splits the call tree for each recorded request URL. Request URLs that
+          do not have an associated call stack are not shown by default. To display these request URLs
+          at the top level of the call tree you can select this option.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/sessions/profiling/cpu.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/sessions/profiling/memory.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

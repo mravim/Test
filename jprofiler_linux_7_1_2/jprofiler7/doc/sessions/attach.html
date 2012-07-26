@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Attaching to JVMs</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Attaching to JVMs</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/startupDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler has the capability to profile any JVM that has a minimum version of 1.6, even if that JVM was not
+      started with the <a href="../../doc/sessions/remoteTable.html">VM parameters for profiling</a>. Through the use of the
+      <a target="_blank" href="http://download.oracle.com/javase/6/docs/technotes/guides/attach/index.html">attach API</a>
+      that is present in Oracle/Sun JVMs, JProfiler can load the profiling agent on the fly. There are two scenarios
+      for attaching to JVMs:
+      <ul>
+<li>
+<span class="sectiontitle">Locally running JVMs</span>
+<br>
+          In this case, invoke <i>Session-&gt;Quick Attach</i> from the main menu and
+          <a href="../../doc/sessions/application/attach.html">select the JVM from a list of discovered JVMs</a>.
+          <p>
+            When you close the session, you can save the session settings (filter, profiling and triggers settings) so
+            that
+            you can reuse them for future use. When you attach to the same application again,
+            <a href="../../doc/sessions/open.html">start the saved session</a>
+            instead of using "Quick attach".
+            Of course you can also start out by creating such a dedicated session in the first place.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">JVMs running on remote machines</span>
+<br>
+          In this case, extract a JProfiler archive from the
+          <a target="_blank" href="http://www.ej-technologies.com/download/jprofiler/files.html">download page</a>
+          on the remote machine. You do not have to enter a license key there. Run the
+          <b><tt>bin/jpenable</tt></b> command line application on the remote machine. You will be able to
+          select a JVM and load the profiling agent into it so that is listens on a specific profiling port.
+          <p>
+            In your local JProfiler GUI, create an
+            <a href="../../doc/sessions/application/remote.html">"Attach to profiled JVM (local or remote)" session</a>
+            and enter the host name and the same profiling port that you specified in <b><tt>jpenable</tt></b>
+            on the remote machine.
+          </p>
+          
+<p>
+            When you start the session, it connects to the remote JVM and you can start profiling.
+          </p>
+        
+</li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      When the profiling agent is loaded for an attach session (either by the JProfiler GUI or by
+      <b><tt>jpenable</tt></b>, the profiling agent did not have the chance to instrument classes when they were
+      loaded. Instead, it has to reload them which puts a burden on the PermGem space of the heap.
+      Classes are not easily garbage collected and so the PermGem space has to support both old and new versions of all reloaded
+      classes. If the PermGen space is to small for a particular application, you can increase it with the VM parameter
+      <tt>-XX:MaxPermSize=128m</tt>.
+      <p>
+        When you choose "Dynamic instrumentation" as the method call recording type, it is important to choose
+        inclusive filters that focus on the classes of interest. In that way,
+        relatively few classes are instrumented. Alternatively, you can choose
+        <a href="../../doc/sessions/profiling/callTreeCollection.html">Sampling</a> in the profiling settings.
+      </p>
+      
+<p>
+        If JProfiler detects that the PermGen space would be overloaded with the current filter settings,
+        it will warn you in the <a href="../../doc/sessions/startupDialog.html">session startup dialog</a>.
+        You should then switch to sampling or define narrow inclusive filters. Clicking on the hyperlinks in the
+        warning message will quickly make these changes. When selecting inclusive filters, the total amount
+        of instrumented classes is monitored and you are notified if you exceed the approximate maximum number of
+        classes that can be instrumented.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Views that show information on recorded objects, such as the
+      <a href="../../doc/views/memory/recordedObjects.html">Recorded objects view</a>, the
+      <a href="../../doc/views/memory/allocationsMonitor.html">Allocation call tree</a> or the
+      <a href="../../doc/views/heapwalker/allocations.html">heap walker allocations screen</a> rely on instrumentation
+      of certain classes. Unfortunately, array allocations have to be instrumented at all call sites. When the
+      profiling agent is present at startup, this is not a problem, but in attach mode, a large fraction of all
+      classes has to be instrumented which might fail due to the limitations of the PermGen space.
+      <p>
+        By default,
+        array allocations are not recorded in attach mode, although the
+        <a href="../../doc/sessions/startupDialog.html">session startup dialog</a> gives you the possibility to do so
+        for "non-client" JVMs (the "client" JVM has a bug that prevents this from working successfully).
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/startupDialog.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/remote.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Snapshots</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Snapshots</h2>
+</td><td valign="top" align="right"><a href="../../doc/generalSettings/sessionDefaults.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        Here you can configure <b>how the heap dump analysis is saved for snapshots</b>.
+      
+      <p>
+        Most of the time spent when loading snapshots is for the analysis of the raw data, the removal of
+        unreferenced objects and the retained size calculation. JProfiler stores the result of this analysis
+        next to the snapshot if possible. This means that opening a snapshot that has already been analyzed
+        is <b>orders of magnitudes faster</b> if a saved heap dump analysis can be found.
+      </p>
+      
+<p>
+        If the heap dump analysis takes up a too much disk space, you can switch off the heap dump analysis saving
+        altogether on this tab. The analysis will then be created each time you open the snapshot. In general,
+        if a heap dump analysis is missing or incorrect (e.g. from a different snapshot) it will simply be
+        recreated.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The default storage format for the heap dump analysis is directory-based, e.g. if your snapshot
+        is saved to <i><tt>snapshot.jps</tt></i>, the analysis is stored in the directory <i><tt>snapshot.jps.analysis</tt></i>.
+        In that directory there are multiple files and further subdirectories that contain the entire analysis.
+      
+      <p>
+        If this is not practical for some reason, you can choose the <tt>TAR archive</tt> or
+        <tt>Compressed TAR archive</tt> options on this tab. Both of them make moving snapshots together
+        with their analysis to a different computer easier since you only have one additional file.
+        The compressed tar archive option is noticeably slower than the alternatives, but takes up less disk space.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Snapshots taken with offline profiling do not have an existing heap analysis. If you're taking these snapshots
+      in an automated fashion, you can use the <a href="../../doc/offline/offline.html">command line tool "jpanalyze"</a>
+      or the <a href="../../doc/offline/ant.html">corresponding "analyze" ant task</a> in order to massively speed up
+      the opening of these snapshot in the JProfiler GUI.
+    </td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/generalSettings/sessionDefaults.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/generalSettings/ide.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

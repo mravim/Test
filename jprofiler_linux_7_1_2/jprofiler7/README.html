@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>JProfiler Readme</title>
+</head>
+<body>
+<h1>JProfiler Readme</h1>
+
+<b>version 7.1.2</b><br />
+<b>released on 2012-06-30</b>
+<hr size="1" />
+
+<h2>I. License</h2>
+
+<p>
+The license agreement (EULA) can be found in <a href="license.html">license.html</a> in the same
+directory as this readme file.
+</p>
+
+<h2>II. Running JProfiler</h2>
+
+<h3>1. Windows</h3>
+
+<p>
+Start JProfiler by executing
+<pre>
+   [jprofiler install directory]\bin\jprofiler.exe
+</pre>
+There is also a batch file
+<pre>
+   [jprofiler install directory]\bin\windows\jprofiler.bat
+</pre>
+if you need to customize the environment variables.
+
+<h3>2. Linux/Unix</h3>
+
+<p>
+Start JProfiler by executing the shell script
+<pre>
+   [jprofiler install directory]/bin/jprofiler
+</pre>
+
+<h3>3. MAC OS X</h3>
+
+<p>
+Start JProfiler with the installed application bundle:
+</p>
+<pre>
+   [jprofiler install directory]/bin/JProfiler
+</pre>
+
+<h2>III. Documentation</h2>
+
+<p>
+Help is available
+</p>
+
+<ol>
+<li>from the "Help" menu in JProfiler</li>
+<li>as HTML pages the doc directory of your JProfiler installation.
+   Start with <a href="doc/index.html">index.html</a> or open any other HTML file directly.</li>
+<li>online at  <a href="http://resources.ej-technologies.com/jprofiler/help/doc/">http://resources.ej-technologies.com/jprofiler/help/doc/</a></li>
+</ol>
+
+<h2>IV. Directory Layout</h2>
+
+<p>
+An installation of JProfiler contains the following directories:
+</p>
+
+<dl>
+<dt>api</dt>
+<dd>contains the API documentation as well as runnable code samples
+         </dd>
+
+<dt>bin</dt>
+<dd>contains the executables for JProfiler in platform-specific
+         subdirectories</dd>
+
+<dt>config</dt>
+<dd>contains configuration template files for JProfiler</dd>
+
+<dt>demo</dt>
+<dd>contains applications in compiled form as well as source code
+         for the standard demo sessions of JProfiler.</dd>
+
+<dt>doc</dt>
+<dd>contains the documentation for JProfiler</dd>
+
+<dt>integrations</dt>
+<dd>contains the files neccessary for integrating JProfiler with
+         popular IDEs. See the README.html in that directory for further
+         information.</dd>
+
+<dt>jre (optional)</dt>
+<dd>contains the JRE that was shipped with JProfiler. JProfiler will
+         use this JRE for running ts GUI frontend unless the
+         JPROFILER_JAVA_HOME variable is set to a different location.</dd>
+
+<dt>lib</dt>
+<dd>contains external libraries used by JProfiler. If the libraries
+         come with an open source license, it is reproduced in that
+         directory.</dd>
+
+</dl>
+</body>
+</html>

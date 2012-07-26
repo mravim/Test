@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Heap Walker Reference View - Cumulated Incoming References</title>
+<link href="../../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Heap Walker Reference View - Cumulated Incoming References</h2>
+</td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/treeIncoming.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/cumulatedReferencesOut.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The cumulated incoming references show the list of all reference types through which
+      the instances of classes and arrays in the current object set are held.
+      This view has two display modes that determine how the "Object count" and the "Size" column
+      have to be interpreted:
+      <ul>
+<li>
+<span class="sectiontitle">Show counts and sizes of reference holders</span>
+<br>
+          The "Object count" and the "Size" columns refer to the objects that
+          reference any objects in the current object set through a certain reference type.
+        </li>
+<li>
+<span class="sectiontitle">Show counts and sizes of referenced objects</span>
+<br>
+          The "Object count" and the "Size" columns refer to the objects in the current object set
+          that are referenced through a certain reference type.
+        </li>
+</ul>
+      
+<p>
+        There are three columns shown in the table, which can be <a href="../../../doc/views/common/sorting.html">sorted</a>:
+      </p>
+      
+<ul>
+<li>
+<span class="sectiontitle">Reference type</span>
+<br>
+          Shows the type of the incoming reference which is one of
+          <ul>
+<li>
+<span class="sectiontitle">field</span>
+<br>
+              some of the objects or arrays in the current object set are held in the
+              indicated field of an instance of the indicated class.
+            </li>
+<li>
+<span class="sectiontitle">static field</span>
+<br>
+              some of the objects or arrays in the current object set are held in the
+              indicated static field of the indicated class.
+            </li>
+<li>
+<span class="sectiontitle">constant</span>
+<br>
+              some of the objects or arrays in the current object set are held in the
+              constant pool of the indicated class. These references mostly stem from
+              constants declared as <tt>private static final</tt>.
+            </li>
+<li>
+<span class="sectiontitle">object array content</span>
+<br>
+              some of the objects in the current object set are held in an array of
+              instances of classes. The arrays are of types or supertypes of the held
+              objects. A further distinction is not possible due to the nature of
+              Java bytecode.
+            </li>
+<li>
+<span class="sectiontitle">JNI global/local reference</span>
+<br>
+              some of the objects or arrays in the current object set are held through
+              the Java Native Interface. Generally global references are persistent
+              across a number of native calls which local references are only valid for
+              the duration of one native call. These references are of interest to
+              JNI programmers only. If you do not use any extra native libraries and
+              encounter these reference types nonetheless, they can be attributed to the
+              internal state of the JVM. In that case, there won't be any accessible
+              objects behind these references and the <tt>Size</tt> column will
+              show a zero value.
+            </li>
+<li>
+<span class="sectiontitle">java stack</span>
+<br>
+              some of the objects in the current object set are held in a stack frame of a
+              thread.
+            </li>
+<li>
+<span class="sectiontitle">sticky class, thread block, unknown type</span>
+<br>
+              internal references in the JVM.
+            </li>
+</ul>
+          
+<p>
+            Note that for static fields, constants, java stack references and the internal
+            references in the JVM the origin of the reference do not belong to accessible
+            objects. The <tt>Size</tt> column shows a zero value and a filter
+            selection is not possible for these incoming reference types.
+          </p>
+        
+</li>
+<li>
+<span class="sectiontitle">Object count</span>
+<br>
+          Depending on the display mode, shows
+          <ul>
+<li>
+<span class="sectiontitle">Show counts and sizes of reference holders</span>
+<br>
+              How many objects are holding on to any object in the current object set
+              through this reference type.
+            </li>
+<li>
+<span class="sectiontitle">Show counts and sizes of referenced objects</span>
+<br>
+              How many objects in the current object set are referenced
+              through this reference type.
+            </li>
+</ul>
+          The reference count is displayed graphically as well.
+        </li>
+<li>
+<span class="sectiontitle">Size</span>
+<br>
+          Depending on the display mode, shows
+          <ul>
+<li>
+<span class="sectiontitle">Show counts and sizes of reference holders</span>
+<br>
+              The total size of all objects that are holding on to any object in the
+              current object set through this reference type.
+            </li>
+<li>
+<span class="sectiontitle">Show counts and sizes of referenced objects</span>
+<br>
+              The total size of all objects in the current object set that are referenced
+              through this reference type.
+            </li>
+</ul>
+          
+<p>
+            Note that this is the
+            <b>shallow size</b> which does not include the size of referenced arrays and
+            instances but only the size of the corresponding pointers.
+          </p>
+        
+</li>
+</ul>
+      
+<p>No specific view settings apply to the cumulated incoming references.</p>
+    
+</td>
+</tr>
+</table>
+
+    
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      
+        The cumulated reference view is a <b>tree table</b>, you can open single references and view
+        cumulated reference chains. Multiple selection is only possible on the same level in the tree.
+      
+      <p>
+        The lengths of the bars in the object count column are adjusted for the sibling nodes in the tree (not the top level)
+        and the colors of the bars alternate between dark and light red for descending tree levels. 
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      To add a selection step from this view you can
+      <ul>
+<li>
+          select one or multiple references from the table and click the
+          <b>[Use ...]</b> button above the table and choose
+          <i>reference holders</i> in the popup menu.
+          A new object set will be created that contains all objects that
+          hold any object in the current object set by way of the selected reference types.
+        </li>
+<li>
+          select one or multiple references from the table and click the
+          <b>[Use ...]</b> button above the table and choose
+          <i>referenced objects</i> in the popup menu.
+          A new object set will be created that contains all objects in the current set
+          that are held by a reference of one of the the selected types.
+        </li>
+<li>
+          double click on a reference. Depending on the display mode, either the reference
+          holders or the referenced objects are selected as the new object set.
+        </li>
+</ul>
+      
+<p>
+        All reference types in your selection that do not lead to selectable objects are removed
+        for the selection step. If no selectable objects are contained in your selection, the
+        corresponding action will be disabled. 
+      </p>
+      
+<p>
+        A new object set will be created that contains all instances of classes and arrays
+        that reference objects in the current object set via the selected references. After your selection,
+        the <a href="../../../doc/views/heapwalker/viewChangeDialog.html">view helper dialog</a> will
+        assist you in choosing the appropriate view for the new object set.
+      </p>
+    
+</td>
+</tr>
+</table>
+
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../../doc/views/heapwalker/treeIncoming.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/$referencesFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../../doc/views/heapwalker/cumulatedReferencesOut.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Overview of Features</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Overview of Features</h2>
+</td><td valign="top" align="right"><a href="../../doc/quickstart/demo.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/startcenter.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      JProfiler's features are ordered into view sections.
+      A view section can be made visible by selecting in JProfiler's
+      sidebar. JProfiler offers the following view sections:
+      <ul>
+<li>
+<a href="../../doc/views/memory/memory.html">Memory profiling</a>
+<br>
+          Keep track of your objects and find out where the problem spots are.
+        </li>
+<li>
+<a href="../../doc/views/heapwalker/heapwalker.html">The heap walker</a>
+<br>
+          Use the drill down capabilities of JProfiler's unique heap walker to
+          find memory leaks.
+        </li>
+<li>
+<a href="../../doc/views/cpu/cpu.html">CPU profiling</a>
+<br>
+          Find out where your CPU time is going and zero in on performance bottlenecks.
+        </li>
+<li>
+<a href="../../doc/views/threads/threads.html">Thread profiling</a>
+<br>
+          Check the activity of your threads, resolve deadlocks and get detailed information
+          on your application's monitor usage.
+        </li>
+<li>
+<a href="../../doc/views/telemetry/telemetry.html">VM telemetry information</a>
+<br>
+          Unfold the statistical history of your application with JProfiler's virtual machine
+          telemetry monitors.
+        </li>
+<li>
+<a href="../../doc/views/probes/probes.html">JEE &amp; probes</a>
+<br>
+          Measure higher-level subsystems of the JVM, like JDBC calls or file I/O, as well as own subsystems
+          with custom probes.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      In order to help you find JProfiler's features which are most important to you,
+      we present a situational overview. There are two types of uses for a profiler which
+      arise from different motivations:
+      <ul>
+<li>
+<span class="sectiontitle">Problem solving</span>
+<br>
+          If you turn to a profiler with a problem in your application, it most likely
+          falls into one of the following three categories:
+          <ul>
+<li>
+<span class="sectiontitle">Performance problem</span>
+<br>
+              To find performance related problem spots in your application,
+              turn to JProfiler's <a href="../../doc/views/cpu/cpu.html">CPU section</a>. Often,
+              performance problems are caused by excessive creation of temporary objects. For that
+              case, the <a href="../../doc/views/memory/recordedObjects.html">recorded objects views</a>
+              with its view mode set to "garbage collected objects" will show you where efforts
+              to reduce allocations make sense.
+              <p>
+                For I/O or any other subsystem that is measured by a probe, the
+                <a href="../../doc/views/probes/probes.html">probe views</a> show you higher-level information on what
+                operations take a lot of time.
+              </p>
+            
+</li>
+<li>
+<span class="sectiontitle">Excessive memory consumption</span>
+<br>
+              If your application consumes too much memory, the
+              <a href="../../doc/views/memory/memory.html">memory views</a> will show you where the memory
+              consumption comes from. With the
+              <a href="../../doc/views/heapwalker/references.html">reference views</a> in the
+              <a href="../../doc/views/heapwalker/heapwalker.html">heap walker</a> you can find out which objects are
+              unnecessarily kept alive in the heap.
+            </li>
+<li>
+<span class="sectiontitle">Memory leak</span>
+<br>
+              If your application's memory consumption goes up linearly with time, you
+              likely have a memory leak which is show stopper especially for application
+              servers. The "mark current values and show differences" feature in the
+              <a href="../../doc/views/memory/memory.html">memory section</a> and the
+              <a href="../../doc/views/heapwalker/heapwalker.html">heap walker</a> will help you to find
+              the cause.
+            </li>
+<li>
+<span class="sectiontitle">Deadlock</span>
+<br>
+              If you experience a deadlock, JProfiler's
+              <a href="../../doc/views/monitors/graphCurrent.html">current monitor graph</a>
+              will help you to find the cause even for complex locking situations.
+            </li>
+<li>
+<span class="sectiontitle">Hard to find bug</span>
+<br>
+              A often overlooked but highly profitable use of a profiler is that
+              of debugging. Many kinds of bugs are exceptionally hard to find by hand or by
+              using a traditional debugger. Some bugs revolve around complex call stack scenarios
+              (have a look at the <a href="../../doc/views/cpu/cpu.html">CPU section</a>),
+              others around entangled object reference graphs
+              (have a look at the <a href="../../doc/views/heapwalker/heapwalker.html">heap walker section</a>),
+              both of which are not easy to keep track of. <br>
+              Particularly JProfiler's <a href="../../doc/views/threads/threads.html">thread views</a>
+              are of great help in multi-threaded situations, where race-conditions and deadlocks
+              are hard to track down.
+            </li>
+</ul>
+
+        
+</li>
+<li>
+<span class="sectiontitle">Quality assurance</span>
+<br>
+          During a development process, it's a good idea to regularly run a profiler on your
+          application to assess potential problem spots. Even though an application may prove
+          to be "good enough" in test cases, an awareness for performance and memory bottlenecks
+          enables you adapt your design decisions as the project evolves. In this way you
+          avoid costly re-engineering when real-world needs are not met. Use the information
+          presented in JProfiler's <a href="../../doc/views/telemetry/telemetry.html">telemetry section</a>
+          to keep an eye on the evolution of your application.
+          The ability to <a href="../../doc/sessions/saving.html">save profiling snapshots</a> enables
+          you to keep track of your project's evolution.
+          The <a href="../../doc/offline/offline.html">offline profiling</a> capability allows you to perform
+          automated profiling runs on your application.
+        </li>
+</ul>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/quickstart/demo.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/quickstart/startcenter.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

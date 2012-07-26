@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Command Line Comparison Executable</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Command Line Comparison Executable</h2>
+</td><td valign="top" align="right"><a href="../../doc/export/comparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/export/antComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The command line comparison executable can be used to generate comparisons from a number of saved snapshot.
+      For more information please consult the <a href="../../doc/export/comparisons.html">overview</a>.
+    </td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      The comparison executable is named <i><tt>jpcompare.exe</tt></i> on Windows and <i><tt>jpcompare</tt></i>
+      on Unix-based operating systems and is located in the <i><tt>bin</tt></i> directory of
+      a JProfiler installation. If you execute it with the <b>-help</b> option, you will
+      get help on the available comparison names and comparison options:
+<pre>
+
+  Usage: jpcompare "snapshot file"[,"snapshot file",...] [global options]
+                "comparison name" [options] "output file"
+                "comparison name" [options] "output file" ...
+
+  where "snapshot file" is a snapshot file with a .jps, .hprof, or .dat extension
+        [global options] is a list of options in the format -option=value
+        "comparison name" is one of the comparison names listed below
+        [options] is a list of options in the format -option=value
+        "output file" is the output file for the export
+
+  Global options:
+      -outputdir=[output directory]
+          Base directory to be used when the output file for a comparison is a
+          relative file.
+      -ignoreerrors=true|false
+          Ignore errors that occur when options for a comparison cannot be set
+          and continue with the next comparison. The default value is "false",
+          i.e. the export is terminated, when the first error occurs.
+      -sortbytime=false|true
+          Sort the specified snapshot files by modification time. The default
+          value is false.
+      -listfile=[filename]
+          Read a file that contains the paths of the snapshot files, one
+          snapshot file per line.
+
+  Available comparison names and options:
+  * Objects
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -objects=all|recorded|heapwalker
+          Compare all objects (JVMTI only) or recorded objects, or objects in
+          the heap walker. The default is all objects for .jps files and
+          heapwalker for HPROF files.
+      -liveness=live|gc|all
+          Selects the liveness mode for the export, i.e. whether to display live
+          objects, garbage collected objects or both. The default value is live
+          objects.
+      -aggregation=class|package|component
+          Selects the aggregation level for the export. The default value is
+          classes.
+
+  * AllocationHotSpots
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -classselection
+          Calculate the comparison for a specific class or package. Specify a
+          package with a wildcard, like 'java.awt.*'.
+      -liveness=live|gc|all
+          Selects the liveness mode for the export, i.e. whether to display live
+          objects, garbage collected objects or both. The default value is live
+          objects.
+      -aggregation=method|class|package|component
+          Selects the aggregation level for the export. The default value is
+          methods.
+      -filteredclasses=separately|addtocalling
+          Selects if filtered classes should be shown separately or be added to
+          the calling class. The default value is to show filtered classes
+          separately.
+
+  * AllocationTree
+    options:
+      -format=html|xml
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -classselection
+          Calculate the comparison for a specific class or package. Specify a
+          package with a wildcard, like 'java.awt.*'.
+      -liveness=live|gc|all
+          Selects the liveness mode for the export, i.e. whether to display live
+          objects, garbage collected objects or both. The default value is live
+          objects.
+
+  * HotSpots
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -firstthreadselection
+          Calculate the comparison for a specific thread or thread group.
+          Specify thread groups like 'group.*' and threads in specific thread
+          groups like 'group.thread'. Escape dots in thread names with
+          backslashes.
+      -secondthreadselection
+          Calculate the comparison for a specific thread or thread group. Only
+          available if 'firstthreadselection' is set. If empty, the same value
+          as for 'firstthreadselection' will be used. Specify thread groups like
+          'group.*' and threads in specific thread groups like 'group.thread'.
+          Escape dots in thread names with backslashes.
+      -threadstatus=all|running|waiting|blocking|netio
+          Selects the thread status for the export. The default value is the
+          runnable state.
+      -aggregation=method|class|package|component
+          Selects the aggregation level for the export. The default value is
+          methods.
+      -differencecalculation=total|average
+          Selects the difference calculation method for call times. The default
+          value is total times.
+      -filteredclasses=separately|addtocalling
+          Selects if filtered classes should be shown separately or be added to
+          the calling class. The default value is to show filtered classes
+          separately.
+
+  * CallTree
+    options:
+      -format=html|xml
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -firstthreadselection
+          Calculate the comparison for a specific thread or thread group.
+          Specify thread groups like 'group.*' and threads in specific thread
+          groups like 'group.thread'. Escape dots in thread names with
+          backslashes.
+      -secondthreadselection
+          Calculate the comparison for a specific thread or thread group. Only
+          available if 'firstthreadselection' is set. If empty, the same value
+          as for 'firstthreadselection' will be used. Specify thread groups like
+          'group.*' and threads in specific thread groups like 'group.thread'.
+          Escape dots in thread names with backslashes.
+      -threadstatus=all|running|waiting|blocking|netio
+          Selects the thread status for the export. The default value is the
+          runnable state.
+      -aggregation=method|class|package|component
+          Selects the aggregation level for the export. The default value is
+          methods.
+      -differencecalculation=total|average
+          Selects the difference calculation method for call times. The default
+          value is total times.
+
+  * TelemetryHeap
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -minwidth=[number of pixels]
+          Minimum width of the graph window in pixels. The default value is 800.
+      -minheight=[number of pixels]
+          Minimum height of the graph window in pixels. The default value is
+          600.
+      -valuetype=current|maximum|bookmark
+          Type of the value that is calculated for each snapshot. Default is the
+          current value.
+      -bookmarkname
+          If valuetype is set to 'bookmark', the name of the bookmark for which
+          the value should be calculated.
+      -measurements=maximum,free,used
+          Measurements that are shown in the comparison graph. Concatenate
+          multiple values with commas. The default value is 'used'.
+      -memorytype=heap|nonheap
+          Type of the memory that should be analyzed. Default is 'heap'.
+      -memorypool
+          If a special memory pool should be analyzed, its name can be specified
+          with this parameter. The default is empty, i.e. no special memory
+          pool.
+
+  * TelemetryObjects
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -minwidth=[number of pixels]
+          Minimum width of the graph window in pixels. The default value is 800.
+      -minheight=[number of pixels]
+          Minimum height of the graph window in pixels. The default value is
+          600.
+      -valuetype=current|maximum|bookmark
+          Type of the value that is calculated for each snapshot. Default is the
+          current value.
+      -bookmarkname
+          If valuetype is set to 'bookmark', the name of the bookmark for which
+          the value should be calculated.
+      -measurements=total,nonarrays,arrays
+          Measurements that are shown in the comparison graph. Concatenate
+          multiple values with commas. The default value is 'total'.
+
+  * TelemetryClasses
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -minwidth=[number of pixels]
+          Minimum width of the graph window in pixels. The default value is 800.
+      -minheight=[number of pixels]
+          Minimum height of the graph window in pixels. The default value is
+          600.
+      -valuetype=current|maximum|bookmark
+          Type of the value that is calculated for each snapshot. Default is the
+          current value.
+      -bookmarkname
+          If valuetype is set to 'bookmark', the name of the bookmark for which
+          the value should be calculated.
+      -measurements=total,filtered,unfiltered
+          Measurements that are shown in the comparison graph. Concatenate
+          multiple values with commas. The default value is 'total'.
+
+  * TelemetryThreads
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -minwidth=[number of pixels]
+          Minimum width of the graph window in pixels. The default value is 800.
+      -minheight=[number of pixels]
+          Minimum height of the graph window in pixels. The default value is
+          600.
+      -valuetype=current|maximum|bookmark
+          Type of the value that is calculated for each snapshot. Default is the
+          current value.
+      -bookmarkname
+          If valuetype is set to 'bookmark', the name of the bookmark for which
+          the value should be calculated.
+      -measurements=total,runnable,waiting,netio,waiting
+          Measurements that are shown in the comparison graph. Concatenate
+          multiple values with commas. The default value is 'total'.
+
+  * ProbeHotSpots
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -viewfilters=[comma-separated list]
+          Sets view filters for the export. If you set view filters, only the
+          specified packages and their sub-packages will be displayed by the
+          exported view.
+      -firstthreadselection
+          Calculate the comparison for a specific thread or thread group.
+          Specify thread groups like 'group.*' and threads in specific thread
+          groups like 'group.thread'. Escape dots in thread names with
+          backslashes.
+      -secondthreadselection
+          Calculate the comparison for a specific thread or thread group. Only
+          available if 'firstthreadselection' is set. If empty, the same value
+          as for 'firstthreadselection' will be used. Specify thread groups like
+          'group.*' and threads in specific thread groups like 'group.thread'.
+          Escape dots in thread names with backslashes.
+      -threadstatus=all|running|waiting|blocking|netio
+          Selects the thread status for the export. The default value is the
+          runnable state.
+      -aggregation=method|class|package|component
+          Selects the aggregation level for the export. The default value is
+          methods.
+      -differencecalculation=total|average
+          Selects the difference calculation method for call times. The default
+          value is total times.
+      -probeid
+          The internal ID of the probe that should be exported. Run "jpexport
+          -listProbes" to list all available built-in probes and for an
+          explanation of custom probe names.
+
+  * ProbeTelemetry
+    options:
+      -format=html|csv
+          Determines the output format of the exported file. If not present, the
+          export format will be determined from the extension of the output
+          file.
+      -minwidth=[number of pixels]
+          Minimum width of the graph window in pixels. The default value is 800.
+      -minheight=[number of pixels]
+          Minimum height of the graph window in pixels. The default value is
+          600.
+      -valuetype=current|maximum|bookmark
+          Type of the value that is calculated for each snapshot. Default is the
+          current value.
+      -bookmarkname
+          If valuetype is set to 'bookmark', the name of the bookmark for which
+          the value should be calculated.
+      -measurements
+          The one-based indices of the measurements in the telemetry group that
+          are shown in the comparison graph. Concatenate multiple values with
+          commas, like "1,2". The default value is to show all measurements.
+      -probeid
+          The internal ID of the probe that should be exported. Run "jpexport
+          -listProbes" to list all available built-in probes and for an
+          explanation of custom probe names.
+      -telemetrygroup
+          Sets the one-based index of the telemetry group that should be
+          exported. This refers to the the entries that you see in the drop-down
+          list above the probe telemetry view. The default value is "1".
+
+</pre>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      Examples of using the comparison executable are:
+<pre>
+  jpcompare test1.jps,test2.jps,test3.jps TelemetryHeap heap.html
+
+  jpcompare test1.jps,test2.jps -sortbytime Objects -objects=recorded -aggregation=package objects.html
+
+  jpcompare -listfile=snapshots.txt -ignoreerrors=true -outputdir=/tmp/export
+            Objects objects.csv
+            AllocationTree -class=java.lang.String allocations.xml
+
+</pre>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/export/comparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/export/$comparisonsFolder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/export/antComparisons.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>

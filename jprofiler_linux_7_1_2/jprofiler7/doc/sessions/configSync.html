@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Config Synchronization Options Dialog</title>
+<link href="../../doc/help_common.css" type="text/css" rel="stylesheet">
+<link href="../../doc/help.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+      function detectFrameset() {
+        framesetpage="../../doc/indexRedirect.html";
+        thispage=window.location.href;
+        if (thispage.indexOf('://')<0) {thispage="://"+thispage;};
+        prefix=thispage.substring(0,thispage.lastIndexOf('://'));
+        suffix=thispage.substring(thispage.lastIndexOf('://')+3,thispage.length);
+        if (parent.location.href==window.location.href) {
+          parent.location.href=framesetpage+"?"+prefix+"&&&"+suffix
+        } else {
+          for(i = 0; i < parent.frames.length; i++) {
+            if(parent.frames[i].name == "code" && parent.frames[i].MTMLoaded) {
+              parent.frames[i].MTMTrack = true;
+              setTimeout("parent.frames[" + i + "].MTMDisplayMenu()", 50);
+              break;
+            }
+          }
+        }
+      }
+    
+    </script>
+</head>
+<body onload="detectFrameset()">
+<table width="100%" border="0">
+<tr>
+<td>
+<h2>Config Synchronization Options Dialog</h2>
+</td><td valign="top" align="right"><a href="../../doc/sessions/saving.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/importExport.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+<hr>
+<br>
+<div>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      This dialog is displayed when clicking on <b>[config synchronization options]</b>
+      in the <a href="../../doc/sessions/application/applicationSettings.html">application settings dialog</a> of a
+      <a href="../../doc/sessions/application/remote.html">remote session</a>.
+      <p>
+        
+<b>Note:</b> These settings are only relevant if you are profiling a 1.5 JVM or earlier, and you have
+        specified the <tt>nowait</tt>
+        option for the -Xrun... or -agentpath... VM parameter. In that case, the config file needs to be synchronized
+        on the remote computer when the profiling settings are changed.
+      </p>
+    
+</td>
+</tr>
+</table>
+    
+<table style="margin-top: 1ex" cellpadding="3" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img style="vertical-align: middle" border="0" src="../../doc/images/help_section_bullet_16.png">&nbsp;</td><td>
+      There are 3 possible actions when the config file has to by synchronized:
+      <ul>
+<li>
+<span class="sectiontitle">manual synchronization</span>
+<br>
+          Nothing is done, you have to copy the config file yourself if you want the new settings
+          to become active for the next profiling run.
+        </li>
+<li>
+<span class="sectiontitle">copy to directory</span>
+<br>
+          The config file is copied to the specified directory. You can use the <b>[...]</b> chooser
+          button to select the directory with a file chooser.
+        </li>
+<li>
+<span class="sectiontitle">execute command</span>
+<br>
+          
+<p>
+            The specified command is executed. For example you could invoke <b><tt>ssh</tt></b> to
+            copy the config file to a remote computer.
+          </p>
+          
+<p>
+            No terminal window is shown during the execution. If you have to show a terminal window
+            on Windows, you can use
+<pre>
+      cmd.exe /C "start /WAIT cmd.exe /C [your command here]"
+</pre>
+          
+</p>
+        
+</li>
+</ul>
+      
+<p>
+        Please note that in all cases the profiled JVM has to be restarted in order for the changes to
+        take effect.
+      </p>
+    
+</td>
+</tr>
+</table>
+  
+</div>
+<br>
+<hr>
+<table width="100%" border="0">
+<tr>
+<td></td><td valign="top" align="right"><a href="../../doc/sessions/saving.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_previous_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/$folder$.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_up_16.png"></a>&nbsp;
+            <a href="../../doc/sessions/importExport.html"><img vspace="0" align="center" border="0" height="16" width="16" src="../../doc/images/help_next_16.png"></a>&nbsp;
+            </td>
+</tr>
+</table>
+</body>
+</html>
